@@ -1,9 +1,9 @@
-﻿namespace OldBit.ZX.Tape.Net.Reader;
+﻿namespace OldBit.ZXTape.Reader;
 
 /// <summary>
 /// Represents a reader that helps reading bytes from a stream.
 /// </summary>
-internal class ByteStreamReader : IByteStreamReader
+internal sealed class ByteStreamReader : IByteStreamReader
 {
     private readonly Stream _stream;
 

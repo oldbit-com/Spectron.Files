@@ -1,4 +1,4 @@
-﻿using OldBit.ZX.Tape.Net.Reader;
+﻿using OldBit.ZXTape.Reader;
 using OldBit.ZXTape.Tzx.Serialization;
 
 namespace OldBit.ZXTape.Tzx.Blocks;
@@ -6,14 +6,14 @@ namespace OldBit.ZXTape.Tzx.Blocks;
 /// <summary>
 /// Represents the 'Glue' block.
 /// </summary>
-public class GlueBlock : BaseBlock
+public class GlueBlock : IBlock
 {
     /// <summary>
     /// Gets or sets the data object.
     /// </summary>
     [BlockProperty(Order = 0, Size = 9)]
     public List<byte> Data { get; set; }
-    
+
     /// <summary>
     /// Creates a new instance of the 'Glue' block.
     /// </summary>
@@ -26,7 +26,7 @@ public class GlueBlock : BaseBlock
     /// Creates a new instance of the 'Glue' block using the byte reader.
     /// </summary>
     /// <param name="reader">A byte reader.</param>
-    public GlueBlock(IByteStreamReader reader)
+    internal GlueBlock(IByteStreamReader reader)
     {
         Data = new List<byte>(reader.ReadBytes(9));
     }

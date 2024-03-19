@@ -1,8 +1,8 @@
 ﻿namespace OldBit.ZXTape.Tzx.Blocks;
 
 /// <summary>
-/// Base TZX block abstract class.
+/// Represents the 'Loop End' block.
 /// </summary>
-public abstract class BaseBlock
+public class LoopEndBlock : IBlock
 {
 }

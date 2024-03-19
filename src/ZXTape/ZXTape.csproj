@@ -8,4 +8,9 @@
         <RootNamespace>OldBit.ZXTape</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+            <_Parameter1>OldBit.ZXTape.UnitTests</_Parameter1>
+        </AssemblyAttribute>
+    </ItemGroup>
 </Project>

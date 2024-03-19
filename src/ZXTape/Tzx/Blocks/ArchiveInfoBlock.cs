@@ -1,12 +1,13 @@
-﻿using OldBit.ZX.Tape.Net.Reader;
+﻿using OldBit.ZXTape.Extensions;
+using OldBit.ZXTape.Reader;
 using OldBit.ZXTape.Tzx.Serialization;
 
 namespace OldBit.ZXTape.Tzx.Blocks;
- 
+
 /// <summary>
 /// Represents the 'Archive Info' block.
 /// </summary>
-public class ArchiveInfoBlock : BaseBlock
+public class ArchiveInfoBlock : IBlock
 {
     /// <summary>
     /// Helper property needed by the serialization.
@@ -32,7 +33,7 @@ public class ArchiveInfoBlock : BaseBlock
     /// Creates a new instance of the 'Archive Info' block using the byte reader.
     /// </summary>
     /// <param name="reader">A byte reader.</param>
-    public ArchiveInfoBlock(IByteStreamReader reader)
+    internal ArchiveInfoBlock(IByteStreamReader reader)
     {
         reader.ReadWord();
         var count = reader.ReadByte();
@@ -57,7 +58,7 @@ public class ArchiveInfoBlock : BaseBlock
     /// Gets the Length of the whole block (without these two bytes).
     /// </summary>
     [BlockProperty(Order = 0)]
-    private Word Length => (ushort)(1 + Count * 2 + Infos.Sum(x => x.Length));
+    private Word Length => (Word)(1 + Count * 2 + Infos.Sum(x => x.Length));
 
     /// <summary>
     /// Represents the TEXT structure.
@@ -94,7 +95,7 @@ public class ArchiveInfoBlock : BaseBlock
         /// Creates a new instance of the 'TEXT' structure using the byte reader.
         /// </summary>
         /// <param name="reader">A byte reader.</param>
-        public TextInfo(IByteStreamReader reader)
+        internal TextInfo(IByteStreamReader reader)
         {
             Id = reader.ReadByte();
             var length = reader.ReadByte();

@@ -1,4 +1,4 @@
-﻿namespace OldBit.ZX.Tape.Net.Reader;
+﻿namespace OldBit.ZXTape.Reader;
 
 public interface IByteStreamReader
 {
