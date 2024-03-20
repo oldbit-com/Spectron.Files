@@ -25,7 +25,7 @@ public class StandardSpeedDataBlock : IBlock
     /// Gets or sets the data as in .TAP file.
     /// </summary>
     [BlockProperty(Order = 2)]
-    public List<byte> Data { get; set; } = new();
+    public List<byte> Data { get; set; } = [];
 
     /// <summary>
     /// Creates a new instance of the 'Standard Speed Data' block.

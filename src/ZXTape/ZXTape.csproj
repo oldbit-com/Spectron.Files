@@ -13,4 +13,8 @@
             <_Parameter1>OldBit.ZXTape.UnitTests</_Parameter1>
         </AssemblyAttribute>
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Z80\" />
+    </ItemGroup>
 </Project>

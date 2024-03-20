@@ -6,11 +6,15 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <AssemblyName>zxtape</AssemblyName>
-        <RootNamespace>Oldbit.ZXTape.Cmd</RootNamespace>
+        <RootNamespace>OldBit.ZXTape.Cmd</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ZXTape\ZXTape.csproj" />
     </ItemGroup>
 
 </Project>
