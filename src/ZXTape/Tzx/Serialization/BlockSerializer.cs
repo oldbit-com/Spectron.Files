@@ -14,9 +14,10 @@ internal class BlockSerializer
     /// </summary>
     /// <param name="block">The block to serialize.</param>
     /// <returns>An array of bytes representing the serialized block.</returns>
-    internal byte[] Serialize(object block)
+    internal IEnumerable<byte> Serialize(object block)
     {
-        var propsAndAttrs = block.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+        var propsAndAttrs =
+            block.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
             .Select(p => (Property: p, Atttribute: p.GetCustomAttributes(typeof(BlockPropertyAttribute)).FirstOrDefault() as BlockPropertyAttribute))
             .Where(p => p.Atttribute != null)
             .OrderBy(p => p.Atttribute!.Order);
@@ -29,9 +30,9 @@ internal class BlockSerializer
                 var value = (byte)propAttr.Property.GetValue(block)!;
                 result.Add(value);
             }
-            else if (propAttr.Property.PropertyType == typeof(ushort))
+            else if (propAttr.Property.PropertyType == typeof(Word))
             {
-                var value = (ushort)propAttr.Property.GetValue(block)!;
+                var value = (Word)propAttr.Property.GetValue(block)!;
                 result.Add((byte)value);
                 result.Add((byte)(value >> 8));
             }
@@ -70,7 +71,7 @@ internal class BlockSerializer
                     }
                 }
             }
-            else if (propAttr.Property.PropertyType == typeof(uint))
+            else if (propAttr.Property.PropertyType == typeof(DWord))
             {
                 var value = (DWord)propAttr.Property.GetValue(block)!;
                 for (var i = 0; i < 4; i++)
@@ -93,7 +94,7 @@ internal class BlockSerializer
                 foreach (var value in values)
                 {
                     result.AddRange(value.GetType().IsPrimitive ?
-                        SerializePrimitive(value) :
+                        SerializePrimitiveType(value) :
                         Serialize(value));
                 }
             }
@@ -106,7 +107,7 @@ internal class BlockSerializer
         return result.ToArray();
     }
 
-    private static IEnumerable<byte> SerializePrimitive(object value)
+    private static IEnumerable<byte> SerializePrimitiveType(object value)
     {
         var type = value.GetType();
         if (type == typeof(byte))
