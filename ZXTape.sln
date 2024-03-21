@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZXTape", "src\ZXTape\ZXTape
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZXTape.Cmd", "src\ZXTape.Cmd\ZXTape.Cmd.csproj", "{A56DE577-E82D-45AC-86FF-9D93340787D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZXTape.UnitTests", "ZXTape.UnitTests\ZXTape.UnitTests.csproj", "{09D377C3-320F-471F-A04A-801225A205A4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZXTape.UnitTests", "tests\ZXTape.UnitTests\ZXTape.UnitTests.csproj", "{09D377C3-320F-471F-A04A-801225A205A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

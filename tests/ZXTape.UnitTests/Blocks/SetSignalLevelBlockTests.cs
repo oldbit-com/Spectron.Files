@@ -1,5 +1,5 @@
 ﻿using OldBit.SpeccyLib.Blocks;
-using OldBit.ZXTape.Reader;
+using OldBit.ZXTape.IO;
 using OldBit.ZXTape.Tzx.Blocks;
 using OldBit.ZXTape.Tzx.Serialization;
 
