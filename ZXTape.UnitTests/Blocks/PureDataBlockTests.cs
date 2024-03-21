@@ -7,7 +7,7 @@ namespace OldBit.ZXTape.UnitTests.Blocks;
 public class PureDataBlockTests
 {
     [Fact]
-    public void PureDataBlock_NewInstance_IsCreatedWithDefaults()
+    public void PureDataBlock_NewInstance_ShouldCreateWithDefaultValues()
     {
         var block = new PureDataBlock();
 
@@ -19,7 +19,7 @@ public class PureDataBlockTests
     }
 
     [Fact]
-    public void PureDataBlock_IsDeserializedFromStream()
+    public void PureDataBlock_ShouldDeserializeFromStream()
     {
         using var stream = new MemoryStream([
             0x07, 0x08, 0x09, 0x0A, 0x0D, 0x0E, 0x0F, 0x03, 0x00, 0x00, 0xA0, 0xA1, 0xA2
@@ -36,7 +36,7 @@ public class PureDataBlockTests
     }
 
     [Fact]
-    public void PureDataBlock_IsSerializedToBytes()
+    public void PureDataBlock_ShouldSerializeToBytes()
     {
         var block = new PureDataBlock
         {

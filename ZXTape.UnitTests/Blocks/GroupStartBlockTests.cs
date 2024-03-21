@@ -7,7 +7,7 @@ namespace OldBit.ZXTape.UnitTests.Blocks;
 public class GroupStartBlockTests
 {
     [Fact]
-    public void GroupStartBlock_NewInstance_IsCreatedWithDefaults()
+    public void GroupStartBlock_NewInstance_ShouldCreateWithDefaultValues()
     {
         var block = new GroupStartBlock();
 
@@ -15,7 +15,7 @@ public class GroupStartBlockTests
     }
 
     [Fact]
-    public void GroupStartBlock_IsDeserializedFromStream()
+    public void GroupStartBlock_ShouldDeserializeFromStream()
     {
         using var stream = new MemoryStream([
             0x08, 0x53, 0x70, 0x65, 0x63, 0x74, 0x72, 0x75, 0x6D
@@ -26,7 +26,7 @@ public class GroupStartBlockTests
     }
 
     [Fact]
-    public void GroupStartBlock_IsSerializedToBytes()
+    public void GroupStartBlock_ShouldSerializeToBytes()
     {
         var block = new GroupStartBlock
         {

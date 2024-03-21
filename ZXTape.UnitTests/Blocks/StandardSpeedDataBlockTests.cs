@@ -7,7 +7,7 @@ namespace OldBit.ZXTape.UnitTests.Blocks;
 public class StandardSpeedDataBlockTests
 {
     [Fact]
-    public void StandardSpeedDataBlock_NewInstance_IsCreatedWithDefaults()
+    public void StandardSpeedDataBlock_NewInstance_ShouldCreateWithDefaultValues()
     {
         var block = new StandardSpeedDataBlock();
 
@@ -16,7 +16,7 @@ public class StandardSpeedDataBlockTests
     }
 
     [Fact]
-    public void StandardSpeedDataBlock_IsDeserializedFromStream()
+    public void StandardSpeedDataBlock_ShouldDeserializeFromStream()
     {
         var data = new byte[]
         {
@@ -32,7 +32,7 @@ public class StandardSpeedDataBlockTests
     }
 
     [Fact]
-    public void StandardSpeedDataBlock_IsSerializedToBytes()
+    public void StandardSpeedDataBlock_ShouldSerializeToBytes()
     {
         var block = new StandardSpeedDataBlock
         {

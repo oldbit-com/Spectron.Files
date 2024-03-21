@@ -7,7 +7,7 @@ namespace OldBit.ZXTape.UnitTests.Blocks;
 public class LoopStartBlockTests
 {
     [Fact]
-    public void LoopStartBlock_NewInstance_IsCreatedWithDefaults()
+    public void LoopStartBlock_NewInstance_ShouldCreateWithDefaultValues()
     {
         var block = new LoopStartBlock();
 
@@ -15,7 +15,7 @@ public class LoopStartBlockTests
     }
 
     [Fact]
-    public void LoopStartBlock_IsDeserializedFromStream()
+    public void LoopStartBlock_ShouldDeserializeFromStream()
     {
         var bytes = new byte[] { 0x05, 0x00 };
         using var stream = new MemoryStream(bytes);
@@ -25,7 +25,7 @@ public class LoopStartBlockTests
     }
 
     [Fact]
-    public void LoopStartBlock_IsSerializedToBytes()
+    public void LoopStartBlock_ShouldSerializeToBytes()
     {
         var block = new LoopStartBlock{ Count = 2 };
 

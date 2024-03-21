@@ -7,7 +7,7 @@ namespace OldBit.ZXTape.UnitTests.Blocks;
 public class PauseBlockTests
 {
     [Fact]
-    public void PauseBlock_NewInstance_IsCreatedWithDefaults()
+    public void PauseBlock_NewInstance_ShouldCreateWithDefaultValues()
     {
         var block = new PauseBlock();
 
@@ -15,7 +15,7 @@ public class PauseBlockTests
     }
 
     [Fact]
-    public void PauseBlock_IsDeserializedFromStream()
+    public void PauseBlock_ShouldDeserializeFromStream()
     {
         var bytes = new byte[] { 0x01, 0x02 };
         using var stream = new MemoryStream(bytes);
@@ -25,7 +25,7 @@ public class PauseBlockTests
     }
 
     [Fact]
-    public void PauseBlock_IsSerializedToBytes()
+    public void PauseBlock_ShouldSerializeToBytes()
     {
         var block = new PauseBlock{ Duration = 1234 };
 

@@ -7,7 +7,7 @@ namespace OldBit.ZXTape.UnitTests.Blocks;
 public class CallSequenceBlockTests
 {
     [Fact]
-    public void CallSequenceBlock_NewInstance_IsCreatedWithDefaults()
+    public void CallSequenceBlock_NewInstance_ShouldCreateWithDefaultValues()
     {
         var block = new CallSequenceBlock();
 
@@ -15,7 +15,7 @@ public class CallSequenceBlockTests
     }
 
     [Fact]
-    public void CallSequenceBlock_IsDeserializedFromStream()
+    public void CallSequenceBlock_ShouldDeserializeFromStream()
     {
         using var stream = new MemoryStream([
             0x02, 0x00, 0x04, 0xFF, 0x08, 0x00
@@ -27,7 +27,7 @@ public class CallSequenceBlockTests
     }
 
     [Fact]
-    public void CallSequenceBlock_IsSerializedToBytes()
+    public void CallSequenceBlock_ShouldSerializeToBytes()
     {
         var block = new CallSequenceBlock();
         block.Offsets.Add(-10);

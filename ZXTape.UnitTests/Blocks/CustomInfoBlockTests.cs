@@ -7,7 +7,7 @@ namespace OldBit.ZXTape.UnitTests.Blocks;
 public class CustomInfoBlockTests
 {
     [Fact]
-    public void CustomInfoBlock_NewInstance_IsCreatedWithDefaults()
+    public void CustomInfoBlock_NewInstance_ShouldCreateWithDefaultValues()
     {
         var block = new CustomInfoBlock();
 
@@ -16,7 +16,7 @@ public class CustomInfoBlockTests
     }
 
     [Fact]
-    public void CustomInfoBlock_IsDeserializedFromStream()
+    public void CustomInfoBlock_ShouldDeserializeFromStream()
     {
         using var stream = new MemoryStream([
             0x5A, 0x58, 0x53, 0x70, 0x65, 0x63, 0x74, 0x72,
@@ -32,7 +32,7 @@ public class CustomInfoBlockTests
     }
 
     [Fact]
-    public void CustomInfoBlock_IsSerializedToBytes()
+    public void CustomInfoBlock_ShouldSerializeToBytes()
     {
         var block = new CustomInfoBlock
         {

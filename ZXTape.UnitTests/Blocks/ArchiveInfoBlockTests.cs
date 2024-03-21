@@ -8,7 +8,7 @@ namespace OldBit.ZXTape.UnitTests.Blocks;
 public class ArchiveInfoBlockTests
 {
     [Fact]
-    public void ArchiveInfoBlock_NewInstance_IsCreatedWithDefaults()
+    public void ArchiveInfoBlock_NewInstance_ShouldCreateWithDefaultValues()
     {
         var block = new ArchiveInfoBlock();
 
@@ -16,7 +16,7 @@ public class ArchiveInfoBlockTests
     }
 
     [Fact]
-    public void ArchiveInfoBlock_IsDeserializedFromStream()
+    public void ArchiveInfoBlock_ShouldDeserializeFromStream()
     {
         using var stream = new MemoryStream([
             0x15, 0x00, 0x03,
@@ -39,7 +39,7 @@ public class ArchiveInfoBlockTests
     }
 
     [Fact]
-    public void ArchiveInfoBlock_IsSerializedToBytes()
+    public void ArchiveInfoBlock_ShouldSerializeToBytes()
     {
         var block = new ArchiveInfoBlock();
         block.AddTextInfo(ArchiveInfo.Title, "Title");

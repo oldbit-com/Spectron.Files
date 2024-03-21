@@ -8,7 +8,7 @@ public class PureToneBlockTests
 {
 
     [Fact]
-    public void PureToneBlock_NewInstance_IsCreatedWithDefaults()
+    public void PureToneBlock_NewInstance_ShouldCreateWithDefaultValues()
     {
         var block = new PureToneBlock();
 
@@ -17,7 +17,7 @@ public class PureToneBlockTests
     }
 
     [Fact]
-    public void PureToneBlock_IsDeserializedFromStream()
+    public void PureToneBlock_ShouldDeserializeFromStream()
     {
         using var stream = new MemoryStream([0x01, 0x02, 0x02, 0x04]);
         var block = new PureToneBlock(new ByteStreamReader(stream));
@@ -27,7 +27,7 @@ public class PureToneBlockTests
     }
 
     [Fact]
-    public void PureToneBlock_IsSerializedToBytes()
+    public void PureToneBlock_ShouldSerializeToBytes()
     {
         var block = new PureToneBlock { PulseCount = 10, PulseLength = 1923 };
 

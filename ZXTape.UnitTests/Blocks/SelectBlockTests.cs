@@ -7,7 +7,7 @@ namespace OldBit.ZXTape.UnitTests.Blocks;
 public class SelectBlockTests
 {
     [Fact]
-    public void SelectBlock_NewInstance_IsCreatedWithDefaults()
+    public void SelectBlock_NewInstance_ShouldCreateWithDefaultValues()
     {
         var block = new SelectBlock();
 
@@ -15,7 +15,7 @@ public class SelectBlockTests
     }
 
     [Fact]
-    public void SelectBlock_IsDeserializedFromStream()
+    public void SelectBlock_ShouldDeserializeFromStream()
     {
         using var stream = new MemoryStream([
             0x0B, 0x00, 0x02, 0xFE, 0xFF, 0x02, 0x5A, 0x58, 0x01, 0x00, 0x02, 0x38, 0x31
@@ -32,7 +32,7 @@ public class SelectBlockTests
     }
 
     [Fact]
-    public void SelectBlock_IsSerializedToBytes()
+    public void SelectBlock_ShouldSerializeToBytes()
     {
         var block = new SelectBlock
         {

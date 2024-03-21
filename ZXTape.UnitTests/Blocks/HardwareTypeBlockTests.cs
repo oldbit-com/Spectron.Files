@@ -7,7 +7,7 @@ namespace OldBit.ZXTape.UnitTests.Blocks;
 public class HardwareTypeBlockTests
 {
     [Fact]
-    public void HardwareTypeBlock_NewInstance_IsCreatedWithDefaults()
+    public void HardwareTypeBlock_NewInstance_ShouldCreateWithDefaultValues()
     {
         var block = new HardwareTypeBlock();
 
@@ -15,7 +15,7 @@ public class HardwareTypeBlockTests
     }
 
     [Fact]
-    public void HardwareTypeBlock_IsDeserializedFromStream()
+    public void HardwareTypeBlock_ShouldDeserializeFromStream()
     {
         using var stream = new MemoryStream([
             0x03, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09
@@ -35,7 +35,7 @@ public class HardwareTypeBlockTests
     }
 
     [Fact]
-    public void HardwareTypeBlock_IsSerializedToBytes()
+    public void HardwareTypeBlock_ShouldSerializeToBytes()
     {
         var block = new HardwareTypeBlock
         {

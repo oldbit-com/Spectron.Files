@@ -7,7 +7,7 @@ namespace OldBit.ZXTape.UnitTests.Blocks;
 public class TextDescriptionBlockTests
 {
     [Fact]
-    public void TextDescriptionBlock_NewInstance_IsCreatedWithDefaults()
+    public void TextDescriptionBlock_NewInstance_ShouldCreateWithDefaultValues()
     {
         var block = new TextDescriptionBlock();
 
@@ -15,7 +15,7 @@ public class TextDescriptionBlockTests
     }
 
     [Fact]
-    public void TextDescriptionBlock_IsDeserializedFromStream()
+    public void TextDescriptionBlock_ShouldDeserializeFromStream()
     {
         using var stream = new MemoryStream([0x05, 0x5A, 0x58, 0x34, 0x38, 0x6B]);
         var block = new TextDescriptionBlock(new ByteStreamReader(stream));
@@ -24,7 +24,7 @@ public class TextDescriptionBlockTests
     }
 
     [Fact]
-    public void TextDescriptionBlock_IsSerializedToBytes()
+    public void TextDescriptionBlock_ShouldSerializeToBytes()
     {
         var block = new TextDescriptionBlock
         {

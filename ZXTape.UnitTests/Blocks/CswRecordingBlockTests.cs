@@ -7,7 +7,7 @@ namespace OldBit.ZXTape.UnitTests.Blocks;
 public class CswRecordingBlockTests
 {
     [Fact]
-    public void CswRecordingBlock_NewInstance_IsCreatedWithDefaults()
+    public void CswRecordingBlock_NewInstance_ShouldCreateWithDefaultValues()
     {
         var block = new CswRecordingBlock();
 
@@ -17,7 +17,7 @@ public class CswRecordingBlockTests
     }
 
     [Fact]
-    public void CswRecordingBlock_IsDeserializedFromStream()
+    public void CswRecordingBlock_ShouldDeserializeFromStream()
     {
         using var stream = new MemoryStream([
             0x0E, 0x00, 0x00, 0x00, 0x01, 0x02, 0xAA, 0xBB,
@@ -38,7 +38,7 @@ public class CswRecordingBlockTests
     }
 
     [Fact]
-    public void CswRecordingBlock_IsSerializedToBytes()
+    public void CswRecordingBlock_ShouldSerializeToBytes()
     {
         var block = new CswRecordingBlock
         {

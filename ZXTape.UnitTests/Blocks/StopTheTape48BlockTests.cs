@@ -7,7 +7,7 @@ namespace OldBit.ZXTape.UnitTests.Blocks;
 public class StopTheTape48BlockTests
 {
     [Fact]
-    public void StopTheTape48Block_IsDeserializedFromStream()
+    public void StopTheTape48Block_ShouldDeserializeFromStream()
     {
         using var stream = new MemoryStream([0x00, 0x00, 0x00, 0x00]);
         var reader = new ByteStreamReader(stream);
@@ -17,7 +17,7 @@ public class StopTheTape48BlockTests
     }
 
     [Fact]
-    public void StopTheTape48Block_IsSerializedToBytes()
+    public void StopTheTape48Block_ShouldSerializeToBytes()
     {
         var block = new StopTheTape48Block();
 

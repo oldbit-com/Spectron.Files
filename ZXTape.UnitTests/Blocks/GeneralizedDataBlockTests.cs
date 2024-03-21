@@ -7,7 +7,7 @@ namespace OldBit.ZXTape.UnitTests.Blocks;
 public class GeneralizedDataBlockTests
 {
     [Fact]
-    public void GeneralizedDataBlock_NewInstance_IsCreatedWithDefaults()
+    public void GeneralizedDataBlock_NewInstance_ShouldCreateWithDefaultValues()
     {
         var block = new GeneralizedDataBlock();
 
@@ -16,7 +16,7 @@ public class GeneralizedDataBlockTests
     }
 
     [Fact]
-    public void DirectRecordingBlock_IsDeserializedFromStream()
+    public void DirectRecordingBlock_ShouldDeserializeFromStream()
     {
         // A typical Spectrum's standard loading header
         var bytes = new byte[] {
@@ -65,7 +65,7 @@ public class GeneralizedDataBlockTests
     }
 
     [Fact]
-    public void GeneralizedDataBlock_IsSerializedToBytes()
+    public void GeneralizedDataBlock_ShouldSerializeToBytes()
     {
         var block = new GeneralizedDataBlock
         {

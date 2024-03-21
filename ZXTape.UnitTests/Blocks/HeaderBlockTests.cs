@@ -7,7 +7,7 @@ namespace OldBit.ZXTape.UnitTests.Blocks;
 public class HeaderBlockTests
 {
     [Fact]
-    public void HeaderBlock_NewInstance_IsCreatedWithDefaults()
+    public void HeaderBlock_NewInstance_ShouldCreateWithDefaultValues()
     {
         var block = new HeaderBlock();
 
@@ -18,7 +18,7 @@ public class HeaderBlockTests
     }
 
     [Fact]
-    public void HeaderBlock_IsDeserializedFromStream()
+    public void HeaderBlock_ShouldDeserializeFromStream()
     {
         using var stream = new MemoryStream([
             0x5A, 0x58, 0x54, 0x61, 0x70, 0x65, 0x21, 0x1A, 0x01, 0x0A
@@ -32,7 +32,7 @@ public class HeaderBlockTests
     }
 
     [Fact]
-    public void HeaderBlock_IsSerializedToBytes()
+    public void HeaderBlock_ShouldSerializeToBytes()
     {
         var block = new HeaderBlock();
 

@@ -7,7 +7,7 @@ namespace OldBit.ZXTape.UnitTests.Blocks;
 public class TurboSpeedDataBlockTests
 {
     [Fact]
-    public void TurboSpeedDataBlock_NewInstance_IsCreatedWithDefaults()
+    public void TurboSpeedDataBlock_NewInstance_ShouldCreateWithDefaultValues()
     {
         var block = new TurboSpeedDataBlock();
 
@@ -23,7 +23,7 @@ public class TurboSpeedDataBlockTests
     }
 
     [Fact]
-    public void TurboSpeedDataBlock_IsDeserializedFromStream()
+    public void TurboSpeedDataBlock_ShouldDeserializeFromStream()
     {
         var bytes = new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x03, 0x00, 0x00, 0xA0, 0xA1, 0xA2 };
         using var stream = new MemoryStream(bytes);
@@ -43,7 +43,7 @@ public class TurboSpeedDataBlockTests
     }
 
     [Fact]
-    public void TurboSpeedDataBlock_IsSerializedToBytes()
+    public void TurboSpeedDataBlock_ShouldSerializeToBytes()
     {
         var block = new TurboSpeedDataBlock
         {

@@ -7,7 +7,7 @@ namespace OldBit.ZXTape.UnitTests.Blocks;
 public class PulseSequenceBlockTests
 {
     [Fact]
-    public void PulseSequenceBlock_NewInstance_IsCreatedWithDefaults()
+    public void PulseSequenceBlock_NewInstance_ShouldCreateWithDefaultValues()
     {
         var block = new PulseSequenceBlock();
 
@@ -15,7 +15,7 @@ public class PulseSequenceBlockTests
     }
 
     [Fact]
-    public void PulseSequenceBlock_IsDeserializedFromStream()
+    public void PulseSequenceBlock_ShouldDeserializeFromStream()
     {
         using var stream = new MemoryStream([0x03, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F]);
         var block = new PulseSequenceBlock(new ByteStreamReader(stream));
@@ -27,7 +27,7 @@ public class PulseSequenceBlockTests
     }
 
     [Fact]
-    public void PulseSequenceBlock_IsSerializedToBytes()
+    public void PulseSequenceBlock_ShouldSerializeToBytes()
     {
         var block = new PulseSequenceBlock
         {

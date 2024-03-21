@@ -7,7 +7,7 @@ namespace OldBit.ZXTape.UnitTests.Blocks;
 public class JumpToBlockTests
 {
     [Fact]
-    public void JumpToBlock_NewInstance_IsCreatedWithDefaults()
+    public void JumpToBlock_NewInstance_ShouldCreateWithDefaultValues()
     {
         var block = new JumpToBlock();
 
@@ -15,7 +15,7 @@ public class JumpToBlockTests
     }
 
     [Fact]
-    public void JumpToBlock_IsDeserializedFromStream()
+    public void JumpToBlock_ShouldDeserializeFromStream()
     {
         using var stream = new MemoryStream([0xE7, 0xFF]);
         var block = new JumpToBlock(new ByteStreamReader(stream));
@@ -24,7 +24,7 @@ public class JumpToBlockTests
     }
 
     [Fact]
-    public void JumpToBlock_IsSerializedToBytes()
+    public void JumpToBlock_ShouldSerializeToBytes()
     {
         var block = new JumpToBlock { Jump = -1 };
 

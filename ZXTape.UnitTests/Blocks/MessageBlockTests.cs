@@ -7,7 +7,7 @@ namespace OldBit.ZXTape.UnitTests.Blocks;
 public class MessageBlockTests
 {
     [Fact]
-    public void MessageBlock_NewInstance_IsCreatedWithDefaults()
+    public void MessageBlock_NewInstance_ShouldCreateWithDefaultValues()
     {
         var block = new MessageBlock();
 
@@ -16,7 +16,7 @@ public class MessageBlockTests
     }
 
     [Fact]
-    public void MessageBlock_IsDeserializedFromStream()
+    public void MessageBlock_ShouldDeserializeFromStream()
     {
         using var stream = new MemoryStream([
             0x0A, 0x08, 0x53, 0x69, 0x6E, 0x63, 0x6C, 0x61, 0x69, 0x72
@@ -28,7 +28,7 @@ public class MessageBlockTests
     }
 
     [Fact]
-    public void MessageBlock_IsSerializedToBytes()
+    public void MessageBlock_ShouldSerializeToBytes()
     {
         var block = new MessageBlock
         {
