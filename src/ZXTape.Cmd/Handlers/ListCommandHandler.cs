@@ -5,9 +5,9 @@ using OldBit.ZXTape.Tzx.Blocks;
 
 namespace OldBit.ZXTape.Cmd.Handlers;
 
-public class ListCommandHandler
+public static class ListCommandHandler
 {
-    public void List(string fileName)
+    public static void List(string fileName)
     {
         var tzxFile = TzxFile.Load(fileName);
 

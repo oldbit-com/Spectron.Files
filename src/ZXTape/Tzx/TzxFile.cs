@@ -1,4 +1,4 @@
-using OldBit.ZXTape.Reader;
+using OldBit.ZXTape.IO;
 using OldBit.ZXTape.Tzx.Blocks;
 
 namespace OldBit.ZXTape.Tzx;
@@ -20,9 +20,9 @@ public sealed class TzxFile
         Header = new HeaderBlock();
     }
 
-    public static TzxFile Load(string path)
+    public static TzxFile Load(string fileName)
     {
-        using var stream = File.OpenRead(path);
+        using var stream = File.OpenRead(fileName);
         var reader = new TzxBlockReader(stream);
 
         var tzx = new TzxFile();
@@ -45,5 +45,17 @@ public sealed class TzxFile
         }
 
         return tzx;
+    }
+
+    public void Save(string fileName)
+    {
+        using var stream = File.Create(fileName);
+        var writer = new TzxBlockWriter(stream);
+
+        writer.WriteBlock(Header);
+        foreach (var block in Blocks)
+        {
+            writer.WriteBlock(block);
+        }
     }
 }

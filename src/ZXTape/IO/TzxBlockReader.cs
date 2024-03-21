@@ -1,7 +1,7 @@
 ﻿using OldBit.ZXTape.Tzx;
 using OldBit.ZXTape.Tzx.Blocks;
 
-namespace OldBit.ZXTape.Reader;
+namespace OldBit.ZXTape.IO;
 
 /// <summary>
 /// Reads TZX file data from a stream.

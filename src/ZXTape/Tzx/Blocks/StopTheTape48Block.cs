@@ -1,4 +1,4 @@
-﻿using OldBit.ZXTape.Reader;
+﻿using OldBit.ZXTape.IO;
 using OldBit.ZXTape.Tzx.Serialization;
 
 namespace OldBit.ZXTape.Tzx.Blocks;

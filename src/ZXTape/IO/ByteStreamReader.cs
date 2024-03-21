@@ -1,4 +1,4 @@
-﻿namespace OldBit.ZXTape.Reader;
+﻿namespace OldBit.ZXTape.IO;
 
 /// <summary>
 /// Represents a reader that helps reading bytes from a stream.

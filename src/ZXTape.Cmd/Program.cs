@@ -1,9 +1,9 @@
 ﻿using System.CommandLine;
-using OldBit.ZXTape.Cmd;
+using OldBit.ZXTape.Cmd.Commands;
 
-var commands = new Commands();
-var rootCommand = commands.CreateCommands();
+var commandBuilder = new CommandBuilder();
 
+var rootCommand = commandBuilder.CreateRootCommand();
 await rootCommand.InvokeAsync(args);
 
-return commands.ReturnCode;
+return commandBuilder.ReturnCode;

@@ -14,7 +14,7 @@ internal class BlockSerializer
     /// </summary>
     /// <param name="block">The block to serialize.</param>
     /// <returns>An array of bytes representing the serialized block.</returns>
-    internal IEnumerable<byte> Serialize(object block)
+    internal byte[] Serialize(object block)
     {
         var propsAndAttrs =
             block.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
@@ -119,10 +119,10 @@ internal class BlockSerializer
             yield return (byte)(short)value;
             yield return (byte)((short)value >> 8);
         }
-        else if (type == typeof(ushort))
+        else if (type == typeof(Word))
         {
-            yield return (byte)(ushort)value;
-            yield return (byte)((ushort)value >> 8);
+            yield return (byte)(Word)value;
+            yield return (byte)((Word)value >> 8);
         }
         else
         {
