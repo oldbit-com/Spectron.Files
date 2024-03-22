@@ -10,7 +10,7 @@ public static class BlockExtensions
     /// </summary>
     /// <param name="block">The block object.</param>
     /// <returns>The ID of the block or -1 if there is no associated ID or block is unknown.</returns>
-    public static int GetBlockCode(this IBlock block)
+    public static byte GetBlockCode(this IBlock block)
     {
         return block.GetType().Name switch
         {

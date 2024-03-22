@@ -20,7 +20,7 @@ public class CustomInfoBlock : IBlock
     /// Gets the length of the custom info.
     /// </summary>
     [BlockProperty(Order = 1)]
-    private int Length => (byte)Info.Count;
+    private int Length => Info.Count;
 
     /// <summary>
     /// Gets or sets a list with custom info data.

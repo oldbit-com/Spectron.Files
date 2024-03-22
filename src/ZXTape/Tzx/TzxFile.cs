@@ -3,6 +3,9 @@ using OldBit.ZXTape.Tzx.Blocks;
 
 namespace OldBit.ZXTape.Tzx;
 
+/// <summary>
+/// Represents a TZX file.
+/// </summary>
 public sealed class TzxFile
 {
     /// <summary>
@@ -15,14 +18,21 @@ public sealed class TzxFile
     /// </summary>
     public List<IBlock> Blocks { get; } = [];
 
+    /// <summary>
+    /// Initializes a new instance of the TzxFile class.
+    /// </summary>
     public TzxFile()
     {
         Header = new HeaderBlock();
     }
 
-    public static TzxFile Load(string fileName)
+    /// <summary>
+    /// Loads a TZX file from a stream.
+    /// </summary>
+    /// <param name="stream">The stream to load the TZX file from.</param>
+    /// <returns>A TzxFile object representing the loaded TZX file.</returns>
+    public static TzxFile Load(Stream stream)
     {
-        using var stream = File.OpenRead(fileName);
         var reader = new TzxBlockReader(stream);
 
         var tzx = new TzxFile();
@@ -47,9 +57,25 @@ public sealed class TzxFile
         return tzx;
     }
 
-    public void Save(string fileName)
+    /// <summary>
+    /// Loads a TZX file from a file.
+    /// </summary>
+    /// <param name="fileName">The name of the file to load the TZX file from.</param>
+    /// <returns>A TzxFile object representing the loaded TZX file.</returns>
+    public static TzxFile Load(string fileName)
     {
-        using var stream = File.Create(fileName);
+        using var stream = File.OpenRead(fileName);
+
+        return Load(stream);
+    }
+
+
+    /// <summary>
+    /// Saves the TZX file to a stream.
+    /// </summary>
+    /// <param name="stream">The stream to save the TZX file to.</param>
+    public void Save(Stream stream)
+    {
         var writer = new TzxBlockWriter(stream);
 
         writer.WriteBlock(Header);
@@ -57,5 +83,15 @@ public sealed class TzxFile
         {
             writer.WriteBlock(block);
         }
+    }
+
+    /// <summary>
+    /// Saves the TZX file to a file.
+    /// </summary>
+    /// <param name="fileName">The name of the file to save the TZX file to.</param>
+    public void Save(string fileName)
+    {
+        using var stream = File.Create(fileName);
+        Save(stream);
     }
 }

@@ -1,3 +1,4 @@
+using OldBit.ZXTape.Extensions;
 using OldBit.ZXTape.Tzx.Blocks;
 using OldBit.ZXTape.Tzx.Serialization;
 
@@ -9,6 +10,12 @@ public class TzxBlockWriter(Stream stream)
 
     public void WriteBlock(IBlock block)
     {
+        if (block is not HeaderBlock)
+        {
+            var blockCode = block.GetBlockCode();
+            stream.WriteByte(blockCode);
+        }
+
         var data = _serializer.Serialize(block);
         stream.Write(data, 0, data.Length);
     }

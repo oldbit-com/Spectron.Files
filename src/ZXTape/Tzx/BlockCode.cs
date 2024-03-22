@@ -132,5 +132,5 @@ public static class BlockCode
     /// <summary>
     /// Unknown block.
     /// </summary>
-    public const sbyte Unknown = -1;
+    public const byte Unknown = 0;
 }
