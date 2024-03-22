@@ -9,16 +9,22 @@ namespace OldBit.ZXTape.Tzx.Blocks;
 public class HardwareTypeBlock : IBlock
 {
     /// <summary>
+    /// Gets the block ID.
+    /// </summary>
+    [BlockProperty(Order = 0)]
+    public byte BlockId => BlockCode.HardwareType;
+
+    /// <summary>
     /// Helper property needed by the serialization.
     /// Gets the number of machines and hardware types for which info is supplied
     /// </summary>
-    [BlockProperty(Order = 0)]
+    [BlockProperty(Order = 1)]
     private byte Count => (byte)Infos.Count;
 
     /// <summary>
     /// Gets or sets the array of machines and hardware.
     /// </summary>
-    [BlockProperty(Order = 1)]
+    [BlockProperty(Order = 2)]
     public List<HardwareInfo> Infos { get; set; } = [];
 
     /// <summary>

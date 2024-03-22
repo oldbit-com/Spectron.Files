@@ -24,6 +24,6 @@ public class StopTheTape48BlockTests
         var serializer = new BlockSerializer();
         var result = serializer.Serialize(block);
 
-        result.Should().Equal(0x00, 0x00, 0x00, 0x00);
+        result.Should().Equal(0x2A, 0x00, 0x00, 0x00, 0x00);
     }
 }

@@ -32,6 +32,6 @@ public class LoopStartBlockTests
         var serializer = new BlockSerializer();
         var result = serializer.Serialize(block);
 
-        result.Should().Equal(0x02, 0x00);
+        result.Should().Equal(0x24, 0x02, 0x00);
     }
 }

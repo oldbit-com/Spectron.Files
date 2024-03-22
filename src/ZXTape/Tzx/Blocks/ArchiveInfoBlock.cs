@@ -10,6 +10,12 @@ namespace OldBit.ZXTape.Tzx.Blocks;
 public class ArchiveInfoBlock : IBlock
 {
     /// <summary>
+    /// Gets the block ID.
+    /// </summary>
+    [BlockProperty(Order = 0)]
+    public byte BlockId => BlockCode.ArchiveInfo;
+
+    /// <summary>
     /// Helper property needed by the serialization.
     /// Gets the Length of the whole block (without these two bytes).
     /// </summary>

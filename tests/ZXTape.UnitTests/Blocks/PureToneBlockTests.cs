@@ -34,6 +34,6 @@ public class PureToneBlockTests
         var serializer = new BlockSerializer();
         var result = serializer.Serialize(block);
 
-        result.Should().Equal(0x83, 0x07, 0x0A, 0x00);
+        result.Should().Equal(0x12, 0x83, 0x07, 0x0A, 0x00);
     }
 }

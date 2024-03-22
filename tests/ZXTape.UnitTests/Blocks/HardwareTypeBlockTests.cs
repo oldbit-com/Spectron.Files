@@ -50,7 +50,7 @@ public class HardwareTypeBlockTests
         var serializer = new BlockSerializer();
         var result = serializer.Serialize(block);
 
-        result.Should().Equal(0x03, 0x01, 0x02, 0x03, 0x04, 0x05,
+        result.Should().Equal(0x33, 0x03, 0x01, 0x02, 0x03, 0x04, 0x05,
             0x06, 0x07, 0x08, 0x09);
     }
 }

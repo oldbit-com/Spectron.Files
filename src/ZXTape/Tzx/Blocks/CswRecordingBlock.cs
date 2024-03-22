@@ -9,40 +9,46 @@ namespace OldBit.ZXTape.Tzx.Blocks;
 public class CswRecordingBlock : IBlock
 {
     /// <summary>
+    /// Gets the block ID.
+    /// </summary>
+    [BlockProperty(Order = 0)]
+    public byte BlockId => BlockCode.CswRecording;
+
+    /// <summary>
     /// Helper property needed by the serialization.
     /// Gets the block length.
     /// </summary>
-    [BlockProperty(Order = 0)]
+    [BlockProperty(Order = 1)]
     private int Length => 10 + Data.Count;
 
     /// <summary>
     /// Gets or sets the pause value (in millisecond) that should be applied after this block.
     /// </summary>
-    [BlockProperty(Order = 1)]
+    [BlockProperty(Order = 2)]
     public Word PauseDuration { get; set; }
 
     /// <summary>
     /// Gets or sets the sampling rate.
     /// </summary>
-    [BlockProperty(Order = 2, Size = 3)]
+    [BlockProperty(Order = 3, Size = 3)]
     public int SamplingRate { get; set; }
 
     /// <summary>
     /// Gets or sets the compression type.
     /// </summary>
-    [BlockProperty(Order = 3)]
+    [BlockProperty(Order = 4)]
     public CompressionType CompressionType { get; set; } = CompressionType.Rle;
 
     /// <summary>
     /// Gets or sets the number of stored pulses (after decompression, for validation purposes).
     /// </summary>
-    [BlockProperty(Order = 4)]
+    [BlockProperty(Order = 5)]
     public DWord StoredPulsesCount { get; set; }
 
     /// <summary>
     /// Gets or sets the CSW data encoded according to the CSW file format specification.
     /// </summary>
-    [BlockProperty(Order = 4)]
+    [BlockProperty(Order = 6)]
     public List<byte> Data { get; set; } = [];
 
     /// <summary>

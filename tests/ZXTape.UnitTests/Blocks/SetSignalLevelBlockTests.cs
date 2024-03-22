@@ -32,6 +32,6 @@ public class SetSignalLevelBlockTests
         var serializer = new BlockSerializer();
         var result = serializer.Serialize(block);
 
-        result.Should().Equal(0x01, 0x00, 0x00, 0x00, 0x01);
+        result.Should().Equal(0x2B, 0x01, 0x00, 0x00, 0x00, 0x01);
     }
 }

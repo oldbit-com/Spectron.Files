@@ -30,27 +30,9 @@ public class HeaderBlock : IBlock
     public const byte TzxVerMinor = 20;
 
     /// <summary>
-    /// Creates a new instance of the 'TZX Header' block.
+    /// Gets the block ID.
     /// </summary>
-    public HeaderBlock()
-    {
-        Signature = TzxSignature;
-        EotMarker = TzxEotMarker;
-        VerMajor = TzxVerMajor;
-        VerMinor = TzxVerMinor;
-    }
-
-    /// <summary>
-    /// Creates a new instance of the 'TZX Header' block using the byte reader.
-    /// </summary>
-    /// <param name="reader">A byte reader.</param>
-    internal HeaderBlock(IByteStreamReader reader)
-    {
-        Signature = Encoding.ASCII.GetString(reader.ReadBytes(7));
-        EotMarker = reader.ReadByte();
-        VerMajor = reader.ReadByte();
-        VerMinor = reader.ReadByte();
-    }
+    public byte BlockId => 0;
 
     /// <summary>
     /// Gets the TZX header signature.
@@ -75,4 +57,27 @@ public class HeaderBlock : IBlock
     /// </summary>
     [BlockProperty(Order = 3)]
     public byte VerMinor { get; set; }
+
+    /// <summary>
+    /// Creates a new instance of the 'TZX Header' block.
+    /// </summary>
+    public HeaderBlock()
+    {
+        Signature = TzxSignature;
+        EotMarker = TzxEotMarker;
+        VerMajor = TzxVerMajor;
+        VerMinor = TzxVerMinor;
+    }
+
+    /// <summary>
+    /// Creates a new instance of the 'TZX Header' block using the byte reader.
+    /// </summary>
+    /// <param name="reader">A byte reader.</param>
+    internal HeaderBlock(IByteStreamReader reader)
+    {
+        Signature = Encoding.ASCII.GetString(reader.ReadBytes(7));
+        EotMarker = reader.ReadByte();
+        VerMajor = reader.ReadByte();
+        VerMinor = reader.ReadByte();
+    }
 }

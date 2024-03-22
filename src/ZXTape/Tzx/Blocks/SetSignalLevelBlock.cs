@@ -10,16 +10,22 @@ namespace OldBit.ZXTape.Tzx.Blocks;
 public class SetSignalLevelBlock : IBlock
 {
     /// <summary>
+    /// Gets the block ID.
+    /// </summary>
+    [BlockProperty(Order = 0)]
+    public byte BlockId => BlockCode.SetSignalLevel;
+
+    /// <summary>
     /// Helper property needed by the serialization.
     /// Gets the length of the block without these 4 bytes.
     /// </summary>
-    [BlockProperty(Order = 0)]
+    [BlockProperty(Order = 1)]
     private int Length => 1;
 
     /// <summary>
     /// Gets or sets the signal level.
     /// </summary>
-    [BlockProperty(Order = 1)]
+    [BlockProperty(Order = 2)]
     public SignalLevel Level { get; set; }
 
     /// <summary>

@@ -9,11 +9,17 @@ namespace OldBit.ZXTape.Tzx.Blocks;
 public class PauseBlock : IBlock
 {
     /// <summary>
-    /// Gets or sets the pause duration in milliseconds.
+    /// Gets the block ID.
     /// </summary>
     [BlockProperty(Order = 0)]
+    public byte BlockId => BlockCode.Pause;
+
+    /// <summary>
+    /// Gets or sets the pause duration in milliseconds.
+    /// </summary>
+    [BlockProperty(Order = 1)]
     public Word Duration { get; set; }
-    
+
     /// <summary>
     /// Creates a new instance of the 'Pause' block.
     /// </summary>

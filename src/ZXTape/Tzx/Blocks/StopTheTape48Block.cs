@@ -9,10 +9,16 @@ namespace OldBit.ZXTape.Tzx.Blocks;
 public class StopTheTape48Block : IBlock
 {
     /// <summary>
+    /// Gets the block ID.
+    /// </summary>
+    [BlockProperty(Order = 0)]
+    public byte BlockId => BlockCode.StopTheTape48;
+
+    /// <summary>
     /// Helper property needed by the serialization.
     /// Gets the length of the block without these 4 bytes. The actual value is always zero.
     /// </summary>
-    [BlockProperty(Order = 0)]
+    [BlockProperty(Order = 1)]
     private int Length => 0;
 
     /// <summary>

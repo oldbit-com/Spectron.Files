@@ -9,9 +9,15 @@ namespace OldBit.ZXTape.Tzx.Blocks;
 public class GlueBlock : IBlock
 {
     /// <summary>
+    /// Gets the block ID.
+    /// </summary>
+    [BlockProperty(Order = 0)]
+    public byte BlockId => BlockCode.Glue;
+
+    /// <summary>
     /// Gets or sets the data object.
     /// </summary>
-    [BlockProperty(Order = 0, Size = 9)]
+    [BlockProperty(Order = 1, Size = 9)]
     public List<byte> Data { get; set; }
 
     /// <summary>

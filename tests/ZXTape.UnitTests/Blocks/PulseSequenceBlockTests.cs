@@ -37,6 +37,6 @@ public class PulseSequenceBlockTests
         var serializer = new BlockSerializer();
         var result = serializer.Serialize(block);
 
-        result.Should().Equal(0x03, 0x64, 0x00, 0xC8, 0x00, 0x2C, 0x01);
+        result.Should().Equal(0x13, 0x03, 0x64, 0x00, 0xC8, 0x00, 0x2C, 0x01);
     }
 }

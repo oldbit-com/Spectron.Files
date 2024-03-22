@@ -128,9 +128,4 @@ public static class BlockCode
     /// "Glue" block (ID 0x5A).
     /// </summary>
     public const byte Glue = 0x5A;
-
-    /// <summary>
-    /// Unknown block.
-    /// </summary>
-    public const byte Unknown = 0;
 }

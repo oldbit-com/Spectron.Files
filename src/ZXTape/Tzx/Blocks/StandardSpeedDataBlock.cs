@@ -9,22 +9,28 @@ namespace OldBit.ZXTape.Tzx.Blocks;
 public class StandardSpeedDataBlock : IBlock
 {
     /// <summary>
-    /// Gets or sets the pause value (in millisecond) that should be applied after this block.
+    /// Gets the block ID.
     /// </summary>
     [BlockProperty(Order = 0)]
+    public byte BlockId => BlockCode.StandardSpeedData;
+
+    /// <summary>
+    /// Gets or sets the pause value (in millisecond) that should be applied after this block.
+    /// </summary>
+    [BlockProperty(Order = 1)]
     public Word PauseDuration { get; set; }
 
     /// <summary>
     /// Helper property needed by the serialization.
     /// Gets the length of the data.
     /// </summary>
-    [BlockProperty(Order = 1, Size = 2)]
+    [BlockProperty(Order = 2, Size = 2)]
     private int Length => Data.Count;
 
     /// <summary>
     /// Gets or sets the data as in .TAP file.
     /// </summary>
-    [BlockProperty(Order = 2)]
+    [BlockProperty(Order = 3)]
     public List<byte> Data { get; set; } = [];
 
     /// <summary>

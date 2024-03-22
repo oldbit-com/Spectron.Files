@@ -9,16 +9,22 @@ namespace OldBit.ZXTape.Tzx.Blocks;
 public class CallSequenceBlock : IBlock
 {
     /// <summary>
+    /// Gets the block ID.
+    /// </summary>
+    [BlockProperty(Order = 0)]
+    public byte BlockId => BlockCode.CallSequence;
+
+    /// <summary>
     /// Helper property needed by the serialization.
     /// Gets the number of calls to be made.
     /// </summary>
-    [BlockProperty(Order = 0)]
+    [BlockProperty(Order = 1)]
     private Word Count => (Word)Offsets.Count;
 
     /// <summary>
     /// Gets or sets a list of call block numbers (relative-signed offsets).
     /// </summary>
-    [BlockProperty(Order = 1)]
+    [BlockProperty(Order = 2)]
     public List<short> Offsets { get; set; } = [];
 
     /// <summary>

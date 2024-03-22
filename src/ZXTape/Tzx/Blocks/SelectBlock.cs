@@ -10,23 +10,29 @@ namespace OldBit.ZXTape.Tzx.Blocks;
 public class SelectBlock : IBlock
 {
     /// <summary>
+    /// Gets the block ID.
+    /// </summary>
+    [BlockProperty(Order = 0)]
+    public byte BlockId => BlockCode.Select;
+
+    /// <summary>
     /// Helper property needed by the serialization.
     /// Gets the length of the whole block.
     /// </summary>
-    [BlockProperty(Order = 0)]
+    [BlockProperty(Order = 1)]
     private Word Length => (ushort)(1 + Selections.Count * 3 + Selections.Sum(x => x.Length));
 
     /// <summary>
     /// Helper property needed by the serialization.
     /// Gets the number of selections.
     /// </summary>
-    [BlockProperty(Order = 1)]
+    [BlockProperty(Order = 2)]
     private byte Count => (byte)Selections.Count;
 
     /// <summary>
     /// Gets or sets the array of selections.
     /// </summary>
-    [BlockProperty(Order = 2)]
+    [BlockProperty(Order = 3)]
     public List<Selection> Selections { get; set; } = [];
 
     /// <summary>
@@ -73,7 +79,7 @@ public class SelectBlock : IBlock
         /// </summary>
         [BlockProperty(Order = 2)]
         public string Description { get; set; } = string.Empty;
-        
+
         /// <summary>
         /// Creates a new instance of the 'SELECT' structure.
         /// </summary>

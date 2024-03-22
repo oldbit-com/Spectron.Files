@@ -31,6 +31,6 @@ public class JumpToBlockTests
         var serializer = new BlockSerializer();
         var result = serializer.Serialize(block);
 
-        result.Should().Equal(0xFF, 0xFF);
+        result.Should().Equal(0x23, 0xFF, 0xFF);
     }
 }

@@ -9,16 +9,22 @@ namespace OldBit.ZXTape.Tzx.Blocks;
 public class PulseSequenceBlock : IBlock
 {
     /// <summary>
+    /// Gets the block ID.
+    /// </summary>
+    [BlockProperty(Order = 0)]
+    public byte BlockId => BlockCode.PulseSequence;
+
+    /// <summary>
     /// Helper property needed by the serialization.
     /// Gets the length of the pulses' array.
     /// </summary>
-    [BlockProperty(Order = 0, Size = 1)]
+    [BlockProperty(Order = 1, Size = 1)]
     private int PulseCount => PulseLengths.Count;
 
     /// <summary>
     /// Gets or sets an array of pulses' lengths.
     /// </summary>
-    [BlockProperty(Order = 1)]
+    [BlockProperty(Order = 2)]
     public List<Word> PulseLengths { get; set; } = new();
 
     /// <summary>
