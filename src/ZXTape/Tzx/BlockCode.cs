@@ -35,6 +35,11 @@ public static class BlockCode
     public const byte DirectRecording = 0x15;
 
     /// <summary>
+    /// C64 ROM Type Data (ID 0x16).
+    /// </summary>
+    public const byte C64RomTypeData = 0x16;
+
+    /// <summary>
     /// CSW Recording (ID 0x18).
     /// </summary>
     public const byte CswRecording = 0x18;

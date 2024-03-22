@@ -17,13 +17,21 @@ public class TzxReadWriteTests(ITestOutputHelper output)
             var sourceFileBytes = File.ReadAllBytes(file);
             var sourceStream = new MemoryStream(sourceFileBytes);
 
-            var txzFile = TzxFile.Load(sourceStream);
-            var memoryStream = new MemoryStream();
-            txzFile.Save(memoryStream);
+            try
+            {
+                var txzFile = TzxFile.Load(sourceStream);
+                var memoryStream = new MemoryStream();
+                txzFile.Save(memoryStream);
 
-            var savedFileBytes = memoryStream.ToArray();
+                var savedFileBytes = memoryStream.ToArray();
 
-            savedFileBytes.Should().Equal(sourceFileBytes, file);
+                savedFileBytes.Should().Equal(sourceFileBytes, file);
+            }
+            catch (Exception e)
+            {
+                _output.WriteLine($"Error in file {file}: {e.Message}");
+                throw;
+            }
         }
     }
 }
