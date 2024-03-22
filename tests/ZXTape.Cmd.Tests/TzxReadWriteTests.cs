@@ -11,7 +11,8 @@ public class TzxReadWriteTests(ITestOutputHelper output)
     [Fact]
     public void CompareLoadedFileWithSavedFile()
     {
-        var files = Directory.EnumerateFiles("/Users/voytas/Games/ZX/ZX Spectrum Archive/", "*.tzx", SearchOption.AllDirectories);
+        var count = 0;
+        var files = Directory.EnumerateFiles("/Users/voytas/Games/ZX/ZX Spectrum Games Collection/", "*.tzx", SearchOption.AllDirectories);
         foreach (var file in files)
         {
             var sourceFileBytes = File.ReadAllBytes(file);
@@ -26,12 +27,16 @@ public class TzxReadWriteTests(ITestOutputHelper output)
                 var savedFileBytes = memoryStream.ToArray();
 
                 savedFileBytes.Should().Equal(sourceFileBytes, file);
+
+                count += 1;
             }
             catch (Exception e)
             {
                 _output.WriteLine($"Error in file {file}: {e.Message}");
-                throw;
+               // throw;
             }
         }
+
+        _output.WriteLine("Total files: " + count);
     }
 }

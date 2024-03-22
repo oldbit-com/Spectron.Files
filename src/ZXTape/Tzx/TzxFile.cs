@@ -46,6 +46,10 @@ public sealed class TzxFile
 
             if (block is HeaderBlock headerBlock)
             {
+                if (!headerBlock.IsValid)
+                {
+                    throw new InvalidDataException("Invalid TZX header.");
+                }
                 tzx.Header = headerBlock;
             }
             else

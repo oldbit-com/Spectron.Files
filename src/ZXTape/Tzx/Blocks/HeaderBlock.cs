@@ -80,4 +80,11 @@ public class HeaderBlock : IBlock
         VerMajor = reader.ReadByte();
         VerMinor = reader.ReadByte();
     }
+
+    /// <summary>
+    /// Gets a value indicating whether the header block is valid.
+    /// </summary>
+    /// <returns><c>true</c> if the header block is valid; otherwise, <c>false</c>.</returns>
+    internal bool IsValid =>
+        Signature == TzxSignature && EotMarker == TzxEotMarker;
 }

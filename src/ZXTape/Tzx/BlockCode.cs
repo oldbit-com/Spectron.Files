@@ -130,6 +130,11 @@ public static class BlockCode
     public const byte CustomInfo = 0x35;
 
     /// <summary>
+    /// TSX format specific block used by MSX computers.
+    /// </summary>
+    public const byte KansasCityStandard = 0x4B;
+
+    /// <summary>
     /// "Glue" block (ID 0x5A).
     /// </summary>
     public const byte Glue = 0x5A;

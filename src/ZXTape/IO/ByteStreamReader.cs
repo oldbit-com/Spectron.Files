@@ -55,7 +55,7 @@ internal sealed class ByteStreamReader : IByteStreamReader
     /// <returns>The dword retrieved from the stream.</returns>
     public DWord ReadDWord()
     {
-        return (DWord)(ReadWord() |  ReadWord() << 16);
+        return (DWord)(ReadWord() | ReadWord() << 16);
     }
 
     /// <summary>
@@ -95,7 +95,7 @@ internal sealed class ByteStreamReader : IByteStreamReader
         var words = new Word[count];
         for (var i = 0; i < data; i +=2)
         {
-            words[i / 2] = (ushort)(buffer[i] | buffer[i + 1] << 8);
+            words[i / 2] = (Word)(buffer[i] | buffer[i + 1] << 8);
         }
 
         return words;

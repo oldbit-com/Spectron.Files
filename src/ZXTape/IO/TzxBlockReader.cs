@@ -67,6 +67,7 @@ internal sealed class TzxBlockReader
             BlockCode.CustomInfo => new CustomInfoBlock(_reader),
             BlockCode.Glue => new GlueBlock(_reader),
             BlockCode.C64RomTypeData => new C64RomTypeDataBlock(_reader),
+            BlockCode.KansasCityStandard => new KansasCityStandardBlock(_reader),
             _ => throw new ArgumentException($"Error reading TZX file. Unrecognized block id={id}.")
         };
     }

@@ -40,6 +40,6 @@ public static class ConvertCommandHandler
             outputFileName = Path.Combine(outputFileName, Path.GetFileName(sourceFileName));
         }
 
-        return Path.ChangeExtension(outputFileName, extension); ;
+        return Path.ChangeExtension(outputFileName, extension);
     }
 }
