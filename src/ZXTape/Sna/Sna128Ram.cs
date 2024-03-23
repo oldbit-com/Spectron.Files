@@ -71,7 +71,7 @@ public sealed class Sna128Ram
         {
             if (bank == 2 || bank == 5 || bank == (sna128Ram.PageMode & 0x07))
             {
-                continue;   // These banks are included in 48K SNA file format, skip them
+                continue;   // These banks are included in the 48K SNA file format, skip them
             }
 
             var bankData = reader.ReadBytes(0x4000).ToList();
