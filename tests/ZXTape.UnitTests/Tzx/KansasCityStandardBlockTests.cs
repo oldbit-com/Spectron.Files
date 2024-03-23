@@ -1,4 +1,4 @@
-namespace OldBit.ZXTape.UnitTests.Blocks;
+namespace OldBit.ZXTape.UnitTests.Tzx;
 
 public class KansasCityStandardBlockTests
 {

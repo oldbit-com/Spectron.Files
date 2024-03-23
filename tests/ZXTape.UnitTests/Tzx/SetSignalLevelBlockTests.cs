@@ -3,7 +3,7 @@ using OldBit.ZXTape.IO;
 using OldBit.ZXTape.Tzx.Blocks;
 using OldBit.ZXTape.Tzx.Serialization;
 
-namespace OldBit.ZXTape.UnitTests.Blocks;
+namespace OldBit.ZXTape.UnitTests.Tzx;
 
 public class SetSignalLevelBlockTests
 {
