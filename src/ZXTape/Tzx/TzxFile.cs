@@ -27,10 +27,10 @@ public sealed class TzxFile
     }
 
     /// <summary>
-    /// Loads a TZX file from a stream.
+    /// Loads a TZX file from the given stream.
     /// </summary>
-    /// <param name="stream">The stream to load the TZX file from.</param>
-    /// <returns>A TzxFile object representing the loaded TZX file.</returns>
+    /// <param name="stream">The stream containing the TZX data.</param>
+    /// <returns>The loaded TzxFile object.</returns>
     public static TzxFile Load(Stream stream)
     {
         var reader = new TzxBlockReader(stream);
@@ -62,10 +62,10 @@ public sealed class TzxFile
     }
 
     /// <summary>
-    /// Loads a TZX file from a file.
+    /// Loads a TZX file from the given file.
     /// </summary>
-    /// <param name="fileName">The name of the file to load the TZX file from.</param>
-    /// <returns>A TzxFile object representing the loaded TZX file.</returns>
+    /// <param name="fileName">The file containing the TZX data.</param>
+    /// <returns>The loaded TapFile object.</returns>
     public static TzxFile Load(string fileName)
     {
         using var stream = File.OpenRead(fileName);

@@ -38,7 +38,7 @@ public class PulseSequenceBlock : IBlock
     /// Creates a new instance of the 'Pulse Sequence' block using the byte reader.
     /// </summary>
     /// <param name="reader">A byte reader.</param>
-    internal PulseSequenceBlock(IByteStreamReader reader)
+    internal PulseSequenceBlock(ByteStreamReader reader)
     {
         var length = reader.ReadByte();
         PulseLengths.AddRange(reader.ReadWords(length));

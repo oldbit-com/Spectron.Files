@@ -62,7 +62,7 @@ public class CswRecordingBlock : IBlock
     /// Creates a new instance of the 'CSW Recording' block using the byte reader.
     /// </summary>
     /// <param name="reader">A byte reader.</param>
-    internal CswRecordingBlock(IByteStreamReader reader)
+    internal CswRecordingBlock(ByteStreamReader reader)
     {
         var length = reader.ReadDWord() - 10;
         PauseDuration = reader.ReadWord();

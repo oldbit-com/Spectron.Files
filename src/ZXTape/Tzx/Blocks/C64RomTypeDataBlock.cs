@@ -160,7 +160,7 @@ public class C64RomTypeDataBlock : IBlock
     /// Creates a new instance of the 'C64 ROM Type Data' block using the byte reader.
     /// </summary>
     /// <param name="reader">A byte reader.</param>
-    internal C64RomTypeDataBlock(IByteStreamReader reader)
+    internal C64RomTypeDataBlock(ByteStreamReader reader)
     {
         reader.ReadDWord();
         PilotTonePulseLength = reader.ReadWord();

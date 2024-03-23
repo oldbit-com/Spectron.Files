@@ -45,7 +45,7 @@ public class MessageBlock : IBlock
     /// Creates a new instance of the 'Message' block using the byte reader.
     /// </summary>
     /// <param name="reader">A byte reader.</param>
-    internal MessageBlock(IByteStreamReader reader)
+    internal MessageBlock(ByteStreamReader reader)
     {
         Time = reader.ReadByte();
         var length = reader.ReadByte();

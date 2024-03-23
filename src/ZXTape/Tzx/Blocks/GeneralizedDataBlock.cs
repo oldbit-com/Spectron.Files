@@ -108,7 +108,7 @@ public class GeneralizedDataBlock : IBlock
     /// Creates a new instance of the 'Generalized Data' block using the byte reader.
     /// </summary>
     /// <param name="reader">A byte reader.</param>
-    internal GeneralizedDataBlock(IByteStreamReader reader) : this()
+    internal GeneralizedDataBlock(ByteStreamReader reader) : this()
     {
         reader.ReadDWord();
         PauseDuration = reader.ReadWord();

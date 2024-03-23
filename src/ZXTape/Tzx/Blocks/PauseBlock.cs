@@ -31,7 +31,7 @@ public class PauseBlock : IBlock
     /// Creates a new instance of the 'Pause' block using the byte reader.
     /// </summary>
     /// <param name="reader">A byte reader.</param>
-    public PauseBlock(IByteStreamReader reader)
+    internal PauseBlock(ByteStreamReader reader)
     {
         Duration = reader.ReadWord();
     }

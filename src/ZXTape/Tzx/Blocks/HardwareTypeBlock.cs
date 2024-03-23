@@ -38,7 +38,7 @@ public class HardwareTypeBlock : IBlock
     /// Creates a new instance of the 'Hardware Type' block using the byte reader.
     /// </summary>
     /// <param name="reader">A byte reader.</param>
-    internal HardwareTypeBlock(IByteStreamReader reader)
+    internal HardwareTypeBlock(ByteStreamReader reader)
     {
         var count = reader.ReadByte();
         for (var i = 0; i < count; i++)
@@ -81,7 +81,7 @@ public class HardwareTypeBlock : IBlock
         /// Creates a new instance of the 'HWINFO' structure using the byte reader..
         /// </summary>
         /// <param name="reader">A byte reader.</param>
-        internal HardwareInfo(IByteStreamReader reader)
+        internal HardwareInfo(ByteStreamReader reader)
         {
             Type = reader.ReadByte();
             Id = reader.ReadByte();

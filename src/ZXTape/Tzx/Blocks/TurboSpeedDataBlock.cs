@@ -87,7 +87,7 @@ public class TurboSpeedDataBlock : IBlock
     /// Creates a new instance of the 'Turbo Speed Data' block using the byte reader.
     /// </summary>
     /// <param name="reader">A byte reader.</param>
-    internal TurboSpeedDataBlock(IByteStreamReader reader)
+    internal TurboSpeedDataBlock(ByteStreamReader reader)
     {
         PilotPulseLength = reader.ReadWord();
         SyncFirstPulseLength = reader.ReadWord();

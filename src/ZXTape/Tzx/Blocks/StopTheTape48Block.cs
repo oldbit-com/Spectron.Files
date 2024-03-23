@@ -32,7 +32,7 @@ public class StopTheTape48Block : IBlock
     /// Creates a new instance of the 'Stop The Tape 48k' block using the byte reader.
     /// </summary>
     /// <param name="reader">A byte reader.</param>
-    internal StopTheTape48Block(IByteStreamReader reader)
+    internal StopTheTape48Block(ByteStreamReader reader)
     {
         reader.ReadDWord();
     }

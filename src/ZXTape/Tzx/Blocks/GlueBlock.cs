@@ -32,7 +32,7 @@ public class GlueBlock : IBlock
     /// Creates a new instance of the 'Glue' block using the byte reader.
     /// </summary>
     /// <param name="reader">A byte reader.</param>
-    internal GlueBlock(IByteStreamReader reader)
+    internal GlueBlock(ByteStreamReader reader)
     {
         Data = new List<byte>(reader.ReadBytes(9));
     }

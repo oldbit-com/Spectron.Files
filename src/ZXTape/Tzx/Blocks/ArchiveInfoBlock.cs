@@ -39,7 +39,7 @@ public class ArchiveInfoBlock : IBlock
     /// Creates a new instance of the 'Archive Info' block using the byte reader.
     /// </summary>
     /// <param name="reader">A byte reader.</param>
-    internal ArchiveInfoBlock(IByteStreamReader reader)
+    internal ArchiveInfoBlock(ByteStreamReader reader)
     {
         reader.ReadWord();
         var count = reader.ReadByte();
@@ -101,7 +101,7 @@ public class ArchiveInfoBlock : IBlock
         /// Creates a new instance of the 'TEXT' structure using the byte reader.
         /// </summary>
         /// <param name="reader">A byte reader.</param>
-        internal TextInfo(IByteStreamReader reader)
+        internal TextInfo(ByteStreamReader reader)
         {
             Id = reader.ReadByte();
             var length = reader.ReadByte();

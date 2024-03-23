@@ -17,8 +17,38 @@ public static class ConvertCommandHandler
         {
             var tzxFile = TzxFile.Load(sourceFileName);
             outputFileName = GetOutputFileName(sourceFileName, outputFileName, outputFormat);
-            tzxFile.Save(outputFileName);
+
+            if (outputFormat == FileFormat.Tzx)
+            {
+                TzxToTzx(tzxFile, outputFileName);
+            }
+            else if (outputFormat == FileFormat.Tap)
+            {
+                TzxToTap(tzxFile, outputFileName);
+            }
+            else
+            {
+                throw new Exception("Invalid output format. Only TAP and TZX files are supported.");
+            }
         }
+        else if (sourceFileFormat == FileFormat.Tap)
+        {
+            // var tapFile = TapFile.Load(sourceFileName);
+            // outputFileName = GetOutputFileName(sourceFileName, outputFileName, outputFormat);
+            // tapFile.Save(outputFileName);
+        }
+    }
+
+    private static void TzxToTzx(TzxFile tzxFile, string outputFileName)
+    {
+        tzxFile.Save(outputFileName);
+    }
+
+    private static void TzxToTap(TzxFile tzxFile, string outputFileName)
+    {
+        // var tapFile = new TapFile();
+        // tapFile.AddBlocks(tzxFile.Blocks);
+        // tapFile.Save(outputFileName);
     }
 
     private static string GetOutputFileName(string sourceFileName, string outputFileName, FileFormat outputFormat)

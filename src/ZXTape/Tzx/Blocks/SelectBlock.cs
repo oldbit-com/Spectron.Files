@@ -20,7 +20,7 @@ public class SelectBlock : IBlock
     /// Gets the length of the whole block.
     /// </summary>
     [BlockProperty(Order = 1)]
-    private Word Length => (ushort)(1 + Selections.Count * 3 + Selections.Sum(x => x.Length));
+    private Word Length => (Word)(1 + Selections.Count * 3 + Selections.Sum(x => x.Length));
 
     /// <summary>
     /// Helper property needed by the serialization.
@@ -46,7 +46,7 @@ public class SelectBlock : IBlock
     /// Creates a new instance of the 'Select' block using the byte reader.
     /// </summary>
     /// <param name="reader">A byte reader.</param>
-    internal SelectBlock(IByteStreamReader reader)
+    internal SelectBlock(ByteStreamReader reader)
     {
         reader.ReadWord();
         var count = reader.ReadByte();
@@ -91,7 +91,7 @@ public class SelectBlock : IBlock
         /// Creates a new instance of the 'SELECT' structure using the byte reader..
         /// </summary>
         /// <param name="reader">A byte reader.</param>
-        public Selection(IByteStreamReader reader)
+        internal Selection(ByteStreamReader reader)
         {
             Offset = (short)reader.ReadWord();
             var length = reader.ReadByte();

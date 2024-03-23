@@ -6,13 +6,11 @@ namespace ZXTape.Cmd.Tests;
 
 public class TzxReadWriteTests(ITestOutputHelper output)
 {
-    private readonly ITestOutputHelper _output = output;
-
-    [Fact]
+    [Fact(Skip = "Only for manual testing")]
     public void CompareLoadedFileWithSavedFile()
     {
         var count = 0;
-        var files = Directory.EnumerateFiles("/Users/voytas/Games/ZX/ZX Spectrum Games Collection/", "*.tzx", SearchOption.AllDirectories);
+        var files = Directory.EnumerateFiles("$HOME$/Games/ZX/ZX Spectrum Games Collection/", "*.tzx", SearchOption.AllDirectories);
         foreach (var file in files)
         {
             var sourceFileBytes = File.ReadAllBytes(file);
@@ -32,11 +30,11 @@ public class TzxReadWriteTests(ITestOutputHelper output)
             }
             catch (Exception e)
             {
-                _output.WriteLine($"Error in file {file}: {e.Message}");
+                output.WriteLine($"Error in file {file}: {e.Message}");
                // throw;
             }
         }
 
-        _output.WriteLine("Total files: " + count);
+        output.WriteLine("Total files: " + count);
     }
 }

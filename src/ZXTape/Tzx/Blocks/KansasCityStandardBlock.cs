@@ -92,7 +92,7 @@ public class KansasCityStandardBlock : IBlock
     /// Creates a new instance of the 'Kansas City Standard' block using the byte reader.
     /// </summary>
     /// <param name="reader">A byte reader.</param>
-    internal KansasCityStandardBlock(IByteStreamReader reader)
+    internal KansasCityStandardBlock(ByteStreamReader reader)
     {
         var length = (int)reader.ReadDWord();
         PauseDuration = reader.ReadWord();

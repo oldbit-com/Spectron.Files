@@ -31,7 +31,7 @@ public class JumpToBlock : IBlock
     /// Creates a new instance of the 'Jump To' block using the byte reader.
     /// </summary>
     /// <param name="reader">A byte reader.</param>
-    internal JumpToBlock(IByteStreamReader reader)
+    internal JumpToBlock(ByteStreamReader reader)
     {
         Jump = (short)reader.ReadWord();
     }

@@ -44,7 +44,7 @@ public class StandardSpeedDataBlock : IBlock
     /// Creates a new instance of the 'Standard Speed Data' block using the byte reader.
     /// </summary>
     /// <param name="reader">A byte reader.</param>
-    internal StandardSpeedDataBlock(IByteStreamReader reader)
+    internal StandardSpeedDataBlock(ByteStreamReader reader)
     {
         PauseDuration = reader.ReadWord();
         var length = reader.ReadWord();

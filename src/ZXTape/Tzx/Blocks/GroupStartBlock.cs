@@ -39,7 +39,7 @@ public class GroupStartBlock : IBlock
     /// Creates a new instance of the 'Group Start' block using the byte reader.
     /// </summary>
     /// <param name="reader">A byte reader.</param>
-    internal GroupStartBlock(IByteStreamReader reader)
+    internal GroupStartBlock(ByteStreamReader reader)
     {
         var length = reader.ReadByte();
         Name = reader.ReadBytes(length).ToAsciiString();

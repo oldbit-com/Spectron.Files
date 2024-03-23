@@ -57,7 +57,7 @@ public class DirectRecordingBlock : IBlock
     /// Creates a new instance of the 'Direct Recording' block using the byte reader.
     /// </summary>
     /// <param name="reader">A byte reader.</param>
-    internal DirectRecordingBlock(IByteStreamReader reader)
+    internal DirectRecordingBlock(ByteStreamReader reader)
     {
         StatesPerSample = reader.ReadWord();
         PauseDuration = reader.ReadWord();

@@ -1,9 +1,9 @@
 ﻿namespace OldBit.ZXTape.IO;
 
 /// <summary>
-/// Represents a reader that helps reading bytes from a stream.
+/// Represents a reader that helps reading bytes data from a stream.
 /// </summary>
-internal sealed class ByteStreamReader : IByteStreamReader
+internal sealed class ByteStreamReader
 {
     private readonly Stream _stream;
 

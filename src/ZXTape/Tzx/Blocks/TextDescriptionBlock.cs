@@ -39,7 +39,7 @@ public class TextDescriptionBlock : IBlock
     /// Creates a new instance of the 'Text Description' block using the byte reader.
     /// </summary>
     /// <param name="reader">A byte reader.</param>
-    internal TextDescriptionBlock(IByteStreamReader reader)
+    internal TextDescriptionBlock(ByteStreamReader reader)
     {
         var length = reader.ReadByte();
         Description = reader.ReadBytes(length).ToAsciiString();
