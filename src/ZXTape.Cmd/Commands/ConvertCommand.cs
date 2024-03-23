@@ -1,12 +1,15 @@
 using System.CommandLine;
 using OldBit.ZXTape.Cmd.Handlers;
+using OldBit.ZXTape.Cmd.Logging;
 using OldBit.ZXTape.Cmd.TapeFile;
 
 namespace OldBit.ZXTape.Cmd.Commands;
 
-public static class ConvertCommand
+public class ConvertCommand(IConsoleLogger consoleLogger)
 {
-    public static Command Create(Option<bool> verboseOption, Action<int> setReturnCode)
+    private readonly IConsoleLogger _consoleLogger = consoleLogger;
+
+    public Command Create(Option<bool> verboseOption, Action<int> setReturnCode)
     {
         var sourceFileArgument = new Argument<string>(
             name: "file",
@@ -39,7 +42,8 @@ public static class ConvertCommand
         {
             try
             {
-                ConvertCommandHandler.Convert(
+                var convertCommandHandler = new ConvertCommandHandler(consoleLogger);
+                convertCommandHandler.Convert(
                     sourceFileName,
                     outputFileName,
                     Enum.Parse<FileFormat>(outputFormat, true),
@@ -47,7 +51,7 @@ public static class ConvertCommand
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                consoleLogger.WriteLine(ex.Message);
                 setReturnCode(1);
             }
         }, sourceFileArgument, outputFileOption, outputFormatOption, forceOption);

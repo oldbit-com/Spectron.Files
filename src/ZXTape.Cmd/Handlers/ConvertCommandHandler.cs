@@ -1,22 +1,24 @@
+using OldBit.ZXTape.Cmd.Logging;
 using OldBit.ZXTape.Cmd.TapeFile;
+using OldBit.ZXTape.Tap;
 using OldBit.ZXTape.Tzx;
 
 namespace OldBit.ZXTape.Cmd.Handlers;
 
-public static class ConvertCommandHandler
+public class ConvertCommandHandler(IConsoleLogger consoleLogger)
 {
-    public static void Convert(string sourceFileName, string outputFileName, FileFormat outputFormat, bool force)
+    public void Convert(string sourceFileName, string outputFileName, FileFormat outputFormat, bool force)
     {
         var sourceFileFormat = TapeFileHelper.DetectFormat(sourceFileName);
-        if (sourceFileFormat != FileFormat.Tzx && sourceFileFormat != FileFormat.Tap)
+        if (sourceFileFormat == outputFormat && force)
         {
-            throw new Exception("Invalid source file. Only TAP and TZX files are supported.");
+            throw new Exception("Source and output formats are the same. Use force option to override.");
         }
 
+        outputFileName = GetOutputFileName(sourceFileName, outputFileName, outputFormat);
         if (sourceFileFormat == FileFormat.Tzx)
         {
             var tzxFile = TzxFile.Load(sourceFileName);
-            outputFileName = GetOutputFileName(sourceFileName, outputFileName, outputFormat);
 
             if (outputFormat == FileFormat.Tzx)
             {
@@ -33,15 +35,34 @@ public static class ConvertCommandHandler
         }
         else if (sourceFileFormat == FileFormat.Tap)
         {
-            // var tapFile = TapFile.Load(sourceFileName);
-            // outputFileName = GetOutputFileName(sourceFileName, outputFileName, outputFormat);
-            // tapFile.Save(outputFileName);
+            var tapFile = TapFile.Load(sourceFileName);
+            if (outputFormat == FileFormat.Tzx)
+            {
+                TapToTzx(tapFile, outputFileName);
+            }
+            else if (outputFormat == FileFormat.Tap)
+            {
+                TapToTap(tapFile, outputFileName);
+            }
+            else
+            {
+                throw new Exception("Invalid output format. Only TAP and TZX files are supported.");
+            }
+        }
+        else
+        {
+            throw new Exception("Invalid source file. Only TAP and TZX files are supported.");
         }
     }
 
-    private static void TzxToTzx(TzxFile tzxFile, string outputFileName)
+    private void TzxToTzx(TzxFile tzxFile, string outputFileName)
     {
+        consoleLogger.WriteLine("Source format: TZX");
+        consoleLogger.WriteLine("Target format: TZX");
+
         tzxFile.Save(outputFileName);
+
+        consoleLogger.WriteLine($"File saved: '{outputFileName}'");
     }
 
     private static void TzxToTap(TzxFile tzxFile, string outputFileName)
@@ -49,6 +70,21 @@ public static class ConvertCommandHandler
         // var tapFile = new TapFile();
         // tapFile.AddBlocks(tzxFile.Blocks);
         // tapFile.Save(outputFileName);
+    }
+
+    private void TapToTap(TapFile tapFile, string outputFileName)
+    {
+        consoleLogger.WriteLine("Source format: TAP");
+        consoleLogger.WriteLine("Target format: TAP");
+
+        tapFile.Save(outputFileName);
+
+        consoleLogger.WriteLine($"File saved: '{outputFileName}'");
+    }
+
+    private static void TapToTzx(TapFile tapFile, string outputFileName)
+    {
+        //tapFile.Save(outputFileName);
     }
 
     private static string GetOutputFileName(string sourceFileName, string outputFileName, FileFormat outputFormat)

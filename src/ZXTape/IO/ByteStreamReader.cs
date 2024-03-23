@@ -64,13 +64,7 @@ internal sealed class ByteStreamReader
     public byte[] ReadBytes(int count)
     {
         var buffer = new byte[count];
-        var data = _stream.Read(buffer);
-
-        if (data != count)
-        {
-            throw new EndOfStreamException();
-        }
-
+        _stream.ReadExactly(buffer, 0, count);
         return buffer;
     }
 
@@ -82,15 +76,10 @@ internal sealed class ByteStreamReader
     public Word[] ReadWords(int count)
     {
         var buffer = new byte[2 * count];
-        var data = _stream.Read(buffer);
-
-        if (data != 2 * count)
-        {
-            throw new EndOfStreamException();
-        }
+        _stream.ReadExactly(buffer, 0, 2 * count);
 
         var words = new Word[count];
-        for (var i = 0; i < data; i +=2)
+        for (var i = 0; i < buffer.Length; i +=2)
         {
             words[i / 2] = (Word)(buffer[i] | buffer[i + 1] << 8);
         }
@@ -119,6 +108,14 @@ internal sealed class ByteStreamReader
     }
 
     /// <summary>
+    /// Reads a sequence of bytes from the stream and advances the position within the stream by 'count' bytes.
+    /// </summary>
+    /// <param name="buffer">An array of bytes retrieved from the stream.</param>
+    /// <param name="count">The number of bytes to read.</param>
+    /// <returns>The number of bytes read from the stream.</returns>
+    public int ReadAtLeast(byte[] buffer, int count) => _stream.ReadAtLeast(buffer, count, false);
+
+    /// <summary>
     /// Attempts to read a word from the stream and advances the position within the stream by two bytes.
     /// </summary>
     /// <param name="result">When this method returns, contains the word retrieved from the stream,
@@ -126,16 +123,16 @@ internal sealed class ByteStreamReader
     /// <returns>true if the read operation succeeds; otherwise, false.</returns>
     public bool TryReadWord(out Word result)
     {
-        result = 0;
-        var byte1 = _stream.ReadByte();
-        var byte2 = _stream.ReadByte();
+        var buffer = new byte[2];
+        var count = _stream.ReadAtLeast(buffer, 2, false);
 
-        if (byte1 == -1 || byte2 == -1)
+        result = 0;
+        if (count != 2)
         {
             return false;
         }
 
-        result = (Word)(byte1 | byte2 << 8);
+        result = (Word)(buffer[0] | buffer[1] << 8);
         return true;
     }
 }

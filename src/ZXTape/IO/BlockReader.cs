@@ -4,7 +4,7 @@ using OldBit.ZXTape.Tzx.Blocks;
 namespace OldBit.ZXTape.IO;
 
 /// <summary>
-/// Reads TZX file data from a stream.
+/// Reads a block data from a stream.
 /// </summary>
 internal sealed class BlockReader
 {
@@ -12,9 +12,9 @@ internal sealed class BlockReader
     private int _blockCounter;
 
     /// <summary>
-    /// Creates a new instance of the TZX block reader.
+    /// Creates a new instance of the block reader.
     /// </summary>
-    /// <param name="stream">The stream to read TZX data from.</param>
+    /// <param name="stream">The stream to read data from.</param>
     internal BlockReader(Stream stream)
     {
         _reader = new ByteStreamReader(stream);
