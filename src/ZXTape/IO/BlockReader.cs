@@ -6,7 +6,7 @@ namespace OldBit.ZXTape.IO;
 /// <summary>
 /// Reads TZX file data from a stream.
 /// </summary>
-internal sealed class TzxBlockReader
+internal sealed class BlockReader
 {
     private readonly ByteStreamReader _reader;
     private int _blockCounter;
@@ -15,7 +15,7 @@ internal sealed class TzxBlockReader
     /// Creates a new instance of the TZX block reader.
     /// </summary>
     /// <param name="stream">The stream to read TZX data from.</param>
-    internal TzxBlockReader(Stream stream)
+    internal BlockReader(Stream stream)
     {
         _reader = new ByteStreamReader(stream);
     }

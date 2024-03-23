@@ -33,7 +33,7 @@ public sealed class TzxFile
     /// <returns>The loaded TzxFile object.</returns>
     public static TzxFile Load(Stream stream)
     {
-        var reader = new TzxBlockReader(stream);
+        var reader = new BlockReader(stream);
 
         var tzx = new TzxFile();
         while (true)
