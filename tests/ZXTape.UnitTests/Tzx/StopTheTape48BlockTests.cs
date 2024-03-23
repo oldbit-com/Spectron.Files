@@ -1,6 +1,6 @@
 ﻿using OldBit.ZXTape.IO;
+using OldBit.ZXTape.Serialization;
 using OldBit.ZXTape.Tzx.Blocks;
-using OldBit.ZXTape.Tzx.Serialization;
 
 namespace OldBit.ZXTape.UnitTests.Tzx;
 
@@ -21,7 +21,7 @@ public class StopTheTape48BlockTests
     {
         var block = new StopTheTape48Block();
 
-        var result = BlockSerializer.Serialize(block);
+        var result = FileDataSerializer.Serialize(block);
 
         result.Should().Equal(0x2A, 0x00, 0x00, 0x00, 0x00);
     }

@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using OldBit.ZXTape.IO;
-using OldBit.ZXTape.Tzx.Serialization;
+using OldBit.ZXTape.Serialization;
 
 namespace OldBit.ZXTape.Sna;
 
@@ -12,40 +12,40 @@ public sealed class Sna128Ram
     /// <summary>
     /// Gets or sets the RAM bank 5.
     /// </summary>
-    [BlockProperty(Order = 0)]
+    [FileData(Order = 0)]
     public List<byte> RamBank5 { get; set; } = [];
 
     /// <summary>
     /// Gets or sets the RAM bank 2.
     /// </summary>
-    [BlockProperty(Order = 1)]
+    [FileData(Order = 1)]
     public List<byte> RamBank2 { get; set; } = [];
 
     /// <summary>
     /// Gets or sets the currently paged RAM bank.
     /// </summary>
-    [BlockProperty(Order = 2)]
+    [FileData(Order = 2)]
     public List<byte> RamBankN { get; set; } = [];
 
     /// <summary>
     /// Gets or sets the PC register.
     /// </summary>
-    [BlockProperty(Order = 3)]
+    [FileData(Order = 3)]
     public Word PC { get; set; }
 
     /// <summary>
     /// Gets or sets the page mode (port 7FFD value).
     /// </summary>
-    [BlockProperty(Order = 4)]
+    [FileData(Order = 4)]
     public byte PageMode { get; set; }
 
     /// <summary>
     /// Gets or sets the TR-DOS ROM paged flag (1=yes, 0=no).
     /// </summary>
-    [BlockProperty(Order = 5)]
+    [FileData(Order = 5)]
     public byte TrDosRomPaged { get; set; }
 
-    [BlockProperty(Order = 6)]
+    [FileData(Order = 6)]
     public List<List<byte>> RemainingBanks { get; set; } = [];
 
     /// <summary>

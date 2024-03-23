@@ -1,5 +1,5 @@
 ﻿using OldBit.ZXTape.IO;
-using OldBit.ZXTape.Tzx.Serialization;
+using OldBit.ZXTape.Serialization;
 
 namespace OldBit.ZXTape.Tzx.Blocks;
 
@@ -11,13 +11,13 @@ public class GlueBlock : IBlock
     /// <summary>
     /// Gets the block ID.
     /// </summary>
-    [BlockProperty(Order = 0)]
+    [FileData(Order = 0)]
     public byte BlockId => BlockCode.Glue;
 
     /// <summary>
     /// Gets or sets the data object.
     /// </summary>
-    [BlockProperty(Order = 1, Size = 9)]
+    [FileData(Order = 1, Size = 9)]
     public List<byte> Data { get; set; }
 
     /// <summary>

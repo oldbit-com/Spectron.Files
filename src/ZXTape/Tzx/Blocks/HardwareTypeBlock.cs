@@ -1,5 +1,5 @@
 ﻿using OldBit.ZXTape.IO;
-using OldBit.ZXTape.Tzx.Serialization;
+using OldBit.ZXTape.Serialization;
 
 namespace OldBit.ZXTape.Tzx.Blocks;
 
@@ -11,20 +11,20 @@ public class HardwareTypeBlock : IBlock
     /// <summary>
     /// Gets the block ID.
     /// </summary>
-    [BlockProperty(Order = 0)]
+    [FileData(Order = 0)]
     public byte BlockId => BlockCode.HardwareType;
 
     /// <summary>
     /// Helper property needed by the serialization.
     /// Gets the number of machines and hardware types for which info is supplied
     /// </summary>
-    [BlockProperty(Order = 1)]
+    [FileData(Order = 1)]
     private byte Count => (byte)Infos.Count;
 
     /// <summary>
     /// Gets or sets the array of machines and hardware.
     /// </summary>
-    [BlockProperty(Order = 2)]
+    [FileData(Order = 2)]
     public List<HardwareInfo> Infos { get; set; } = [];
 
     /// <summary>
@@ -55,19 +55,19 @@ public class HardwareTypeBlock : IBlock
         /// <summary>
         /// Gets or sets the hardware type.
         /// </summary>
-        [BlockProperty(Order = 0)]
+        [FileData(Order = 0)]
         public byte Type { get; set; }
 
         /// <summary>
         /// Gets or sets the hardware id.
         /// </summary>
-        [BlockProperty(Order = 1)]
+        [FileData(Order = 1)]
         public byte Id { get; set; }
 
         /// <summary>
         /// Gets or sets the hardware information.
         /// </summary>
-        [BlockProperty(Order = 2)]
+        [FileData(Order = 2)]
         public byte Info { get; set; }
 
         /// <summary>

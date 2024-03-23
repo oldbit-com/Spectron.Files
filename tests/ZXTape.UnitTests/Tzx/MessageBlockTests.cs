@@ -1,6 +1,6 @@
 ﻿using OldBit.ZXTape.IO;
+using OldBit.ZXTape.Serialization;
 using OldBit.ZXTape.Tzx.Blocks;
-using OldBit.ZXTape.Tzx.Serialization;
 
 namespace OldBit.ZXTape.UnitTests.Tzx;
 
@@ -36,7 +36,7 @@ public class MessageBlockTests
             Message = "message"
         };
 
-        var result = BlockSerializer.Serialize(block);
+        var result = FileDataSerializer.Serialize(block);
 
         result.Should().Equal(0x31, 0x14, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65);
     }

@@ -1,7 +1,7 @@
 ﻿using OldBit.ZXTape.IO;
+using OldBit.ZXTape.Serialization;
 using OldBit.ZXTape.Tzx;
 using OldBit.ZXTape.Tzx.Blocks;
-using OldBit.ZXTape.Tzx.Serialization;
 
 namespace OldBit.ZXTape.UnitTests.Tzx;
 
@@ -46,7 +46,7 @@ public class ArchiveInfoBlockTests
         block.AddTextInfo(ArchiveInfo.Year, "1984");
         block.AddTextInfo(ArchiveInfo.Price, "£7.95");
 
-        var result = BlockSerializer.Serialize(block);
+        var result = FileDataSerializer.Serialize(block);
 
         result.Should().Equal(0x32, 0x15, 0x00, 0x03,
             0x00, 0x05, 0x54, 0x69, 0x74, 0x6c, 0x65,

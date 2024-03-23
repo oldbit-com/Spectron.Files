@@ -51,12 +51,12 @@ public sealed class TapFile
     }
 
     /// <summary>
-    /// Saves the TAP file to a stream.
+    /// Saves the TAP data to a stream.
     /// </summary>
-    /// <param name="stream">The stream to save the TAP file to.</param>
+    /// <param name="stream">The stream to save the TAP data to.</param>
     public void Save(Stream stream)
     {
-        var writer = new BlockWriter(stream);
+        var writer = new DataWriter(stream);
         foreach (var block in Blocks)
         {
             writer.Write(block);
@@ -64,9 +64,9 @@ public sealed class TapFile
     }
 
     /// <summary>
-    /// Saves the TAP file to a file.
+    /// Saves the TAP data to a file.
     /// </summary>
-    /// <param name="fileName">The name of the file to save the TAP file to.</param>
+    /// <param name="fileName">The name of the file to save the TAP data to.</param>
     public void Save(string fileName)
     {
         using var stream = File.Create(fileName);

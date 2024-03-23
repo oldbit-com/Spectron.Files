@@ -1,4 +1,4 @@
-﻿using OldBit.ZXTape.Tzx.Serialization;
+﻿using OldBit.ZXTape.Serialization;
 
 namespace OldBit.ZXTape.Tzx.Blocks;
 
@@ -10,6 +10,6 @@ public class LoopEndBlock : IBlock
     /// <summary>
     /// Gets the block ID.
     /// </summary>
-    [BlockProperty(Order = 0)]
+    [FileData(Order = 0)]
     public byte BlockId => BlockCode.LoopEnd;
 }

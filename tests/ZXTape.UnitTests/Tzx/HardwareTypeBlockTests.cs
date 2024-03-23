@@ -1,6 +1,6 @@
 ﻿using OldBit.ZXTape.IO;
+using OldBit.ZXTape.Serialization;
 using OldBit.ZXTape.Tzx.Blocks;
-using OldBit.ZXTape.Tzx.Serialization;
 
 namespace OldBit.ZXTape.UnitTests.Tzx;
 
@@ -47,7 +47,7 @@ public class HardwareTypeBlockTests
             ]
         };
 
-        var result = BlockSerializer.Serialize(block);
+        var result = FileDataSerializer.Serialize(block);
 
         result.Should().Equal(0x33, 0x03, 0x01, 0x02, 0x03, 0x04, 0x05,
             0x06, 0x07, 0x08, 0x09);

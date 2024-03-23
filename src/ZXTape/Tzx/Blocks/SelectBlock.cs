@@ -1,6 +1,6 @@
 ﻿using System.Text;
 using OldBit.ZXTape.IO;
-using OldBit.ZXTape.Tzx.Serialization;
+using OldBit.ZXTape.Serialization;
 
 namespace OldBit.ZXTape.Tzx.Blocks;
 
@@ -12,27 +12,27 @@ public class SelectBlock : IBlock
     /// <summary>
     /// Gets the block ID.
     /// </summary>
-    [BlockProperty(Order = 0)]
+    [FileData(Order = 0)]
     public byte BlockId => BlockCode.Select;
 
     /// <summary>
     /// Helper property needed by the serialization.
     /// Gets the length of the whole block.
     /// </summary>
-    [BlockProperty(Order = 1)]
+    [FileData(Order = 1)]
     private Word Length => (Word)(1 + Selections.Count * 3 + Selections.Sum(x => x.Length));
 
     /// <summary>
     /// Helper property needed by the serialization.
     /// Gets the number of selections.
     /// </summary>
-    [BlockProperty(Order = 2)]
+    [FileData(Order = 2)]
     private byte Count => (byte)Selections.Count;
 
     /// <summary>
     /// Gets or sets the array of selections.
     /// </summary>
-    [BlockProperty(Order = 3)]
+    [FileData(Order = 3)]
     public List<Selection> Selections { get; set; } = [];
 
     /// <summary>
@@ -64,20 +64,20 @@ public class SelectBlock : IBlock
         /// <summary>
         /// Gets or sets the relative offset.
         /// </summary>
-        [BlockProperty(Order = 0)]
+        [FileData(Order = 0)]
         public short Offset { get; set; }
 
         /// <summary>
         /// Helper property needed by the serialization
         /// Gets the length of the description text.
         /// </summary>
-        [BlockProperty(Order = 1)]
+        [FileData(Order = 1)]
         internal byte Length => (byte)Description.Length;
 
         /// <summary>
         /// Gets or sets the description text.
         /// </summary>
-        [BlockProperty(Order = 2)]
+        [FileData(Order = 2)]
         public string Description { get; set; } = string.Empty;
 
         /// <summary>

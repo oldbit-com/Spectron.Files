@@ -1,5 +1,5 @@
 using OldBit.ZXTape.IO;
-using OldBit.ZXTape.Tzx.Serialization;
+using OldBit.ZXTape.Serialization;
 
 namespace OldBit.ZXTape.Tzx.Blocks;
 
@@ -11,44 +11,44 @@ public class KansasCityStandardBlock : IBlock
     /// <summary>
     /// Gets the block ID.
     /// </summary>
-    [BlockProperty(Order = 0)]
+    [FileData(Order = 0)]
     public byte BlockId => BlockCode.KansasCityStandard;
 
     /// <summary>
     /// Gets the block length.
     /// </summary>
-    [BlockProperty(Order = 1)]
+    [FileData(Order = 1)]
     public DWord Length => 12 + (DWord)Data.Count;
 
     /// <summary>
     /// Gets or sets the pause value (in millisecond) that should be applied after this block.
     /// </summary>
-    [BlockProperty(Order = 2)]
+    [FileData(Order = 2)]
     public Word PauseDuration { get; set; }
 
 
     /// <summary>
     /// Gets or sets the duration of a PILOT pulse in T-states (same as ONE pulse).
     /// </summary>
-    [BlockProperty(Order = 3)]
+    [FileData(Order = 3)]
     public Word PilotPulseDuration { get; set; }
 
     /// <summary>
     /// Gets or sets the number of pulses in the PILOT tone.
     /// </summary>
-    [BlockProperty(Order = 4)]
+    [FileData(Order = 4)]
     public Word NumberOfPulsesInPilot { get; set; }
 
     /// <summary>
     /// Gets or sets the duration of a ZERO pulse in T-states.
     /// </summary>
-    [BlockProperty(Order = 5)]
+    [FileData(Order = 5)]
     public Word ZeroPulseDuration { get; set; }
 
     /// <summary>
     /// Gets or sets the duration of a ONE pulse in T-states.
     /// </summary>
-    [BlockProperty(Order = 6)]
+    [FileData(Order = 6)]
     public Word OnePulseDuration { get; set; }
 
     /// <summary>
@@ -58,7 +58,7 @@ public class KansasCityStandardBlock : IBlock
     ///     Bits 3-0: Number of ONE pulses in a ONE bit (0=16 pulses) {8}
     /// </remarks>
     /// </summary>
-    [BlockProperty(Order = 7)]
+    [FileData(Order = 7)]
     public byte BitConfiguration { get; set; }
 
     /// <summary>
@@ -72,13 +72,13 @@ public class KansasCityStandardBlock : IBlock
     ///     Bit 0: Endianness (0 for LSb first, 1 for MSb first> {0}
     /// </remarks>
     /// </summary>
-    [BlockProperty(Order = 8)]
+    [FileData(Order = 8)]
     public byte ByteConfiguration { get; set; }
 
     /// <summary>
     /// Gets or sets the data.
     /// </summary>
-    [BlockProperty(Order = 9)]
+    [FileData(Order = 9)]
     public List<byte> Data { get; set; } = [];
 
     /// <summary>

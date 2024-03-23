@@ -1,6 +1,6 @@
 ﻿using OldBit.ZXTape.IO;
+using OldBit.ZXTape.Serialization;
 using OldBit.ZXTape.Tzx.Blocks;
-using OldBit.ZXTape.Tzx.Serialization;
 
 namespace OldBit.ZXTape.UnitTests.Tzx;
 
@@ -33,7 +33,7 @@ public class CallSequenceBlockTests
         block.Offsets.Add(-10);
         block.Offsets.Add(10);
 
-        var result = BlockSerializer.Serialize(block);
+        var result = FileDataSerializer.Serialize(block);
 
         result.Should().Equal(0x26, 0x02, 0x00, 0xF6, 0xFF, 0x0A, 0x00);
     }

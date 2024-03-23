@@ -1,7 +1,6 @@
-﻿using OldBit.SpeccyLib.Blocks;
-using OldBit.ZXTape.IO;
+﻿using OldBit.ZXTape.IO;
+using OldBit.ZXTape.Serialization;
 using OldBit.ZXTape.Tzx.Blocks;
-using OldBit.ZXTape.Tzx.Serialization;
 
 namespace OldBit.ZXTape.UnitTests.Tzx;
 
@@ -29,7 +28,7 @@ public class SetSignalLevelBlockTests
     {
         var block = new SetSignalLevelBlock{ Level = SignalLevel.High };
 
-        var result = BlockSerializer.Serialize(block);
+        var result = FileDataSerializer.Serialize(block);
 
         result.Should().Equal(0x2B, 0x01, 0x00, 0x00, 0x00, 0x01);
     }

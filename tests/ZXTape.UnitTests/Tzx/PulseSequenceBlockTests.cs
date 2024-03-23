@@ -1,6 +1,6 @@
 ﻿using OldBit.ZXTape.IO;
+using OldBit.ZXTape.Serialization;
 using OldBit.ZXTape.Tzx.Blocks;
-using OldBit.ZXTape.Tzx.Serialization;
 
 namespace OldBit.ZXTape.UnitTests.Tzx;
 
@@ -34,7 +34,7 @@ public class PulseSequenceBlockTests
             PulseLengths = [100, 200, 300]
         };
 
-        var result = BlockSerializer.Serialize(block);
+        var result = FileDataSerializer.Serialize(block);
 
         result.Should().Equal(0x13, 0x03, 0x64, 0x00, 0xC8, 0x00, 0x2C, 0x01);
     }

@@ -1,10 +1,10 @@
-﻿namespace OldBit.ZXTape.Tzx.Serialization;
+﻿namespace OldBit.ZXTape.Serialization;
 
 /// <summary>
 /// Attribute used by the block serializer.
 /// </summary>
 [AttributeUsage(AttributeTargets.Property)]
-internal class BlockPropertyAttribute : Attribute
+internal class FileDataAttribute : Attribute
 {
     /// <summary>
     /// Gets or sets the value that specifies the order in which the property should be serialized.

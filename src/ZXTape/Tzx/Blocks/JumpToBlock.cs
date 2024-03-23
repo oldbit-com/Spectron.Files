@@ -1,5 +1,5 @@
 ﻿using OldBit.ZXTape.IO;
-using OldBit.ZXTape.Tzx.Serialization;
+using OldBit.ZXTape.Serialization;
 
 namespace OldBit.ZXTape.Tzx.Blocks;
 
@@ -11,13 +11,13 @@ public class JumpToBlock : IBlock
     /// <summary>
     /// Gets the block ID.
     /// </summary>
-    [BlockProperty(Order = 0)]
+    [FileData(Order = 0)]
     public byte BlockId => BlockCode.JumpToBlock;
 
     /// <summary>
     /// Gets or sets the relative jump value.
     /// </summary>
-    [BlockProperty(Order = 1)]
+    [FileData(Order = 1)]
     public short Jump { get; set; }
 
     /// <summary>

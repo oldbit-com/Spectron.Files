@@ -1,6 +1,6 @@
 ﻿using OldBit.ZXTape.IO;
+using OldBit.ZXTape.Serialization;
 using OldBit.ZXTape.Tzx.Blocks;
-using OldBit.ZXTape.Tzx.Serialization;
 
 namespace OldBit.ZXTape.UnitTests.Tzx;
 
@@ -40,7 +40,7 @@ public class CustomInfoBlockTests
             Info = [0x01, 0x02, 0x03, 0x04]
         };
 
-        var result = BlockSerializer.Serialize(block);
+        var result = FileDataSerializer.Serialize(block);
 
         result.Should().Equal(0x35, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x49,
             0x6e, 0x66, 0x6f, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x04, 0x00,

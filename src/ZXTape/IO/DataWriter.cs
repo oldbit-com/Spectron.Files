@@ -1,23 +1,22 @@
+using OldBit.ZXTape.Serialization;
+using OldBit.ZXTape.Sna;
 using OldBit.ZXTape.Tap;
 using OldBit.ZXTape.Tzx.Blocks;
-using OldBit.ZXTape.Tzx.Serialization;
 
 namespace OldBit.ZXTape.IO;
 
 /// <summary>
-/// Writes a data block to a stream.
+/// Methods to write data to a stream.
 /// </summary>
-internal class BlockWriter(Stream stream)
+internal class DataWriter(Stream stream)
 {
-    private readonly BlockSerializer _serializer = new();
-
     /// <summary>
     /// Writes a data block to the stream.
     /// </summary>
     /// <param name="block">The block to write.</param>
     internal void Write(IBlock block)
     {
-        var data = BlockSerializer.Serialize(block);
+        var data = FileDataSerializer.Serialize(block);
         stream.Write(data, 0, data.Length);
     }
 
@@ -27,7 +26,17 @@ internal class BlockWriter(Stream stream)
     /// <param name="tapData">The data to write.</param>
     internal void Write(TapData tapData)
     {
-        var data = BlockSerializer.Serialize(tapData);
+        var data = FileDataSerializer.Serialize(tapData);
+        stream.Write(data, 0, data.Length);
+    }
+
+    /// <summary>
+    /// Writes a SNA data to the stream.
+    /// </summary>
+    /// <param name="snaData">The data to write.</param>
+    internal void Write(SnaData snaData)
+    {
+        var data = FileDataSerializer.Serialize(snaData);
         stream.Write(data, 0, data.Length);
     }
 }

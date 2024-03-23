@@ -1,5 +1,5 @@
 using OldBit.ZXTape.IO;
-using OldBit.ZXTape.Tzx.Serialization;
+using OldBit.ZXTape.Serialization;
 
 namespace OldBit.ZXTape.Sna;
 
@@ -11,19 +11,19 @@ public sealed class SnaData
     /// <summary>
     /// Gets or sets the SNA header.
     /// </summary>
-    [BlockProperty(Order = 0)]
+    [FileData(Order = 0)]
     public SnaHeader Header { get; set; } = new();
 
     /// <summary>
     /// Gets or sets the 48K RAM data.
     /// </summary>
-    [BlockProperty(Order = 1)]
+    [FileData(Order = 1)]
     public List<byte> Ram48 { get; set; } = [];
 
     /// <summary>
     /// Gets or sets the 128K RAM data.
     /// </summary>
-    [BlockProperty(Order = 2)]
+    [FileData(Order = 2)]
     public Sna128Ram? Ram128 { get; set; }
 
     /// <summary>
@@ -40,7 +40,7 @@ public sealed class SnaData
     internal SnaData(ByteStreamReader reader)
     {
         Header = new SnaHeader(reader);
-        Ram48 = reader.ReadBytes(0x4000).ToList();
+        Ram48 = reader.ReadBytes(0xC000).ToList();
         Ram128 = Sna128Ram.LoadIfExists(reader);
     }
 }

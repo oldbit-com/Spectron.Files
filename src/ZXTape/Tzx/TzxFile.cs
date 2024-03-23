@@ -75,12 +75,12 @@ public sealed class TzxFile
 
 
     /// <summary>
-    /// Saves the TZX file to a stream.
+    /// Saves the TZX data to a stream.
     /// </summary>
-    /// <param name="stream">The stream to save the TZX file to.</param>
+    /// <param name="stream">The stream to save the TZX data to.</param>
     public void Save(Stream stream)
     {
-        var writer = new BlockWriter(stream);
+        var writer = new DataWriter(stream);
 
         writer.Write(Header);
         foreach (var block in Blocks)
@@ -90,9 +90,9 @@ public sealed class TzxFile
     }
 
     /// <summary>
-    /// Saves the TZX file to a file.
+    /// Saves the TZX data to a file.
     /// </summary>
-    /// <param name="fileName">The name of the file to save the TZX file to.</param>
+    /// <param name="fileName">The name of the file to save the TZX data to.</param>
     public void Save(string fileName)
     {
         using var stream = File.Create(fileName);

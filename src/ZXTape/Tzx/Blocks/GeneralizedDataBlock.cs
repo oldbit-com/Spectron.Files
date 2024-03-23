@@ -1,5 +1,5 @@
 ﻿using OldBit.ZXTape.IO;
-using OldBit.ZXTape.Tzx.Serialization;
+using OldBit.ZXTape.Serialization;
 
 namespace OldBit.ZXTape.Tzx.Blocks;
 
@@ -11,13 +11,13 @@ public class GeneralizedDataBlock : IBlock
     /// <summary>
     /// Gets the block ID.
     /// </summary>
-    [BlockProperty(Order = 0)]
+    [FileData(Order = 0)]
     public byte BlockId => BlockCode.GeneralizedData;
 
     /// <summary>
     /// Gets the block length.
     /// </summary>
-    [BlockProperty(Order = 1)]
+    [FileData(Order = 1)]
     public int Length =>
         14 +
         PilotSymbols.Count * (1 + 2 * PilotSymbols.Count) +
@@ -28,73 +28,73 @@ public class GeneralizedDataBlock : IBlock
     /// <summary>
     /// Gets or sets the pause value (in millisecond) that should be applied after this block.
     /// </summary>
-    [BlockProperty(Order = 2)]
+    [FileData(Order = 2)]
     public Word PauseDuration { get; set; }
 
     /// <summary>
     /// Helper property needed by the serialization.
     /// The total number of symbols in pilot/sync block (can be 0) [TOTP].
     /// </summary>
-    [BlockProperty(Order = 3)]
+    [FileData(Order = 3)]
     private int PilotTotalSymbols => PilotDataStream.Count;
 
     /// <summary>
     /// Helper property needed by the serialization.
     /// Gets or sets the maximum number of pulses per pilot/sync symbol [NPP].
     /// </summary>
-    [BlockProperty(Order = 4)]
+    [FileData(Order = 4)]
     private byte PilotMaxPulses => PilotSymbols.Count > 0 ? (byte)PilotSymbols[0].PulseLengths.Count : (byte)0;
 
     /// <summary>
     /// Helper property needed by the serialization.
     /// Gets or sets the number of pilot/sync symbols in the alphabet table (0=256) [ASP].
     /// </summary>
-    [BlockProperty(Order = 5)]
+    [FileData(Order = 5)]
     private byte PilotSymbolsCountAlpha => (byte)PilotSymbols.Count;
 
     /// <summary>
     /// Helper property needed by the serialization.
     /// Gets or sets the total number of symbols in data stream (can be 0) [TOTD].
     /// </summary>
-    [BlockProperty(Order = 6)]
+    [FileData(Order = 6)]
     private int DataTotalSymbols => DataStream.Count * 8;
 
     /// <summary>
     /// Helper property needed by the serialization.
     /// Gets or sets the maximum number of pulses per data symbol [NPD].
     /// </summary>
-    [BlockProperty(Order = 7)]
+    [FileData(Order = 7)]
     private byte DataMaxPulses => DataSymbols.Count > 0 ? (byte)DataSymbols[0].PulseLengths.Count : (byte)0;
 
     /// <summary>
     /// Helper property needed by the serialization.
     /// Gets or sets the Number of data symbols in the alphabet table (0=256) [ASD].
     /// </summary>
-    [BlockProperty(Order = 8)]
+    [FileData(Order = 8)]
     private byte DataSymbolsCountAlpha => (byte)DataSymbols.Count;
 
     /// <summary>
     /// Gets or sets the pilot and sync symbols definition table.
     /// </summary>
-    [BlockProperty(Order = 9)]
+    [FileData(Order = 9)]
     public List<SymbolDef> PilotSymbols { get; set; } = [];
 
     /// <summary>
     /// Gets or sets the pilot and sync data stream.
     /// </summary>
-    [BlockProperty(Order = 10)]
+    [FileData(Order = 10)]
     public List<Prle> PilotDataStream { get; set; } = [];
 
     /// <summary>
     /// Gets or sets the data symbols definition table.
     /// </summary>
-    [BlockProperty(Order = 11)]
+    [FileData(Order = 11)]
     public List<SymbolDef> DataSymbols { get; set; } = [];
 
     /// <summary>
     /// Gets or sets the data stream.
     /// </summary>
-    [BlockProperty(Order = 12)]
+    [FileData(Order = 12)]
     public List<byte> DataStream { get; set; } = [];
 
     /// <summary>
@@ -165,13 +165,13 @@ public class GeneralizedDataBlock : IBlock
         ///     10: force low level
         ///     11: force high level
         /// </summary>
-        [BlockProperty(Order = 0)]
+        [FileData(Order = 0)]
         public byte Flags { get; set; }
 
         /// <summary>
         /// Gets or sets array of pulse lengths.
         /// </summary>
-        [BlockProperty(Order = 1)]
+        [FileData(Order = 1)]
         public List<ushort> PulseLengths { get; set; } = new();
     }
 
@@ -183,13 +183,13 @@ public class GeneralizedDataBlock : IBlock
         /// <summary>
         /// Gets or sets the symbol to be represented.
         /// </summary>
-        [BlockProperty(Order = 0)]
+        [FileData(Order = 0)]
         public byte Symbol { get; set; }
 
         /// <summary>
         /// Gets or sets the number of repetitions.
         /// </summary>
-        [BlockProperty(Order = 1)]
+        [FileData(Order = 1)]
         public ushort RepeatCount { get; set; }
     }
 }

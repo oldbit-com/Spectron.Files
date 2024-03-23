@@ -1,6 +1,5 @@
-﻿using OldBit.SpeccyLib.Blocks;
-using OldBit.ZXTape.IO;
-using OldBit.ZXTape.Tzx.Serialization;
+﻿using OldBit.ZXTape.IO;
+using OldBit.ZXTape.Serialization;
 
 namespace OldBit.ZXTape.Tzx.Blocks;
 
@@ -12,20 +11,20 @@ public class SetSignalLevelBlock : IBlock
     /// <summary>
     /// Gets the block ID.
     /// </summary>
-    [BlockProperty(Order = 0)]
+    [FileData(Order = 0)]
     public byte BlockId => BlockCode.SetSignalLevel;
 
     /// <summary>
     /// Helper property needed by the serialization.
     /// Gets the length of the block without these 4 bytes.
     /// </summary>
-    [BlockProperty(Order = 1)]
+    [FileData(Order = 1)]
     private int Length => 1;
 
     /// <summary>
     /// Gets or sets the signal level.
     /// </summary>
-    [BlockProperty(Order = 2)]
+    [FileData(Order = 2)]
     public SignalLevel Level { get; set; }
 
     /// <summary>

@@ -1,6 +1,6 @@
 ﻿using OldBit.ZXTape.IO;
+using OldBit.ZXTape.Serialization;
 using OldBit.ZXTape.Tzx.Blocks;
-using OldBit.ZXTape.Tzx.Serialization;
 
 namespace OldBit.ZXTape.UnitTests.Tzx;
 
@@ -49,7 +49,7 @@ public class CswRecordingBlockTests
             Data = [0x01, 0x02, 0x03, 0x04]
         };
 
-        var result = BlockSerializer.Serialize(block);
+        var result = FileDataSerializer.Serialize(block);
 
         result.Should().Equal(0x18, 0x0E, 0x00, 0x00, 0x00, 0xE8, 0x03,
             0xD0, 0x07, 0x00, 0x01, 0xB8, 0x0B, 0x00, 0x00, 0x01, 0x02, 0x03, 0x04);

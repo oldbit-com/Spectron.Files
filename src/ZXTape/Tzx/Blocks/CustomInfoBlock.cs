@@ -1,6 +1,6 @@
 ﻿using OldBit.ZXTape.Extensions;
 using OldBit.ZXTape.IO;
-using OldBit.ZXTape.Tzx.Serialization;
+using OldBit.ZXTape.Serialization;
 
 namespace OldBit.ZXTape.Tzx.Blocks;
 
@@ -12,26 +12,26 @@ public class CustomInfoBlock : IBlock
     /// <summary>
     /// Gets the block ID.
     /// </summary>
-    [BlockProperty(Order = 0)]
+    [FileData(Order = 0)]
     public byte BlockId => BlockCode.CustomInfo;
 
     /// <summary>
     /// Gets or sets the identification string (in ASCII).
     /// </summary>
-    [BlockProperty(Order = 1, Size = 0x10)]
+    [FileData(Order = 1, Size = 0x10)]
     public string Identification { get; set; } = string.Empty;
 
     /// <summary>
     /// Helper property needed by the serialization.
     /// Gets the length of the custom info.
     /// </summary>
-    [BlockProperty(Order = 2)]
+    [FileData(Order = 2)]
     private int Length => Info.Count;
 
     /// <summary>
     /// Gets or sets a list with custom info data.
     /// </summary>
-    [BlockProperty(Order = 3)]
+    [FileData(Order = 3)]
     public List<byte> Info { get; set; } = [];
 
     /// <summary>

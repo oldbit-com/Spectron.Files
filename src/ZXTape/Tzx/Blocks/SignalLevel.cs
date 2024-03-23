@@ -1,4 +1,4 @@
-﻿namespace OldBit.SpeccyLib.Blocks
+﻿namespace OldBit.ZXTape.Tzx.Blocks
 {
     /// <summary>
     /// Represents the signal level.

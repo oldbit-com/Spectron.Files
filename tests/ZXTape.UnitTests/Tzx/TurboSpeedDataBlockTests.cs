@@ -1,6 +1,6 @@
 ﻿using OldBit.ZXTape.IO;
+using OldBit.ZXTape.Serialization;
 using OldBit.ZXTape.Tzx.Blocks;
-using OldBit.ZXTape.Tzx.Serialization;
 
 namespace OldBit.ZXTape.UnitTests.Tzx;
 
@@ -58,7 +58,7 @@ public class TurboSpeedDataBlockTests
             Data = [0x01, 0x02, 0x03, 0x04]
         };
 
-        var result = BlockSerializer.Serialize(block);
+        var result = FileDataSerializer.Serialize(block);
 
         result.Should().Equal(0x11,0xE8, 0x03, 0xD0, 0x07, 0xB8, 0x0B, 0xA0, 0x0F, 0x88,
             0x13, 0x70, 0x17, 0x05, 0x58, 0x1B, 0x04, 0x00, 0x00, 0x01, 0x02, 0x03, 0x04);

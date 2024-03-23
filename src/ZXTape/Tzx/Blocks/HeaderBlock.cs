@@ -1,6 +1,6 @@
 ﻿using System.Text;
 using OldBit.ZXTape.IO;
-using OldBit.ZXTape.Tzx.Serialization;
+using OldBit.ZXTape.Serialization;
 
 namespace OldBit.ZXTape.Tzx.Blocks;
 
@@ -37,25 +37,25 @@ public class HeaderBlock : IBlock
     /// <summary>
     /// Gets the TZX header signature.
     /// </summary>
-    [BlockProperty(Order = 0, Size = 7)]
+    [FileData(Order = 0, Size = 7)]
     public string Signature { get; private set; }
 
     /// <summary>
     /// Gets or sets the end of text file marker.
     /// </summary>
-    [BlockProperty(Order = 1)]
+    [FileData(Order = 1)]
     public byte EotMarker { get; private set; }
 
     /// <summary>
     /// Gets or sets the TZX major revision number.
     /// </summary>
-    [BlockProperty(Order = 2)]
+    [FileData(Order = 2)]
     public byte VerMajor { get; set; }
 
     /// <summary>
     /// Gets or sets the TZX minor revision number.
     /// </summary>
-    [BlockProperty(Order = 3)]
+    [FileData(Order = 3)]
     public byte VerMinor { get; set; }
 
     /// <summary>

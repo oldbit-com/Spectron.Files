@@ -1,6 +1,6 @@
 ﻿using OldBit.ZXTape.Extensions;
 using OldBit.ZXTape.IO;
-using OldBit.ZXTape.Tzx.Serialization;
+using OldBit.ZXTape.Serialization;
 
 namespace OldBit.ZXTape.Tzx.Blocks;
 
@@ -12,20 +12,20 @@ public class ArchiveInfoBlock : IBlock
     /// <summary>
     /// Gets the block ID.
     /// </summary>
-    [BlockProperty(Order = 0)]
+    [FileData(Order = 0)]
     public byte BlockId => BlockCode.ArchiveInfo;
 
     /// <summary>
     /// Helper property needed by the serialization.
     /// Gets the Length of the whole block (without these two bytes).
     /// </summary>
-    [BlockProperty(Order = 1)]
+    [FileData(Order = 1)]
     private byte Count => (byte)Infos.Count;
 
     /// <summary>
     /// Gets or sets a list of <see cref="TextInfo"/> items.
     /// </summary>
-    [BlockProperty(Order = 2)]
+    [FileData(Order = 2)]
     public List<TextInfo> Infos { get; set; } = [];
 
     /// <summary>
@@ -63,7 +63,7 @@ public class ArchiveInfoBlock : IBlock
     /// Helper property needed by the serialization.
     /// Gets the Length of the whole block (without these two bytes).
     /// </summary>
-    [BlockProperty(Order = 0)]
+    [FileData(Order = 0)]
     private Word Length => (Word)(1 + Count * 2 + Infos.Sum(x => x.Length));
 
     /// <summary>
@@ -74,20 +74,20 @@ public class ArchiveInfoBlock : IBlock
         /// <summary>
         /// Gets or sets the text identification.
         /// </summary>
-        [BlockProperty(Order = 0)]
+        [FileData(Order = 0)]
         public byte Id { get; set; }
 
         /// <summary>
         /// Helper property needed by the serialization.
         /// Gets the length of the text string.
         /// </summary>
-        [BlockProperty(Order = 1)]
+        [FileData(Order = 1)]
         internal byte Length => (byte)Text.Length;
 
         /// <summary>
         /// Gets or sets the text string in ASCII format.
         /// </summary>
-        [BlockProperty(Order = 2)]
+        [FileData(Order = 2)]
         public string Text { get; set; } = string.Empty;
 
         /// <summary>

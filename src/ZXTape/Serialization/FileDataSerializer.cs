@@ -2,12 +2,12 @@
 using System.Reflection;
 using OldBit.ZXTape.Extensions;
 
-namespace OldBit.ZXTape.Tzx.Serialization;
+namespace OldBit.ZXTape.Serialization;
 
 /// <summary>
-/// Implements generic block data serializer.
+/// Implements generic data serializer.
 /// </summary>
-internal class BlockSerializer
+internal class FileDataSerializer
 {
     /// <summary>
     /// Serializes the block as an array of bytes.
@@ -18,7 +18,7 @@ internal class BlockSerializer
     {
         var propsAndAttrs =
             block.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
-            .Select(p => (Property: p, Atttribute: p.GetCustomAttributes(typeof(BlockPropertyAttribute)).FirstOrDefault() as BlockPropertyAttribute))
+            .Select(p => (Property: p, Atttribute: p.GetCustomAttributes(typeof(FileDataAttribute)).FirstOrDefault() as FileDataAttribute))
             .Where(p => p.Atttribute != null)
             .OrderBy(p => p.Atttribute!.Order);
 

@@ -1,5 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
-using OldBit.ZXTape.Tzx.Serialization;
+using OldBit.ZXTape.Serialization;
 
 namespace OldBit.ZXTape.Tap;
 
@@ -11,26 +11,26 @@ public sealed class TapData
     /// <summary>
     /// Gets the length of the block data.
     /// </summary>
-    [BlockProperty(Order = 0)]
+    [FileData(Order = 0)]
     private Word Length => (Word)(Data.Count + 2);
 
     /// <summary>
     /// Gets or sets type of the block data.
     /// Typically there are two standard values: 0x00 for header and 0xFF for data.
     /// </summary>
-    [BlockProperty(Order = 1)]
+    [FileData(Order = 1)]
     public byte Flag { get; set; }
 
     /// <summary>
     /// Gets or sets data.
     /// </summary>
-    [BlockProperty(Order = 2)]
+    [FileData(Order = 2)]
     public List<byte> Data { get; set; } = [];
 
     /// <summary>
     /// Gets or sets the control sum of the data.
     /// </summary>
-    [BlockProperty(Order = 3)]
+    [FileData(Order = 3)]
     public byte Checksum { get; set; }
 
     /// <summary>
