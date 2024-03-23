@@ -10,42 +10,27 @@ namespace OldBit.ZXTape.Sna;
 public sealed class Sna128Ram
 {
     /// <summary>
-    /// Gets or sets the RAM bank 5.
-    /// </summary>
-    [FileData(Order = 0)]
-    public List<byte> RamBank5 { get; set; } = [];
-
-    /// <summary>
-    /// Gets or sets the RAM bank 2.
-    /// </summary>
-    [FileData(Order = 1)]
-    public List<byte> RamBank2 { get; set; } = [];
-
-    /// <summary>
-    /// Gets or sets the currently paged RAM bank.
-    /// </summary>
-    [FileData(Order = 2)]
-    public List<byte> RamBankN { get; set; } = [];
-
-    /// <summary>
     /// Gets or sets the PC register.
     /// </summary>
-    [FileData(Order = 3)]
+    [FileData(Order = 0)]
     public Word PC { get; set; }
 
     /// <summary>
     /// Gets or sets the page mode (port 7FFD value).
     /// </summary>
-    [FileData(Order = 4)]
+    [FileData(Order = 1)]
     public byte PageMode { get; set; }
 
     /// <summary>
     /// Gets or sets the TR-DOS ROM paged flag (1=yes, 0=no).
     /// </summary>
-    [FileData(Order = 5)]
+    [FileData(Order = 2)]
     public byte TrDosRomPaged { get; set; }
 
-    [FileData(Order = 6)]
+    /// <summary>
+    /// Gets or sets the remaining banks of the 128K RAM.
+    /// </summary>
+    [FileData(Order = 3)]
     public List<List<byte>> RemainingBanks { get; set; } = [];
 
     /// <summary>
@@ -63,36 +48,34 @@ public sealed class Sna128Ram
     /// <throws cref="EndOfStreamException">Thrown when not enough data is in the stream.</throws>
     internal static Sna128Ram? LoadIfExists(ByteStreamReader reader)
     {
-        var ramBank5 = new byte[0x4000];
-        var readCount = reader.ReadAtLeast(ramBank5, ramBank5.Length);
+        var pc = new byte[2];
+        var readCount = reader.ReadAtLeast(pc, pc.Length);
 
         if (readCount == 0)
         {
             return null;    // No 128K data available, 48K SNA file format
         }
-        if (readCount != ramBank5.Length)
+        if (readCount != pc.Length)
         {
             throw new EndOfStreamException("Not enough data to read the 128K SNA file format.");
         }
 
         var sna128Ram = new Sna128Ram
         {
-            RamBank5 = ramBank5.ToList(),
-            RamBank2 = reader.ReadBytes(0x4000).ToList(),
-            RamBankN = reader.ReadBytes(0x4000).ToList(),
-            PC = reader.ReadWord(),
+            PC = (Word)(pc[0] | (pc[1] << 8)),
             PageMode = reader.ReadByte(),
             TrDosRomPaged = reader.ReadByte()
         };
 
-        for (var bank = 0; bank < 7; bank++)
+        for (var bank = 0; bank < 8; bank++)
         {
             if (bank == 2 || bank == 5 || bank == (sna128Ram.PageMode & 0x07))
             {
                 continue;   // These banks are included in 48K SNA file format, skip them
             }
 
-            sna128Ram.RemainingBanks.Add([..reader.ReadBytes(0x4000)]);
+            var bankData = reader.ReadBytes(0x4000).ToList();
+            sna128Ram.RemainingBanks.Add(bankData);
         }
 
         return sna128Ram;
