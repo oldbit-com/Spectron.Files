@@ -92,8 +92,7 @@ public class GeneralizedDataBlockTests
             ]
         };
 
-        var serializer = new BlockSerializer();
-        var result = serializer.Serialize(block);
+        var result = BlockSerializer.Serialize(block);
 
         result.Should().Equal(
             0x19,

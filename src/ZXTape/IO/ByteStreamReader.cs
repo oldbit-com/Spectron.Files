@@ -38,15 +38,12 @@ internal sealed class ByteStreamReader
     /// <exception cref="EndOfStreamException">Thrown when not enough data is in the stream.</exception>
     public Word ReadWord()
     {
-        var byte1 = _stream.ReadByte();
-        var byte2 = _stream.ReadByte();
-
-        if (byte1 == -1 || byte2 == -1)
+        if (!TryReadWord(out var data))
         {
             throw new EndOfStreamException();
         }
 
-        return (Word)(byte1 | byte2 << 8);
+        return data;
     }
 
     /// <summary>
@@ -102,10 +99,11 @@ internal sealed class ByteStreamReader
     }
 
     /// <summary>
-    /// Attempts to read a byte from the stream.
+    /// Attempts to read a byte from the stream and advances the position within the stream by one byte.
     /// </summary>
-    /// <param name="result">The byte retrieved from the stream or zero if data could not be read.</param>
-    /// <returns>true if an item was read; otherwise, false.</returns>
+    /// <param name="result">When this method returns, contains the byte retrieved from the stream,
+    /// if the read operation succeeds, or zero if the read operation fails.</param>
+    /// <returns>true if the read operation succeeds; otherwise, false.</returns>
     public bool TryReadByte(out byte result)
     {
         result = 0;
@@ -117,6 +115,27 @@ internal sealed class ByteStreamReader
         }
 
         result = (byte)data;
+        return true;
+    }
+
+    /// <summary>
+    /// Attempts to read a word from the stream and advances the position within the stream by two bytes.
+    /// </summary>
+    /// <param name="result">When this method returns, contains the word retrieved from the stream,
+    /// if the read operation succeeds, or zero if the read operation fails.</param>
+    /// <returns>true if the read operation succeeds; otherwise, false.</returns>
+    public bool TryReadWord(out Word result)
+    {
+        result = 0;
+        var byte1 = _stream.ReadByte();
+        var byte2 = _stream.ReadByte();
+
+        if (byte1 == -1 || byte2 == -1)
+        {
+            return false;
+        }
+
+        result = (Word)(byte1 | byte2 << 8);
         return true;
     }
 }

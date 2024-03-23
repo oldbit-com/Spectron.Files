@@ -10,8 +10,7 @@ public class ReturnFromSequenceBlockTests
     {
         var block = new ReturnFromSequenceBlock();
 
-        var serializer = new BlockSerializer();
-        var result = serializer.Serialize(block);
+        var result = BlockSerializer.Serialize(block);
 
         result.Should().Equal(0x27);
     }

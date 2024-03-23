@@ -29,8 +29,7 @@ public class SetSignalLevelBlockTests
     {
         var block = new SetSignalLevelBlock{ Level = SignalLevel.High };
 
-        var serializer = new BlockSerializer();
-        var result = serializer.Serialize(block);
+        var result = BlockSerializer.Serialize(block);
 
         result.Should().Equal(0x2B, 0x01, 0x00, 0x00, 0x00, 0x01);
     }

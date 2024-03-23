@@ -6,7 +6,7 @@ namespace OldBit.ZXTape.Tap;
 /// <summary>
 /// Represents standard TAP file header which is 17 bytes long.
 /// </summary>
-public sealed class TapeHeader
+public sealed class TapHeader
 {
     /// <summary>
     /// Gets or sets the type of the data stored.
@@ -42,7 +42,7 @@ public sealed class TapeHeader
     /// <param name="header">When this method returns, contains the TapeHeader object created from the parsed data,
     /// if the parse operation was successful, or null if the parse operation failed.</param>
     /// <returns>True if the data was successfully parsed into a TapeHeader object; otherwise, false.</returns>
-    public static bool TryParse(IEnumerable<byte> data, [NotNullWhen(true)] out TapeHeader? header)
+    public static bool TryParse(IEnumerable<byte> data, [NotNullWhen(true)] out TapHeader? header)
     {
         header = null;
         var headerData = data.ToArray();
@@ -51,7 +51,7 @@ public sealed class TapeHeader
             return false;
         }
 
-        header = new TapeHeader
+        header = new TapHeader
         {
             DataType = (HeaderDataType)headerData[0],
             FileName = headerData[1..11].ToAsciiString(),

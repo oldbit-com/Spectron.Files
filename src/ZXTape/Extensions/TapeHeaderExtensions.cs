@@ -4,7 +4,7 @@ namespace OldBit.ZXTape.Extensions;
 
 public static class TapeHeaderExtensions
 {
-    public static string GetDataTypeName(this TapeHeader header)
+    public static string GetDataTypeName(this TapHeader header)
     {
         return header.DataType switch
         {

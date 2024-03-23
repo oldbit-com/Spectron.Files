@@ -29,8 +29,7 @@ public class PauseBlockTests
     {
         var block = new PauseBlock{ Duration = 1234 };
 
-        var serializer = new BlockSerializer();
-        var result = serializer.Serialize(block);
+        var result = BlockSerializer.Serialize(block);
 
         result.Should().Equal(0x20, 0xD2, 0x04);
     }

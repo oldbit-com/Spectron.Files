@@ -2,7 +2,7 @@ using OldBit.ZXTape.Tap;
 
 namespace OldBit.ZXTape.UnitTests.Tap;
 
-public class TapeHeaderTests
+public class TapHeaderTests
 {
     [Fact]
     public void TryParse_WhenDataIsValid_ReturnsTrueAndValidHeaderData()
@@ -13,7 +13,7 @@ public class TapeHeaderTests
             0x20, 0x20, 0x68, 0x02, 0x00, 0x00, 0xAC, 0x80
         ];
 
-        var result = TapeHeader.TryParse(validData, out var tapeHeader);
+        var result = TapHeader.TryParse(validData, out var tapeHeader);
 
         result.Should().BeTrue();
         tapeHeader.Should().NotBeNull();
@@ -29,7 +29,7 @@ public class TapeHeaderTests
     {
         byte[] invalidData = [0x03, 0x74, 0x65];
 
-        var result = TapeHeader.TryParse(invalidData, out var tapeHeader);
+        var result = TapHeader.TryParse(invalidData, out var tapeHeader);
 
         result.Should().BeFalse();
         tapeHeader.Should().BeNull();

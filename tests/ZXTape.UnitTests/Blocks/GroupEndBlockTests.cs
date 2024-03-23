@@ -10,8 +10,7 @@ public class GroupEndBlockTests
     {
         var block = new GroupEndBlock();
 
-        var serializer = new BlockSerializer();
-        var result = serializer.Serialize(block);
+        var result = BlockSerializer.Serialize(block);
 
         result.Should().Equal(0x22);
     }

@@ -8,7 +8,7 @@ namespace OldBit.ZXTape.Tap;
 /// </summary>
 public sealed class TapFile
 {
-    public List<TapeData> Blocks { get; } = [];
+    public List<TapData> Blocks { get; } = [];
 
     /// <summary>
     /// Initializes a new instance of the TapFile class.
@@ -27,11 +27,13 @@ public sealed class TapFile
         var tapFile = new TapFile();
         var reader = new ByteStreamReader(stream);
 
-        // TODO: Implement loading of TAP file.
-        var length = reader.ReadWord();
-        if (!TapeData.TryParse(reader.ReadBytes(length), out var tapData))
+        while (reader.TryReadWord(out var length))
         {
-            throw new InvalidDataException("Invalid TAP data.");
+            if (!TapData.TryParse(reader.ReadBytes(length), out var tapData))
+            {
+                throw new InvalidDataException("Invalid TAP data.");
+            }
+            tapFile.Blocks.Add(tapData);
         }
 
         return tapFile;
@@ -46,5 +48,28 @@ public sealed class TapFile
     {
         using var stream = File.OpenRead(fileName);
         return Load(stream);
+    }
+
+    /// <summary>
+    /// Saves the TAP file to a stream.
+    /// </summary>
+    /// <param name="stream">The stream to save the TAP file to.</param>
+    public void Save(Stream stream)
+    {
+        var writer = new BlockWriter(stream);
+        foreach (var block in Blocks)
+        {
+            writer.Write(block);
+        }
+    }
+
+    /// <summary>
+    /// Saves the TAP file to a file.
+    /// </summary>
+    /// <param name="fileName">The name of the file to save the TAP file to.</param>
+    public void Save(string fileName)
+    {
+        using var stream = File.Create(fileName);
+        Save(stream);
     }
 }

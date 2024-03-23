@@ -31,8 +31,7 @@ public class PureToneBlockTests
     {
         var block = new PureToneBlock { PulseCount = 10, PulseLength = 1923 };
 
-        var serializer = new BlockSerializer();
-        var result = serializer.Serialize(block);
+        var result = BlockSerializer.Serialize(block);
 
         result.Should().Equal(0x12, 0x83, 0x07, 0x0A, 0x00);
     }

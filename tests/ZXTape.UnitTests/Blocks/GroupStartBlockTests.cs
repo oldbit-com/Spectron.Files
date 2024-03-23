@@ -33,8 +33,7 @@ public class GroupStartBlockTests
             Name = "Block description"
         };
 
-        var serializer = new BlockSerializer();
-        var result = serializer.Serialize(block);
+        var result = BlockSerializer.Serialize(block);
 
         result.Should().Equal(0x21, 0x11, 0x42, 0x6c, 0x6f, 0x63, 0x6b, 0x20, 0x64, 0x65,
             0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e);

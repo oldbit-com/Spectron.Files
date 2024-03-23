@@ -80,12 +80,12 @@ public sealed class TzxFile
     /// <param name="stream">The stream to save the TZX file to.</param>
     public void Save(Stream stream)
     {
-        var writer = new TzxBlockWriter(stream);
+        var writer = new BlockWriter(stream);
 
-        writer.WriteBlock(Header);
+        writer.Write(Header);
         foreach (var block in Blocks)
         {
-            writer.WriteBlock(block);
+            writer.Write(block);
         }
     }
 

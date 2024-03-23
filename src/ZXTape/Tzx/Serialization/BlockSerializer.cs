@@ -14,7 +14,7 @@ internal class BlockSerializer
     /// </summary>
     /// <param name="block">The block to serialize.</param>
     /// <returns>An array of bytes representing the serialized block.</returns>
-    internal byte[] Serialize(object block)
+    internal static byte[] Serialize(object block)
     {
         var propsAndAttrs =
             block.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)

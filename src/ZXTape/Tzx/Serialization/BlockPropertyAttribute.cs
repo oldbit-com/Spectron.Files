@@ -1,7 +1,7 @@
 ﻿namespace OldBit.ZXTape.Tzx.Serialization;
 
 /// <summary>
-/// Attribute used by block serializer.
+/// Attribute used by the block serializer.
 /// </summary>
 [AttributeUsage(AttributeTargets.Property)]
 internal class BlockPropertyAttribute : Attribute

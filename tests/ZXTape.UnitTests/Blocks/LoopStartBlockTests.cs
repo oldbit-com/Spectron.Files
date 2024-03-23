@@ -29,8 +29,7 @@ public class LoopStartBlockTests
     {
         var block = new LoopStartBlock{ Count = 2 };
 
-        var serializer = new BlockSerializer();
-        var result = serializer.Serialize(block);
+        var result = BlockSerializer.Serialize(block);
 
         result.Should().Equal(0x24, 0x02, 0x00);
     }

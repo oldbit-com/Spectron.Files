@@ -36,8 +36,7 @@ public class MessageBlockTests
             Message = "message"
         };
 
-        var serializer = new BlockSerializer();
-        var result = serializer.Serialize(block);
+        var result = BlockSerializer.Serialize(block);
 
         result.Should().Equal(0x31, 0x14, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65);
     }

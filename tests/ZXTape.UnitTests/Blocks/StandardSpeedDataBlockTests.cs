@@ -40,8 +40,7 @@ public class StandardSpeedDataBlockTests
             Data = [0x01, 0x02, 0x03, 0x04]
         };
 
-        var serializer = new BlockSerializer();
-        var result = serializer.Serialize(block);
+        var result = BlockSerializer.Serialize(block);
 
         result.Should().Equal(0x10, 0xE8, 0x03, 0x04, 0x00, 0x01, 0x02, 0x03, 0x04);
     }

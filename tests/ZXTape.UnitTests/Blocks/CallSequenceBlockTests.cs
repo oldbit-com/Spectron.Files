@@ -33,8 +33,7 @@ public class CallSequenceBlockTests
         block.Offsets.Add(-10);
         block.Offsets.Add(10);
 
-        var serializer = new BlockSerializer();
-        var result = serializer.Serialize(block);
+        var result = BlockSerializer.Serialize(block);
 
         result.Should().Equal(0x26, 0x02, 0x00, 0xF6, 0xFF, 0x0A, 0x00);
     }
