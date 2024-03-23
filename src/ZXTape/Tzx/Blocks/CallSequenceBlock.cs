@@ -37,7 +37,7 @@ public class CallSequenceBlock : IBlock
     /// <summary>
     /// Creates a new instance of the 'Call Sequence' block using the byte reader.
     /// </summary>
-    /// <param name="reader">A byte reader.</param>
+    /// <param name="reader">The ByteStreamReader used to initialize the CallSequenceBlock properties.</param>
     internal CallSequenceBlock(ByteStreamReader reader)
     {
         var length = reader.ReadWord();

@@ -38,7 +38,7 @@ public class SetSignalLevelBlock : IBlock
     /// <summary>
     /// Creates a new instance of the 'Set Signal Level' block using the byte reader.
     /// </summary>
-    /// <param name="reader">A byte reader.</param>
+    /// <param name="reader">The ByteStreamReader used to initialize the SetSignalLevelBlock properties.</param>
     internal SetSignalLevelBlock(ByteStreamReader reader)
     {
         Level = (SignalLevel)reader.ReadByte();

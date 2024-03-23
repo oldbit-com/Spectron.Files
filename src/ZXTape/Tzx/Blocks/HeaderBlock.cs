@@ -72,7 +72,7 @@ public class HeaderBlock : IBlock
     /// <summary>
     /// Creates a new instance of the 'TZX Header' block using the byte reader.
     /// </summary>
-    /// <param name="reader">A byte reader.</param>
+    /// <param name="reader">The ByteStreamReader used to initialize the HeaderBlock properties.</param>
     internal HeaderBlock(ByteStreamReader reader)
     {
         Signature = Encoding.ASCII.GetString(reader.ReadBytes(7));

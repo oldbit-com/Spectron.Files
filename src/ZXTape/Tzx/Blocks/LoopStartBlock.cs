@@ -30,7 +30,7 @@ public class LoopStartBlock : IBlock
     /// <summary>
     /// Creates a new instance of the 'Loop Start' block using the byte reader.
     /// </summary>
-    /// <param name="reader">A byte reader.</param>
+    /// <param name="reader">The ByteStreamReader used to initialize the LoopStartBlock properties.</param>
     internal LoopStartBlock(ByteStreamReader reader)
     {
         Count = reader.ReadWord();

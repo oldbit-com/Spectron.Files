@@ -62,7 +62,7 @@ public class PureDataBlock : IBlock
     /// <summary>
     /// Creates a new instance of the 'Pure Data' block using the byte reader.
     /// </summary>
-    /// <param name="reader">A byte reader.</param>
+    /// <param name="reader">The ByteStreamReader used to initialize the PureDataBlock properties.</param>
     internal PureDataBlock(ByteStreamReader reader)
     {
         ZeroBitPulseLength = reader.ReadWord();

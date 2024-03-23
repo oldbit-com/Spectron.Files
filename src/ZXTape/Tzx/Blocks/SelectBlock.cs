@@ -45,7 +45,7 @@ public class SelectBlock : IBlock
     /// <summary>
     /// Creates a new instance of the 'Select' block using the byte reader.
     /// </summary>
-    /// <param name="reader">A byte reader.</param>
+    /// <param name="reader">The ByteStreamReader used to initialize the SelectBlock properties.</param>
     internal SelectBlock(ByteStreamReader reader)
     {
         reader.ReadWord();
@@ -90,7 +90,7 @@ public class SelectBlock : IBlock
         /// <summary>
         /// Creates a new instance of the 'SELECT' structure using the byte reader..
         /// </summary>
-        /// <param name="reader">A byte reader.</param>
+        /// <param name="reader">The ByteStreamReader used to initialize the Selection properties.</param>
         internal Selection(ByteStreamReader reader)
         {
             Offset = (short)reader.ReadWord();

@@ -44,7 +44,7 @@ public class CustomInfoBlock : IBlock
     /// <summary>
     /// Creates a new instance of the 'Custom Info' block using the byte reader.
     /// </summary>
-    /// <param name="reader">A byte reader.</param>
+    /// <param name="reader">The ByteStreamReader used to initialize the CustomInfoBlock properties.</param>
     internal CustomInfoBlock(ByteStreamReader reader)
     {
         Identification = reader.ReadBytes(0x10).ToAsciiString().TrimEnd(' ');

@@ -36,7 +36,7 @@ public class PureToneBlock : IBlock
     /// <summary>
     /// Creates a new instance of the 'Pure Tone' block using the byte reader.
     /// </summary>
-    /// <param name="reader">A byte reader.</param>
+    /// <param name="reader">The ByteStreamReader used to initialize the PureToneBlock properties.</param>
     internal PureToneBlock(ByteStreamReader reader)
     {
         PulseLength = reader.ReadWord();

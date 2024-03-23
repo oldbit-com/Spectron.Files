@@ -38,7 +38,7 @@ public class ArchiveInfoBlock : IBlock
     /// <summary>
     /// Creates a new instance of the 'Archive Info' block using the byte reader.
     /// </summary>
-    /// <param name="reader">A byte reader.</param>
+    /// <param name="reader">The ByteStreamReader used to initialize the ArchiveInfoBlock properties.</param>
     internal ArchiveInfoBlock(ByteStreamReader reader)
     {
         reader.ReadWord();
@@ -100,7 +100,7 @@ public class ArchiveInfoBlock : IBlock
         /// <summary>
         /// Creates a new instance of the 'TEXT' structure using the byte reader.
         /// </summary>
-        /// <param name="reader">A byte reader.</param>
+        /// <param name="reader">The ByteStreamReader used to initialize the TextInfo properties.</param>
         internal TextInfo(ByteStreamReader reader)
         {
             Id = reader.ReadByte();

@@ -43,7 +43,7 @@ public class StandardSpeedDataBlock : IBlock
     /// <summary>
     /// Creates a new instance of the 'Standard Speed Data' block using the byte reader.
     /// </summary>
-    /// <param name="reader">A byte reader.</param>
+    /// <param name="reader">The ByteStreamReader used to initialize the StandardSpeedDataBlock properties.</param>
     internal StandardSpeedDataBlock(ByteStreamReader reader)
     {
         PauseDuration = reader.ReadWord();
