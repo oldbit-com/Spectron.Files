@@ -83,5 +83,5 @@ public class DataReadWriteTests(ITestOutputHelper output)
     private static string TestFilesPath =>
         Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
-            "Games/ZX/TEMP/");
+            "Games/ZX/ZX Spectrum Archive/");
 }

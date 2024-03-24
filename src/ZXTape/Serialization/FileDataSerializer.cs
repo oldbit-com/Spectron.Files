@@ -95,8 +95,11 @@ internal class FileDataSerializer
             }
             else if (propAttr.Property.PropertyType.IsEnumerable())
             {
-                var values = (IEnumerable)propAttr.Property.GetValue(data)!;
-                result.AddRange(SerializeEnumerable(values));
+                var values = (IEnumerable?)propAttr.Property.GetValue(data);
+                if (values != null)
+                {
+                    result.AddRange(SerializeEnumerable(values));
+                }
             }
             else
             {

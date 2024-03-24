@@ -7,6 +7,9 @@ namespace OldBit.ZXTape.Sna;
 /// </summary>
 public sealed class SnaFile
 {
+    /// <summary>
+    /// Gets or sets the SNA data.
+    /// </summary>
     public SnaData Data { get; private set; } = new();
 
     /// <summary>

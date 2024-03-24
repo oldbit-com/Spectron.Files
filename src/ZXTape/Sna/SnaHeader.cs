@@ -102,7 +102,7 @@ public sealed class SnaHeader
     /// Gets or sets the border color.
     /// </summary>
     [FileData(Order = 15)]
-    public byte BorderColor { get; set; }
+    public byte Border { get; set; }
 
     /// <summary>
     /// Initializes a new instance of the Sna48Data class.
@@ -132,6 +132,6 @@ public sealed class SnaHeader
         AF = reader.ReadWord();
         SP = reader.ReadWord();
         InterruptMode = reader.ReadByte();
-        BorderColor = reader.ReadByte();
+        Border = reader.ReadByte();
     }
 }
