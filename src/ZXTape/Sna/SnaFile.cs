@@ -3,7 +3,7 @@ using OldBit.ZXTape.IO;
 namespace OldBit.ZXTape.Sna;
 
 /// <summary>
-/// Represents a SNA file.
+/// Represents a .sna file.
 /// </summary>
 public sealed class SnaFile
 {
@@ -17,15 +17,10 @@ public sealed class SnaFile
     /// </summary>
     /// <param name="stream">The stream containing the SNA data.</param>
     /// <returns>The loaded SnaFile object.</returns>
-    public static SnaFile Load(Stream stream)
+    public static SnaFile Load(Stream stream) => new()
     {
-        var snaFile = new SnaFile
-        {
-            Data = new SnaData(new ByteStreamReader(stream))
-        };
-
-        return snaFile;
-    }
+        Data = new SnaData(new ByteStreamReader(stream))
+    };
 
     /// <summary>
     /// Loads a SNA file from the given file.

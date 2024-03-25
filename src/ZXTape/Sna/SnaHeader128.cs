@@ -5,7 +5,7 @@ namespace OldBit.ZXTape.Sna;
 /// <summary>
 /// Represents additional header in a 128K SNA file.
 /// </summary>
-public class SnaHeader128
+public sealed class SnaHeader128
 {
     /// <summary>
     /// Gets or sets the PC register.

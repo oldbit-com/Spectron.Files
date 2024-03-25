@@ -4,7 +4,7 @@ using OldBit.ZXTape.Serialization;
 namespace OldBit.ZXTape.Sna;
 
 /// <summary>
-/// Represents the SNA header.
+/// Represents the .sna file header.
 /// </summary>
 public sealed class SnaHeader
 {
@@ -105,7 +105,7 @@ public sealed class SnaHeader
     public byte Border { get; set; }
 
     /// <summary>
-    /// Initializes a new instance of the Sna48Data class.
+    /// Creates a new instance of the 48K SNA header.
     /// </summary>
     public SnaHeader()
     {

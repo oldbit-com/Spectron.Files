@@ -4,7 +4,7 @@ using OldBit.ZXTape.Extensions;
 namespace OldBit.ZXTape.Tap;
 
 /// <summary>
-/// Represents standard TAP file header which is 17 bytes long.
+/// Represents the .tap file header.
 /// </summary>
 public sealed class TapHeader
 {

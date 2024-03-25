@@ -4,18 +4,14 @@ using OldBit.ZXTape.Tzx.Blocks;
 namespace OldBit.ZXTape.Tap;
 
 /// <summary>
-/// Represents a TAP file.
+/// Represents a .tap file.
 /// </summary>
 public sealed class TapFile
 {
-    public List<TapData> Blocks { get; } = [];
-
     /// <summary>
-    /// Initializes a new instance of the TapFile class.
+    /// Gets a list of TAP file blocks.
     /// </summary>
-    public TapFile()
-    {
-    }
+    public List<TapData> Blocks { get; } = [];
 
     /// <summary>
     /// Loads a TAP file from the given stream.

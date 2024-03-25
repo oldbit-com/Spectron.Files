@@ -4,27 +4,19 @@ using OldBit.ZXTape.Tzx.Blocks;
 namespace OldBit.ZXTape.Tzx;
 
 /// <summary>
-/// Represents a TZX file.
+/// Represents a .tzx file.
 /// </summary>
 public sealed class TzxFile
 {
     /// <summary>
     /// Gets the TZX file header.
     /// </summary>
-    public HeaderBlock Header { get; private set; }
+    public HeaderBlock Header { get; private set; } = new();
 
     /// <summary>
     /// Gets a list of TZX file blocks.
     /// </summary>
     public List<IBlock> Blocks { get; } = [];
-
-    /// <summary>
-    /// Initializes a new instance of the TzxFile class.
-    /// </summary>
-    public TzxFile()
-    {
-        Header = new HeaderBlock();
-    }
 
     /// <summary>
     /// Loads a TZX file from the given stream.

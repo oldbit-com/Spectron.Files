@@ -9,7 +9,7 @@ namespace OldBit.ZXTape.Sna;
 public sealed class SnaData
 {
     /// <summary>
-    /// Gets or sets the SNA header.
+    /// Gets or sets the header.
     /// </summary>
     [FileData(Order = 0)]
     public SnaHeader Header { get; set; } = new();
