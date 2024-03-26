@@ -116,6 +116,27 @@ internal sealed class ByteStreamReader
     public int ReadAtLeast(byte[] buffer, int count) => _stream.ReadAtLeast(buffer, count, false);
 
     /// <summary>
+    /// Reads all the remaining bytes from the stream and returns them as an enumeration of bytes.
+    /// </summary>
+    /// <returns>An enumeration of bytes representing the remaining data in the stream.</returns>
+    public byte[] ReadToEnd()
+    {
+        var bytes = new List<byte>();
+        while (true)
+        {
+            var data = _stream.ReadByte();
+            if (data == -1)
+            {
+                break;
+            }
+
+            bytes.Add((byte)data);
+        }
+
+        return bytes.ToArray();
+    }
+
+    /// <summary>
     /// Attempts to read a word from the stream and advances the position within the stream by two bytes.
     /// </summary>
     /// <param name="result">When this method returns, contains the word retrieved from the stream,

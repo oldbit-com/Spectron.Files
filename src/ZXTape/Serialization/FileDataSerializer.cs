@@ -7,7 +7,7 @@ namespace OldBit.ZXTape.Serialization;
 /// <summary>
 /// Implements generic data serializer.
 /// </summary>
-internal class FileDataSerializer
+internal static class FileDataSerializer
 {
     /// <summary>
     /// Serializes the data as an array of bytes.
@@ -110,7 +110,7 @@ internal class FileDataSerializer
         return result.ToArray();
     }
 
-    private static IEnumerable<byte> SerializePrimitiveType(object value)
+    internal static IEnumerable<byte> SerializePrimitiveType(object value)
     {
         var type = value.GetType();
         if (type == typeof(byte))

@@ -1,11 +1,20 @@
 
 namespace OldBit.ZXTape.Z80;
 
-internal sealed class Z80DataCompressor
+/// <summary>
+/// Provides methods for compressing and decompressing Z80 file data.
+/// </summary>
+internal sealed class DataCompressor
 {
     private const byte Marker = 0xED;
 
-    public static List<byte> Compress(byte[] data, bool appendEndMarker = true)
+    /// <summary>
+    /// Compresses the given data using a simple run-length encoding algorithm specific to Z80 files.
+    /// </summary>
+    /// <param name="data">The data to be compressed.</param>
+    /// <param name="appendEndMarker">Whether to append the end marker to the compressed data.</param>
+    /// <returns>A list of bytes representing the compressed data.</returns>
+    internal static List<byte> Compress(byte[] data, bool appendEndMarker)
     {
         var compressed = new List<byte>();
         var position = 0;
@@ -61,14 +70,20 @@ internal sealed class Z80DataCompressor
         return compressed;
     }
 
-    public static List<byte> Decompress(byte[] data)
+    /// <summary>
+    /// Decompresses the given data using a simple run-length decoding algorithm specific to Z80 files.
+    /// </summary>
+    /// <param name="data">The compressed data to be decompressed.</param>
+    /// <param name="hasEndMarker">Indicates whether the data has an end marker.</param>
+    /// <returns>A list of bytes representing the decompressed data.</returns>
+    internal static byte[] Decompress(byte[] data, bool hasEndMarker)
     {
         var decompressed = new List<byte>();
         var position = 0;
 
-        while (position < data.Length - 1)
+        while (position < data.Length)
         {
-            if (data[position] == Marker && data[position + 1] == Marker)
+            if (position < data.Length - 1 && data[position] == Marker && data[position + 1] == Marker)
             {
                 int count = data[position + 2];
                 var value = data[position + 3];
@@ -82,13 +97,13 @@ internal sealed class Z80DataCompressor
                 position++;
             }
 
-            if (IsEndOfData(data, position))
+            if (hasEndMarker && IsEndOfData(data, position))
             {
                 break;
             }
         }
 
-        return decompressed;
+        return decompressed.ToArray();
     }
 
     private static void Repeat(List<byte> compressed, int count, byte currentByte)
