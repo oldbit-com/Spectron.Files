@@ -81,8 +81,7 @@ public class DataReadWriteTests(ITestOutputHelper output)
         output.WriteLine("Total files: " + count);
     }
 
-    //[Fact(Skip = "Only for manual testing")]
-    [Fact]
+    [Fact(Skip = "Only for manual testing")]
     public void CompareZ80LoadedFileWithSavedFile()
     {
         var count = 0;
