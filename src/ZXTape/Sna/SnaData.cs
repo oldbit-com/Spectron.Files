@@ -55,6 +55,7 @@ public sealed class SnaData
         {
             return;    // No 128K data available, 48K SNA file format
         }
+
         if (readCount != sna128HeaderData.Length)
         {
             throw new EndOfStreamException("Not enough data to read the 128K SNA file format.");

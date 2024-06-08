@@ -10,7 +10,7 @@ public sealed class SnaFile
     /// <summary>
     /// Gets or sets the SNA data.
     /// </summary>
-    public SnaData Data { get; private set; } = new();
+    public SnaData Data { get; init; } = new();
 
     /// <summary>
     /// Loads a SNA file from the given stream.
