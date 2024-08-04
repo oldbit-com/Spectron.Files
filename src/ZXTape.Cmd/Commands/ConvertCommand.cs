@@ -7,8 +7,6 @@ namespace OldBit.ZXTape.Cmd.Commands;
 
 public class ConvertCommand(IConsoleLogger consoleLogger)
 {
-    private readonly IConsoleLogger _consoleLogger = consoleLogger;
-
     public Command Create(Option<bool> verboseOption, Action<int> setReturnCode)
     {
         var sourceFileArgument = new Argument<string>(
