@@ -60,6 +60,11 @@ public sealed class TapData
     }
 
     /// <summary>
+    /// Gets a value indicating whether the block is a header.
+    /// </summary>
+    public bool IsHeader => Flag == 0x00;
+
+    /// <summary>
     /// Calculates the checksum of the data.
     /// The checksum is calculated by performing a bitwise exclusive OR (XOR) operation
     /// on the flag and each byte in the data.
