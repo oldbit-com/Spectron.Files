@@ -12,11 +12,11 @@ public sealed class TapData
     /// Gets the length of the block data.
     /// </summary>
     [FileData(Order = 0)]
-    private Word Length => (Word)(Data.Count + 2);
+    private Word Length => (Word)(BlockData.Count + 2);
 
     /// <summary>
     /// Gets or sets type of the block data.
-    /// Typically there are two standard values: 0x00 for header and 0xFF for data.
+    /// Typically, there are two standard values: 0x00 for header and 0xFF for data.
     /// </summary>
     [FileData(Order = 1)]
     public byte Flag { get; set; }
@@ -25,7 +25,7 @@ public sealed class TapData
     /// Gets or sets data.
     /// </summary>
     [FileData(Order = 2)]
-    public List<byte> Data { get; set; } = [];
+    public List<byte> BlockData { get; set; } = [];
 
     /// <summary>
     /// Gets or sets the control sum of the data.
@@ -52,7 +52,7 @@ public sealed class TapData
         tapData = new TapData
         {
             Flag = dataBytes[0],
-            Data = dataBytes[1..^1].ToList(),
+            BlockData = dataBytes[1..^1].ToList(),
             Checksum = dataBytes[^1]
         };
 
@@ -73,7 +73,9 @@ public sealed class TapData
     public byte CalculateChecksum()
     {
         var checksum = Flag;
-        Data.ForEach(b => { checksum ^= b; });
+
+        BlockData.ForEach(b => { checksum ^= b; });
+
         return checksum;
     }
 }

@@ -36,7 +36,7 @@ public static class ListCommandHandler
             {
                 if (TapData.TryParse(standardSpeedDataBlock.Data, out var tapeData))
                 {
-                    if (TapHeader.TryParse(tapeData.Data, out var tapeHeader))
+                    if (TapHeader.TryParse(tapeData.BlockData, out var tapeHeader))
                     {
                         return $"{tapeHeader.GetDataTypeName()}: {tapeHeader.FileName}";
                     }
