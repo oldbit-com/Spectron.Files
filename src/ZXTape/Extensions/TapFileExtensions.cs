@@ -22,6 +22,7 @@ public static class TapFileExtensions
             tzx.Blocks.Add(new StandardSpeedDataBlock
             {
                 Data = FileDataSerializer.Serialize(block).Skip(2).ToList(),
+                PauseDuration = 1000,
             });
         }
 
