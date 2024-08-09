@@ -168,7 +168,7 @@ public sealed class Z80Header
     /// <summary>
     /// Gets or sets the Interrupt flip-flop: 0=DI, otherwise EI.
     /// </summary>
-    public byte Interrupt
+    public byte IFF1
     {
         get => RawData[27];
         set => RawData[27] = value;
