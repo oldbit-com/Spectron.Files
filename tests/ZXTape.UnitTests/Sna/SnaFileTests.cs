@@ -1,80 +1,79 @@
-using OldBit.ZXTape.IO;
 using OldBit.ZXTape.Serialization;
 using OldBit.ZXTape.Sna;
 
 namespace OldBit.ZXTape.UnitTests.Sna;
 
-public class SnaDataTests
+public class SnaFileTests
 {
     [Fact]
-    public void SnaData_48K_ShouldDeserializeFromStream()
+    public void SnaFile_48K_ShouldDeserializeFromStream()
     {
         var data = GetSna48Data();
 
         using var stream = new MemoryStream(data);
-        var snaData = new SnaData(new ByteStreamReader(stream));
+        var snaFile = SnaFile.Load(stream);
 
-        snaData.Header.I.Should().Be(0x01);
-        snaData.Header.HLPrime.Should().Be(0x0302);
-        snaData.Header.DEPrime.Should().Be(0x0504);
-        snaData.Header.BCPrime.Should().Be(0x0706);
-        snaData.Header.AFPrime.Should().Be(0x0908);
-        snaData.Header.HL.Should().Be(0x0B0A);
-        snaData.Header.DE.Should().Be(0x0D0C);
-        snaData.Header.BC.Should().Be(0x0F0E);
-        snaData.Header.IY.Should().Be(0x1110);
-        snaData.Header.IX.Should().Be(0x1312);
-        snaData.Header.Interrupt.Should().Be(0x14);
-        snaData.Header.R.Should().Be(0x15);
-        snaData.Header.AF.Should().Be(0x1716);
-        snaData.Header.SP.Should().Be(0x1918);
-        snaData.Header.InterruptMode.Should().Be(0x1A);
-        snaData.Header.Border.Should().Be(0x1B);
-        snaData.Ram48.Should().Equal(data[27..]);
-        snaData.Header128.Should().BeNull();
-        snaData.RamBanks.Should().BeNull();
+        snaFile.Header.I.Should().Be(0x01);
+        snaFile.Header.HLPrime.Should().Be(0x0302);
+        snaFile.Header.DEPrime.Should().Be(0x0504);
+        snaFile.Header.BCPrime.Should().Be(0x0706);
+        snaFile.Header.AFPrime.Should().Be(0x0908);
+        snaFile.Header.HL.Should().Be(0x0B0A);
+        snaFile.Header.DE.Should().Be(0x0D0C);
+        snaFile.Header.BC.Should().Be(0x0F0E);
+        snaFile.Header.IY.Should().Be(0x1110);
+        snaFile.Header.IX.Should().Be(0x1312);
+        snaFile.Header.Interrupt.Should().Be(0x14);
+        snaFile.Header.R.Should().Be(0x15);
+        snaFile.Header.AF.Should().Be(0x1716);
+        snaFile.Header.SP.Should().Be(0x1918);
+        snaFile.Header.InterruptMode.Should().Be(0x1A);
+        snaFile.Header.BorderColor.Should().Be(0x1B);
+        snaFile.Ram48.Should().Equal(data[27..]);
+        snaFile.Header128.Should().BeNull();
+        snaFile.RamBanks.Should().BeNull();
     }
 
     [Fact]
-    public void SnaData_128K_ShouldDeserializeFromStream()
+    public void SnaFile_128K_ShouldDeserializeFromStream()
     {
-        var data = GetSna128Data();
+        var data = GetSna128();
         using var stream = new MemoryStream(data);
-        var snaData = new SnaData(new ByteStreamReader(stream));
+        var snaFile = SnaFile.Load(stream);
 
-        snaData.Header.I.Should().Be(0x01);
-        snaData.Header.HLPrime.Should().Be(0x0302);
-        snaData.Header.DEPrime.Should().Be(0x0504);
-        snaData.Header.BCPrime.Should().Be(0x0706);
-        snaData.Header.AFPrime.Should().Be(0x0908);
-        snaData.Header.HL.Should().Be(0x0B0A);
-        snaData.Header.DE.Should().Be(0x0D0C);
-        snaData.Header.BC.Should().Be(0x0F0E);
-        snaData.Header.IY.Should().Be(0x1110);
-        snaData.Header.IX.Should().Be(0x1312);
-        snaData.Header.Interrupt.Should().Be(0x14);
-        snaData.Header.R.Should().Be(0x15);
-        snaData.Header.AF.Should().Be(0x1716);
-        snaData.Header.SP.Should().Be(0x1918);
-        snaData.Header.InterruptMode.Should().Be(0x1A);
-        snaData.Header.Border.Should().Be(0x1B);
-        snaData.Ram48.Should().Equal(data[27..49179]);
-        snaData.Header128!.PC.Should().Be(0x1D1C);
-        snaData.Header128!.PageMode.Should().Be(0x05);
-        snaData.Header128!.TrDosRom.Should().Be(0x00);
-        snaData.RamBanks.Should().HaveCount(6);
-        snaData.RamBanks![0].Should().Equal(data.Skip(49183).Take(16384));
-        snaData.RamBanks![1].Should().Equal(data.Skip(65567).Take(16384));
-        snaData.RamBanks![2].Should().Equal(data.Skip(81951).Take(16384));
-        snaData.RamBanks![3].Should().Equal(data.Skip(98335).Take(16384));
-        snaData.RamBanks![4].Should().Equal(data.Skip(114719).Take(16384));
-        snaData.RamBanks![5].Should().Equal(data.Skip(131103).Take(16384));
+        snaFile.Header.I.Should().Be(0x01);
+        snaFile.Header.HLPrime.Should().Be(0x0302);
+        snaFile.Header.DEPrime.Should().Be(0x0504);
+        snaFile.Header.BCPrime.Should().Be(0x0706);
+        snaFile.Header.AFPrime.Should().Be(0x0908);
+        snaFile.Header.HL.Should().Be(0x0B0A);
+        snaFile.Header.DE.Should().Be(0x0D0C);
+        snaFile.Header.BC.Should().Be(0x0F0E);
+        snaFile.Header.IY.Should().Be(0x1110);
+        snaFile.Header.IX.Should().Be(0x1312);
+        snaFile.Header.Interrupt.Should().Be(0x14);
+        snaFile.Header.R.Should().Be(0x15);
+        snaFile.Header.AF.Should().Be(0x1716);
+        snaFile.Header.SP.Should().Be(0x1918);
+        snaFile.Header.InterruptMode.Should().Be(0x1A);
+        snaFile.Header.BorderColor.Should().Be(0x1B);
+        snaFile.Ram48.Should().Equal(data[27..49179]);
+        snaFile.Header128!.PC.Should().Be(0x1D1C);
+        snaFile.Header128!.PageMode.Should().Be(0x05);
+        snaFile.Header128!.TrDosRom.Should().Be(0x00);
+        snaFile.RamBanks.Should().HaveCount(6);
+        snaFile.RamBanks![0].Should().Equal(data.Skip(49183).Take(16384));
+        snaFile.RamBanks![1].Should().Equal(data.Skip(65567).Take(16384));
+        snaFile.RamBanks![2].Should().Equal(data.Skip(81951).Take(16384));
+        snaFile.RamBanks![3].Should().Equal(data.Skip(98335).Take(16384));
+        snaFile.RamBanks![4].Should().Equal(data.Skip(114719).Take(16384));
+        snaFile.RamBanks![5].Should().Equal(data.Skip(131103).Take(16384));
     }
 
     [Fact]
-    public void SnaData_48K_ShouldSerializeToBytes()
+    public void SnaFile_48K_ShouldSerializeToBytes()
     {
-        var snaData = new SnaData
+        var snaFile = new SnaFile()
         {
             Header = new SnaHeader
             {
@@ -93,20 +92,20 @@ public class SnaDataTests
                 AF = 0x1716,
                 SP = 0x1918,
                 InterruptMode = 0x1A,
-                Border = 0x1B
+                BorderColor = 0x1B
             },
             Ram48 = Enumerable.Repeat((byte)0xFF, 49152).ToList()
         };
 
-        var result = FileDataSerializer.Serialize(snaData);
+        var result = FileDataSerializer.Serialize(snaFile);
 
         result.Should().Equal(GetSna48Data());
     }
 
     [Fact]
-    public void SnaData_128K_ShouldSerializeToBytes()
+    public void SnaFile_128K_ShouldSerializeToBytes()
     {
-        var snaData = new SnaData
+        var snaFile = new SnaFile
         {
             Header = new SnaHeader
             {
@@ -125,7 +124,7 @@ public class SnaDataTests
                 AF = 0x1716,
                 SP = 0x1918,
                 InterruptMode = 0x1A,
-                Border = 0x1B
+                BorderColor = 0x1B
             },
             Ram48 = Enumerable.Repeat((byte)0x40, 49152).ToList(),
             Header128 = new SnaHeader128
@@ -145,9 +144,9 @@ public class SnaDataTests
             }
         };
 
-        var result = FileDataSerializer.Serialize(snaData);
+        var result = FileDataSerializer.Serialize(snaFile);
 
-        result.Should().Equal(GetSna128Data());
+        result.Should().Equal(GetSna128());
     }
 
     private static byte[] GetSna48Data()
@@ -164,7 +163,7 @@ public class SnaDataTests
         return data;
     }
 
-    private static byte[] GetSna128Data()
+    private static byte[] GetSna128()
     {
         var data = GetSna48Data();
         Array.Resize(ref data, 147487);

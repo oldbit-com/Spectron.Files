@@ -1,26 +1,43 @@
 using OldBit.ZXTape.IO;
+using OldBit.ZXTape.Serialization;
 
 namespace OldBit.ZXTape.Sna;
 
 /// <summary>
-/// Represents a .sna file.
+/// Represents a .sna file. Provides methods to load and save SNA files.
 /// </summary>
 public sealed class SnaFile
 {
     /// <summary>
-    /// Gets or sets the SNA data.
+    /// Gets or sets the header.
     /// </summary>
-    public SnaData Data { get; init; } = new();
+    [FileData(Order = 0)]
+    public SnaHeader Header { get; set; } = new();
+
+    /// <summary>
+    /// Gets or sets the 48K RAM data.
+    /// </summary>
+    [FileData(Order = 1)]
+    public List<byte> Ram48 { get; set; } = [];
+
+    /// <summary>
+    /// Gets or sets the SNA header.
+    /// </summary>
+    [FileData(Order = 2)]
+    public SnaHeader128? Header128 { get; set; }
+
+    /// <summary>
+    /// Gets or sets the remaining banks of the 128K RAM.
+    /// </summary>
+    [FileData(Order = 3)]
+    public List<List<byte>>? RamBanks { get; set; }
 
     /// <summary>
     /// Loads a SNA file from the given stream.
     /// </summary>
     /// <param name="stream">The stream containing the SNA data.</param>
     /// <returns>The loaded SnaFile object.</returns>
-    public static SnaFile Load(Stream stream) => new()
-    {
-        Data = new SnaData(new ByteStreamReader(stream))
-    };
+    public static SnaFile Load(Stream stream) => SnaParser.Parse(stream);
 
     /// <summary>
     /// Loads a SNA file from the given file.
@@ -30,6 +47,7 @@ public sealed class SnaFile
     public static SnaFile Load(string fileName)
     {
         using var stream = File.OpenRead(fileName);
+
         return Load(stream);
     }
 
@@ -39,8 +57,9 @@ public sealed class SnaFile
     /// <param name="stream">The stream to save the SNA data to.</param>
     public void Save(Stream stream)
     {
-        var writer = new DataWriter(stream);
-        writer.Write(Data);
+        var data = FileDataSerializer.Serialize(this);
+
+        stream.Write(data, 0, data.Length);
     }
 
     /// <summary>
@@ -50,6 +69,7 @@ public sealed class SnaFile
     public void Save(string fileName)
     {
         using var stream = File.Create(fileName);
+
         Save(stream);
     }
 }
