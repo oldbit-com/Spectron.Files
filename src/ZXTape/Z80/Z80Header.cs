@@ -1,6 +1,6 @@
-using OldBit.ZXTape.Extensions;
 using OldBit.ZXTape.IO;
 using OldBit.ZXTape.Serialization;
+using OldBit.ZXTape.Z80.Types;
 
 namespace OldBit.ZXTape.Z80;
 
@@ -9,16 +9,19 @@ namespace OldBit.ZXTape.Z80;
 /// </summary>
 public sealed class Z80Header
 {
-    private byte[] _rawData;
+    private byte[] _data;
+    private Flags1? _flags1;
+    private Flags2? _flags2;
+    private Flags3? _flags3;
 
     /// <summary>
     /// Gets or sets the raw header data.
     /// </summary>
     [FileData(Order = 0)]
-    public byte[] RawData
+    internal byte[] Data
     {
-        get => _rawData;
-        set => _rawData = value;
+        get => _data;
+        set => _data = value;
     }
 
     /// <summary>
@@ -26,8 +29,8 @@ public sealed class Z80Header
     /// </summary>
     public byte A
     {
-        get => RawData[0];
-        set => RawData[0] = value;
+        get => Data[0];
+        set => Data[0] = value;
     }
 
     /// <summary>
@@ -35,8 +38,8 @@ public sealed class Z80Header
     /// </summary>
     public byte F
     {
-        get => RawData[1];
-        set => RawData[1] = value;
+        get => Data[1];
+        set => Data[1] = value;
     }
 
     /// <summary>
@@ -44,8 +47,8 @@ public sealed class Z80Header
     /// </summary>
     public Word BC
     {
-        get => RawData.GetWord(2);
-        set => RawData.SetWord(2, value);
+        get => Data.GetWord(2);
+        set => Data.SetWord(2, value);
     }
 
     /// <summary>
@@ -53,8 +56,8 @@ public sealed class Z80Header
     /// </summary>
     public Word HL
     {
-        get => RawData.GetWord(4);
-        set => RawData.SetWord(4, value);
+        get => Data.GetWord(4);
+        set => Data.SetWord(4, value);
     }
 
     /// <summary>
@@ -62,8 +65,8 @@ public sealed class Z80Header
     /// </summary>
     public Word PC
     {
-        get => RawData.GetWord(_rawData.Length == 30 ? 6 : 32);
-        set => RawData.SetWord(_rawData.Length == 30 ? 6 : 32, value);
+        get => Data.GetWord(Version == 1 ? 6 : 32);
+        set => Data.SetWord(Version == 1 ? 6 : 32, value);
     }
 
     /// <summary>
@@ -71,8 +74,8 @@ public sealed class Z80Header
     /// </summary>
     public Word SP
     {
-        get => RawData.GetWord(8);
-        set => RawData.SetWord(8, value);
+        get => Data.GetWord(8);
+        set => Data.SetWord(8, value);
     }
 
     /// <summary>
@@ -80,26 +83,35 @@ public sealed class Z80Header
     /// </summary>
     public byte I
     {
-        get => RawData[10];
-        set => RawData[10] = value;
+        get => Data[10];
+        set => Data[10] = value;
     }
 
     /// <summary>
-    /// Gets or sets the R register.
+    /// Gets or sets the R register. Bit 7 is applied from the Flags1 byte.
     /// </summary>
     public byte R
     {
-        get => RawData[11];
-        set => RawData[11] = value;
+        get => (byte)(Data[11] & 0x7F | (Data[12] & 0x01) << 7);
+        set
+        {
+            Data[11] = value;
+            Data[12] = (byte)((Data[12] & 0b1111_1110) | ((value & 0x80) >> 7));
+        }
     }
+
+    /// <summary>
+    /// Gets or sets miscellaneous flags 1.
+    /// </summary>
+    public Flags1 Flags1 => _flags1 ??= new Flags1(Data[12]);
 
     /// <summary>
     /// Gets or sets the DE register.
     /// </summary>
     public Word DE
     {
-        get => RawData.GetWord(13);
-        set => RawData.SetWord(13, value);
+        get => Data.GetWord(13);
+        set => Data.SetWord(13, value);
     }
 
     /// <summary>
@@ -107,8 +119,8 @@ public sealed class Z80Header
     /// </summary>
     public Word BCPrime
     {
-        get => RawData.GetWord(15);
-        set => RawData.SetWord(15, value);
+        get => Data.GetWord(15);
+        set => Data.SetWord(15, value);
     }
 
     /// <summary>
@@ -116,8 +128,8 @@ public sealed class Z80Header
     /// </summary>
     public Word DEPrime
     {
-        get => RawData.GetWord(17);
-        set => RawData.SetWord(17, value);
+        get => Data.GetWord(17);
+        set => Data.SetWord(17, value);
     }
 
     /// <summary>
@@ -125,8 +137,8 @@ public sealed class Z80Header
     /// </summary>
     public Word HLPrime
     {
-        get => RawData.GetWord(19);
-        set => RawData.SetWord(19, value);
+        get => Data.GetWord(19);
+        set => Data.SetWord(19, value);
     }
 
     /// <summary>
@@ -134,8 +146,8 @@ public sealed class Z80Header
     /// </summary>
     public byte APrime
     {
-        get => RawData[21];
-        set => RawData[21] = value;
+        get => Data[21];
+        set => Data[21] = value;
     }
 
     /// <summary>
@@ -143,8 +155,8 @@ public sealed class Z80Header
     /// </summary>
     public byte FPrime
     {
-        get => RawData[22];
-        set => RawData[22] = value;
+        get => Data[22];
+        set => Data[22] = value;
     }
 
     /// <summary>
@@ -152,8 +164,8 @@ public sealed class Z80Header
     /// </summary>
     public Word IY
     {
-        get => RawData.GetWord(23);
-        set => RawData.SetWord(23, value);
+        get => Data.GetWord(23);
+        set => Data.SetWord(23, value);
     }
 
     /// <summary>
@@ -161,8 +173,8 @@ public sealed class Z80Header
     /// </summary>
     public Word IX
     {
-        get => RawData.GetWord(25);
-        set => RawData.SetWord(25, value);
+        get => Data.GetWord(25);
+        set => Data.SetWord(25, value);
     }
 
     /// <summary>
@@ -170,8 +182,8 @@ public sealed class Z80Header
     /// </summary>
     public byte IFF1
     {
-        get => RawData[27];
-        set => RawData[27] = value;
+        get => Data[27];
+        set => Data[27] = value;
     }
 
     /// <summary>
@@ -179,19 +191,127 @@ public sealed class Z80Header
     /// </summary>
     public byte IFF2
     {
-        get => RawData[28];
-        set => RawData[28] = value;
+        get => Data[28];
+        set => Data[28] = value;
     }
+
+    /// <summary>
+    /// Gets or sets miscellaneous flags 2.
+    /// </summary>
+    public Flags2 Flags2 => _flags2 ??= new Flags2(Data[29]);
 
     /// <summary>
     /// Gets the version of the Z80 header.
     /// </summary>
-    public int Version => _rawData.Length switch
+    public int Version => _data.Length switch
     {
         30 => 1,
         53 => 2,
         _ => 3
     };
+
+    /// <summary>
+    /// Gets the length of the additional header data.
+    /// </summary>
+    public int ExtraHeaderLength => _data.Length switch
+    {
+        30 => 0,
+        _ => Data.GetWord(30)
+    };
+
+    /// <summary>
+    /// Gets or sets the byte at the specified index in the header data.
+    /// </summary>
+    /// <param name="index">The zero-based index of the byte to get or set.</param>
+    /// <returns>The byte at the specified index.</returns>
+    /// <exception cref="IndexOutOfRangeException">Thrown when the index is outside the bounds of the header data array.</exception>
+    public byte this[int index]
+    {
+        get => Data[index];
+        set => Data[index] = value;
+    }
+
+    /// <summary>
+    /// Gets or sets the hardware mode (applies to version 2 and 3).
+    /// </summary>
+    public HardwareMode HardwareMode
+    {
+        get => (Version > 1 ? Data[34] : -1, Version) switch
+        {
+            (0, _) => HardwareMode.Spectrum48,
+            (1, _) => HardwareMode.Spectrum48 | HardwareMode.Interface1,
+            (2, _) => HardwareMode.SamRam,
+            (3, 2) => HardwareMode.Spectrum128,
+            (3, 3) => HardwareMode.Spectrum48 | HardwareMode.Mgt,
+            (4, 2) => HardwareMode.Spectrum128 | HardwareMode.Interface1,
+            (4, 3) => HardwareMode.Spectrum128,
+            (5, 3) => HardwareMode.Spectrum128 | HardwareMode.Interface1,
+            (6, 3) => HardwareMode.Spectrum128 | HardwareMode.Mgt,
+            (7, _) => HardwareMode.SpectrumPlus3,
+            (9, _) => HardwareMode.Pentagon128,
+            (10, _) => HardwareMode.Scorpion256,
+            (11, _) => HardwareMode.DidaktikKompakt,
+            (12, _) => HardwareMode.SpectrumPlus2,
+            (13, _) => HardwareMode.SpectrumPlus2A,
+            (14, _) => HardwareMode.TC2048,
+            (15, _) => HardwareMode.TC2068,
+            (128, _) => HardwareMode.TS2068,
+            _ => HardwareMode.None
+        };
+        set
+        {
+            if (Version == 1)
+            {
+                return;
+            }
+
+            Data[32] = (Version, value) switch
+            {
+                (_, HardwareMode.Spectrum48) => 0,
+                (_, HardwareMode.Spectrum48 | HardwareMode.Interface1) => 1,
+                (_, HardwareMode.SamRam) => 2,
+                (2, HardwareMode.Spectrum128) => 3,
+                (3, HardwareMode.Spectrum48 | HardwareMode.Mgt) => 3,
+                (2, HardwareMode.Spectrum128 | HardwareMode.Interface1) => 4,
+                (_, HardwareMode.Spectrum128) => 4,
+                (_, HardwareMode.Spectrum128 | HardwareMode.Interface1) => 5,
+                (_, HardwareMode.Spectrum128 | HardwareMode.Mgt) => 6,
+                (_, HardwareMode.SpectrumPlus3) => 7,
+                (_, HardwareMode.Pentagon128) => 9,
+                (_, HardwareMode.Scorpion256) => 10,
+                (_, HardwareMode.DidaktikKompakt) => 11,
+                (_, HardwareMode.SpectrumPlus2) => 12,
+                (_, HardwareMode.SpectrumPlus2A) => 13,
+                (_, HardwareMode.TC2048) => 14,
+                (_, HardwareMode.TC2068) => 15,
+                (_, HardwareMode.TS2068) => 128,
+                _ => 0
+            };
+        }
+    }
+
+    /// <summary>
+    /// Gets or sets miscellaneous flags 3.
+    /// </summary>
+    public Flags3 Flags3 => _flags3 ??= new Flags3(Data[37]);
+
+    /// <summary>
+    /// Gets or sets the low T state counter.
+    /// </summary>
+    public Word LowTStateCounter
+    {
+        get => Data.GetWord(55);
+        set => Data.SetWord(55, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the high T state counter.
+    /// </summary>
+    public byte HighTStateCounter
+    {
+        get => Data[57];
+        set => Data[57] = value;
+    }
 
     /// <summary>
     /// Creates a new instance of the Z80Header header.
@@ -203,7 +323,7 @@ public sealed class Z80Header
             throw new ArgumentOutOfRangeException(nameof(headerSize), headerSize, "Invalid header size. Must be 30 for V1, 53 for V2, 54 or 55 for V3.");
         }
 
-        _rawData = new byte[headerSize];
+        _data = new byte[headerSize];
     }
 
     /// <summary>
@@ -212,8 +332,8 @@ public sealed class Z80Header
     /// <param name="reader">The ByteStreamReader used to initialize the Z80Header properties.</param>
     internal Z80Header(ByteStreamReader reader)
     {
-        _rawData = reader.ReadBytes(30);
-        if (_rawData[6] != 0 || _rawData[7] != 0)
+        _data = reader.ReadBytes(30);
+        if (_data[6] != 0 || _data[7] != 0)
         {
             // V1, no additional header
             return;
@@ -224,7 +344,13 @@ public sealed class Z80Header
         var extraHeader = reader.ReadBytes(extraHeaderLength);
 
         // Resize and copy the additional header data
-        Array.Resize(ref _rawData, 30 + extraHeaderLength);
-        Array.Copy(extraHeader, 0, _rawData, 30, extraHeaderLength);
+        Array.Resize(ref _data, 30 + extraHeaderLength + 2);
+
+        // Write the extra header length
+        _data[30] = (byte)(extraHeaderLength & 0xFF);
+        _data[31] = (byte)(extraHeaderLength >> 8);
+
+        // Copy the extra header data
+        Array.Copy(extraHeader, 0, _data, 32, extraHeaderLength);
     }
 }

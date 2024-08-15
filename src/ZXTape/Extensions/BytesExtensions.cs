@@ -13,13 +13,4 @@ internal static class BytesExtensions
         }
         return s.ToString();
     }
-
-    internal static Word GetWord(this byte[] data, int index) =>
-        (Word)((data[index + 1] << 8) | data[index]);
-
-    internal static void SetWord(this byte[] data, int index, Word value)
-    {
-        data[index] = (byte)value;
-        data[index + 1] = (byte)(value >> 8);
-    }
 }

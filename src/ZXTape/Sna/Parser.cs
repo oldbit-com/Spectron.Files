@@ -2,12 +2,12 @@ using OldBit.ZXTape.IO;
 
 namespace OldBit.ZXTape.Sna;
 
-internal static class SnaParser
+internal static class Parser
 {
     internal static SnaFile Parse(Stream stream)
     {
         var reader = new ByteStreamReader(stream);
-        var sna = new SnaFile
+        var snapshot = new SnaFile
         {
             Header = new SnaHeader(reader),
             Ram48 = reader.ReadBytes(0xC000).ToList()
@@ -18,7 +18,7 @@ internal static class SnaParser
 
         if (readCount == 0)
         {
-            return sna;    // No 128K data available, treat as 48K SNA file
+            return snapshot;    // No 128K data available, treat as 48K SNA file
         }
 
         if (readCount != sna128HeaderData.Length)
@@ -26,25 +26,25 @@ internal static class SnaParser
             throw new EndOfStreamException("Not enough data to read the 128K SNA file format.");
         }
 
-        sna.Header128 = new SnaHeader128
+        snapshot.Header128 = new SnaHeader128
         {
             PC = (Word)(sna128HeaderData[0] | (sna128HeaderData[1] << 8)),
             PageMode = sna128HeaderData[2],
             TrDosRom = sna128HeaderData[3]
         };
 
-        sna.RamBanks = new List<List<byte>>();
+        snapshot.RamBanks = new List<List<byte>>();
         for (var bank = 0; bank < 8; bank++)
         {
-            if (bank == 2 || bank == 5 || bank == (sna.Header128.PageMode & 0x07))
+            if (bank == 2 || bank == 5 || bank == (snapshot.Header128.PageMode & 0x07))
             {
                 continue;   // These banks are included in the 48K SNA file format, skip them
             }
 
             var bankData = reader.ReadBytes(0x4000).ToList();
-            sna.RamBanks.Add(bankData);
+            snapshot.RamBanks.Add(bankData);
         }
 
-        return sna;
+        return snapshot;
     }
 }

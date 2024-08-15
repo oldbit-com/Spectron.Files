@@ -65,6 +65,7 @@ internal sealed class ByteStreamReader
     {
         var buffer = new byte[count];
         _stream.ReadExactly(buffer, 0, count);
+
         return buffer;
     }
 
@@ -154,6 +155,7 @@ internal sealed class ByteStreamReader
         }
 
         result = (Word)(buffer[0] | buffer[1] << 8);
+
         return true;
     }
 }

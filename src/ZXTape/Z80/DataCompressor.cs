@@ -1,10 +1,9 @@
-
 namespace OldBit.ZXTape.Z80;
 
 /// <summary>
 /// Provides methods for compressing and decompressing Z80 file data.
 /// </summary>
-internal sealed class DataCompressor
+internal static class DataCompressor
 {
     private const byte Marker = 0xED;
 
@@ -76,7 +75,7 @@ internal sealed class DataCompressor
     /// <param name="data">The compressed data to be decompressed.</param>
     /// <param name="hasEndMarker">Indicates whether the data has an end marker.</param>
     /// <returns>A list of bytes representing the decompressed data.</returns>
-    internal static byte[] Decompress(byte[] data, bool hasEndMarker)
+    internal static byte[] Decompress(byte[] data, bool hasEndMarker = false)
     {
         var decompressed = new List<byte>();
         var position = 0;

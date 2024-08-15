@@ -29,4 +29,10 @@
       <ProjectReference Include="..\..\src\ZXTape\ZXTape.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="TestFiles\Test48.z80">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>

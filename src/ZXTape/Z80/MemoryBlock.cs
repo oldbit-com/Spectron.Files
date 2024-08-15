@@ -15,18 +15,23 @@ public class MemoryBlock : IDataSerializer
     /// </summary>
     public byte[] Data { get; set; } = [];
 
-    public MemoryBlock()
+    internal static MemoryBlock? Load(ByteStreamReader reader)
     {
+        if (!reader.TryReadWord(out var length))
+        {
+            return null;
+        }
 
-    }
+        var block = new MemoryBlock();
+        var isDataCompressed = length != 0xFFFF;
 
-    internal MemoryBlock(ByteStreamReader reader, bool isDataCompressed)
-    {
-        var dataLength = reader.ReadWord();
-        PageNumber = reader.ReadByte();
-        Data = isDataCompressed ?
-            DataCompressor.Decompress(reader.ReadBytes(dataLength), false) :
-            reader.ReadBytes(dataLength);
+        block.PageNumber = reader.ReadByte();
+
+        block.Data = isDataCompressed ?
+            DataCompressor.Decompress(reader.ReadBytes(length)) :
+            reader.ReadBytes(16384);
+
+        return block;
     }
 
     public byte[] Serialize()

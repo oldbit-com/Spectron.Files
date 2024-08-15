@@ -29,14 +29,4 @@ internal class DataWriter(Stream stream)
         var data = FileDataSerializer.Serialize(tapData);
         stream.Write(data, 0, data.Length);
     }
-
-    /// <summary>
-    /// Writes a SNA data to the stream.
-    /// </summary>
-    /// <param name="snaData">The data to write.</param>
-    internal void Write(SnaData snaData)
-    {
-        var data = FileDataSerializer.Serialize(snaData);
-        stream.Write(data, 0, data.Length);
-    }
 }

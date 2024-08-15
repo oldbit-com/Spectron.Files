@@ -23,7 +23,7 @@ public class DataCompressorTests
     [InlineData(new byte[] { 0xED, 0xED, 2, 0xED }, new byte[] { 0xED, 0xED }, false)]
     public void Decompress_ReturnsDecompressedData(byte[] compressedData, byte[] expectedData, bool hasEndMarker)
     {
-        var decompressedData = DataCompressor.Decompress(compressedData, true);
+        var decompressedData = DataCompressor.Decompress(compressedData, hasEndMarker);
 
         decompressedData.Should().Equal(expectedData);
     }

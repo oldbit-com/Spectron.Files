@@ -37,7 +37,7 @@ public sealed class SnaFile
     /// </summary>
     /// <param name="stream">The stream containing the SNA data.</param>
     /// <returns>The loaded SnaFile object.</returns>
-    public static SnaFile Load(Stream stream) => SnaParser.Parse(stream);
+    public static SnaFile Load(Stream stream) => Parser.Parse(stream);
 
     /// <summary>
     /// Loads a SNA file from the given file.
