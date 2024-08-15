@@ -33,6 +33,9 @@
       <None Update="TestFiles\Test48.z80">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="TestFiles\Test128.z80">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>
