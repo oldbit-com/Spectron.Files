@@ -293,15 +293,32 @@ public sealed class Z80Header
     /// <summary>
     /// Gets or sets miscellaneous flags 3.
     /// </summary>
-    public Flags3 Flags3 => _flags3 ??= new Flags3(Data[37]);
+    public Flags3? Flags3
+    {
+        get
+        {
+            if (Version == 1)
+            {
+                return null;
+            }
+
+            return _flags3 ??= new Flags3(Data[37]);
+        }
+    }
 
     /// <summary>
     /// Gets or sets the low T state counter.
     /// </summary>
     public Word LowTStateCounter
     {
-        get => Data.GetWord(55);
-        set => Data.SetWord(55, value);
+        get => Version == 1 ? (Word)0 : Data.GetWord(55);
+        set
+        {
+            if (Version != 1)
+            {
+                Data.SetWord(55, value);
+            }
+        }
     }
 
     /// <summary>
@@ -309,8 +326,14 @@ public sealed class Z80Header
     /// </summary>
     public byte HighTStateCounter
     {
-        get => Data[57];
-        set => Data[57] = value;
+        get => Version == 1 ? (byte)0 : Data[57];
+        set
+        {
+            if (Version != 1)
+            {
+                Data[57] = value;
+            }
+        }
     }
 
     /// <summary>
