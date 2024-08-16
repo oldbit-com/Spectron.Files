@@ -311,10 +311,10 @@ public sealed class Z80Header
     /// </summary>
     public Word LowTStateCounter
     {
-        get => Version == 1 ? (Word)0 : Data.GetWord(55);
+        get => Version < 3 ? (Word)0 : Data.GetWord(55);
         set
         {
-            if (Version != 1)
+            if (Version >= 3)
             {
                 Data.SetWord(55, value);
             }
@@ -326,10 +326,10 @@ public sealed class Z80Header
     /// </summary>
     public byte HighTStateCounter
     {
-        get => Version == 1 ? (byte)0 : Data[57];
+        get => Version < 3 ? (byte)0 : Data[57];
         set
         {
-            if (Version != 1)
+            if (Version >= 3)
             {
                 Data[57] = value;
             }
@@ -339,11 +339,11 @@ public sealed class Z80Header
     /// <summary>
     /// Creates a new instance of the Z80Header header.
     /// </summary>
-    public Z80Header(int headerSize = 54)
+    public Z80Header(int headerSize = 84)
     {
-        if (headerSize != 30 && headerSize != 53 && headerSize != 54 && headerSize != 55)
+        if (headerSize != 30 && headerSize != 53 && headerSize != 84 && headerSize != 85)
         {
-            throw new ArgumentOutOfRangeException(nameof(headerSize), headerSize, "Invalid header size. Must be 30 for V1, 53 for V2, 54 or 55 for V3.");
+            throw new ArgumentOutOfRangeException(nameof(headerSize), headerSize, "Invalid header size. Must be 30 for V1, 53 for V2, 84 or 85 for V3.");
         }
 
         _data = new byte[headerSize];

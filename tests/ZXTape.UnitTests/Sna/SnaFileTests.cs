@@ -94,7 +94,7 @@ public class SnaFileTests
                 InterruptMode = 0x1A,
                 BorderColor = 0x1B
             },
-            Ram48 = Enumerable.Repeat((byte)0xFF, 49152).ToList()
+            Ram48 = Enumerable.Repeat((byte)0xFF, 49152).ToArray()
         };
 
         var result = FileDataSerializer.Serialize(snaFile);
@@ -126,21 +126,21 @@ public class SnaFileTests
                 InterruptMode = 0x1A,
                 BorderColor = 0x1B
             },
-            Ram48 = Enumerable.Repeat((byte)0x40, 49152).ToList(),
+            Ram48 = Enumerable.Repeat((byte)0x40, 49152).ToArray(),
             Header128 = new SnaHeader128
             {
                 PC = 0x1D1C,
                 PageMode = 0x05,
                 TrDosRom = 0x00
             },
-            RamBanks = new List<List<byte>>
+            RamBanks = new List<byte[]>
             {
-                Enumerable.Repeat((byte)0x50, 16384).ToList(),
-                Enumerable.Repeat((byte)0x60, 16384).ToList(),
-                Enumerable.Repeat((byte)0x70, 16384).ToList(),
-                Enumerable.Repeat((byte)0x70, 16384).ToList(),
-                Enumerable.Repeat((byte)0x80, 16384).ToList(),
-                Enumerable.Repeat((byte)0x90, 16384).ToList()
+                Enumerable.Repeat((byte)0x50, 16384).ToArray(),
+                Enumerable.Repeat((byte)0x60, 16384).ToArray(),
+                Enumerable.Repeat((byte)0x70, 16384).ToArray(),
+                Enumerable.Repeat((byte)0x70, 16384).ToArray(),
+                Enumerable.Repeat((byte)0x80, 16384).ToArray(),
+                Enumerable.Repeat((byte)0x90, 16384).ToArray()
             }
         };
 

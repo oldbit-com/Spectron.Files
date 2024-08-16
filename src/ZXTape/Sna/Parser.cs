@@ -10,7 +10,7 @@ internal static class Parser
         var snapshot = new SnaFile
         {
             Header = new SnaHeader(reader),
-            Ram48 = reader.ReadBytes(0xC000).ToList()
+            Ram48 = reader.ReadBytes(0xC000)
         };
 
         var sna128HeaderData = new byte[4];
@@ -33,7 +33,7 @@ internal static class Parser
             TrDosRom = sna128HeaderData[3]
         };
 
-        snapshot.RamBanks = new List<List<byte>>();
+        snapshot.RamBanks = new List<byte[]>();
         for (var bank = 0; bank < 8; bank++)
         {
             if (bank == 2 || bank == 5 || bank == (snapshot.Header128.PageMode & 0x07))
@@ -41,7 +41,7 @@ internal static class Parser
                 continue;   // These banks are included in the 48K SNA file format, skip them
             }
 
-            var bankData = reader.ReadBytes(0x4000).ToList();
+            var bankData = reader.ReadBytes(0x4000);
             snapshot.RamBanks.Add(bankData);
         }
 

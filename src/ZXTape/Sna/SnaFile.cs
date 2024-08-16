@@ -18,7 +18,7 @@ public sealed class SnaFile
     /// Gets or sets the 48K RAM data.
     /// </summary>
     [FileData(Order = 1)]
-    public List<byte> Ram48 { get; set; } = [];
+    public byte[] Ram48 { get; set; } = [];
 
     /// <summary>
     /// Gets or sets the SNA header.
@@ -30,7 +30,7 @@ public sealed class SnaFile
     /// Gets or sets the remaining banks of the 128K RAM.
     /// </summary>
     [FileData(Order = 3)]
-    public List<List<byte>>? RamBanks { get; set; }
+    public List<byte[]>? RamBanks { get; set; }
 
     /// <summary>
     /// Loads a SNA file from the given stream.
