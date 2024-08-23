@@ -25,7 +25,15 @@ public sealed class ZxStateFile
     /// </summary>
     public SpecRegsBlock SpecRegs { get; private set; } = new();
 
-    public ZxPrinterBlock?  ZxPrinter { get; set; }
+    /// <summary>
+    /// Gets or sets the status of the ZX Printer.
+    /// </summary>
+    public ZxPrinterBlock? ZxPrinter { get; set; }
+
+    /// <summary>
+    /// Gets or sets the state of the Spectrum keyboard and any keyboard joystick emulation.
+    /// </summary>
+    public KeyboardBlock? Keyboard { get; set; }
 
     /// <summary>
     /// Loads a SZX file from the given stream.
@@ -42,26 +50,30 @@ public sealed class ZxStateFile
             throw new InvalidDataException("Not a valid SZX file. Invalid magic number.");
         }
 
-        var zxs = new ZxStateFile { Header = header };
+        var state = new ZxStateFile { Header = header };
 
         while (BlockHeader.Read(reader) is { } blockHeader)
         {
             switch (blockHeader.BlockId)
             {
                 case BlockIds.Creator:
-                    zxs.Creator = CreatorBlock.Read(reader, blockHeader.Size);
+                    state.Creator = CreatorBlock.Read(reader, blockHeader.Size);
                     break;
 
                 case BlockIds.Z80Regs:
-                    zxs.Z80Registers = Z80RegsBlock.Read(reader, blockHeader.Size);
+                    state.Z80Registers = Z80RegsBlock.Read(reader, blockHeader.Size);
                     break;
 
                 case BlockIds.SpecRegs:
-                    zxs.SpecRegs = SpecRegsBlock.Read(reader, blockHeader.Size);
+                    state.SpecRegs = SpecRegsBlock.Read(reader, blockHeader.Size);
                     break;
 
                 case BlockIds.ZxPrinter:
-                    zxs.ZxPrinter = ZxPrinterBlock.Read(reader, blockHeader.Size);
+                    state.ZxPrinter = ZxPrinterBlock.Read(reader, blockHeader.Size);
+                    break;
+
+                case BlockIds.Keyboard:
+                    state.Keyboard = KeyboardBlock.Read(reader, blockHeader.Size);
                     break;
 
                 default:
@@ -71,7 +83,7 @@ public sealed class ZxStateFile
             }
         }
 
-        return zxs;
+        return state;
     }
 
     /// <summary>
