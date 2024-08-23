@@ -7,7 +7,7 @@ namespace OldBit.ZXTape.UnitTests.Szx.Blocks;
 public class Z80RegsBlockTests
 {
     [Fact]
-    public void Z80Registers_ShouldConvertToBytes()
+    public void Z80Regs_ShouldConvertToBytes()
     {
         var regs = GetZ80RegsBlock();
         var writer = new ByteWriter();
@@ -43,35 +43,35 @@ public class Z80RegsBlockTests
     }
 
     [Fact]
-    public void Z80Registers_ShouldConvertFromBytes()
+    public void Z80Regs_ShouldConvertFromBytes()
     {
-        var registersData = GetZ80RegsBlockData();
-        using var memoryStream = new MemoryStream(registersData);
+        var regsData = GetZ80RegsBlockData();
+        using var memoryStream = new MemoryStream(regsData);
         var reader = new ByteStreamReader(memoryStream);
 
-        var registers = Z80RegsBlock.Read(reader, registersData.Length);
+        var regs = Z80RegsBlock.Read(reader, regsData.Length);
 
-        registers.AF.Should().Be(0x1234);
-        registers.BC.Should().Be(0x5678);
-        registers.DE.Should().Be(0x9ABC);
-        registers.HL.Should().Be(0xDEF0);
-        registers.AF1.Should().Be(0x1234);
-        registers.BC1.Should().Be(0x5678);
-        registers.DE1.Should().Be(0x9ABC);
-        registers.HL1.Should().Be(0xDEF0);
-        registers.IX.Should().Be(0x1234);
-        registers.IY.Should().Be(0x5678);
-        registers.SP.Should().Be(0xDEF0);
-        registers.PC.Should().Be(0x9ABC);
-        registers.I.Should().Be(0x12);
-        registers.R.Should().Be(0x34);
-        registers.IFF1.Should().Be(0x01);
-        registers.IFF2.Should().Be(0x01);
-        registers.IM.Should().Be(0x02);
-        registers.CyclesStart.Should().Be(1985);
-        registers.HoldIntReqCycles.Should().Be(0x01);
-        registers.Flags.Should().Be(Z80RegsBlock.FlagsHalted);
-        registers.MemPtr.Should().Be(0x1234);
+        regs.AF.Should().Be(0x1234);
+        regs.BC.Should().Be(0x5678);
+        regs.DE.Should().Be(0x9ABC);
+        regs.HL.Should().Be(0xDEF0);
+        regs.AF1.Should().Be(0x1234);
+        regs.BC1.Should().Be(0x5678);
+        regs.DE1.Should().Be(0x9ABC);
+        regs.HL1.Should().Be(0xDEF0);
+        regs.IX.Should().Be(0x1234);
+        regs.IY.Should().Be(0x5678);
+        regs.SP.Should().Be(0xDEF0);
+        regs.PC.Should().Be(0x9ABC);
+        regs.I.Should().Be(0x12);
+        regs.R.Should().Be(0x34);
+        regs.IFF1.Should().Be(0x01);
+        regs.IFF2.Should().Be(0x01);
+        regs.IM.Should().Be(0x02);
+        regs.CyclesStart.Should().Be(1985);
+        regs.HoldIntReqCycles.Should().Be(0x01);
+        regs.Flags.Should().Be(Z80RegsBlock.FlagsHalted);
+        regs.MemPtr.Should().Be(0x1234);
     }
 
     private static byte[] GetZ80RegsBlockData()
