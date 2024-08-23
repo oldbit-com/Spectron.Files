@@ -1,7 +1,7 @@
 ﻿namespace OldBit.ZXTape.IO;
 
 /// <summary>
-/// Represents a reader that helps reading bytes data from a stream.
+/// Represents a reader that helps to read bytes data from a stream.
 /// </summary>
 internal sealed class ByteStreamReader
 {
@@ -52,7 +52,12 @@ internal sealed class ByteStreamReader
     /// <returns>The dword retrieved from the stream.</returns>
     public DWord ReadDWord()
     {
-        return (DWord)(ReadWord() | ReadWord() << 16);
+        if (!TryReadDWord(out var data))
+        {
+            throw new EndOfStreamException();
+        }
+
+        return data;
     }
 
     /// <summary>
@@ -155,6 +160,25 @@ internal sealed class ByteStreamReader
         }
 
         result = (Word)(buffer[0] | buffer[1] << 8);
+
+        return true;
+    }
+
+    /// <summary>
+    /// Attempts to read a dword from the stream and advances the position within the stream by two bytes.
+    /// </summary>
+    /// <param name="result">When this method returns, contains the dword retrieved from the stream,
+    /// if the read operation succeeds, or zero if the read operation fails.</param>
+    /// <returns>true if the read operation succeeds; otherwise, false.</returns>
+    public bool TryReadDWord(out DWord result)
+    {
+        if (!TryReadWord(out var low) || !TryReadWord(out var high))
+        {
+            result = 0;
+            return false;
+        }
+
+        result = (DWord)(low | high << 16);
 
         return true;
     }
