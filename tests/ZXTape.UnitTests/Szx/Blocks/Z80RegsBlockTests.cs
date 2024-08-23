@@ -17,8 +17,11 @@ public class Z80RegsBlockTests
         var data = writer.GetData();
         data.Length.Should().Be(8 + 37);
 
+        // Header
         BitConverter.ToUInt32(data[..4].ToArray()).Should().Be(0x5230385A);
         BitConverter.ToUInt32(data[4..8].ToArray()).Should().Be(37);
+
+        // Data
         BitConverter.ToUInt16(data[8..10].ToArray()).Should().Be(0x1234);
         BitConverter.ToUInt16(data[10..12].ToArray()).Should().Be(0x5678);
         BitConverter.ToUInt16(data[12..14].ToArray()).Should().Be(0x9ABC);

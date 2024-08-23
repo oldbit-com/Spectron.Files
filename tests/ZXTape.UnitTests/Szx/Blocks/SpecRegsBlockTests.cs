@@ -17,8 +17,11 @@ public class SpecRegsBlockTests
         var data = writer.GetData();
         data.Length.Should().Be(8 + 8);
 
+        // Header
         BitConverter.ToUInt32(data[..4].ToArray()).Should().Be(0x52435053);
         BitConverter.ToUInt32(data[4..8].ToArray()).Should().Be(8);
+
+        // Data
         data[8].Should().Be(1);
         data[9].Should().Be(2);
         data[10].Should().Be(3);
@@ -29,11 +32,11 @@ public class SpecRegsBlockTests
     [Fact]
     public void SpecRegs_ShouldConvertFromBytes()
     {
-        var regssData = GetSpecRegsBlockData();
-        using var memoryStream = new MemoryStream(regssData);
+        var regsData = GetSpecRegsBlockData();
+        using var memoryStream = new MemoryStream(regsData);
         var reader = new ByteStreamReader(memoryStream);
 
-        var regs = SpecRegsBlock.Read(reader, regssData.Length);
+        var regs = SpecRegsBlock.Read(reader, regsData.Length);
 
         regs.Border.Should().Be(1);
         regs.Port7FFD.Should().Be(2);

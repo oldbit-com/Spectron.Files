@@ -25,6 +25,8 @@ public sealed class ZxStateFile
     /// </summary>
     public SpecRegsBlock SpecRegs { get; private set; } = new();
 
+    public ZxPrinterBlock?  ZxPrinter { get; set; }
+
     /// <summary>
     /// Loads a SZX file from the given stream.
     /// </summary>
@@ -56,6 +58,15 @@ public sealed class ZxStateFile
 
                 case BlockIds.SpecRegs:
                     zxs.SpecRegs = SpecRegsBlock.Read(reader, blockHeader.Size);
+                    break;
+
+                case BlockIds.ZxPrinter:
+                    zxs.ZxPrinter = ZxPrinterBlock.Read(reader, blockHeader.Size);
+                    break;
+
+                default:
+                    // Ignore this block, not needed for now.
+                    reader.ReadBytes(blockHeader.Size);
                     break;
             }
         }
