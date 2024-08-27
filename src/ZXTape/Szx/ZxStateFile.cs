@@ -41,6 +41,11 @@ public sealed class ZxStateFile
     public JoystickBlock? Joystick { get; set; }
 
     /// <summary>
+    /// Gets or sets the custom ROM that has been installed for the current Spectrum model.
+    /// </summary>
+    public CustomRomBlock? CustomRom { get; set; }
+
+    /// <summary>
     /// Loads a SZX file from the given stream.
     /// </summary>
     /// <param name="stream">The stream containing the SZX data.</param>
@@ -83,6 +88,10 @@ public sealed class ZxStateFile
 
                 case BlockIds.Joystick:
                     state.Joystick = JoystickBlock.Read(reader, blockHeader.Size);
+                    break;
+
+                case BlockIds.CustomRom:
+                    state.CustomRom = CustomRomBlock.Read(reader, blockHeader.Size);
                     break;
 
                 default:

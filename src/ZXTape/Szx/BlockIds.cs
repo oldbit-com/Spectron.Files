@@ -9,4 +9,5 @@ internal static class BlockIds
     internal const DWord ZxPrinter = 0x5250585A;    // Z','X','P','R'
     internal const DWord Keyboard = 0x4259454B;     // 'K','E','Y','B'
     internal const DWord Joystick = 0x00594F4A;     // 'J','O','Y',0
+    internal const DWord CustomRom = 0x004D4F52;    // 'R','O','M',0
 }
