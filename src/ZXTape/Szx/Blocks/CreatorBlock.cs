@@ -5,7 +5,7 @@ using OldBit.ZXTape.Szx.Serialization;
 namespace OldBit.ZXTape.Szx.Blocks;
 
 /// <summary>
-/// This block (CRTR) identifies the program that created this zx-state file.
+/// This block ('C','R','T','R') identifies the program that created this zx-state file.
 /// </summary>
 public sealed class CreatorBlock
 {

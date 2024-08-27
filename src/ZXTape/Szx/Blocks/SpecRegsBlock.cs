@@ -4,7 +4,7 @@ using OldBit.ZXTape.Szx.Serialization;
 namespace OldBit.ZXTape.Szx.Blocks;
 
 /// <summary>
-/// This block (SPCR) contains the Spectrum's ULA state specifying the
+/// This block ('S','P','C','R') contains the Spectrum's ULA state specifying the
 /// current border colour, memory paging status etc.
 /// </summary>
 public sealed class SpecRegsBlock

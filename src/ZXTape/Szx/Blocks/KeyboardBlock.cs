@@ -4,7 +4,7 @@ using OldBit.ZXTape.Szx.Serialization;
 namespace OldBit.ZXTape.Szx.Blocks;
 
 /// <summary>
-/// This block (KEYB) contains the state of the Spectrum keyboard and any keyboard joystick emulation.
+/// This block ('K','E','Y','B') contains the state of the Spectrum keyboard and any keyboard joystick emulation.
 /// </summary>
 public sealed class KeyboardBlock
 {

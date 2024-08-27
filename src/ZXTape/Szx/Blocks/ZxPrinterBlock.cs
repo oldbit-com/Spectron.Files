@@ -4,7 +4,7 @@ using OldBit.ZXTape.Szx.Serialization;
 namespace OldBit.ZXTape.Szx.Blocks;
 
 /// <summary>
-/// This block (ZXPR) contains the status of the ZX Printer.
+/// This block ('Z','X','P','R') contains the status of the ZX Printer.
 /// </summary>
 public sealed class ZxPrinterBlock
 {

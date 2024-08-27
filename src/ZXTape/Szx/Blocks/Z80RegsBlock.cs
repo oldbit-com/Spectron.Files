@@ -4,7 +4,7 @@ using OldBit.ZXTape.Szx.Serialization;
 namespace OldBit.ZXTape.Szx.Blocks;
 
 /// <summary>
-/// This block (Z80R) contains the Z80 registers and other internal state values.
+/// This block ('Z','8','0','R') contains the Z80 registers and other internal state values.
 /// It does not contain any specific model registers.
 /// </summary>
 public sealed class Z80RegsBlock
