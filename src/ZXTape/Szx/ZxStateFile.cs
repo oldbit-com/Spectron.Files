@@ -36,6 +36,11 @@ public sealed class ZxStateFile
     public KeyboardBlock? Keyboard { get; set; }
 
     /// <summary>
+    /// Gets or sets joystick setup for both players.
+    /// </summary>
+    public JoystickBlock? Joystick { get; set; }
+
+    /// <summary>
     /// Loads a SZX file from the given stream.
     /// </summary>
     /// <param name="stream">The stream containing the SZX data.</param>
@@ -74,6 +79,10 @@ public sealed class ZxStateFile
 
                 case BlockIds.Keyboard:
                     state.Keyboard = KeyboardBlock.Read(reader, blockHeader.Size);
+                    break;
+
+                case BlockIds.Joystick:
+                    state.Joystick = JoystickBlock.Read(reader, blockHeader.Size);
                     break;
 
                 default:
