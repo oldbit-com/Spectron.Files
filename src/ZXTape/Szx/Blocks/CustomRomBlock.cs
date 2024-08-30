@@ -14,12 +14,12 @@ public sealed class CustomRomBlock
     public const Word FlagsCompressed = 1;
 
     /// <summary>
-    /// Gets or sets the various flags.
+    /// Gets the flags indicating the ROM image is compressed.
     /// </summary>
     public Word Flags { get; private init; }
 
     /// <summary>
-    /// Gets or sets the size in bytes of the custom ROM. This will be one of:
+    /// Gets the size in bytes of the custom ROM. This will be one of:
     ///     16,384 for 16k/48k Spectrum
     ///     32,768 for Spectrum 128/+2
     ///     65,536 for Spectrum +2A/+3
@@ -31,12 +31,20 @@ public sealed class CustomRomBlock
     /// </summary>
     public DWord UncompressedSize { get; private init; }
 
+    /// <summary>
+    /// Gets the compressed or uncompressed ROM image depending on the Flags.
+    /// </summary>
     public byte[] Data { get; private set; } = [];
 
     private CustomRomBlock()
     {
     }
 
+    /// <summary>
+    /// Creates a new instance of the CustomRomBlock class.
+    /// </summary>
+    /// <param name="data">The ROM data.</param>
+    /// <param name="compress">Specifies whether the data should be compressed or not.</param>
     public CustomRomBlock(byte[] data, bool compress)
     {
         Flags = (Word)(compress ? FlagsCompressed : 0);
