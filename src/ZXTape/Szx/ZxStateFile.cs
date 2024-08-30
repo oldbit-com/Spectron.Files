@@ -46,6 +46,11 @@ public sealed class ZxStateFile
     public CustomRomBlock? CustomRom { get; set; }
 
     /// <summary>
+    /// Gets a list of RAM pages.
+    /// </summary>
+    public List<RamPageBlock> RamPages { get; } = [];
+
+    /// <summary>
     /// Loads a SZX file from the given stream.
     /// </summary>
     /// <param name="stream">The stream containing the SZX data.</param>
@@ -92,6 +97,10 @@ public sealed class ZxStateFile
 
                 case BlockIds.CustomRom:
                     state.CustomRom = CustomRomBlock.Read(reader, blockHeader.Size);
+                    break;
+
+                case BlockIds.RamPage:
+                    state.RamPages.Add(RamPageBlock.Read(reader, blockHeader.Size));
                     break;
 
                 default:
