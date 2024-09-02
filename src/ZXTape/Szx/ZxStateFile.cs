@@ -51,6 +51,11 @@ public sealed class ZxStateFile
     public List<RamPageBlock> RamPages { get; } = [];
 
     /// <summary>
+    /// Gets or sets the Timex Sinclair screen mode and memory paging status.
+    /// </summary>
+    public TimexSinclairBlock? TimexSinclair { get; set; }
+
+    /// <summary>
     /// Loads a SZX file from the given stream.
     /// </summary>
     /// <param name="stream">The stream containing the SZX data.</param>
@@ -101,6 +106,10 @@ public sealed class ZxStateFile
 
                 case BlockIds.RamPage:
                     state.RamPages.Add(RamPageBlock.Read(reader, blockHeader.Size));
+                    break;
+
+                case BlockIds.TimexSinclair:
+                    state.TimexSinclair = TimexSinclairBlock.Read(reader, blockHeader.Size);
                     break;
 
                 default:
