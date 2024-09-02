@@ -6,12 +6,12 @@ namespace OldBit.ZXTape.Szx;
 /// <summary>
 /// Represents a .szx file.
 /// </summary>
-public sealed class ZxStateFile
+public sealed class SzxFile
 {
     /// <summary>
     /// Gets the SZX file header.
     /// </summary>
-    public ZxStateHeader Header { get; private set; } = new();
+    public SzxHeader Header { get; private set; } = new();
 
     /// <summary>
     /// Gets or sets the program that created this zx-state file.
@@ -68,17 +68,17 @@ public sealed class ZxStateFile
     /// </summary>
     /// <param name="stream">The stream containing the SZX data.</param>
     /// <returns>The loaded SzxFile object.</returns>
-    public static ZxStateFile Load(Stream stream)
+    public static SzxFile Load(Stream stream)
     {
         var reader = new ByteStreamReader(stream);
-        var header = ZxStateHeader.Read(reader);
+        var header = SzxHeader.Read(reader);
 
         if (header.Magic != BlockIds.Magic)
         {
             throw new InvalidDataException("Not a valid SZX file. Invalid magic number.");
         }
 
-        var state = new ZxStateFile { Header = header };
+        var state = new SzxFile { Header = header };
 
         while (BlockHeader.Read(reader) is { } blockHeader)
         {
@@ -139,7 +139,7 @@ public sealed class ZxStateFile
     /// </summary>
     /// <param name="fileName">The file containing the SZX data.</param>
     /// <returns>The loaded SzxFile object.</returns>
-    public static ZxStateFile Load(string fileName)
+    public static SzxFile Load(string fileName)
     {
         using var stream = File.OpenRead(fileName);
 

@@ -6,7 +6,7 @@ namespace OldBit.ZXTape.Szx;
 /// <summary>
 /// The zx-state header appears right at the start of a zx-state (.szx) file.
 /// </summary>
-public sealed class ZxStateHeader
+public sealed class SzxHeader
 {
     public const byte MachineId16K = 0;
     public const byte MachineId48K = 1;
@@ -53,7 +53,7 @@ public sealed class ZxStateHeader
     /// </summary>
     public byte Flags { get; set; }
 
-    internal static ZxStateHeader Read(ByteStreamReader reader) => new()
+    internal static SzxHeader Read(ByteStreamReader reader) => new()
     {
         Magic = reader.ReadDWord(),
         MajorVersion = reader.ReadByte(),
