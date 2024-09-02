@@ -12,4 +12,5 @@ internal static class BlockIds
     internal const DWord CustomRom = 0x004D4F52;         // 'R','O','M',0
     internal const DWord RamPage = 0x504D4152;           // 'R','A','M','P'
     internal const DWord TimexSinclair = 0x444C4353;     // 'S','C','L','D'
+    internal const DWord Ay = 0x00005941;                // 'A','Y',0,0
 }

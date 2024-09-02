@@ -56,6 +56,11 @@ public sealed class ZxStateFile
     public TimexSinclairBlock? TimexSinclair { get; set; }
 
     /// <summary>
+    /// Gets or sets the AY sound chip state.
+    /// </summary>
+    public AyBlock? Ay { get; set; }
+
+    /// <summary>
     /// Loads a SZX file from the given stream.
     /// </summary>
     /// <param name="stream">The stream containing the SZX data.</param>
@@ -110,6 +115,10 @@ public sealed class ZxStateFile
 
                 case BlockIds.TimexSinclair:
                     state.TimexSinclair = TimexSinclairBlock.Read(reader, blockHeader.Size);
+                    break;
+
+                case BlockIds.Ay:
+                    state.Ay = AyBlock.Read(reader, blockHeader.Size);
                     break;
 
                 default:
