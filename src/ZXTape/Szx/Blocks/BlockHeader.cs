@@ -1,5 +1,5 @@
 using OldBit.ZXTape.IO;
-using OldBit.ZXTape.Szx.Serialization;
+using OldBit.ZXTape.Szx.Extensions;
 
 namespace OldBit.ZXTape.Szx.Blocks;
 
@@ -8,7 +8,7 @@ internal sealed class BlockHeader(DWord blockId, int size)
     internal DWord BlockId { get; } = blockId;
     internal int Size { get; } = size;
 
-    internal void Write(ByteWriter writer)
+    internal void Write(Stream writer)
     {
         writer.WriteDWord(BlockId);
         writer.WriteDWord((DWord)Size);

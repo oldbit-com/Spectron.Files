@@ -1,5 +1,5 @@
 using OldBit.ZXTape.IO;
-using OldBit.ZXTape.Szx.Serialization;
+using OldBit.ZXTape.Szx.Extensions;
 
 namespace OldBit.ZXTape.Szx.Blocks;
 
@@ -52,7 +52,7 @@ public sealed class CustomRomBlock
         Data = compress ? ZLibHelper.Compress(data) : data;
     }
 
-    internal void Write(ByteWriter writer)
+    internal void Write(MemoryStream writer)
     {
         var header = new BlockHeader(BlockIds.CustomRom, 6 + Data.Length);
         header.Write(writer);

@@ -1,6 +1,5 @@
 using OldBit.ZXTape.IO;
 using OldBit.ZXTape.Szx.Blocks;
-using OldBit.ZXTape.Szx.Serialization;
 
 namespace OldBit.ZXTape.UnitTests.Szx.Blocks;
 
@@ -10,11 +9,11 @@ public class TimexSinclairBlockTests
     public void TimexSinclair_ShouldConvertToBytes()
     {
         var timex = GetTimexSinclairBlock();
-        var writer = new ByteWriter();
+        using var writer = new MemoryStream();
 
         timex.Write(writer);
 
-        var data = writer.GetData();
+        var data = writer.ToArray();
         data.Length.Should().Be(8 + 2);
 
         // Header
@@ -42,12 +41,11 @@ public class TimexSinclairBlockTests
     private static byte[] GetTimexSinclairBlockData()
     {
         var timex = GetTimexSinclairBlock();
-        var writer = new ByteWriter();
+        using var writer = new MemoryStream();
 
         timex.Write(writer);
-        writer.GetData();
 
-        return writer.GetData()[8..].ToArray();
+        return writer.ToArray()[8..].ToArray();
     }
 
     private static TimexSinclairBlock GetTimexSinclairBlock() => new()

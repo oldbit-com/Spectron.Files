@@ -1,4 +1,5 @@
 using OldBit.ZXTape.IO;
+using OldBit.ZXTape.Szx.Extensions;
 
 namespace OldBit.ZXTape.Szx;
 
@@ -60,4 +61,13 @@ public sealed class ZxStateHeader
         MachineId = reader.ReadByte(),
         Flags = reader.ReadByte(),
     };
+
+    internal void Write(Stream writer)
+    {
+        writer.WriteDWord(Magic);
+        writer.WriteByte(MajorVersion);
+        writer.WriteByte(MinorVersion);
+        writer.WriteByte(MachineId);
+        writer.WriteByte(Flags);
+    }
 }

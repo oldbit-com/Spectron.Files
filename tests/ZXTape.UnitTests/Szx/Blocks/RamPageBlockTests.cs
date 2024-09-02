@@ -1,7 +1,6 @@
 using OldBit.ZXTape.IO;
 using OldBit.ZXTape.Szx;
 using OldBit.ZXTape.Szx.Blocks;
-using OldBit.ZXTape.Szx.Serialization;
 
 namespace OldBit.ZXTape.UnitTests.Szx.Blocks;
 
@@ -21,11 +20,11 @@ public class RamPageBlockTests
     public void RamPage_ShouldConvertToBytes(bool isCompressed, DWord expectedSize)
     {
         var ramPage = GetRamPageBlock(isCompressed);
-        var writer = new ByteWriter();
+        using var writer = new MemoryStream();
 
         ramPage.Write(writer);
 
-        var data = writer.GetData();
+        var data = writer.ToArray();
         data.Length.Should().Be((int)(8 + expectedSize));
 
         // Header
@@ -65,12 +64,11 @@ public class RamPageBlockTests
     private byte[] GetRamPageBlockData(bool compress)
     {
         var ramPage = GetRamPageBlock(compress);
-        var writer = new ByteWriter();
+        using var writer = new MemoryStream();
 
         ramPage.Write(writer);
-        writer.GetData();
 
-        return writer.GetData()[8..].ToArray();
+        return writer.ToArray()[8..].ToArray();
     }
 
     private RamPageBlock GetRamPageBlock(bool isCompressed) => new(_ramData, 5, isCompressed);

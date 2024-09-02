@@ -1,6 +1,5 @@
 using OldBit.ZXTape.IO;
 using OldBit.ZXTape.Szx.Blocks;
-using OldBit.ZXTape.Szx.Serialization;
 
 namespace OldBit.ZXTape.UnitTests.Szx.Blocks;
 
@@ -10,11 +9,11 @@ public class Z80RegsBlockTests
     public void Z80Regs_ShouldConvertToBytes()
     {
         var regs = GetZ80RegsBlock();
-        var writer = new ByteWriter();
+        using var writer = new MemoryStream();
 
         regs.Write(writer);
 
-        var data = writer.GetData();
+        var data = writer.ToArray();
         data.Length.Should().Be(8 + 37);
 
         // Header
@@ -80,12 +79,11 @@ public class Z80RegsBlockTests
     private static byte[] GetZ80RegsBlockData()
     {
         var registers = GetZ80RegsBlock();
-        var writer = new ByteWriter();
+        using var writer = new MemoryStream();
 
         registers.Write(writer);
-        writer.GetData();
 
-        return writer.GetData()[8..].ToArray();
+        return writer.ToArray()[8..].ToArray();
     }
 
     private static Z80RegsBlock GetZ80RegsBlock() => new()

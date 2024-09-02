@@ -1,6 +1,5 @@
 using OldBit.ZXTape.IO;
 using OldBit.ZXTape.Szx.Blocks;
-using OldBit.ZXTape.Szx.Serialization;
 
 namespace OldBit.ZXTape.UnitTests.Szx.Blocks;
 
@@ -10,11 +9,11 @@ public class ZxPrinterBlockTests
     public void ZXPrinter_ShouldConvertToBytes()
     {
         var printer = GetZxPrinterBlock();
-        var writer = new ByteWriter();
+        using var writer = new MemoryStream();
 
         printer.Write(writer);
 
-        var data = writer.GetData();
+        var data = writer.ToArray();
         data.Length.Should().Be(8 + 2);
 
         // Header
@@ -40,12 +39,11 @@ public class ZxPrinterBlockTests
     private static byte[] GetZxPrinterBlockData()
     {
         var creator = GetZxPrinterBlock();
-        var writer = new ByteWriter();
+        using var writer = new MemoryStream();
 
         creator.Write(writer);
-        writer.GetData();
 
-        return writer.GetData()[8..].ToArray();
+        return writer.ToArray()[8..].ToArray();
     }
 
     private static ZxPrinterBlock GetZxPrinterBlock() => new()

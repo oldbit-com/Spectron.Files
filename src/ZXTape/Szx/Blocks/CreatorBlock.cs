@@ -1,6 +1,5 @@
 using OldBit.ZXTape.IO;
 using OldBit.ZXTape.Szx.Extensions;
-using OldBit.ZXTape.Szx.Serialization;
 
 namespace OldBit.ZXTape.Szx.Blocks;
 
@@ -29,7 +28,7 @@ public sealed class CreatorBlock
     /// </summary>
     public byte[]? CustomData { get; set; }
 
-    internal void Write(ByteWriter writer)
+    internal void Write(MemoryStream writer)
     {
         var header = new BlockHeader(BlockIds.Creator, 32 + 2 + 2 + (CustomData?.Length ?? 1));
         header.Write(writer);

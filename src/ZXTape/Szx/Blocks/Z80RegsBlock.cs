@@ -1,5 +1,5 @@
 using OldBit.ZXTape.IO;
-using OldBit.ZXTape.Szx.Serialization;
+using OldBit.ZXTape.Szx.Extensions;
 
 namespace OldBit.ZXTape.Szx.Blocks;
 
@@ -140,7 +140,7 @@ public sealed class Z80RegsBlock
     /// </summary>
     public Word MemPtr { get; set; }
 
-    internal void Write(ByteWriter writer)
+    internal void Write(MemoryStream writer)
     {
         var header = new BlockHeader(BlockIds.Z80Regs, 37);
         header.Write(writer);

@@ -1,5 +1,5 @@
 using OldBit.ZXTape.IO;
-using OldBit.ZXTape.Szx.Serialization;
+using OldBit.ZXTape.Szx.Extensions;
 
 namespace OldBit.ZXTape.Szx.Blocks;
 
@@ -22,7 +22,7 @@ public sealed class ZxPrinterBlock
     /// </summary>
     public Word Flags { get; set; }
 
-    internal void Write(ByteWriter writer)
+    internal void Write(MemoryStream writer)
     {
         var header = new BlockHeader(BlockIds.ZxPrinter, 2);
         header.Write(writer);

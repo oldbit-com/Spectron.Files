@@ -8,6 +8,9 @@ namespace OldBit.ZXTape.Szx;
 /// </summary>
 public sealed class ZxStateFile
 {
+    /// <summary>
+    /// Gets the SZX file header.
+    /// </summary>
     public ZxStateHeader Header { get; private set; } = new();
 
     /// <summary>
@@ -132,7 +135,7 @@ public sealed class ZxStateFile
     }
 
     /// <summary>
-    /// Loads a SNA file from the given file.
+    /// Loads a SZX file from the given file.
     /// </summary>
     /// <param name="fileName">The file containing the SZX data.</param>
     /// <returns>The loaded SzxFile object.</returns>
@@ -141,5 +144,31 @@ public sealed class ZxStateFile
         using var stream = File.OpenRead(fileName);
 
         return Load(stream);
+    }
+
+    /// <summary>
+    /// Saves the SZX file to a stream.
+    /// </summary>
+    /// <param name="stream">The stream to save the SZX data to.</param>
+    public void Save(Stream stream)
+    {
+        // var writer = new ByteWriter();
+        //
+        // Header.Write(writer);
+        //
+        //
+        // var data = writer.GetData();
+        // stream.Write(data.ToArray(), 0, data.Length);
+    }
+
+    /// <summary>
+    /// Saves the SZX data to a file.
+    /// </summary>
+    /// <param name="fileName">The name of the file to save the SZX data to.</param>
+    public void Save(string fileName)
+    {
+        using var stream = File.Create(fileName);
+
+        Save(stream);
     }
 }

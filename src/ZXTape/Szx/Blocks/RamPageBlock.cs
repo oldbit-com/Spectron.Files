@@ -1,5 +1,5 @@
 using OldBit.ZXTape.IO;
-using OldBit.ZXTape.Szx.Serialization;
+using OldBit.ZXTape.Szx.Extensions;
 
 namespace OldBit.ZXTape.Szx.Blocks;
 
@@ -27,7 +27,7 @@ public sealed class RamPageBlock
     /// <summary>
     /// Gets the actual compressed or uncompressed memory page data.
     /// </summary>
-    public byte[] Data { get; private set; }
+    public byte[] Data { get; private set; } = [];
 
     private RamPageBlock()
     {
@@ -46,7 +46,7 @@ public sealed class RamPageBlock
         Data = compress ? ZLibHelper.Compress(data) : data;
     }
 
-    internal void Write(ByteWriter writer)
+    internal void Write(MemoryStream writer)
     {
         var header = new BlockHeader(BlockIds.RamPage, 3 + Data.Length);
         header.Write(writer);

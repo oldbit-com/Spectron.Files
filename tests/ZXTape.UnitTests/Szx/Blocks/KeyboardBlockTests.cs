@@ -1,6 +1,5 @@
 using OldBit.ZXTape.IO;
 using OldBit.ZXTape.Szx.Blocks;
-using OldBit.ZXTape.Szx.Serialization;
 
 namespace OldBit.ZXTape.UnitTests.Szx.Blocks;
 
@@ -10,11 +9,11 @@ public class KeyboardBlockTests
     public void Keyboard_ShouldConvertToBytes()
     {
         var keyboard = GetKeyboardBlock();
-        var writer = new ByteWriter();
+        using var writer = new MemoryStream();
 
         keyboard.Write(writer);
 
-        var data = writer.GetData();
+        var data = writer.ToArray();
         data.Length.Should().Be(8 + 5);
 
         // Header
@@ -42,12 +41,11 @@ public class KeyboardBlockTests
     private static byte[] GetKeyboardBlockData()
     {
         var keyboard = GetKeyboardBlock();
-        var writer = new ByteWriter();
+        using var writer = new MemoryStream();
 
         keyboard.Write(writer);
-        writer.GetData();
 
-        return writer.GetData()[8..].ToArray();
+        return writer.ToArray()[8..].ToArray();
     }
 
     private static KeyboardBlock GetKeyboardBlock() => new()

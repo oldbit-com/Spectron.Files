@@ -1,5 +1,5 @@
 using OldBit.ZXTape.IO;
-using OldBit.ZXTape.Szx.Serialization;
+using OldBit.ZXTape.Szx.Extensions;
 
 namespace OldBit.ZXTape.Szx.Blocks;
 
@@ -36,7 +36,7 @@ public sealed class AyBlock
     /// </summary>
     public byte[] Registers { get; private set; } = new byte[16];
 
-    internal void Write(ByteWriter writer)
+    internal void Write(Stream writer)
     {
         var header = new BlockHeader(BlockIds.Ay, 8);
         header.Write(writer);

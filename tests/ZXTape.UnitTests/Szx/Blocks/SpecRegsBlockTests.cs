@@ -1,6 +1,5 @@
 using OldBit.ZXTape.IO;
 using OldBit.ZXTape.Szx.Blocks;
-using OldBit.ZXTape.Szx.Serialization;
 
 namespace OldBit.ZXTape.UnitTests.Szx.Blocks;
 
@@ -10,11 +9,11 @@ public class SpecRegsBlockTests
     public void SpecRegs_ShouldConvertToBytes()
     {
         var regs = GetSpecRegsBlock();
-        var writer = new ByteWriter();
+        using var writer = new MemoryStream();
 
         regs.Write(writer);
 
-        var data = writer.GetData();
+        var data = writer.ToArray();
         data.Length.Should().Be(8 + 8);
 
         // Header
@@ -48,12 +47,11 @@ public class SpecRegsBlockTests
     private static byte[] GetSpecRegsBlockData()
     {
         var registers = GetSpecRegsBlock();
-        var writer = new ByteWriter();
+        using var writer = new MemoryStream();
 
         registers.Write(writer);
-        writer.GetData();
 
-        return writer.GetData()[8..].ToArray();
+        return writer.ToArray()[8..].ToArray();
     }
 
     private static SpecRegsBlock GetSpecRegsBlock() => new()

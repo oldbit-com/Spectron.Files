@@ -1,5 +1,5 @@
 using OldBit.ZXTape.IO;
-using OldBit.ZXTape.Szx.Serialization;
+using OldBit.ZXTape.Szx.Extensions;
 
 namespace OldBit.ZXTape.Szx.Blocks;
 
@@ -38,7 +38,7 @@ public sealed class SpecRegsBlock
     /// </summary>
     public byte[] Reserved { get; private set; } = new byte[4];
 
-    internal void Write(ByteWriter writer)
+    internal void Write(MemoryStream writer)
     {
         var header = new BlockHeader(BlockIds.SpecRegs, 8);
         header.Write(writer);

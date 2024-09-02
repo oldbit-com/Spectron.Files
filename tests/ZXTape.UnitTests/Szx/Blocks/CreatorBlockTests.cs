@@ -1,7 +1,6 @@
 using System.Text;
 using OldBit.ZXTape.IO;
 using OldBit.ZXTape.Szx.Blocks;
-using OldBit.ZXTape.Szx.Serialization;
 
 namespace OldBit.ZXTape.UnitTests.Szx.Blocks;
 
@@ -11,11 +10,11 @@ public class CreatorBlockTests
     public void Creator_ShouldConvertToBytes()
     {
         var creator = GetCreatorBlock();
-        var writer = new ByteWriter();
+        using var writer = new MemoryStream();
 
         creator.Write(writer);
 
-        var data = writer.GetData();
+        var data = writer.ToArray();
         data.Length.Should().Be(8 + 37);
 
         // Header
@@ -46,12 +45,11 @@ public class CreatorBlockTests
     private static byte[] GetCreatorBlockData()
     {
         var creator = GetCreatorBlock();
-        var writer = new ByteWriter();
+        using var writer = new MemoryStream();
 
         creator.Write(writer);
-        writer.GetData();
 
-        return writer.GetData()[8..].ToArray();
+        return writer.ToArray()[8..].ToArray();
     }
 
     private static CreatorBlock GetCreatorBlock() => new()

@@ -1,6 +1,5 @@
 using OldBit.ZXTape.IO;
 using OldBit.ZXTape.Szx.Blocks;
-using OldBit.ZXTape.Szx.Serialization;
 
 namespace OldBit.ZXTape.UnitTests.Szx.Blocks;
 
@@ -10,11 +9,11 @@ public class AyBlockTests
     public void Ay_ShouldConvertToBytes()
     {
         var ay = GetAyBlock();
-        var writer = new ByteWriter();
+        using var writer = new MemoryStream();
 
         ay.Write(writer);
 
-        var data = writer.GetData();
+        var data = writer.ToArray();
         data.Length.Should().Be(8 + 18);
 
         // Header
@@ -44,12 +43,11 @@ public class AyBlockTests
     private static byte[] GetAyBlockData()
     {
         var ay = GetAyBlock();
-        var writer = new ByteWriter();
+        using var writer = new MemoryStream();
 
         ay.Write(writer);
-        writer.GetData();
 
-        return writer.GetData()[8..].ToArray();
+        return writer.ToArray()[8..].ToArray();
     }
 
     private static AyBlock GetAyBlock()

@@ -1,7 +1,6 @@
 using OldBit.ZXTape.IO;
 using OldBit.ZXTape.Szx;
 using OldBit.ZXTape.Szx.Blocks;
-using OldBit.ZXTape.Szx.Serialization;
 
 namespace OldBit.ZXTape.UnitTests.Szx.Blocks;
 
@@ -21,11 +20,11 @@ public class CustomRomBlockTests
     public void CustomRom_ShouldConvertToBytes(bool isCompressed, DWord expectedSize)
     {
         var customRom = GetCustomRomBlock(isCompressed);
-        var writer = new ByteWriter();
+        using var writer = new MemoryStream();
 
         customRom.Write(writer);
 
-        var data = writer.GetData();
+        var data = writer.ToArray();
         data.Length.Should().Be((int)(8 + expectedSize));
 
         // Header
@@ -65,12 +64,11 @@ public class CustomRomBlockTests
     private byte[] GetCustomRomBlockData(bool compress)
     {
         var customRom = GetCustomRomBlock(compress);
-        var writer = new ByteWriter();
+        using var writer = new MemoryStream();
 
         customRom.Write(writer);
-        writer.GetData();
 
-        return writer.GetData()[8..].ToArray();
+        return writer.ToArray()[8..].ToArray();
     }
 
     private CustomRomBlock GetCustomRomBlock(bool isCompressed) => new(_romData, isCompressed);

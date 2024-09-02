@@ -1,5 +1,4 @@
 using OldBit.ZXTape.IO;
-using OldBit.ZXTape.Szx.Serialization;
 
 namespace OldBit.ZXTape.Szx.Blocks;
 
@@ -19,7 +18,7 @@ public sealed class TimexSinclairBlock
     /// </summary>
     public byte PortFF { get; set; }
 
-    internal void Write(ByteWriter writer)
+    internal void Write(MemoryStream writer)
     {
         var header = new BlockHeader(BlockIds.TimexSinclair, 8);
         header.Write(writer);
