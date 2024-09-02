@@ -52,7 +52,7 @@ public sealed class CustomRomBlock
         Data = compress ? ZLibHelper.Compress(data) : data;
     }
 
-    internal void Write(MemoryStream writer)
+    internal void Write(Stream writer)
     {
         var header = new BlockHeader(BlockIds.CustomRom, 6 + Data.Length);
         header.Write(writer);

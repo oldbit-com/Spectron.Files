@@ -71,7 +71,7 @@ public sealed class KeyboardBlock
     /// </summary>
     public byte Joystick { get; set; }
 
-    internal void Write(MemoryStream writer)
+    internal void Write(Stream writer)
     {
         var header = new BlockHeader(BlockIds.Keyboard, 5);
         header.Write(writer);

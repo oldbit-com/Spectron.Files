@@ -18,7 +18,7 @@ public sealed class TimexSinclairBlock
     /// </summary>
     public byte PortFF { get; set; }
 
-    internal void Write(MemoryStream writer)
+    internal void Write(Stream writer)
     {
         var header = new BlockHeader(BlockIds.TimexSinclair, 8);
         header.Write(writer);

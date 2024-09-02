@@ -28,7 +28,7 @@ public sealed class CreatorBlock
     /// </summary>
     public byte[]? CustomData { get; set; }
 
-    internal void Write(MemoryStream writer)
+    internal void Write(Stream writer)
     {
         var header = new BlockHeader(BlockIds.Creator, 32 + 2 + 2 + (CustomData?.Length ?? 1));
         header.Write(writer);

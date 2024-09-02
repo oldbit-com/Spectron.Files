@@ -140,7 +140,7 @@ public sealed class Z80RegsBlock
     /// </summary>
     public Word MemPtr { get; set; }
 
-    internal void Write(MemoryStream writer)
+    internal void Write(Stream writer)
     {
         var header = new BlockHeader(BlockIds.Z80Regs, 37);
         header.Write(writer);

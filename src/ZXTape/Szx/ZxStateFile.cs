@@ -152,13 +152,17 @@ public sealed class ZxStateFile
     /// <param name="stream">The stream to save the SZX data to.</param>
     public void Save(Stream stream)
     {
-        // var writer = new ByteWriter();
-        //
-        // Header.Write(writer);
-        //
-        //
-        // var data = writer.GetData();
-        // stream.Write(data.ToArray(), 0, data.Length);
+        Header.Write(stream);
+        Creator?.Write(stream);
+        Z80Registers.Write(stream);
+        SpecRegs.Write(stream);
+        CustomRom?.Write(stream);
+        RamPages.ForEach(x => x.Write(stream));
+        Ay?.Write(stream);
+        Keyboard?.Write(stream);
+        Joystick?.Write(stream);
+        ZxPrinter?.Write(stream);
+        TimexSinclair?.Write(stream);
     }
 
     /// <summary>

@@ -68,7 +68,7 @@ public sealed class JoystickBlock
     /// </summary>
     public byte JoystickTypePlayer2 { get; set; }
 
-    internal void Write(MemoryStream writer)
+    internal void Write(Stream writer)
     {
         var header = new BlockHeader(BlockIds.Joystick, 6);
         header.Write(writer);

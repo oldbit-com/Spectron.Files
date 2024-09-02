@@ -22,7 +22,7 @@ public sealed class ZxPrinterBlock
     /// </summary>
     public Word Flags { get; set; }
 
-    internal void Write(MemoryStream writer)
+    internal void Write(Stream writer)
     {
         var header = new BlockHeader(BlockIds.ZxPrinter, 2);
         header.Write(writer);

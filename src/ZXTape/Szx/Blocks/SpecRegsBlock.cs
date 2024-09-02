@@ -38,7 +38,7 @@ public sealed class SpecRegsBlock
     /// </summary>
     public byte[] Reserved { get; private set; } = new byte[4];
 
-    internal void Write(MemoryStream writer)
+    internal void Write(Stream writer)
     {
         var header = new BlockHeader(BlockIds.SpecRegs, 8);
         header.Write(writer);

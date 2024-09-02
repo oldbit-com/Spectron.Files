@@ -46,7 +46,7 @@ public sealed class RamPageBlock
         Data = compress ? ZLibHelper.Compress(data) : data;
     }
 
-    internal void Write(MemoryStream writer)
+    internal void Write(Stream writer)
     {
         var header = new BlockHeader(BlockIds.RamPage, 3 + Data.Length);
         header.Write(writer);
