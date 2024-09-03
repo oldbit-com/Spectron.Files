@@ -45,7 +45,7 @@ public sealed class CustomRomBlock
     /// </summary>
     /// <param name="data">The ROM data.</param>
     /// <param name="compress">Specifies whether the data should be compressed or not.</param>
-    public CustomRomBlock(byte[] data, bool compress)
+    public CustomRomBlock(byte[] data, bool compress = true)
     {
         Flags = (Word)(compress ? FlagsCompressed : 0);
         UncompressedSize = (DWord)data.Length;

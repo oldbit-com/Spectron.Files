@@ -39,7 +39,7 @@ public sealed class RamPageBlock
     /// <param name="data">The memory page data.</param>
     /// <param name="pageNumber">The memory page number.</param>
     /// <param name="compress">Specifies whether the data should be compressed or not.</param>
-    public RamPageBlock(byte[] data, byte pageNumber, bool compress)
+    public RamPageBlock(byte[] data, byte pageNumber, bool compress = true)
     {
         Flags = (Word)(compress ? FlagsCompressed : 0);
         PageNumber = pageNumber;
