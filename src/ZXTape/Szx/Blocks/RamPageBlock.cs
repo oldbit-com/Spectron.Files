@@ -1,3 +1,4 @@
+using System.IO.Compression;
 using OldBit.ZXTape.IO;
 using OldBit.ZXTape.Szx.Extensions;
 
@@ -38,12 +39,14 @@ public sealed class RamPageBlock
     /// </summary>
     /// <param name="data">The memory page data.</param>
     /// <param name="pageNumber">The memory page number.</param>
-    /// <param name="compress">Specifies whether the data should be compressed or not.</param>
-    public RamPageBlock(byte[] data, byte pageNumber, bool compress = true)
+    /// <param name="compressionLevel">Specifies the default compression level if data compression is on.</param>
+    public RamPageBlock(byte[] data, byte pageNumber, CompressionLevel compressionLevel = CompressionLevel.SmallestSize)
     {
+        var compress = compressionLevel != CompressionLevel.NoCompression;
+
         Flags = (Word)(compress ? FlagsCompressed : 0);
         PageNumber = pageNumber;
-        Data = compress ? ZLibHelper.Compress(data) : data;
+        Data = compress ? ZLibHelper.Compress(data, compressionLevel) : data;
     }
 
     internal void Write(Stream writer)

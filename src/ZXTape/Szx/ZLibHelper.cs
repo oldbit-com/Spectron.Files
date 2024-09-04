@@ -14,10 +14,10 @@ internal static class ZLibHelper
         return decompressed.ToArray();
     }
 
-    internal static byte[] Compress(byte[] data)
+    internal static byte[] Compress(byte[] data, CompressionLevel compressionLevel)
     {
         using var compressed = new MemoryStream();
-        using (var zlibStream = new ZLibStream(compressed, CompressionLevel.Optimal, leaveOpen: true))
+        using (var zlibStream = new ZLibStream(compressed, compressionLevel, leaveOpen: true))
         {
             zlibStream.Write(data, 0, data.Length);
         }

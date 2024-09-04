@@ -1,3 +1,4 @@
+using System.IO.Compression;
 using OldBit.ZXTape.IO;
 using OldBit.ZXTape.Szx;
 using OldBit.ZXTape.Szx.Blocks;
@@ -40,7 +41,7 @@ public class CustomRomBlockTests
         }
         else
         {
-            var compressedData = ZLibHelper.Compress(_romData);
+            var compressedData = ZLibHelper.Compress(_romData, CompressionLevel.SmallestSize);
             data[14..].ToArray().Should().BeEquivalentTo(compressedData);
         }
     }
@@ -71,5 +72,6 @@ public class CustomRomBlockTests
         return writer.ToArray()[8..].ToArray();
     }
 
-    private CustomRomBlock GetCustomRomBlock(bool isCompressed) => new(_romData, isCompressed);
+    private CustomRomBlock GetCustomRomBlock(bool isCompressed) =>
+        new(_romData, isCompressed ? CompressionLevel.SmallestSize : CompressionLevel.NoCompression);
 }

@@ -1,3 +1,4 @@
+using System.IO.Compression;
 using OldBit.ZXTape.IO;
 using OldBit.ZXTape.Szx;
 using OldBit.ZXTape.Szx.Blocks;
@@ -40,7 +41,7 @@ public class RamPageBlockTests
         }
         else
         {
-            var compressedData = ZLibHelper.Compress(_ramData);
+            var compressedData = ZLibHelper.Compress(_ramData, CompressionLevel.SmallestSize);
             data[11..].ToArray().Should().BeEquivalentTo(compressedData);
         }
     }
@@ -71,5 +72,6 @@ public class RamPageBlockTests
         return writer.ToArray()[8..].ToArray();
     }
 
-    private RamPageBlock GetRamPageBlock(bool isCompressed) => new(_ramData, 5, isCompressed);
+    private RamPageBlock GetRamPageBlock(bool isCompressed) =>
+        new(_ramData, 5, isCompressed ? CompressionLevel.SmallestSize : CompressionLevel.NoCompression);
 }

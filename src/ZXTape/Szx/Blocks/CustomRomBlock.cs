@@ -1,3 +1,4 @@
+using System.IO.Compression;
 using OldBit.ZXTape.IO;
 using OldBit.ZXTape.Szx.Extensions;
 
@@ -44,12 +45,14 @@ public sealed class CustomRomBlock
     /// Creates a new instance of the CustomRomBlock class.
     /// </summary>
     /// <param name="data">The ROM data.</param>
-    /// <param name="compress">Specifies whether the data should be compressed or not.</param>
-    public CustomRomBlock(byte[] data, bool compress = true)
+    /// <param name="compressionLevel">Specifies the default compression level if data compression is on.</param>
+    public CustomRomBlock(byte[] data, CompressionLevel compressionLevel = CompressionLevel.SmallestSize)
     {
+        var compress = compressionLevel != CompressionLevel.NoCompression;
+
         Flags = (Word)(compress ? FlagsCompressed : 0);
         UncompressedSize = (DWord)data.Length;
-        Data = compress ? ZLibHelper.Compress(data) : data;
+        Data = compress ? ZLibHelper.Compress(data, compressionLevel) : data;
     }
 
     internal void Write(Stream writer)
