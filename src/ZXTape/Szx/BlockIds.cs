@@ -13,4 +13,5 @@ internal static class BlockIds
     internal const DWord RamPage = 0x504D4152;           // 'R','A','M','P'
     internal const DWord TimexSinclair = 0x444C4353;     // 'S','C','L','D'
     internal const DWord Ay = 0x00005941;                // 'A','Y',0,0
+    internal const DWord Palette = 0x54544C50;           // 'P','L','T','T'
 }

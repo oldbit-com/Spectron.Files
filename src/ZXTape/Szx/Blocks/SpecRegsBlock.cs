@@ -38,9 +38,11 @@ public sealed class SpecRegsBlock
     /// </summary>
     public byte[] Reserved { get; private set; } = new byte[4];
 
+    private static int Size => 8;
+
     internal void Write(Stream writer)
     {
-        var header = new BlockHeader(BlockIds.SpecRegs, 8);
+        var header = new BlockHeader(BlockIds.SpecRegs, Size);
         header.Write(writer);
 
         writer.WriteByte(Border);
@@ -52,7 +54,7 @@ public sealed class SpecRegsBlock
 
     internal static SpecRegsBlock Read(ByteStreamReader reader, int size)
     {
-        if (size != 8)
+        if (size != Size)
         {
             throw new InvalidDataException("Invalid SpecRegs block size.");
         }

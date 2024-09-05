@@ -22,9 +22,11 @@ public sealed class ZxPrinterBlock
     /// </summary>
     public Word Flags { get; set; }
 
+    private static int Size => 2;
+
     internal void Write(Stream writer)
     {
-        var header = new BlockHeader(BlockIds.ZxPrinter, 2);
+        var header = new BlockHeader(BlockIds.ZxPrinter, Size);
         header.Write(writer);
 
         writer.WriteWord(Flags);
@@ -32,7 +34,7 @@ public sealed class ZxPrinterBlock
 
     internal static ZxPrinterBlock Read(ByteStreamReader reader, int size)
     {
-        if (size != 2)
+        if (size != Size)
         {
             throw new InvalidDataException("Invalid ZxPrinter block size.");
         }

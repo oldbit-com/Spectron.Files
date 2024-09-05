@@ -18,12 +18,12 @@ public class AyBlockTests
 
         // Header
         BitConverter.ToUInt32(data[..4].ToArray()).Should().Be(0x00005941);
-        BitConverter.ToUInt32(data[4..8].ToArray()).Should().Be(8);
+        BitConverter.ToUInt32(data[4..8].ToArray()).Should().Be(18);
 
         // Data
         data[8].Should().Be(AyBlock.Flags128Ay);
         data[9].Should().Be(0x0F);
-        data[10..26].ToArray().Should().BeEquivalentTo(new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 });
+        data[10..26].ToArray().Should().BeEquivalentTo(Enumerable.Range(1, 16).Select(i => (byte)i));
     }
 
     [Fact]
@@ -37,7 +37,7 @@ public class AyBlockTests
 
         ay.Flags.Should().Be(AyBlock.Flags128Ay);
         ay.CurrentRegister.Should().Be(0x0F);
-        ay.Registers.Should().BeEquivalentTo(new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 });
+        ay.Registers.Should().BeEquivalentTo(Enumerable.Range(1, 16).Select(i => (byte)i));
     }
 
     private static byte[] GetAyBlockData()

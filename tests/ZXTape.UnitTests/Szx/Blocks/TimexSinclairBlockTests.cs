@@ -18,7 +18,7 @@ public class TimexSinclairBlockTests
 
         // Header
         BitConverter.ToUInt32(data[..4].ToArray()).Should().Be(0x444C4353);
-        BitConverter.ToUInt32(data[4..8].ToArray()).Should().Be(8);
+        BitConverter.ToUInt32(data[4..8].ToArray()).Should().Be(2);
 
         // Data
         data[8].Should().Be(0xF4);

@@ -18,9 +18,11 @@ public sealed class TimexSinclairBlock
     /// </summary>
     public byte PortFF { get; set; }
 
+    private static int Size => 2;
+
     internal void Write(Stream writer)
     {
-        var header = new BlockHeader(BlockIds.TimexSinclair, 8);
+        var header = new BlockHeader(BlockIds.TimexSinclair, Size);
         header.Write(writer);
 
         writer.WriteByte(PortF4);
@@ -29,7 +31,7 @@ public sealed class TimexSinclairBlock
 
     internal static TimexSinclairBlock Read(ByteStreamReader reader, int size)
     {
-        if (size != 2)
+        if (size != Size)
         {
             throw new InvalidDataException("Invalid TimexSinclair block size.");
         }

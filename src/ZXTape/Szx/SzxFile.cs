@@ -59,6 +59,11 @@ public sealed class SzxFile
     public TimexSinclairBlock? TimexSinclair { get; set; }
 
     /// <summary>
+    /// Gets or sets the 64 colour replacement ULA state.
+    /// </summary>
+    public PaletteBlock? Palette { get; set; }
+
+    /// <summary>
     /// Gets or sets the AY sound chip state.
     /// </summary>
     public AyBlock? Ay { get; set; }
@@ -122,6 +127,10 @@ public sealed class SzxFile
 
                 case BlockIds.Ay:
                     state.Ay = AyBlock.Read(reader, blockHeader.Size);
+                    break;
+
+                case BlockIds.Palette:
+                    state.Palette = PaletteBlock.Read(reader, blockHeader.Size);
                     break;
 
                 default:

@@ -140,9 +140,11 @@ public sealed class Z80RegsBlock
     /// </summary>
     public Word MemPtr { get; set; }
 
+    private static int Size => 37;
+
     internal void Write(Stream writer)
     {
-        var header = new BlockHeader(BlockIds.Z80Regs, 37);
+        var header = new BlockHeader(BlockIds.Z80Regs, Size);
         header.Write(writer);
 
         writer.WriteWord(AF);
@@ -170,7 +172,7 @@ public sealed class Z80RegsBlock
 
     internal static Z80RegsBlock Read(ByteStreamReader reader, int size)
     {
-        if (size != 37)
+        if (size != Size)
         {
             throw new InvalidDataException("Invalid Z80Regs block size.");
         }

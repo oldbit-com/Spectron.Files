@@ -36,9 +36,11 @@ public sealed class AyBlock
     /// </summary>
     public byte[] Registers { get; private set; } = new byte[16];
 
+    private static int Size => 18;
+
     internal void Write(Stream writer)
     {
-        var header = new BlockHeader(BlockIds.Ay, 8);
+        var header = new BlockHeader(BlockIds.Ay, Size);
         header.Write(writer);
 
         writer.WriteByte(Flags);
@@ -48,7 +50,7 @@ public sealed class AyBlock
 
     internal static AyBlock Read(ByteStreamReader reader, int size)
     {
-        if (size != 18)
+        if (size != Size)
         {
             throw new InvalidDataException("Invalid AY block size.");
         }

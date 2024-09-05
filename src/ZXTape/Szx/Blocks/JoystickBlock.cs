@@ -68,9 +68,11 @@ public sealed class JoystickBlock
     /// </summary>
     public byte JoystickTypePlayer2 { get; set; }
 
+    private static int Size => 6;
+
     internal void Write(Stream writer)
     {
-        var header = new BlockHeader(BlockIds.Joystick, 6);
+        var header = new BlockHeader(BlockIds.Joystick, Size);
         header.Write(writer);
 
         writer.WriteDWord(Flags);
@@ -80,7 +82,7 @@ public sealed class JoystickBlock
 
     internal static JoystickBlock Read(ByteStreamReader reader, int size)
     {
-        if (size != 6)
+        if (size != Size)
         {
             throw new InvalidDataException("Invalid Joystick block size.");
         }
