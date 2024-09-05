@@ -172,6 +172,7 @@ public sealed class SzxFile
         Joystick?.Write(stream);
         ZxPrinter?.Write(stream);
         TimexSinclair?.Write(stream);
+        Palette?.Write(stream);
     }
 
     /// <summary>
