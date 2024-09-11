@@ -14,7 +14,7 @@ public sealed class AyBlock
     public const byte FlagsFullerBox = 1;
 
     /// <summary>
-    /// Indicates Melodik Soundbox emulation
+    /// Indicates Melodik Soundbox emulation.
     /// </summary>
     public const byte Flags128Ay = 2;
 
