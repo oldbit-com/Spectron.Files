@@ -24,13 +24,13 @@ public class TurboSpeedDataBlock : IBlock
     /// Gets or sets the length of the SYNC first pulse.
     /// </summary>
     [FileData(Order = 2)]
-    public Word SyncFirstPulseLength { get; set; }
+    public Word FirstSyncPulseLength { get; set; }
 
     /// <summary>
     /// Gets or sets the length of the SYNC second pulse.
     /// </summary>
     [FileData(Order = 3)]
-    public Word SyncSecondPulseLength { get; set; }
+    public Word SecondSyncPulseLength { get; set; }
 
     /// <summary>
     /// Gets or sets the length of the ZERO bit pulse.
@@ -90,8 +90,8 @@ public class TurboSpeedDataBlock : IBlock
     internal TurboSpeedDataBlock(ByteStreamReader reader)
     {
         PilotPulseLength = reader.ReadWord();
-        SyncFirstPulseLength = reader.ReadWord();
-        SyncSecondPulseLength = reader.ReadWord();
+        FirstSyncPulseLength = reader.ReadWord();
+        SecondSyncPulseLength = reader.ReadWord();
         ZeroBitPulseLength = reader.ReadWord();
         OneBitPulseLength = reader.ReadWord();
         PilotToneLength = reader.ReadWord();

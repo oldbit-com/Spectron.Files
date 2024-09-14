@@ -12,8 +12,8 @@ public class TurboSpeedDataBlockTests
         var block = new TurboSpeedDataBlock();
 
         block.PilotPulseLength.Should().Be(0);
-        block.SyncFirstPulseLength.Should().Be(0);
-        block.SyncSecondPulseLength.Should().Be(0);
+        block.FirstSyncPulseLength.Should().Be(0);
+        block.SecondSyncPulseLength.Should().Be(0);
         block.ZeroBitPulseLength.Should().Be(0);
         block.OneBitPulseLength.Should().Be(0);
         block.PilotToneLength.Should().Be(0);
@@ -30,8 +30,8 @@ public class TurboSpeedDataBlockTests
         var block = new TurboSpeedDataBlock(new ByteStreamReader(stream));
 
         block.PilotPulseLength.Should().Be(0x0201);
-        block.SyncFirstPulseLength.Should().Be(0x0403);
-        block.SyncSecondPulseLength.Should().Be(0x0605);
+        block.FirstSyncPulseLength.Should().Be(0x0403);
+        block.SecondSyncPulseLength.Should().Be(0x0605);
         block.ZeroBitPulseLength.Should().Be(0x0807);
         block.OneBitPulseLength.Should().Be(0x0A09);
         block.PilotToneLength.Should().Be(0x0C0B);
@@ -48,8 +48,8 @@ public class TurboSpeedDataBlockTests
         var block = new TurboSpeedDataBlock
         {
             PilotPulseLength = 1000,
-            SyncFirstPulseLength = 2000,
-            SyncSecondPulseLength = 3000,
+            FirstSyncPulseLength = 2000,
+            SecondSyncPulseLength = 3000,
             ZeroBitPulseLength = 4000,
             OneBitPulseLength = 5000,
             PilotToneLength = 6000,
