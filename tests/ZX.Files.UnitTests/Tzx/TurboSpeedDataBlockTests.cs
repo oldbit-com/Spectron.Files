@@ -17,7 +17,7 @@ public class TurboSpeedDataBlockTests
         block.ZeroBitPulseLength.Should().Be(0);
         block.OneBitPulseLength.Should().Be(0);
         block.PilotToneLength.Should().Be(0);
-        block.UsedBitsLastByte.Should().Be(0);
+        block.UsedBitsInLastByte.Should().Be(0);
         block.PauseDuration.Should().Be(0);
         block.Data.Count.Should().Be(0);
     }
@@ -35,7 +35,7 @@ public class TurboSpeedDataBlockTests
         block.ZeroBitPulseLength.Should().Be(0x0807);
         block.OneBitPulseLength.Should().Be(0x0A09);
         block.PilotToneLength.Should().Be(0x0C0B);
-        block.UsedBitsLastByte.Should().Be(0x0D);
+        block.UsedBitsInLastByte.Should().Be(0x0D);
         block.Data.Count.Should().Be(3);
         block.Data[0].Should().Be(0xA0);
         block.Data[1].Should().Be(0xA1);
@@ -53,7 +53,7 @@ public class TurboSpeedDataBlockTests
             ZeroBitPulseLength = 4000,
             OneBitPulseLength = 5000,
             PilotToneLength = 6000,
-            UsedBitsLastByte = 5,
+            UsedBitsInLastByte = 5,
             PauseDuration = 7000,
             Data = [0x01, 0x02, 0x03, 0x04]
         };

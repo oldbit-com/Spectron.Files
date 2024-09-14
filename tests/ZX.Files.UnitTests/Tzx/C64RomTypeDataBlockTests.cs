@@ -45,7 +45,7 @@ public class C64RomTypeDataBlockTests
         block.FinishDataSecondWavePulseLength.Should().Be(616);
         block.TrailingTonePulseLength.Should().Be(616);
         block.NumberOfWavesInTrailingTone.Should().Be(0);
-        block.UsedBitsLastByte.Should().Be(8);
+        block.UsedBitsInLastByte.Should().Be(8);
         block.GeneralPurpose.Should().Be(0);
         block.PauseDuration.Should().Be(0);
         block.DataLength.Should().Be(202);
@@ -75,7 +75,7 @@ public class C64RomTypeDataBlockTests
             FinishDataSecondWavePulseLength = 616,
             TrailingTonePulseLength = 616,
             NumberOfWavesInTrailingTone = 0,
-            UsedBitsLastByte = 8,
+            UsedBitsInLastByte = 8,
             GeneralPurpose = 0,
             PauseDuration = 0,
             Data =

@@ -13,7 +13,7 @@ public class PureDataBlockTests
 
         block.ZeroBitPulseLength.Should().Be(0);
         block.OneBitPulseLength.Should().Be(0);
-        block.UsedBitsLastByte.Should().Be(0);
+        block.UsedBitsInLastByte.Should().Be(0);
         block.PauseDuration.Should().Be(0);
         block.Data.Count.Should().Be(0);
     }
@@ -28,7 +28,7 @@ public class PureDataBlockTests
 
         block.ZeroBitPulseLength.Should().Be(0x0807);
         block.OneBitPulseLength.Should().Be(0x0A09);
-        block.UsedBitsLastByte.Should().Be(0x0D);
+        block.UsedBitsInLastByte.Should().Be(0x0D);
         block.Data.Count.Should().Be(3);
         block.Data[0].Should().Be(0xA0);
         block.Data[1].Should().Be(0xA1);
@@ -42,7 +42,7 @@ public class PureDataBlockTests
         {
             ZeroBitPulseLength = 1000,
             OneBitPulseLength = 2000,
-            UsedBitsLastByte = 1,
+            UsedBitsInLastByte = 1,
             PauseDuration = 3000,
             Data = [0x01, 0x02, 0x03, 0x04]
         };

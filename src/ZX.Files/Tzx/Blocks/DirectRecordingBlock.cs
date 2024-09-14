@@ -31,7 +31,7 @@ public class DirectRecordingBlock : IBlock
     /// in the last byte are: xxxxxx00, where MSb is the leftmost bit, LSb is the rightmost bit.
     /// </summary>
     [FileData(Order = 3)]
-    public byte UsedBitsLastByte { get; set; }
+    public byte UsedBitsInLastByte { get; set; }
 
     /// <summary>
     /// Helper property needed by the serialization.
@@ -61,7 +61,7 @@ public class DirectRecordingBlock : IBlock
     {
         StatesPerSample = reader.ReadWord();
         PauseDuration = reader.ReadWord();
-        UsedBitsLastByte = reader.ReadByte();
+        UsedBitsInLastByte = reader.ReadByte();
         var length = reader.ReadByte() | reader.ReadByte() << 8 | reader.ReadByte() << 16;
         Data.AddRange(reader.ReadBytes(length));
     }

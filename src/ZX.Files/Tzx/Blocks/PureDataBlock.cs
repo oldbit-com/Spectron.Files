@@ -31,7 +31,7 @@ public class PureDataBlock : IBlock
     /// in the last byte are: xxxxxx00, where MSb is the leftmost bit, LSb is the rightmost bit.
     /// </summary>
     [FileData(Order = 3)]
-    public byte UsedBitsLastByte { get; set; }
+    public byte UsedBitsInLastByte { get; set; }
 
     /// <summary>
     /// Gets or sets the pause value (in millisecond) that should be applied after this block.
@@ -67,7 +67,7 @@ public class PureDataBlock : IBlock
     {
         ZeroBitPulseLength = reader.ReadWord();
         OneBitPulseLength = reader.ReadWord();
-        UsedBitsLastByte = reader.ReadByte();
+        UsedBitsInLastByte = reader.ReadByte();
         PauseDuration = reader.ReadWord();
         var length = reader.ReadByte() | reader.ReadByte() << 8 | reader.ReadByte() << 16;
         Data.AddRange(reader.ReadBytes(length));

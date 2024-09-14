@@ -11,7 +11,7 @@ public class DirectRecordingBlockTests
     {
         var block = new DirectRecordingBlock();
 
-        block.UsedBitsLastByte.Should().Be(0);
+        block.UsedBitsInLastByte.Should().Be(0);
         block.PauseDuration.Should().Be(0);
         block.Data.Count.Should().Be(0);
     }
@@ -26,7 +26,7 @@ public class DirectRecordingBlockTests
 
         block.StatesPerSample.Should().Be(0x0201);
         block.PauseDuration.Should().Be(0x0403);
-        block.UsedBitsLastByte.Should().Be(0x05);
+        block.UsedBitsInLastByte.Should().Be(0x05);
         block.Data.Count.Should().Be(3);
         block.Data[0].Should().Be(0xA0);
         block.Data[1].Should().Be(0xA1);
@@ -40,7 +40,7 @@ public class DirectRecordingBlockTests
         {
             PauseDuration = 1000,
             StatesPerSample = 1432,
-            UsedBitsLastByte = 6,
+            UsedBitsInLastByte = 6,
             Data = [0x01, 0x02, 0x03, 0x04]
         };
 

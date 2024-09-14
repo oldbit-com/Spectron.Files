@@ -120,7 +120,7 @@ public class C64RomTypeDataBlock : IBlock
     /// in the last byte are: xxxxxx00, where MSb is the leftmost bit, LSb is the rightmost bit.
     /// </summary>
     [FileData(Order = 17)]
-    public byte UsedBitsLastByte { get; set; }
+    public byte UsedBitsInLastByte { get; set; }
 
     /// <summary>
     /// Gets or sets the general purpose byte.
@@ -178,7 +178,7 @@ public class C64RomTypeDataBlock : IBlock
         FinishDataSecondWavePulseLength = reader.ReadWord();
         TrailingTonePulseLength = reader.ReadWord();
         NumberOfWavesInTrailingTone = reader.ReadWord();
-        UsedBitsLastByte = reader.ReadByte();
+        UsedBitsInLastByte = reader.ReadByte();
         GeneralPurpose = reader.ReadByte();
         PauseDuration = reader.ReadWord();
         var dataLength = reader.ReadByte() | reader.ReadByte() << 8 | reader.ReadByte() << 16;
