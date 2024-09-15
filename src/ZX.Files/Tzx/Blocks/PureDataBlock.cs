@@ -72,4 +72,10 @@ public class PureDataBlock : IBlock
         var length = reader.ReadByte() | reader.ReadByte() << 8 | reader.ReadByte() << 16;
         Data.AddRange(reader.ReadBytes(length));
     }
+
+    /// <summary>
+    /// Converts the 'Pure Data' block to its equivalent string representation.
+    /// </summary>
+    /// <returns>The string representation of this object which corresponds to Length value.</returns>
+    public override string ToString() => Length == 1 ? "1 byte" : $"{Length} bytes";
 }

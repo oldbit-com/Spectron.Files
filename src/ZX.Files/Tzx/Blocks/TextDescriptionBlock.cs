@@ -44,4 +44,10 @@ public class TextDescriptionBlock : IBlock
         var length = reader.ReadByte();
         Description = reader.ReadBytes(length).ToAsciiString();
     }
+
+    /// <summary>
+    /// Converts the 'Text Description' block to its equivalent string representation.
+    /// </summary>
+    /// <returns>The string representation of this object which corresponds to Description value.</returns>
+    public override string ToString() => Description;
 }

@@ -44,4 +44,10 @@ public class GroupStartBlock : IBlock
         var length = reader.ReadByte();
         Name = reader.ReadBytes(length).ToAsciiString();
     }
+
+    /// <summary>
+    /// Converts the 'Group Start' block to its equivalent string representation.
+    /// </summary>
+    /// <returns>The string representation of this object which corresponds to Name value.</returns>
+    public override string ToString() => Name;
 }

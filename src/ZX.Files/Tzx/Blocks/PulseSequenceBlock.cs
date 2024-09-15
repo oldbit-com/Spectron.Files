@@ -43,4 +43,11 @@ public class PulseSequenceBlock : IBlock
         var length = reader.ReadByte();
         PulseLengths.AddRange(reader.ReadWords(length));
     }
+
+    /// <summary>
+    /// Converts the 'Pulse Sequence' block to its equivalent string representation.
+    /// </summary>
+    /// <returns>The string representation of this object which corresponds to PulseCount value.</returns>
+    public override string ToString() =>
+        PulseLengths.Count == 1 ? "1 pulse" : $"{PulseLengths.Count} pulses";
 }
