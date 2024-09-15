@@ -1,6 +1,4 @@
-using OldBit.ZX.Files.Tap;
-
-namespace OldBit.ZX.Files.Extensions;
+namespace OldBit.ZX.Files.Tap.Extensions;
 
 public static class TapeHeaderExtensions
 {

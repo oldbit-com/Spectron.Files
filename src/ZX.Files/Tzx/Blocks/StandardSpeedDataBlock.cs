@@ -1,5 +1,6 @@
 ﻿using OldBit.ZX.Files.IO;
 using OldBit.ZX.Files.Serialization;
+using OldBit.ZX.Files.Tap;
 
 namespace OldBit.ZX.Files.Tzx.Blocks;
 
@@ -49,5 +50,19 @@ public class StandardSpeedDataBlock : IBlock
         PauseDuration = reader.ReadWord();
         var length = reader.ReadWord();
         Data.AddRange(reader.ReadBytes(length));
+    }
+
+    /// <summary>
+    /// Converts the 'Standard Speed Data' block to its equivalent string representation.
+    /// </summary>
+    /// <returns>The string representation of this object which corresponds to Program name or Length value.</returns>
+    public override string ToString()
+    {
+        if (TapData.TryParse(Data, out var tap))
+        {
+            return tap.ToString();
+        }
+
+        return Length == 1 ? "1 byte" : $"{Length} bytes";
     }
 }

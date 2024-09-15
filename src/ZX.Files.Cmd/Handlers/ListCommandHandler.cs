@@ -1,7 +1,8 @@
-using OldBit.ZX.Files.Extensions;
 using OldBit.ZX.Files.Tap;
+using OldBit.ZX.Files.Tap.Extensions;
 using OldBit.ZX.Files.Tzx;
 using OldBit.ZX.Files.Tzx.Blocks;
+using OldBit.ZX.Files.Tzx.Extensions;
 
 namespace OldBit.ZX.Files.Cmd.Handlers;
 

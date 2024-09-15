@@ -1,6 +1,6 @@
 using OldBit.ZX.Files.Tzx.Blocks;
 
-namespace OldBit.ZX.Files.Extensions;
+namespace OldBit.ZX.Files.Tzx.Extensions;
 
 public static class BlockExtensions
 {

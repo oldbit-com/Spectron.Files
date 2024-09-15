@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using OldBit.ZX.Files.Serialization;
+using OldBit.ZX.Files.Tap.Extensions;
 
 namespace OldBit.ZX.Files.Tap;
 
@@ -77,5 +78,20 @@ public sealed class TapData
         BlockData.ForEach(b => { checksum ^= b; });
 
         return checksum;
+    }
+
+    /// <summary>
+    /// Converts the TapData to its equivalent string representation.
+    /// </summary>
+    /// <returns>The string representation of this object.</returns>
+    public override string ToString()
+    {
+        if (IsHeader && TapHeader.TryParse(BlockData, out var header))
+        {
+            var name = header.GetDataTypeName();
+            return $"{name}: {header.FileName}";
+        }
+
+        return Length == 1 ? "1 byte" : $"{Length} bytes";;
     }
 }
