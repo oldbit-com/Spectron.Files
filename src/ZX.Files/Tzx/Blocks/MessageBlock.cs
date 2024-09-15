@@ -51,4 +51,10 @@ public class MessageBlock : IBlock
         var length = reader.ReadByte();
         Message = reader.ReadBytes(length).ToAsciiString();
     }
+
+    /// <summary>
+    /// Converts the 'Message' block to its equivalent string representation.
+    /// </summary>
+    /// <returns>The string representation of this object which corresponds to Message value.</returns>
+    public override string ToString() => Message;
 }
