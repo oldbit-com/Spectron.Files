@@ -42,4 +42,7 @@ public static class BlockExtensions
             _ => "Unknown Block Type"
         };
     }
+
+    public static string? GetInfoText(this ArchiveInfoBlock archiveInfoBlock, int id) =>
+        archiveInfoBlock.Infos.FirstOrDefault(i => i.Id == id)?.Text;
 }

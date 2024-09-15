@@ -19,17 +19,17 @@ public static class ArchiveInfo
     /// <param name="id">The id of archive info property.</param>
     /// <returns>The display name of the archive info property.</returns>
     public static string GetName(byte id) => id switch
-        {
-            Title => "Title",
-            Publisher => "Publisher",
-            Author => "Author",
-            Year => "Year",
-            Language => "Language",
-            Type => "Type",
-            Price => "Price",
-            Protection => "Protection",
-            Origin => "Origin",
-            Comments => "Comments",
-            _ => string.Empty
-        };
+    {
+        Title => "Title",
+        Publisher => "Publisher",
+        Author => "Author",
+        Year => "Year",
+        Language => "Language",
+        Type => "Type",
+        Price => "Price",
+        Protection => "Protection",
+        Origin => "Origin",
+        Comments => "Comments",
+        _ => string.Empty
+    };
 }

@@ -1,6 +1,7 @@
 ﻿using OldBit.ZX.Files.Extensions;
 using OldBit.ZX.Files.IO;
 using OldBit.ZX.Files.Serialization;
+using OldBit.ZX.Files.Tzx.Extensions;
 
 namespace OldBit.ZX.Files.Tzx.Blocks;
 
@@ -67,6 +68,18 @@ public class ArchiveInfoBlock : IBlock
     private Word Length => (Word)(1 + Count * 2 + Infos.Sum(x => x.Length));
 
     /// <summary>
+    /// Converts the 'Archive Info' block to its equivalent string representation.
+    /// </summary>
+    /// <returns>The string representation of this object.</returns>
+    public override string ToString()
+    {
+        var title = this.GetInfoText(ArchiveInfo.Title);
+        var year = this.GetInfoText(ArchiveInfo.Year);
+
+        return year != null ? $"{title} ({year})" : title ?? string.Empty;
+    }
+
+    /// <summary>
     /// Represents the TEXT structure.
     /// </summary>
     public class TextInfo
@@ -108,5 +121,11 @@ public class ArchiveInfoBlock : IBlock
             var bytes = reader.ReadBytes(length);
             Text = bytes.ToAsciiString();
         }
+
+        /// <summary>
+        /// Converts the TextInfo class to its equivalent string representation.
+        /// </summary>
+        /// <returns>The string representation of this object.</returns>
+        public override string ToString() => Text;
     }
 }
