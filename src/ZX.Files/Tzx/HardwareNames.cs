@@ -1,6 +1,6 @@
 namespace OldBit.ZX.Files.Tzx;
 
-public static class HardwareType
+public static class HardwareNames
 {
     public const byte Computer = 0x00;
     public const byte ExternalStorage = 0x01;
@@ -41,6 +41,34 @@ public static class HardwareType
         Graphics => "Graphics",
         _ => "Unknown Hardware Type"
     };
+
+    public static string GetName(byte hardwareTypeId, byte hardwareId)
+    {
+        var hardwareType = GetName(hardwareTypeId);
+        var hardwareName = hardwareTypeId switch
+        {
+            Computer => ComputerType.GetName(hardwareId),
+            ExternalStorage => ExternalStorageType.GetName(hardwareId),
+            MemoryAddOn => MemoryAddOnType.GetName(hardwareId),
+            SoundDevice => SoundDeviceType.GetName(hardwareId),
+            Joystick => JoystickType.GetName(hardwareId),
+            Mouse => MouseType.GetName(hardwareId),
+            OtherController => OtherControllerType.GetName(hardwareId),
+            SerialPort => SerialPortType.GetName(hardwareId),
+            ParallelPort => ParallelPortType.GetName(hardwareId),
+            Printer => PrinterType.GetName(hardwareId),
+            Modem => ModemType.GetName(hardwareId),
+            Digitizer => DigitizerType.GetName(hardwareId),
+            NetworkAdapter => NetworkAdapterType.GetName(hardwareId),
+            Keyboard => KeyboardKeypadType.GetName(hardwareId),
+            AdDaConverter => AdDaConverterType.GetName(hardwareId),
+            EpromProgrammer => EpromProgrammerType.GetName(hardwareId),
+            Graphics => GraphicsType.GetName(hardwareId),
+            _ => "Unknown Hardware Type"
+        };
+
+        return $"{hardwareType}: {hardwareName}";
+    }
 }
 
 public static class ComputerType

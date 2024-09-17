@@ -23,14 +23,14 @@ public class HardwareTypeBlockTests
         var block = new HardwareTypeBlock(new ByteStreamReader(stream));
 
         block.Infos.Count.Should().Be(3);
-        block.Infos[0].Type.Should().Be(0x01);
-        block.Infos[0].Id.Should().Be(0x02);
+        block.Infos[0].HardwareTypeId.Should().Be(0x01);
+        block.Infos[0].HardwareId.Should().Be(0x02);
         block.Infos[0].Info.Should().Be(0x03);
-        block.Infos[1].Type.Should().Be(0x04);
-        block.Infos[1].Id.Should().Be(0x05);
+        block.Infos[1].HardwareTypeId.Should().Be(0x04);
+        block.Infos[1].HardwareId.Should().Be(0x05);
         block.Infos[1].Info.Should().Be(0x06);
-        block.Infos[2].Type.Should().Be(0x07);
-        block.Infos[2].Id.Should().Be(0x08);
+        block.Infos[2].HardwareTypeId.Should().Be(0x07);
+        block.Infos[2].HardwareId.Should().Be(0x08);
         block.Infos[2].Info.Should().Be(0x09);
     }
 
@@ -41,9 +41,9 @@ public class HardwareTypeBlockTests
         {
             Infos =
             [
-                new HardwareTypeBlock.HardwareInfo { Type = 0x01, Id = 0x02, Info = 0x03 },
-                new HardwareTypeBlock.HardwareInfo { Type = 0x04, Id = 0x05, Info = 0x06 },
-                new HardwareTypeBlock.HardwareInfo { Type = 0x07, Id = 0x08, Info = 0x09 }
+                new HardwareTypeBlock.HardwareInfo { HardwareTypeId = 0x01, HardwareId = 0x02, Info = 0x03 },
+                new HardwareTypeBlock.HardwareInfo { HardwareTypeId = 0x04, HardwareId = 0x05, Info = 0x06 },
+                new HardwareTypeBlock.HardwareInfo { HardwareTypeId = 0x07, HardwareId = 0x08, Info = 0x09 }
             ]
         };
 
