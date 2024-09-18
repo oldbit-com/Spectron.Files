@@ -69,6 +69,11 @@ public sealed class SzxFile
     public AyBlock? Ay { get; set; }
 
     /// <summary>
+    /// Gets or sets the virtual cassette recorder state and its contents.
+    /// </summary>
+    public TapeBlock? Tape { get; set; }
+
+    /// <summary>
     /// Loads a SZX file from the given stream.
     /// </summary>
     /// <param name="stream">The stream containing the SZX data.</param>
@@ -133,6 +138,10 @@ public sealed class SzxFile
                     state.Palette = PaletteBlock.Read(reader, blockHeader.Size);
                     break;
 
+                case BlockIds.Tape:
+                    state.Tape = TapeBlock.Read(reader, blockHeader.Size);
+                    break;
+
                 default:
                     // Ignore this block, not needed for now.
                     reader.ReadBytes(blockHeader.Size);
@@ -173,6 +182,7 @@ public sealed class SzxFile
         ZxPrinter?.Write(stream);
         TimexSinclair?.Write(stream);
         Palette?.Write(stream);
+        Tape?.Write(stream);
     }
 
     /// <summary>

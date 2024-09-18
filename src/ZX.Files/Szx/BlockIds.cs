@@ -14,4 +14,5 @@ internal static class BlockIds
     internal const DWord TimexSinclair = 0x444C4353;     // 'S','C','L','D'
     internal const DWord Ay = 0x00005941;                // 'A','Y',0,0
     internal const DWord Palette = 0x54544C50;           // 'P','L','T','T'
+    internal const DWord Tape = 0x45504154;              // 'T','A','P','E'
 }
