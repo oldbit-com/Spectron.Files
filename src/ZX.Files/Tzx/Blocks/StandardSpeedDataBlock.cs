@@ -35,10 +35,20 @@ public class StandardSpeedDataBlock : IBlock
     public List<byte> Data { get; set; } = [];
 
     /// <summary>
-    /// Creates a new instance of the 'Standard Speed Data' block.
+    /// Creates a new emptyi nstance of the 'Standard Speed Data' block.
     /// </summary>
     public StandardSpeedDataBlock()
     {
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="StandardSpeedDataBlock"/> class using the specified TAP data.
+    /// </summary>
+    /// <param name="tapData">The TAP data used to initialize the block.</param>
+    public StandardSpeedDataBlock(TapData tapData)
+    {
+        var bytes = FileDataSerializer.Serialize(tapData);
+        Data = bytes.ToList();
     }
 
     /// <summary>

@@ -10,12 +10,6 @@ namespace OldBit.ZX.Files.Tap;
 public sealed class TapData
 {
     /// <summary>
-    /// Gets the length of the block data.
-    /// </summary>
-    [FileData(Order = 0)]
-    private Word Length => (Word)(BlockData.Count + 2);
-
-    /// <summary>
     /// Gets or sets type of the block data.
     /// Typically, there are two standard values: 0x00 for header and 0xFF for data.
     /// </summary>
@@ -26,13 +20,32 @@ public sealed class TapData
     /// Gets or sets data.
     /// </summary>
     [FileData(Order = 2)]
-    public List<byte> BlockData { get; set; } = [];
+    public List<byte> Data { get; set; } = [];
 
     /// <summary>
     /// Gets or sets the control sum of the data.
     /// </summary>
     [FileData(Order = 3)]
     public byte Checksum { get; set; }
+
+    /// <summary>
+    /// Initializes a new empty instance of the <see cref="TapData"/> class.
+    /// </summary>
+    public TapData()
+    {
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="TapData"/> class with the specified flag and data.
+    /// </summary>
+    /// <param name="flag">The type of the block data. Typically, there are two standard values: 0x00 for header and 0xFF for data.</param>
+    /// <param name="data">The block data as a list of bytes.</param>
+    public TapData(byte flag, List<byte> data)
+    {
+        Flag = flag;
+        Data = data;
+        Checksum = CalculateChecksum();
+    }
 
     /// <summary>
     /// Tries to parse the given data into a TapeData object.
@@ -53,7 +66,7 @@ public sealed class TapData
         tapData = new TapData
         {
             Flag = dataBytes[0],
-            BlockData = dataBytes[1..^1].ToList(),
+            Data = dataBytes[1..^1].ToList(),
             Checksum = dataBytes[^1]
         };
 
@@ -75,7 +88,7 @@ public sealed class TapData
     {
         var checksum = Flag;
 
-        BlockData.ForEach(b => { checksum ^= b; });
+        Data.ForEach(b => { checksum ^= b; });
 
         return checksum;
     }
@@ -86,12 +99,12 @@ public sealed class TapData
     /// <returns>The string representation of this object.</returns>
     public override string ToString()
     {
-        if (IsHeader && TapHeader.TryParse(BlockData, out var header))
+        if (IsHeader && TapHeader.TryParse(Data, out var header))
         {
             var name = header.GetDataTypeName();
             return $"{name}: {header.FileName}";
         }
 
-        return Length == 1 ? "1 byte" : $"{Length} bytes";;
+        return Data.Count == 1 ? "1 byte" : $"{Data.Count} bytes";;
     }
 }

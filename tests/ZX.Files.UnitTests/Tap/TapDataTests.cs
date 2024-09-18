@@ -14,7 +14,7 @@ public class TapDataTests
         result.Should().BeTrue();
         tapeData.Should().NotBeNull();
         tapeData!.Flag.Should().Be(0xFF);
-        tapeData.BlockData.Should().BeEquivalentTo(new byte[] { 0x01, 0x02, 0x03 });
+        tapeData.Data.Should().BeEquivalentTo(new byte[] { 0x01, 0x02, 0x03 });
         tapeData.Checksum.Should().Be(0x55);
     }
 
