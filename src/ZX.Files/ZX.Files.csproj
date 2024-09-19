@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
         <AssemblyName>OldBit.ZX.Files</AssemblyName>
         <RootNamespace>OldBit.ZX.Files</RootNamespace>
-        <Version>0.2.1</Version>
+        <Version>0.2.2</Version>
         <Title>ZX Spectrum Files</Title>
         <Authors>Wojciech Sobieszek</Authors>
         <Description>This package allows reading and writing files used by ZX Spectrum emulators such as TAP, TZX, SNA, SZX and Z80.</Description>
@@ -14,6 +14,7 @@
         <PackageProjectUrl>https://github.com/oldbit-com/ZX.Files</PackageProjectUrl>
         <PackageLicenseUrl>https://github.com/oldbit-com/ZX.Files/blob/main/LICENSE</PackageLicenseUrl>
         <PackageTags>TAP TZX SNA SZX Z80</PackageTags>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
 
     <ItemGroup>
