@@ -18,7 +18,7 @@ internal static class FileDataSerializer
     {
         if (data == null)
         {
-            return Array.Empty<byte>();
+            return [];
         }
 
         var propsAndAttrs =
@@ -113,6 +113,7 @@ internal static class FileDataSerializer
     internal static IEnumerable<byte> SerializePrimitiveType(object value)
     {
         var type = value.GetType();
+
         if (type == typeof(byte))
         {
             yield return Convert.ToByte(value);
@@ -133,7 +134,7 @@ internal static class FileDataSerializer
         }
     }
 
-    private static IEnumerable<byte> SerializeEnumerable(IEnumerable values)
+    private static List<byte> SerializeEnumerable(IEnumerable values)
     {
         var items = new List<byte>();
 
