@@ -24,6 +24,12 @@ public class Z80FileSaveTests
                 BCPrime = 0x4566,
                 DEPrime = 0x4294,
                 HLPrime = 0xABCF,
+                APrime = 0x04,
+                FPrime = 0x05,
+                IY = 0x1110,
+                IX = 0x1312,
+                IFF1 = 1,
+                IFF2 = 0
             }
         };
 
@@ -52,6 +58,14 @@ public class Z80FileSaveTests
         data[18].Should().Be(0x42);     // DE'
         data[19].Should().Be(0xCF);     // HL'
         data[20].Should().Be(0xAB);     // HL'
+        data[21].Should().Be(0x04);     // A'
+        data[22].Should().Be(0x05);     // F'
+        data[23].Should().Be(0x10);     // IY
+        data[24].Should().Be(0x11);     // IY
+        data[25].Should().Be(0x12);     // IX
+        data[26].Should().Be(0x13);     // IX
+        data[27].Should().Be(1);        // IFF1
+        data[28].Should().Be(0);        // IFF2
 
         data[32].Should().Be(0x53);     // PC
         data[33].Should().Be(0x11);     // PC

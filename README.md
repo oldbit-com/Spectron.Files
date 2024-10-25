@@ -1,4 +1,4 @@
-# ZX Files
+# Spectron Files
 
 This a dotnet library that allows reading and writing different file formats used by the ZX Spectrum emulators.
 
@@ -10,21 +10,23 @@ I am currently working on as a fun project.
 - TZX
 - SNA
 - Z80
-- SZX (some obscure / least useful blocks are not supported yet)
+- SZX (some obscure / least useful blocks are not implemented)
 
 ## Usage
 
-### Reading a TAP file
+### Reading/writing a TAP file
 
 Using file path:
 ```csharp
-var tapFile = TapFile.Load(filePath);
+var tap = TapFile.Load(filePath);
+tap.Save(filePath);
 ````
 
 or from a stream:
 ```csharp
 using var stream = File.OpenRead(fileName);
-var tapFile = TapFile.Load(stream);
+var tap = TapFile.Load(stream);
+tap.Save(filePath);
 ````
 
-This is still work in progress, although the library is already usable, but some breaking changes may still happen.
+### Reading a TZX file
