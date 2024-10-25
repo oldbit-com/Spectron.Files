@@ -1,3 +1,5 @@
+using OldBit.ZX.Files.Serialization;
+
 namespace OldBit.ZX.Files.Z80.Types;
 
 /// <summary>
@@ -7,27 +9,39 @@ namespace OldBit.ZX.Files.Z80.Types;
 ///     Bit 5  : 1=Block of data is compressed
 ///     Bit 6-7: No meaning
 /// </summary>
-public sealed class Flags1
+public class Flags1
 {
-    internal Flags1(byte value)
+    private readonly byte[] _data;
+
+    internal Flags1(byte[] data) => _data = data;
+
+    public byte Bit7R
     {
-        Bit7R = (byte)(value & 0x01);
-        BorderColor = (byte)((value >> 1) & 0x07);
-        IsSamRam = (value & 0x10) != 0;
-        IsDataCompressed = (value & 0x20) != 0;
+        get => (byte)(Value& 0x01);
+        set => Value = (byte)((Value & 0xFE) | (value & 0x01));
     }
 
-    public byte Bit7R { get; set; }
+    public byte BorderColor
+    {
+        get => (byte)(Value>> 1 & 0x07);
+        set => Value = (byte)((Value & 0x01) | ((value & 0x07) << 1));
+    }
 
-    public byte BorderColor { get; set; }
+    public bool IsSamRam
+    {
+        get => (Value & 0x10) != 0;
+        set => Value = (byte)((Value & 0xEF) | (value ? 0x10 : 0));
+    }
 
-    public bool IsSamRam { get; set; }
+    public bool IsDataCompressed
+    {
+        get => (Value & 0x20) != 0;
+        set => Value = (byte)((Value & 0xDF) | (value ? 0x20 : 0));
+    }
 
-    public bool IsDataCompressed { get; set; }
-
-    public byte ToByte() => (byte)(
-        (Bit7R & 0x01) |
-        ((BorderColor & 0x07) << 1) |
-        (IsSamRam ? 0x10 : 0) |
-        (IsDataCompressed ? 0x20 : 0));
+    private byte Value
+    {
+        get => _data[12];
+        set => _data[12] = value;
+    }
 }

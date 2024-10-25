@@ -1,5 +1,4 @@
 using OldBit.ZX.Files.IO;
-using OldBit.ZX.Files.Serialization;
 using OldBit.ZX.Files.Z80.Types;
 
 namespace OldBit.ZX.Files.Z80;
@@ -17,7 +16,6 @@ public sealed class Z80Header
     /// <summary>
     /// Gets or sets the raw header data.
     /// </summary>
-    [FileData(Order = 0)]
     internal byte[] Data
     {
         get => _data;
@@ -96,14 +94,14 @@ public sealed class Z80Header
         set
         {
             Data[11] = value;
-            Data[12] = (byte)((Data[12] & 0b1111_1110) | ((value & 0x80) >> 7));
+            Flags1.Bit7R = (byte)(value >> 7);
         }
     }
 
     /// <summary>
     /// Gets or sets miscellaneous flags 1.
     /// </summary>
-    public Flags1 Flags1 => _flags1 ??= new Flags1(Data[12]);
+    public Flags1 Flags1 => _flags1 ??= new Flags1(Data);
 
     /// <summary>
     /// Gets or sets the DE register.

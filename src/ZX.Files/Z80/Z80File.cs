@@ -51,9 +51,9 @@ public sealed class Z80File
     /// <param name="stream">The stream to save the Z80 data to.</param>
     public void Save(Stream stream)
     {
-        var writer = new DataWriter(stream);
+        var data = FileDataSerializer.Serialize(this);
 
-        throw new NotImplementedException();
+        stream.Write(Header.Data, 0, Header.Data.Length);
     }
 
     /// <summary>
