@@ -14,29 +14,43 @@ namespace OldBit.Spectron.Files.Z80.Types;
 /// </summary>
 public sealed class Flags2
 {
-    internal Flags2(byte value)
+    private readonly byte[] _data;
+
+    internal Flags2(byte[] data) => _data = data;
+
+    public byte InterruptMode
     {
-        InterruptMode = (byte)(value & 0x03);
-        Issue2Emulation = (value & 0x04) != 0;
-        DoubleInterruptFrequency = (value & 0x08) != 0;
-        VideoSynchronization = (byte)((value >> 4) & 0x03);
-        JoystickType = (JoystickType)((value >> 6) & 0x03);
+        get => (byte)(Value & 0x03);
+        set => Value = (byte)((Value & 0xFC) | (value & 0x03));
     }
 
-    public byte InterruptMode { get; set; }
+    public bool Issue2Emulation
+    {
+        get => (Value & 0x04) != 0;
+        set => Value = (byte)((Value & 0xFB) | (value ? 0x04 : 0));
+    }
 
-    public bool Issue2Emulation { get; set; }
+    public bool DoubleInterruptFrequency
+    {
+        get => (Value & 0x08) != 0;
+        set => Value = (byte)((Value & 0xF7) | (value ? 0x08 : 0));
+    }
 
-    public bool DoubleInterruptFrequency { get; set; }
+    public byte VideoSynchronization
+    {
+        get => (byte)((Value >> 4) & 0x03);
+        set => Value = (byte)((Value & 0xCF) | ((value & 0x03) << 4));
+    }
 
-    public byte VideoSynchronization { get; set; }
+    public JoystickType JoystickType
+    {
+       get => (JoystickType)((Value >> 6) & 0x03);
+       set => Value = (byte)((Value & 0x3F) | ((byte)value << 6));
+    }
 
-    public JoystickType JoystickType { get; set; }
-
-    public byte ToByte() => (byte)(
-        (InterruptMode & 0x03) |
-        (Issue2Emulation ? 0x04 : 0) |
-        (DoubleInterruptFrequency ? 0x08 : 0) |
-        ((VideoSynchronization & 0x03) << 4) |
-        ((byte)JoystickType << 6));
+    private byte Value
+    {
+        get => _data[29];
+        set => _data[29] = value;
+    }
 }

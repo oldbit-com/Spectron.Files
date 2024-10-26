@@ -1,4 +1,5 @@
 using OldBit.Spectron.Files.Z80;
+using OldBit.Spectron.Files.Z80.Types;
 
 namespace OldBit.Spectron.Files.Tests.Z80;
 
@@ -19,7 +20,11 @@ public class Z80FileSaveTests
                 SP = 0xFF48,
                 I = 0x3F,
                 R = 0x89,
-                Flags1 = { BorderColor = 7, IsDataCompressed = true },
+                Flags1 =
+                {
+                    BorderColor = 7,
+                    IsDataCompressed = true
+                },
                 DE = 0x5CB9,
                 BCPrime = 0x4566,
                 DEPrime = 0x4294,
@@ -29,7 +34,16 @@ public class Z80FileSaveTests
                 IY = 0x1110,
                 IX = 0x1312,
                 IFF1 = 1,
-                IFF2 = 0
+                IFF2 = 0,
+                Flags2 =
+                {
+                    InterruptMode = 1,
+                    Issue2Emulation = true,
+                    DoubleInterruptFrequency = true,
+                    VideoSynchronization = 2,
+                    JoystickType = JoystickType.Sinclair2
+                },
+                HardwareMode = HardwareMode.Spectrum48 | HardwareMode.Interface1,
             }
         };
 
@@ -66,6 +80,12 @@ public class Z80FileSaveTests
         data[26].Should().Be(0x13);     // IX
         data[27].Should().Be(1);        // IFF1
         data[28].Should().Be(0);        // IFF2
+        data[29].Should().Be(0xED);     // Flags2
+        data[30].Should().Be(0x36);     // Extra header length
+        data[31].Should().Be(0);        // Extra header length
+        data[32].Should().Be(0x53);     // PC
+        data[33].Should().Be(0x11);     // PC
+        data[34].Should().Be(1);        // Hardware mode
 
         data[32].Should().Be(0x53);     // PC
         data[33].Should().Be(0x11);     // PC

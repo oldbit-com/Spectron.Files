@@ -196,7 +196,7 @@ public sealed class Z80Header
     /// <summary>
     /// Gets or sets miscellaneous flags 2.
     /// </summary>
-    public Flags2 Flags2 => _flags2 ??= new Flags2(Data[29]);
+    public Flags2 Flags2 => _flags2 ??= new Flags2(Data);
 
     /// <summary>
     /// Gets the version of the Z80 header.
@@ -263,7 +263,7 @@ public sealed class Z80Header
                 return;
             }
 
-            Data[32] = (Version, value) switch
+            Data[34] = (Version, value) switch
             {
                 (_, HardwareMode.Spectrum48) => 0,
                 (_, HardwareMode.Spectrum48 | HardwareMode.Interface1) => 1,
@@ -345,6 +345,11 @@ public sealed class Z80Header
         }
 
         _data = new byte[headerSize];
+
+        if (headerSize > 30)
+        {
+            Data.SetWord(30, (Word)(headerSize - 30));
+        }
     }
 
     /// <summary>
