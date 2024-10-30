@@ -44,8 +44,17 @@ public class Z80FileSaveTests
                     JoystickType = JoystickType.Sinclair2
                 },
                 HardwareMode = HardwareMode.Spectrum48 | HardwareMode.Interface1,
+                Port7FFD = 0xA5,
+                IsInterface1RomPage = true,
+                PortFFFD = 0x23,
+                AyRegisters = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray(),
             }
         };
+        snapshot.Header.Flags3!.EmulateRegisterR = true;
+        snapshot.Header.Flags3.EmulateLdirInstruction = true;
+        snapshot.Header.Flags3.UseAySound = true;
+        snapshot.Header.Flags3.EmulateFullerAudioBox = true;
+        snapshot.Header.Flags3.ModifyHardware = true;
 
         var stream = new MemoryStream();
         snapshot.Save(stream);
@@ -86,6 +95,11 @@ public class Z80FileSaveTests
         data[32].Should().Be(0x53);     // PC
         data[33].Should().Be(0x11);     // PC
         data[34].Should().Be(1);        // Hardware mode
+        data[35].Should().Be(0xA5);     // Port 7FFD
+        data[36].Should().Be(0xFF);     // Interface 1 ROM paged
+        data[37].Should().Be(0xC7);     // Flags3
+        data[38].Should().Be(0x23);     // Port FFFD
+        data[39..55].Should().BeEquivalentTo(Enumerable.Range(1, 16)); // AY registers
 
         data[32].Should().Be(0x53);     // PC
         data[33].Should().Be(0x11);     // PC

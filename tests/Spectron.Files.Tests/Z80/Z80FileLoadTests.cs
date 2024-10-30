@@ -115,7 +115,7 @@ public class Z80FileLoadTests
 
         // Flags3
         snapshot.Header[37].Should().Be(0x04);
-        snapshot.Header.Flags3?.UseAYSound.Should().BeTrue();
+        snapshot.Header.Flags3?.UseAySound.Should().BeTrue();
 
         snapshot.Header.HighTStateCounter.Should().Be(0);
         snapshot.Header.LowTStateCounter.Should().Be(0);

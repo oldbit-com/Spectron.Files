@@ -289,6 +289,57 @@ public sealed class Z80Header
     }
 
     /// <summary>
+    /// Gets sets the last byte written to the 0x7FFD port.
+    /// </summary>
+    public byte Port7FFD
+    {
+        get => (byte)(Version > 1 ? Data[35] : 0);
+        set
+        {
+            if (Version > 1)
+            {
+                Data[35] = value;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Gets or sets the interface 1 ROM page status.
+    /// </summary>
+    public bool IsInterface1RomPage
+    {
+        get => Version > 1 && Data[36] == 0xFF;
+        set
+        {
+            if (Version > 1)
+            {
+                Data[36] = (byte)(value ? 0xFF : 0);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Gets sets the last byte written to the 0x7FFD port.
+    /// </summary>
+    public byte PortFFFD
+    {
+        get => (byte)(Version > 1 ? Data[38] : 0);
+        set
+        {
+            if (Version > 1)
+            {
+                Data[38] = value;
+            }
+        }
+    }
+
+    public byte[] AyRegisters
+    {
+        get => Version > 1 ? Data[39..55] : [];
+        set => Array.Copy(value, 0, Data, 39, 16);
+    }
+
+    /// <summary>
     /// Gets or sets miscellaneous flags 3.
     /// </summary>
     public Flags3? Flags3
@@ -300,7 +351,7 @@ public sealed class Z80Header
                 return null;
             }
 
-            return _flags3 ??= new Flags3(Data[37]);
+            return _flags3 ??= new Flags3(Data);
         }
     }
 
