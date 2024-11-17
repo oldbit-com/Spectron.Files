@@ -22,7 +22,7 @@ public class Flags1
     public byte BorderColor
     {
         get => (byte)(Value>> 1 & 0x07);
-        set => Value = (byte)((Value & 0x01) | ((value & 0x07) << 1));
+        set => Value = (byte)((Value & 0xF1) | ((value & 0x07) << 1));
     }
 
     public bool IsSamRam

@@ -27,4 +27,20 @@ public class DataCompressorTests
 
         decompressedData.Should().Equal(expectedData);
     }
+
+    [Fact]
+    public void Compress_ShouldCompressEmptyArray()
+    {
+        var compressedData = DataCompressor.Compress(new byte[1024], true);
+
+        compressedData.Should().BeEquivalentTo(
+        [
+            0xED, 0xED, 0xFF, 0x00,
+            0xED, 0xED, 0xFF, 0x00,
+            0xED, 0xED, 0xFF, 0x00,
+            0xED, 0xED, 0xFF ,0x00,
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0xED, 0xED, 0x00
+        ]);
+    }
 }

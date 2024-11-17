@@ -1,4 +1,5 @@
 using OldBit.Spectron.Files.Serialization;
+using OldBit.Spectron.Files.Z80.Types;
 
 namespace OldBit.Spectron.Files.Z80;
 
@@ -11,7 +12,7 @@ public sealed class Z80File
     /// Gets or sets the header.
     /// </summary>
     [FileData(Order = 0)]
-    public Z80Header Header { get; set; } = new();
+    public Z80Header Header { get; }
 
     /// <summary>
     /// Gets or sets the 48K RAM data.
@@ -23,7 +24,28 @@ public sealed class Z80File
     /// Gets or sets the memory blocks.
     /// </summary>
     [FileData(Order = 2)]
-    public List<MemoryBlock> MemoryBlocks { get; set; } = [];
+    public List<MemoryBlock> MemoryBlocks { get; } = [];
+
+    internal Z80File(Z80Header header)
+    {
+        Header = header;
+    }
+
+    public Z80File(Z80Header header, byte[] memory)
+    {
+        Header = header;
+        Memory = memory;
+        Header.Flags1.IsDataCompressed = true;
+        Header.HardwareMode = HardwareMode.Spectrum48;
+    }
+
+    public Z80File(Z80Header header, IEnumerable<MemoryBlock> memory)
+    {
+        Header = header;
+        MemoryBlocks.AddRange(memory);
+        Header.Flags1.IsDataCompressed = true;
+        Header.HardwareMode = HardwareMode.Spectrum128;
+    }
 
     /// <summary>
     /// Loads a Z80 file from the given stream.
@@ -51,6 +73,18 @@ public sealed class Z80File
     public void Save(Stream stream)
     {
         stream.Write(Header.Data, 0, Header.Data.Length);
+
+        if (Memory.Length > 0)
+        {
+            var data = Header.Flags1.IsDataCompressed ? DataCompressor.Compress(Memory, true).ToArray() : Memory;
+            stream.Write(data, 0, data.Length);
+        }
+
+        foreach (var block in MemoryBlocks)
+        {
+            var data = block.Serialize();
+            stream.Write(data, 0, data.Length);
+        }
     }
 
     /// <summary>

@@ -8,10 +8,7 @@ internal static class Parser
     {
         var reader = new ByteStreamReader(stream);
 
-        var snapshot = new Z80File
-        {
-            Header = new Z80Header(reader)
-        };
+        var snapshot = new Z80File(new Z80Header(reader));
 
         if (snapshot.Header.Version == 1)
         {

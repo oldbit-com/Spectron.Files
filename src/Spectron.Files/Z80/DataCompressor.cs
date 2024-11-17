@@ -20,16 +20,16 @@ internal static class DataCompressor
 
         while (position < data.Length)
         {
+            var count = 0;
             var start = position;
             var currentByte = data[position];
 
             // Count the number of repeated bytes
-            while (position < data.Length && data[position] == currentByte)
+            while (position < data.Length && data[position] == currentByte && count < 0xFF)
             {
-                position++;
+                count += 1;
+                position += 1;
             }
-
-            var count = position - start;
 
             if (currentByte == Marker)
             {
@@ -63,7 +63,7 @@ internal static class DataCompressor
         if (appendEndMarker)
         {
             // Append the end marker
-            compressed.AddRange(new byte[] { 0x00, Marker, Marker, 0x00 });
+            compressed.AddRange([0x00, Marker, Marker, 0x00]);
         }
 
         return compressed;

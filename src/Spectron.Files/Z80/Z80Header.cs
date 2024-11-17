@@ -289,7 +289,7 @@ public sealed class Z80Header
     }
 
     /// <summary>
-    /// Gets sets the last byte written to the 0x7FFD port.
+    /// Gets sets the last byte written to the 0x7FFD port (.
     /// </summary>
     public byte Port7FFD
     {
