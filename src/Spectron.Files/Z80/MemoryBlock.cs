@@ -8,12 +8,22 @@ public class MemoryBlock : IDataSerializer
     /// <summary>
     /// Gets or sets the page number.
     /// </summary>
-    public byte PageNumber { get; set; }
+    public byte PageNumber { get; private set; }
 
     /// <summary>
     /// Gets or sets the data.
     /// </summary>
-    public byte[] Data { get; set; } = [];
+    public byte[] Data { get; private set; } = [];
+
+    internal MemoryBlock()
+    {
+    }
+
+    public MemoryBlock(byte[] data, byte pageNumber)
+    {
+        Data = data;
+        PageNumber = pageNumber;
+    }
 
     internal static MemoryBlock? Load(ByteStreamReader reader)
     {
@@ -23,7 +33,7 @@ public class MemoryBlock : IDataSerializer
         }
 
         var block = new MemoryBlock();
-        var isDataCompressed = length != 0xFFFF;
+        var isDataCompressed = length != 0xffff;
 
         block.PageNumber = reader.ReadByte();
 
