@@ -388,19 +388,14 @@ public sealed class Z80Header
     /// <summary>
     /// Creates a new instance of the Z80Header header.
     /// </summary>
-    public Z80Header(int headerSize = 84)
+    public Z80Header()
     {
-        if (headerSize != 30 && headerSize != 53 && headerSize != 84 && headerSize != 85)
-        {
-            throw new ArgumentOutOfRangeException(nameof(headerSize), headerSize, "Invalid header size. Must be 30 for V1, 53 for V2, 84 or 85 for V3.");
-        }
+        const int headerSize = 84;
 
-        _data = new byte[headerSize];
+        _data = new byte[headerSize + 2];
 
-        if (headerSize > 30)
-        {
-            Data.SetWord(30, (Word)(headerSize - 30));
-        }
+        Data.SetWord(30, headerSize - 30);
+        Flags1.IsDataCompressed = true;
     }
 
     /// <summary>

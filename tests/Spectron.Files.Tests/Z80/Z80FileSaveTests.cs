@@ -28,6 +28,10 @@ public class Z80FileSaveTests
             IX = 0x1312,
             IFF1 = 1,
             IFF2 = 0,
+            Flags1 =
+            {
+                IsDataCompressed = true,
+            },
             Flags2 =
             {
                 InterruptMode = 1,
@@ -36,11 +40,12 @@ public class Z80FileSaveTests
                 VideoSynchronization = 2,
                 JoystickType = JoystickType.Sinclair2
             },
+            HardwareMode = HardwareMode.Spectrum48 | HardwareMode.Interface1,
             Port7FFD = 0xA5,
             IsInterface1RomPage = true,
             PortFFFD = 0x23,
             AyRegisters = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray(),
-        }, new byte[0x10000]);
+        }, new byte[0xC000]);
 
         snapshot.Header.Flags1.BorderColor = 7;
         snapshot.Header.Flags3!.EmulateRegisterR = true;
@@ -87,21 +92,21 @@ public class Z80FileSaveTests
         data[31].Should().Be(0); // Extra header length
         data[32].Should().Be(0x53); // PC
         data[33].Should().Be(0x11); // PC
-        data[34].Should().Be(0); // Hardware mode
+        data[34].Should().Be(0x01); // Hardware mode
         data[35].Should().Be(0xA5); // Port 7FFD
         data[36].Should().Be(0xFF); // Interface 1 ROM paged
         data[37].Should().Be(0xC7); // Flags3
         data[38].Should().Be(0x23); // Port FFFD
         data[39..55].Should().BeEquivalentTo(Enumerable.Range(1, 16)); // AY registers
 
-        data.Length.Should().Be(84 + 1033);
+        data.Length.Should().Be(86 + 789);
     }
 
     [Fact]
     public void Z80Snapshot_ShouldSaveSpectrum128Version3()
     {
-        var memory128 = Enumerable.Range(0, 8).Select(value => new MemoryBlock(
-            Enumerable.Repeat((byte)value, 0x4000).ToArray(), (byte)value)).ToList();
+        var memory128 = Enumerable.Range(0, 8).Select(value =>
+            Enumerable.Repeat((byte)value, 0x4000).ToArray());
 
         var snapshot = new Z80File(new Z80Header
         {
@@ -123,6 +128,10 @@ public class Z80FileSaveTests
             IX = 0x1312,
             IFF1 = 1,
             IFF2 = 0,
+            Flags1 =
+            {
+                IsDataCompressed = true,
+            },
             Flags2 =
             {
                 InterruptMode = 1,
@@ -131,7 +140,7 @@ public class Z80FileSaveTests
                 VideoSynchronization = 2,
                 JoystickType = JoystickType.Sinclair2
             },
-            HardwareMode = HardwareMode.Spectrum48 | HardwareMode.Interface1,
+            HardwareMode = HardwareMode.Spectrum128,
             Port7FFD = 0xA5,
             IsInterface1RomPage = true,
             PortFFFD = 0x23,
@@ -190,6 +199,6 @@ public class Z80FileSaveTests
         data[38].Should().Be(0x23); // Port FFFD
         data[39..55].Should().BeEquivalentTo(Enumerable.Range(1, 16)); // AY registers
 
-        data.Length.Should().Be(84 + 263 * 8);
+        data.Length.Should().Be(86 + 263 * 8);
     }
 }

@@ -20,43 +20,44 @@ internal static class DataCompressor
 
         while (position < data.Length)
         {
-            var count = 0;
+            var repeats = 0;
             var start = position;
-            var currentByte = data[position];
+            var current = data[position];
 
             // Count the number of repeated bytes
-            while (position < data.Length && data[position] == currentByte && count < 0xFF)
+            while (position < data.Length && data[position] == current && repeats < 255)
             {
-                count += 1;
+                repeats += 1;
                 position += 1;
             }
 
-            if (currentByte == Marker)
+            if (current == Marker)
             {
                 // If the byte is the marker, we need to handle it differently
-                if (count == 1)
+                if (repeats == 1)
                 {
-                    compressed.Add(currentByte);
-                    position++;
+                    compressed.Add(current);
+
                     if (position < data.Length)
                     {
                         compressed.Add(data[position]);
+                        position += 1;
                     }
                 }
                 else
                 {
-                    Repeat(compressed, count, Marker);
+                    AddRepeated(compressed, repeats, Marker);
                 }
             }
-            else if (count >= 5 || (count > 1 && position < data.Length && data[position] == Marker))
+            else if (repeats >= 5 || (repeats > 1 && position < data.Length && data[position] == Marker))
             {
                 // More than 5 bytes repeated or a sequence of more than 1 ED bytes
-                Repeat(compressed, count, currentByte);
+                AddRepeated(compressed, repeats, current);
             }
             else
             {
                 // If the sequence is less than 5 bytes long, just copy the bytes
-                compressed.AddRange(data[start..(count+start)]);
+                compressed.AddRange(data[start..(repeats + start)]);
             }
         }
 
@@ -105,15 +106,8 @@ internal static class DataCompressor
         return decompressed.ToArray();
     }
 
-    private static void Repeat(List<byte> compressed, int count, byte currentByte)
-    {
-        while (count > 0)
-        {
-            var repeat = Math.Min(count, 0x100);
-            compressed.AddRange(new[] { Marker, Marker, (byte)repeat, currentByte });
-            count -= repeat;
-        }
-    }
+    private static void AddRepeated(List<byte> compressed, int count, byte value) =>
+        compressed.AddRange([Marker, Marker, (byte)count, value]);
 
     private static bool IsEndOfData(IReadOnlyList<byte> data, int index)
     {

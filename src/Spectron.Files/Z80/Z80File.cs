@@ -31,20 +31,46 @@ public sealed class Z80File
         Header = header;
     }
 
-    public Z80File(Z80Header header, byte[] memory)
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Z80File"/> class with the specified header and memory.
+    /// </summary>
+    /// <param name="header">The Z80 file header.</param>
+    /// <param name="memory">The memory data. It should either be 16k or 48 long</param>
+    public Z80File(Z80Header header, byte[] memory) : this(header)
     {
-        Header = header;
-        Memory = memory;
-        Header.Flags1.IsDataCompressed = true;
-        Header.HardwareMode = HardwareMode.Spectrum48;
+        switch (memory.Length)
+        {
+            case 0x4000:
+            {
+                var empty = new byte[0x4000];
+
+                MemoryBlocks.Add(new MemoryBlock(empty, 4));
+                MemoryBlocks.Add(new MemoryBlock(memory, 5));
+                MemoryBlocks.Add(new MemoryBlock(empty, 8));
+                break;
+            }
+            case 0xC000:
+                MemoryBlocks.Add(new MemoryBlock(memory[0x4000..0x8000], 4));
+                MemoryBlocks.Add(new MemoryBlock(memory[0x0000..0x4000], 5));
+                MemoryBlocks.Add(new MemoryBlock(memory[0x8000..0xC000], 8));
+                break;
+
+            default:
+                throw new ArgumentOutOfRangeException(nameof(memory), "Memory must be 16k or 48k long");
+        }
     }
 
-    public Z80File(Z80Header header, IEnumerable<MemoryBlock> memory)
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Z80File"/> class with the specified header and memory blocks.
+    /// </summary>
+    /// <param name="header">The Z80 file header.</param>
+    /// <param name="blocks">The collection of memory blocks.</param>
+    public Z80File(Z80Header header, IEnumerable<byte[]> blocks) : this(header)
     {
-        Header = header;
-        MemoryBlocks.AddRange(memory);
-        Header.Flags1.IsDataCompressed = true;
-        Header.HardwareMode = HardwareMode.Spectrum128;
+        foreach (var block in blocks)
+        {
+            MemoryBlocks.Add(new MemoryBlock(block, (byte)(MemoryBlocks.Count + 3)));
+        }
     }
 
     /// <summary>

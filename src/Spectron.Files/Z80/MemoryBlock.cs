@@ -21,6 +21,11 @@ public class MemoryBlock : IDataSerializer
 
     public MemoryBlock(byte[] data, byte pageNumber)
     {
+        if (data.Length != 0x4000)
+        {
+            throw new ArgumentOutOfRangeException(nameof(data), "Memory data must be 16k long.");
+        }
+
         Data = data;
         PageNumber = pageNumber;
     }
@@ -47,13 +52,13 @@ public class MemoryBlock : IDataSerializer
     public byte[] Serialize()
     {
         var compressedData = DataCompressor.Compress(Data, false);
-        var dataLength = (Word)(3 + compressedData.Count) ;
 
-        var data = new List<byte>();
-        data.AddRange(FileDataSerializer.SerializePrimitiveType(dataLength));
-        data.Add(PageNumber);
-        data.AddRange(compressedData);
+        var length = FileDataSerializer.SerializePrimitiveType((Word)compressedData.Count).ToArray();
 
-        return data.ToArray();
+        compressedData.Insert(0, PageNumber);
+        compressedData.Insert(0, length[1]);
+        compressedData.Insert(0, length[0]);
+
+        return compressedData.ToArray();
     }
 }
