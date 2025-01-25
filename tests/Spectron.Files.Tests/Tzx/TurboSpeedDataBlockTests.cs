@@ -11,15 +11,15 @@ public class TurboSpeedDataBlockTests
     {
         var block = new TurboSpeedDataBlock();
 
-        block.PilotPulseLength.Should().Be(0);
-        block.FirstSyncPulseLength.Should().Be(0);
-        block.SecondSyncPulseLength.Should().Be(0);
-        block.ZeroBitPulseLength.Should().Be(0);
-        block.OneBitPulseLength.Should().Be(0);
-        block.PilotToneLength.Should().Be(0);
-        block.UsedBitsInLastByte.Should().Be(0);
-        block.PauseDuration.Should().Be(0);
-        block.Data.Count.Should().Be(0);
+        block.PilotPulseLength.ShouldBe(0);
+        block.FirstSyncPulseLength.ShouldBe(0);
+        block.SecondSyncPulseLength.ShouldBe(0);
+        block.ZeroBitPulseLength.ShouldBe(0);
+        block.OneBitPulseLength.ShouldBe(0);
+        block.PilotToneLength.ShouldBe(0);
+        block.UsedBitsInLastByte.ShouldBe(0);
+        block.PauseDuration.ShouldBe(0);
+        block.Data.Count.ShouldBe(0);
     }
 
     [Fact]
@@ -29,17 +29,17 @@ public class TurboSpeedDataBlockTests
         using var stream = new MemoryStream(bytes);
         var block = new TurboSpeedDataBlock(new ByteStreamReader(stream));
 
-        block.PilotPulseLength.Should().Be(0x0201);
-        block.FirstSyncPulseLength.Should().Be(0x0403);
-        block.SecondSyncPulseLength.Should().Be(0x0605);
-        block.ZeroBitPulseLength.Should().Be(0x0807);
-        block.OneBitPulseLength.Should().Be(0x0A09);
-        block.PilotToneLength.Should().Be(0x0C0B);
-        block.UsedBitsInLastByte.Should().Be(0x0D);
-        block.Data.Count.Should().Be(3);
-        block.Data[0].Should().Be(0xA0);
-        block.Data[1].Should().Be(0xA1);
-        block.Data[2].Should().Be(0xA2);
+        block.PilotPulseLength.ShouldBe(0x0201);
+        block.FirstSyncPulseLength.ShouldBe(0x0403);
+        block.SecondSyncPulseLength.ShouldBe(0x0605);
+        block.ZeroBitPulseLength.ShouldBe(0x0807);
+        block.OneBitPulseLength.ShouldBe(0x0A09);
+        block.PilotToneLength.ShouldBe(0x0C0B);
+        block.UsedBitsInLastByte.ShouldBe(0x0D);
+        block.Data.Count.ShouldBe(3);
+        block.Data[0].ShouldBe(0xA0);
+        block.Data[1].ShouldBe(0xA1);
+        block.Data[2].ShouldBe(0xA2);
     }
 
     [Fact]
@@ -60,7 +60,10 @@ public class TurboSpeedDataBlockTests
 
         var result = FileDataSerializer.Serialize(block);
 
-        result.Should().Equal(0x11,0xE8, 0x03, 0xD0, 0x07, 0xB8, 0x0B, 0xA0, 0x0F, 0x88,
-            0x13, 0x70, 0x17, 0x05, 0x58, 0x1B, 0x04, 0x00, 0x00, 0x01, 0x02, 0x03, 0x04);
+        result.ShouldBeEquivalentTo(new byte []
+        {
+            0x11, 0xE8, 0x03, 0xD0, 0x07, 0xB8, 0x0B, 0xA0, 0x0F, 0x88,
+            0x13, 0x70, 0x17, 0x05, 0x58, 0x1B, 0x04, 0x00, 0x00, 0x01, 0x02, 0x03, 0x04
+        });
     }
 }

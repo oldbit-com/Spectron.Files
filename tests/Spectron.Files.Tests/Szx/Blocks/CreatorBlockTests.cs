@@ -15,17 +15,17 @@ public class CreatorBlockTests
         creator.Write(writer);
 
         var data = writer.ToArray();
-        data.Length.Should().Be(8 + 37);
+        data.Length.ShouldBe(8 + 37);
 
         // Header
-        BitConverter.ToUInt32(data[..4].ToArray()).Should().Be(0x52545243);
-        BitConverter.ToUInt32(data[4..8].ToArray()).Should().Be(37);
+        BitConverter.ToUInt32(data[..4].ToArray()).ShouldBe((DWord)0x52545243);
+        BitConverter.ToUInt32(data[4..8].ToArray()).ShouldBe((DWord)37);
 
         // Data
-        Encoding.ASCII.GetString(data[8..40]).Trim('\0').Should().Be("Test creator");
-        BitConverter.ToUInt16(data[40..42].ToArray()).Should().Be(1);
-        BitConverter.ToUInt16(data[42..44].ToArray()).Should().Be(2);
-        data[44].Should().Be(0);
+        Encoding.ASCII.GetString(data[8..40]).Trim('\0').ShouldBe("Test creator");
+        BitConverter.ToUInt16(data[40..42].ToArray()).ShouldBe(1);
+        BitConverter.ToUInt16(data[42..44].ToArray()).ShouldBe(2);
+        data[44].ShouldBe(0);
     }
 
     [Fact]
@@ -37,9 +37,9 @@ public class CreatorBlockTests
 
         var creator = CreatorBlock.Read(reader, creatorData.Length);
 
-        creator.Name.Should().Be("Test creator");
-        creator.MajorVersion.Should().Be(1);
-        creator.MinorVersion.Should().Be(2);
+        creator.Name.ShouldBe("Test creator");
+        creator.MajorVersion.ShouldBe(1);
+        creator.MinorVersion.ShouldBe(2);
     }
 
     private static byte[] GetCreatorBlockData()

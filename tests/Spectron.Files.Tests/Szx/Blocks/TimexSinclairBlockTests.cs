@@ -14,15 +14,15 @@ public class TimexSinclairBlockTests
         timex.Write(writer);
 
         var data = writer.ToArray();
-        data.Length.Should().Be(8 + 2);
+        data.Length.ShouldBe(8 + 2);
 
         // Header
-        BitConverter.ToUInt32(data[..4].ToArray()).Should().Be(0x444C4353);
-        BitConverter.ToUInt32(data[4..8].ToArray()).Should().Be(2);
+        BitConverter.ToUInt32(data[..4].ToArray()).ShouldBe(0x444C4353);
+        BitConverter.ToUInt32(data[4..8].ToArray()).ShouldBe(2);
 
         // Data
-        data[8].Should().Be(0xF4);
-        data[9].Should().Be(0xFF);
+        data[8].ShouldBe(0xF4);
+        data[9].ShouldBe(0xFF);
     }
 
     [Fact]
@@ -34,8 +34,8 @@ public class TimexSinclairBlockTests
 
         var timex = TimexSinclairBlock.Read(reader, timexData.Length);
 
-        timex.PortF4.Should().Be(0xF4);
-        timex.PortFF.Should().Be(0xFF);
+        timex.PortF4.ShouldBe(0xF4);
+        timex.PortFF.ShouldBe(0xFF);
     }
 
     private static byte[] GetTimexSinclairBlockData()

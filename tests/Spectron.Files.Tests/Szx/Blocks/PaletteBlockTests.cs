@@ -14,16 +14,16 @@ public class PaletteBlockTests
         palette.Write(writer);
 
         var data = writer.ToArray();
-        data.Length.Should().Be(8 + 66);
+        data.Length.ShouldBe(8 + 66);
 
         // Header
-        BitConverter.ToUInt32(data[..4].ToArray()).Should().Be(0x54544C50);
-        BitConverter.ToUInt32(data[4..8].ToArray()).Should().Be(66);
+        BitConverter.ToUInt32(data[..4].ToArray()).ShouldBe((DWord)0x54544C50);
+        BitConverter.ToUInt32(data[4..8].ToArray()).ShouldBe((DWord)66);
 
         // Data
-        data[8].Should().Be(PaletteBlock.FlagsPaletteEnabled);
-        data[9].Should().Be(0x0F);
-        data[10..74].ToArray().Should().BeEquivalentTo(Enumerable.Range(1, 64).Select(i => (byte)i));
+        data[8].ShouldBe(PaletteBlock.FlagsPaletteEnabled);
+        data[9].ShouldBe(0x0F);
+        data[10..74].ToArray().ShouldBeEquivalentTo(Enumerable.Range(1, 64).Select(i => (byte)i).ToArray());
     }
 
     [Fact]
@@ -35,9 +35,9 @@ public class PaletteBlockTests
 
         var palette = PaletteBlock.Read(reader, paletteData.Length);
 
-        palette.Flags.Should().Be(PaletteBlock.FlagsPaletteEnabled);
-        palette.CurrentRegister.Should().Be(0x0F);
-        palette.Registers.Should().BeEquivalentTo(Enumerable.Range(1, 64).Select(i => (byte)i));
+        palette.Flags.ShouldBe(PaletteBlock.FlagsPaletteEnabled);
+        palette.CurrentRegister.ShouldBe(0x0F);
+        palette.Registers.ShouldBeEquivalentTo(Enumerable.Range(1, 64).Select(i => (byte)i).ToArray());
     }
 
     private static byte[] GetPaletteBlockData()

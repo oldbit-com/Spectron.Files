@@ -12,56 +12,56 @@ public class Z80FileLoadTests
         using var file = LoadTestFile("Test48.z80");
         var snapshot = Z80File.Load(file);
 
-        snapshot.Header.Version.Should().Be(3);
-        snapshot.Header.ExtraHeaderLength.Should().Be(55);
-        snapshot.Header.HardwareMode.Should().Be(HardwareMode.Spectrum48);
+        snapshot.Header.Version.ShouldBe(3);
+        snapshot.Header.ExtraHeaderLength.ShouldBe(55);
+        snapshot.Header.HardwareMode.ShouldBe(HardwareMode.Spectrum48);
 
-        snapshot.Header.A.Should().Be(0x01);
-        snapshot.Header.F.Should().Be(0x5C);
+        snapshot.Header.A.ShouldBe(0x01);
+        snapshot.Header.F.ShouldBe(0x5C);
 
-        snapshot.Header.APrime.Should().Be(0x02);
-        snapshot.Header.FPrime.Should().Be(0x44);
+        snapshot.Header.APrime.ShouldBe(0x02);
+        snapshot.Header.FPrime.ShouldBe(0x44);
 
-        snapshot.Header.BC.Should().Be(0x1721);
-        snapshot.Header.DE.Should().Be(0x5CB9);
-        snapshot.Header.HL.Should().Be(0x5CB6);
-        snapshot.Header.IX.Should().Be(0x03D4);
-        snapshot.Header.IY.Should().Be(0x5C3A);
+        snapshot.Header.BC.ShouldBe(0x1721);
+        snapshot.Header.DE.ShouldBe(0x5CB9);
+        snapshot.Header.HL.ShouldBe(0x5CB6);
+        snapshot.Header.IX.ShouldBe(0x03D4);
+        snapshot.Header.IY.ShouldBe(0x5C3A);
 
-        snapshot.Header.BCPrime.Should().Be(0x1720);
-        snapshot.Header.DEPrime.Should().Be(0x0097);
-        snapshot.Header.HLPrime.Should().Be(0x0017);
+        snapshot.Header.BCPrime.ShouldBe(0x1720);
+        snapshot.Header.DEPrime.ShouldBe(0x0097);
+        snapshot.Header.HLPrime.ShouldBe(0x0017);
 
-        snapshot.Header[6].Should().Be(0x00);       // Version 1 PC
-        snapshot.Header[7].Should().Be(0x00);       // Version 1 PC
-        snapshot.Header.SP.Should().Be(0xFF48);
-        snapshot.Header.I.Should().Be(0x3F);
-        snapshot.Header.R.Should().Be(0x21);
-        snapshot.Header.IFF1.Should().Be(0x00);
-        snapshot.Header.IFF2.Should().Be(0x00);
+        snapshot.Header[6].ShouldBe(0x00);       // Version 1 PC
+        snapshot.Header[7].ShouldBe(0x00);       // Version 1 PC
+        snapshot.Header.SP.ShouldBe(0xFF48);
+        snapshot.Header.I.ShouldBe(0x3F);
+        snapshot.Header.R.ShouldBe(0x21);
+        snapshot.Header.IFF1.ShouldBe(0x00);
+        snapshot.Header.IFF2.ShouldBe(0x00);
 
         // Flags1
-        snapshot.Header[12].Should().Be(0x04);
-        snapshot.Header.Flags1.Bit7R.Should().Be(0);
-        snapshot.Header.Flags1.BorderColor.Should().Be(2);
-        snapshot.Header.Flags1.IsSamRam.Should().BeFalse();
-        snapshot.Header.Flags1.IsDataCompressed.Should().BeFalse();
+        snapshot.Header[12].ShouldBe(0x04);
+        snapshot.Header.Flags1.Bit7R.ShouldBe(0);
+        snapshot.Header.Flags1.BorderColor.ShouldBe(2);
+        snapshot.Header.Flags1.IsSamRam.ShouldBeFalse();
+        snapshot.Header.Flags1.IsDataCompressed.ShouldBeFalse();
 
         // Flags2
-        snapshot.Header[29].Should().Be(0x41);
-        snapshot.Header.Flags2.InterruptMode.Should().Be(1);
-        snapshot.Header.Flags2.Issue2Emulation.Should().BeFalse();
-        snapshot.Header.Flags2.DoubleInterruptFrequency.Should().BeFalse();
-        snapshot.Header.Flags2.VideoSynchronization.Should().Be(0);
-        snapshot.Header.Flags2.JoystickType.Should().Be(JoystickType.Kempston);
+        snapshot.Header[29].ShouldBe(0x41);
+        snapshot.Header.Flags2.InterruptMode.ShouldBe(1);
+        snapshot.Header.Flags2.Issue2Emulation.ShouldBeFalse();
+        snapshot.Header.Flags2.DoubleInterruptFrequency.ShouldBeFalse();
+        snapshot.Header.Flags2.VideoSynchronization.ShouldBe(0);
+        snapshot.Header.Flags2.JoystickType.ShouldBe(JoystickType.Kempston);
 
         // Flags3
-        snapshot.Header[37].Should().Be(0);
+        snapshot.Header[37].ShouldBe(0);
 
-        snapshot.Header.HighTStateCounter.Should().Be(0);
-        snapshot.Header.LowTStateCounter.Should().Be(0);
+        snapshot.Header.HighTStateCounter.ShouldBe(0);
+        snapshot.Header.LowTStateCounter.ShouldBe(0);
 
-        snapshot.MemoryBlocks.Should().HaveCount(3);
+        snapshot.MemoryBlocks.Count.ShouldBe(3);
     }
 
     [Fact]
@@ -70,57 +70,57 @@ public class Z80FileLoadTests
         using var file = LoadTestFile("Test128.z80");
         var snapshot = Z80File.Load(file);
 
-        snapshot.Header.Version.Should().Be(3);
-        snapshot.Header.ExtraHeaderLength.Should().Be(55);
-        snapshot.Header.HardwareMode.Should().Be(HardwareMode.Spectrum128);
+        snapshot.Header.Version.ShouldBe(3);
+        snapshot.Header.ExtraHeaderLength.ShouldBe(55);
+        snapshot.Header.HardwareMode.ShouldBe(HardwareMode.Spectrum128);
 
-        snapshot.Header.A.Should().Be(0xDD);
-        snapshot.Header.F.Should().Be(0x74);
+        snapshot.Header.A.ShouldBe(0xDD);
+        snapshot.Header.F.ShouldBe(0x74);
 
-        snapshot.Header.APrime.Should().Be(0x00);
-        snapshot.Header.FPrime.Should().Be(0x44);
+        snapshot.Header.APrime.ShouldBe(0x00);
+        snapshot.Header.FPrime.ShouldBe(0x44);
 
-        snapshot.Header.BC.Should().Be(0x1300);
-        snapshot.Header.DE.Should().Be(0x1213);
-        snapshot.Header.HL.Should().Be(0x5C3B);
-        snapshot.Header.IX.Should().Be(0xFD6C);
-        snapshot.Header.IY.Should().Be(0x5C3A);
+        snapshot.Header.BC.ShouldBe(0x1300);
+        snapshot.Header.DE.ShouldBe(0x1213);
+        snapshot.Header.HL.ShouldBe(0x5C3B);
+        snapshot.Header.IX.ShouldBe(0xFD6C);
+        snapshot.Header.IY.ShouldBe(0x5C3A);
 
-        snapshot.Header.BCPrime.Should().Be(0x1801);
-        snapshot.Header.DEPrime.Should().Be(0x0068);
-        snapshot.Header.HLPrime.Should().Be(0x0038);
+        snapshot.Header.BCPrime.ShouldBe(0x1801);
+        snapshot.Header.DEPrime.ShouldBe(0x0068);
+        snapshot.Header.HLPrime.ShouldBe(0x0038);
 
-        snapshot.Header[6].Should().Be(0x00);       // Version 1 PC
-        snapshot.Header[7].Should().Be(0x00);       // Version 1 PC
-        snapshot.Header.SP.Should().Be(0x5BF9);
-        snapshot.Header.I.Should().Be(0x00);
-        snapshot.Header.R.Should().Be(0x37);
-        snapshot.Header.IFF1.Should().Be(0x00);
-        snapshot.Header.IFF2.Should().Be(0x00);
+        snapshot.Header[6].ShouldBe(0x00);       // Version 1 PC
+        snapshot.Header[7].ShouldBe(0x00);       // Version 1 PC
+        snapshot.Header.SP.ShouldBe(0x5BF9);
+        snapshot.Header.I.ShouldBe(0x00);
+        snapshot.Header.R.ShouldBe(0x37);
+        snapshot.Header.IFF1.ShouldBe(0x00);
+        snapshot.Header.IFF2.ShouldBe(0x00);
 
         // Flags1
-        snapshot.Header[12].Should().Be(0x0C);
-        snapshot.Header.Flags1.Bit7R.Should().Be(0);
-        snapshot.Header.Flags1.BorderColor.Should().Be(6);
-        snapshot.Header.Flags1.IsSamRam.Should().BeFalse();
-        snapshot.Header.Flags1.IsDataCompressed.Should().BeFalse();
+        snapshot.Header[12].ShouldBe(0x0C);
+        snapshot.Header.Flags1.Bit7R.ShouldBe(0);
+        snapshot.Header.Flags1.BorderColor.ShouldBe(6);
+        snapshot.Header.Flags1.IsSamRam.ShouldBeFalse();
+        snapshot.Header.Flags1.IsDataCompressed.ShouldBeFalse();
 
         // Flags2
-        snapshot.Header[29].Should().Be(0x01);
-        snapshot.Header.Flags2.InterruptMode.Should().Be(1);
-        snapshot.Header.Flags2.Issue2Emulation.Should().BeFalse();
-        snapshot.Header.Flags2.DoubleInterruptFrequency.Should().BeFalse();
-        snapshot.Header.Flags2.VideoSynchronization.Should().Be(0);
-        snapshot.Header.Flags2.JoystickType.Should().Be(JoystickType.Cursor);
+        snapshot.Header[29].ShouldBe(0x01);
+        snapshot.Header.Flags2.InterruptMode.ShouldBe(1);
+        snapshot.Header.Flags2.Issue2Emulation.ShouldBeFalse();
+        snapshot.Header.Flags2.DoubleInterruptFrequency.ShouldBeFalse();
+        snapshot.Header.Flags2.VideoSynchronization.ShouldBe(0);
+        snapshot.Header.Flags2.JoystickType.ShouldBe(JoystickType.Cursor);
 
         // Flags3
-        snapshot.Header[37].Should().Be(0x04);
-        snapshot.Header.Flags3?.UseAySound.Should().BeTrue();
+        snapshot.Header[37].ShouldBe(0x04);
+        snapshot.Header.Flags3?.UseAySound.ShouldBeTrue();
 
-        snapshot.Header.HighTStateCounter.Should().Be(0);
-        snapshot.Header.LowTStateCounter.Should().Be(0);
+        snapshot.Header.HighTStateCounter.ShouldBe(0);
+        snapshot.Header.LowTStateCounter.ShouldBe(0);
 
-        snapshot.MemoryBlocks.Should().HaveCount(8);
+        snapshot.MemoryBlocks.Count.ShouldBe(8);
     }
 
     private static FileStream LoadTestFile(string fileName)

@@ -11,7 +11,7 @@ public class PulseSequenceBlockTests
     {
         var block = new PulseSequenceBlock();
 
-        block.PulseLengths.Count.Should().Be(0);
+        block.PulseLengths.Count.ShouldBe(0);
     }
 
     [Fact]
@@ -20,10 +20,10 @@ public class PulseSequenceBlockTests
         using var stream = new MemoryStream([0x03, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F]);
         var block = new PulseSequenceBlock(new ByteStreamReader(stream));
 
-        block.PulseLengths.Count.Should().Be(3);
-        block.PulseLengths[0].Should().Be(0x0B0A);
-        block.PulseLengths[1].Should().Be(0x0D0C);
-        block.PulseLengths[2].Should().Be(0x0F0E);
+        block.PulseLengths.Count.ShouldBe(3);
+        block.PulseLengths[0].ShouldBe(0x0B0A);
+        block.PulseLengths[1].ShouldBe(0x0D0C);
+        block.PulseLengths[2].ShouldBe(0x0F0E);
     }
 
     [Fact]
@@ -36,6 +36,6 @@ public class PulseSequenceBlockTests
 
         var result = FileDataSerializer.Serialize(block);
 
-        result.Should().Equal(0x13, 0x03, 0x64, 0x00, 0xC8, 0x00, 0x2C, 0x01);
+        result.ShouldBeEquivalentTo(new byte[] { 0x13, 0x03, 0x64, 0x00, 0xC8, 0x00, 0x2C, 0x01 });
     }
 }

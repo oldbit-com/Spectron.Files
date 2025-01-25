@@ -11,11 +11,11 @@ public class TapDataTests
 
         var result = TapData.TryParse(validData, out TapData? tapeData);
 
-        result.Should().BeTrue();
-        tapeData.Should().NotBeNull();
-        tapeData!.Flag.Should().Be(0xFF);
-        tapeData.Data.Should().BeEquivalentTo(new byte[] { 0x01, 0x02, 0x03 });
-        tapeData.Checksum.Should().Be(0x55);
+        result.ShouldBeTrue();
+        tapeData.ShouldNotBeNull();
+        tapeData.Flag.ShouldBe(0xFF);
+        tapeData.Data.ShouldBeEquivalentTo(new List<byte> { 0x01, 0x02, 0x03 });
+        tapeData.Checksum.ShouldBe(0x55);
     }
 
     [Fact]
@@ -25,8 +25,8 @@ public class TapDataTests
 
         var result = TapData.TryParse(invalidData, out TapData? tapeData);
 
-        result.Should().BeFalse();
-        tapeData.Should().BeNull();
+        result.ShouldBeFalse();
+        tapeData.ShouldBeNull();
     }
 
     [Fact]
@@ -37,6 +37,6 @@ public class TapDataTests
 
         var checksum = tapeData!.CalculateChecksum();
 
-        checksum.Should().Be(0x55);
+        checksum.ShouldBe(0x55);
     }
 }

@@ -14,16 +14,16 @@ public class AyBlockTests
         ay.Write(writer);
 
         var data = writer.ToArray();
-        data.Length.Should().Be(8 + 18);
+        data.Length.ShouldBe(8 + 18);
 
         // Header
-        BitConverter.ToUInt32(data[..4].ToArray()).Should().Be(0x00005941);
-        BitConverter.ToUInt32(data[4..8].ToArray()).Should().Be(18);
+        BitConverter.ToUInt32(data[..4].ToArray()).ShouldBe((DWord)0x00005941);
+        BitConverter.ToUInt32(data[4..8].ToArray()).ShouldBe((DWord)18);
 
         // Data
-        data[8].Should().Be(AyBlock.Flags128Ay);
-        data[9].Should().Be(0x0F);
-        data[10..26].ToArray().Should().BeEquivalentTo(Enumerable.Range(1, 16).Select(i => (byte)i));
+        data[8].ShouldBe(AyBlock.Flags128Ay);
+        data[9].ShouldBe(0x0F);
+        data[10..26].ToArray().ShouldBeEquivalentTo(Enumerable.Range(1, 16).Select(i => (byte)i).ToArray());
     }
 
     [Fact]
@@ -35,9 +35,9 @@ public class AyBlockTests
 
         var ay = AyBlock.Read(reader, ayData.Length);
 
-        ay.Flags.Should().Be(AyBlock.Flags128Ay);
-        ay.CurrentRegister.Should().Be(0x0F);
-        ay.Registers.Should().BeEquivalentTo(Enumerable.Range(1, 16).Select(i => (byte)i));
+        ay.Flags.ShouldBe(AyBlock.Flags128Ay);
+        ay.CurrentRegister.ShouldBe(0x0F);
+        ay.Registers.ShouldBeEquivalentTo(Enumerable.Range(1, 16).Select(i => (byte)i).ToArray());
     }
 
     private static byte[] GetAyBlockData()

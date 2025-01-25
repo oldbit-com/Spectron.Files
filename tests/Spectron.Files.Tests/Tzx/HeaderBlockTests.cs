@@ -11,10 +11,10 @@ public class HeaderBlockTests
     {
         var block = new HeaderBlock();
 
-        block.Signature.Should().Be(HeaderBlock.TzxSignature);
-        block.EotMarker.Should().Be(HeaderBlock.TzxEotMarker);
-        block.VerMajor.Should().Be(HeaderBlock.TzxVerMajor);
-        block.VerMinor.Should().Be(HeaderBlock.TzxVerMinor);
+        block.Signature.ShouldBe(HeaderBlock.TzxSignature);
+        block.EotMarker.ShouldBe(HeaderBlock.TzxEotMarker);
+        block.VerMajor.ShouldBe(HeaderBlock.TzxVerMajor);
+        block.VerMinor.ShouldBe(HeaderBlock.TzxVerMinor);
     }
 
     [Fact]
@@ -25,10 +25,10 @@ public class HeaderBlockTests
         ]);
         var block = new HeaderBlock(new ByteStreamReader(stream));
 
-        block.Signature.Should().Be(HeaderBlock.TzxSignature);
-        block.EotMarker.Should().Be(HeaderBlock.TzxEotMarker);
-        block.VerMajor.Should().Be(HeaderBlock.TzxVerMajor);
-        block.VerMinor.Should().Be(0x0A);
+        block.Signature.ShouldBe(HeaderBlock.TzxSignature);
+        block.EotMarker.ShouldBe(HeaderBlock.TzxEotMarker);
+        block.VerMajor.ShouldBe(HeaderBlock.TzxVerMajor);
+        block.VerMinor.ShouldBe(0x0A);
     }
 
     [Fact]
@@ -38,6 +38,6 @@ public class HeaderBlockTests
 
         var result = FileDataSerializer.Serialize(block);
 
-        result.Should().Equal(0x5A, 0x58, 0x54, 0x61, 0x70, 0x65, 0x21, 0x1A, 0x01, 0x14);
+        result.ShouldBeEquivalentTo(new byte[] { 0x5A, 0x58, 0x54, 0x61, 0x70, 0x65, 0x21, 0x1A, 0x01, 0x14 });
     }
 }

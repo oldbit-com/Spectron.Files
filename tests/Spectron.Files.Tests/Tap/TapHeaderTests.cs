@@ -15,13 +15,13 @@ public class TapHeaderTests
 
         var result = TapHeader.TryParse(validData, out var tapeHeader);
 
-        result.Should().BeTrue();
-        tapeHeader.Should().NotBeNull();
-        tapeHeader!.DataType.Should().Be(HeaderDataType.Code);
-        tapeHeader!.FileName.Should().Be("testfile  ");
-        tapeHeader!.DataLength.Should().Be(616);
-        tapeHeader!.Parameter1.Should().Be(0);
-        tapeHeader!.Parameter2.Should().Be(32940);
+        result.ShouldBeTrue();
+        tapeHeader.ShouldNotBeNull();
+        tapeHeader!.DataType.ShouldBe(HeaderDataType.Code);
+        tapeHeader!.FileName.ShouldBe("testfile  ");
+        tapeHeader!.DataLength.ShouldBe(616);
+        tapeHeader!.Parameter1.ShouldBe(0);
+        tapeHeader!.Parameter2.ShouldBe(32940);
     }
 
     [Fact]
@@ -31,7 +31,7 @@ public class TapHeaderTests
 
         var result = TapHeader.TryParse(invalidData, out var tapeHeader);
 
-        result.Should().BeFalse();
-        tapeHeader.Should().BeNull();
+        result.ShouldBeFalse();
+        tapeHeader.ShouldBeNull();
     }
 }

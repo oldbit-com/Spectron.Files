@@ -12,6 +12,6 @@ public class ReturnFromSequenceBlockTests
 
         var result = FileDataSerializer.Serialize(block);
 
-        result.Should().Equal(0x27);
+        result.ShouldBeEquivalentTo(new byte[] { 0x27 });
     }
 }

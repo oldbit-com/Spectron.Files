@@ -11,8 +11,8 @@ public class StandardSpeedDataBlockTests
     {
         var block = new StandardSpeedDataBlock();
 
-        block.PauseDuration.Should().Be(0);
-        block.Data.Count().Should().Be(0);
+        block.PauseDuration.ShouldBe(0);
+        block.Data.Count().ShouldBe(0);
     }
 
     [Fact]
@@ -27,8 +27,8 @@ public class StandardSpeedDataBlockTests
         using var stream = new MemoryStream(data);
         var block = new StandardSpeedDataBlock(new ByteStreamReader(stream));
 
-        block.PauseDuration.Should().Be(0x0201);
-        block.Data.Should().Equal(data[4..]);
+        block.PauseDuration.ShouldBe(0x0201);
+        block.Data.ShouldBeEquivalentTo(data[4..].ToList());
     }
 
     [Fact]
@@ -42,6 +42,6 @@ public class StandardSpeedDataBlockTests
 
         var result = FileDataSerializer.Serialize(block);
 
-        result.Should().Equal(0x10, 0xE8, 0x03, 0x04, 0x00, 0x01, 0x02, 0x03, 0x04);
+        result.ShouldBeEquivalentTo(new byte[] { 0x10, 0xE8, 0x03, 0x04, 0x00, 0x01, 0x02, 0x03, 0x04 });
     }
 }

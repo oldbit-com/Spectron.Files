@@ -11,7 +11,7 @@ public class SetSignalLevelBlockTests
     {
         var block = new SetSignalLevelBlock();
 
-        block.Level.Should().Be(SignalLevel.Low);
+        block.Level.ShouldBe(SignalLevel.Low);
     }
 
     [Fact]
@@ -20,7 +20,7 @@ public class SetSignalLevelBlockTests
         using var stream = new MemoryStream([0x01, 0x00, 0x00, 0x00, 0x01]);
         var block = new SetSignalLevelBlock(new ByteStreamReader(stream));
 
-        block.Level.Should().Be(SignalLevel.High);
+        block.Level.ShouldBe(SignalLevel.High);
     }
 
     [Fact]
@@ -30,6 +30,6 @@ public class SetSignalLevelBlockTests
 
         var result = FileDataSerializer.Serialize(block);
 
-        result.Should().Equal(0x2B, 0x01, 0x00, 0x00, 0x00, 0x01);
+        result.ShouldBeEquivalentTo(new byte[] { 0x2B, 0x01, 0x00, 0x00, 0x00, 0x01 });
     }
 }

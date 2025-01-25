@@ -12,6 +12,6 @@ public class GroupEndBlockTests
 
         var result = FileDataSerializer.Serialize(block);
 
-        result.Should().Equal(0x22);
+        result.ShouldBeEquivalentTo(new byte[] { 0x22 });
     }
 }

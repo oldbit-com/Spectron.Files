@@ -26,23 +26,23 @@ public class RamPageBlockTests
         ramPage.Write(writer);
 
         var data = writer.ToArray();
-        data.Length.Should().Be((int)(8 + expectedSize));
+        data.Length.ShouldBe((int)(8 + expectedSize));
 
         // Header
-        BitConverter.ToUInt32(data[..4].ToArray()).Should().Be(0x504D4152);
-        BitConverter.ToUInt32(data[4..8].ToArray()).Should().Be(expectedSize);
+        BitConverter.ToUInt32(data[..4].ToArray()).ShouldBe(0x504D4152);
+        BitConverter.ToUInt32(data[4..8].ToArray()).ShouldBe(expectedSize);
 
         // Data
-        BitConverter.ToUInt16(data[8..10].ToArray()).Should().Be((Word)(isCompressed ? RamPageBlock.FlagsCompressed : 0));
-        data[10].Should().Be(5);
+        BitConverter.ToUInt16(data[8..10].ToArray()).ShouldBe((Word)(isCompressed ? RamPageBlock.FlagsCompressed : 0));
+        data[10].ShouldBe(5);
         if (!isCompressed)
         {
-            data[11..].ToArray().Should().BeEquivalentTo(_ramData);
+            data[11..].ToArray().ShouldBeEquivalentTo(_ramData);
         }
         else
         {
             var compressedData = ZLibHelper.Compress(_ramData, CompressionLevel.SmallestSize);
-            data[11..].ToArray().Should().BeEquivalentTo(compressedData);
+            data[11..].ToArray().ShouldBeEquivalentTo(compressedData);
         }
     }
 
@@ -57,9 +57,9 @@ public class RamPageBlockTests
 
         var ramPage = RamPageBlock.Read(reader, ramPageData.Length);
 
-        ramPage.Flags.Should().Be((Word)(compress ? RamPageBlock.FlagsCompressed : 0));
-        ramPage.PageNumber.Should().Be(5);
-        ramPage.Data.Should().BeEquivalentTo(_ramData);
+        ramPage.Flags.ShouldBe((Word)(compress ? RamPageBlock.FlagsCompressed : 0));
+        ramPage.PageNumber.ShouldBe(5);
+        ramPage.Data.ShouldBeEquivalentTo(_ramData);
     }
 
     private byte[] GetRamPageBlockData(bool compress)

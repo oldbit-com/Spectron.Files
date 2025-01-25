@@ -14,16 +14,16 @@ public class JoystickBlockTests
         joysstick.Write(writer);
 
         var data = writer.ToArray();
-        data.Length.Should().Be(8 + 6);
+        data.Length.ShouldBe(8 + 6);
 
         // Header
-        BitConverter.ToUInt32(data[..4].ToArray()).Should().Be(0x00594F4A);
-        BitConverter.ToUInt32(data[4..8].ToArray()).Should().Be(6);
+        BitConverter.ToUInt32(data[..4].ToArray()).ShouldBe((DWord)0x00594F4A);
+        BitConverter.ToUInt32(data[4..8].ToArray()).ShouldBe((DWord)6);
 
         // Data
-        BitConverter.ToUInt32(data[8..12].ToArray()).Should().Be(0);
-        data[12].Should().Be(JoystickBlock.JoystickSinclair1);
-        data[13].Should().Be(JoystickBlock.JoystickSinclair2);
+        BitConverter.ToUInt32(data[8..12].ToArray()).ShouldBe((DWord)0);
+        data[12].ShouldBe(JoystickBlock.JoystickSinclair1);
+        data[13].ShouldBe(JoystickBlock.JoystickSinclair2);
     }
 
     [Fact]
@@ -35,9 +35,9 @@ public class JoystickBlockTests
 
         var joystick = JoystickBlock.Read(reader, joystickData.Length);
 
-        joystick.Flags.Should().Be(0);
-        joystick.JoystickTypePlayer1.Should().Be(JoystickBlock.JoystickSinclair1);
-        joystick.JoystickTypePlayer2.Should().Be(JoystickBlock.JoystickSinclair2);
+        joystick.Flags.ShouldBe((DWord)0);
+        joystick.JoystickTypePlayer1.ShouldBe(JoystickBlock.JoystickSinclair1);
+        joystick.JoystickTypePlayer2.ShouldBe(JoystickBlock.JoystickSinclair2);
     }
 
     private static byte[] GetJoystickBlockData()

@@ -11,11 +11,11 @@ public class PureDataBlockTests
     {
         var block = new PureDataBlock();
 
-        block.ZeroBitPulseLength.Should().Be(0);
-        block.OneBitPulseLength.Should().Be(0);
-        block.UsedBitsInLastByte.Should().Be(0);
-        block.PauseDuration.Should().Be(0);
-        block.Data.Count.Should().Be(0);
+        block.ZeroBitPulseLength.ShouldBe(0);
+        block.OneBitPulseLength.ShouldBe(0);
+        block.UsedBitsInLastByte.ShouldBe(0);
+        block.PauseDuration.ShouldBe(0);
+        block.Data.Count.ShouldBe(0);
     }
 
     [Fact]
@@ -26,13 +26,13 @@ public class PureDataBlockTests
         ]);
         var block = new PureDataBlock(new ByteStreamReader(stream));
 
-        block.ZeroBitPulseLength.Should().Be(0x0807);
-        block.OneBitPulseLength.Should().Be(0x0A09);
-        block.UsedBitsInLastByte.Should().Be(0x0D);
-        block.Data.Count.Should().Be(3);
-        block.Data[0].Should().Be(0xA0);
-        block.Data[1].Should().Be(0xA1);
-        block.Data[2].Should().Be(0xA2);
+        block.ZeroBitPulseLength.ShouldBe(0x0807);
+        block.OneBitPulseLength.ShouldBe(0x0A09);
+        block.UsedBitsInLastByte.ShouldBe(0x0D);
+        block.Data.Count.ShouldBe(3);
+        block.Data[0].ShouldBe(0xA0);
+        block.Data[1].ShouldBe(0xA1);
+        block.Data[2].ShouldBe(0xA2);
     }
 
     [Fact]
@@ -49,7 +49,10 @@ public class PureDataBlockTests
 
         var result = FileDataSerializer.Serialize(block);
 
-        result.Should().Equal(0x14, 0xE8, 0x03, 0xD0, 0x07, 0x01, 0xB8, 0x0B,
-            0x04, 0x00, 0x00, 0x01, 0x02, 0x03, 0x04);
+        result.ShouldBeEquivalentTo(new byte[]
+        {
+            0x14, 0xE8, 0x03, 0xD0, 0x07, 0x01, 0xB8, 0x0B,
+            0x04, 0x00, 0x00, 0x01, 0x02, 0x03, 0x04
+        });
     }
 }

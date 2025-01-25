@@ -11,7 +11,7 @@ public class GroupStartBlockTests
     {
         var block = new GroupStartBlock();
 
-        block.Name.Should().BeEmpty();
+        block.Name.ShouldBeEmpty();
     }
 
     [Fact]
@@ -22,7 +22,7 @@ public class GroupStartBlockTests
         ]);
         var block = new GroupStartBlock(new ByteStreamReader(stream));
 
-        block.Name.Should().Be("Spectrum");
+        block.Name.ShouldBe("Spectrum");
     }
 
     [Fact]
@@ -35,7 +35,10 @@ public class GroupStartBlockTests
 
         var result = FileDataSerializer.Serialize(block);
 
-        result.Should().Equal(0x21, 0x11, 0x42, 0x6c, 0x6f, 0x63, 0x6b, 0x20, 0x64, 0x65,
-            0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e);
+        result.ShouldBeEquivalentTo(new byte[]
+        {
+            0x21, 0x11, 0x42, 0x6c, 0x6f, 0x63, 0x6b, 0x20, 0x64, 0x65,
+            0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e
+        });
     }
 }

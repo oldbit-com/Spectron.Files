@@ -11,7 +11,7 @@ public class CallSequenceBlockTests
     {
         var block = new CallSequenceBlock();
 
-        block.Offsets.Count.Should().Be(0);
+        block.Offsets.Count.ShouldBe(0);
     }
 
     [Fact]
@@ -22,8 +22,8 @@ public class CallSequenceBlockTests
         ]);
         var block = new CallSequenceBlock(new ByteStreamReader(stream));
 
-        block.Offsets[0].Should().Be(-252);
-        block.Offsets[1].Should().Be(8);
+        block.Offsets[0].ShouldBe(-252);
+        block.Offsets[1].ShouldBe(8);
     }
 
     [Fact]
@@ -35,6 +35,6 @@ public class CallSequenceBlockTests
 
         var result = FileDataSerializer.Serialize(block);
 
-        result.Should().Equal(0x26, 0x02, 0x00, 0xF6, 0xFF, 0x0A, 0x00);
+        result.ShouldBeEquivalentTo(new byte[] { 0x26, 0x02, 0x00, 0xF6, 0xFF, 0x0A, 0x00 });
     }
 }

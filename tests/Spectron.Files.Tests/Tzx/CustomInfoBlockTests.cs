@@ -11,8 +11,8 @@ public class CustomInfoBlockTests
     {
         var block = new CustomInfoBlock();
 
-        block.Identification.Should().BeEmpty();
-        block.Info.Count.Should().Be(0);
+        block.Identification.ShouldBeEmpty();
+        block.Info.Count.ShouldBe(0);
     }
 
     [Fact]
@@ -25,10 +25,10 @@ public class CustomInfoBlockTests
         ]);
         var block = new CustomInfoBlock(new ByteStreamReader(stream));
 
-        block.Identification.Should().Be("ZXSpectrum");
-        block.Info.Count.Should().Be(2);
-        block.Info[0].Should().Be(0x04);
-        block.Info[1].Should().Be(0x05);
+        block.Identification.ShouldBe("ZXSpectrum");
+        block.Info.Count.ShouldBe(2);
+        block.Info[0].ShouldBe(0x04);
+        block.Info[1].ShouldBe(0x05);
     }
 
     [Fact]
@@ -42,8 +42,11 @@ public class CustomInfoBlockTests
 
         var result = FileDataSerializer.Serialize(block);
 
-        result.Should().Equal(0x35, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x49,
+        result.ShouldBeEquivalentTo(new byte[]
+        {
+            0x35, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x49,
             0x6e, 0x66, 0x6f, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x04, 0x00,
-            0x00, 0x00, 0x01, 0x02, 0x03, 0x04);
+            0x00, 0x00, 0x01, 0x02, 0x03, 0x04
+        });
     }
 }

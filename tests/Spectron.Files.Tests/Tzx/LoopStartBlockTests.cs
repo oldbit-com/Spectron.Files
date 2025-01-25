@@ -11,7 +11,7 @@ public class LoopStartBlockTests
     {
         var block = new LoopStartBlock();
 
-        block.Count.Should().Be(0);
+        block.Count.ShouldBe(0);
     }
 
     [Fact]
@@ -21,7 +21,7 @@ public class LoopStartBlockTests
         using var stream = new MemoryStream(bytes);
         var block = new LoopStartBlock(new ByteStreamReader(stream));
 
-        block.Count.Should().Be(5);
+        block.Count.ShouldBe(5);
     }
 
     [Fact]
@@ -31,6 +31,6 @@ public class LoopStartBlockTests
 
         var result = FileDataSerializer.Serialize(block);
 
-        result.Should().Equal(0x24, 0x02, 0x00);
+        result.ShouldBeEquivalentTo(new byte[] { 0x24, 0x02, 0x00 });
     }
 }

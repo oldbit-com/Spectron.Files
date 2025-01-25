@@ -12,6 +12,6 @@ public class LoopEndBlockTests
 
         var result = FileDataSerializer.Serialize(block);
 
-        result.Should().Equal(0x25);
+        result.ShouldBeEquivalentTo(new byte[] { 0x25 });
     }
 }

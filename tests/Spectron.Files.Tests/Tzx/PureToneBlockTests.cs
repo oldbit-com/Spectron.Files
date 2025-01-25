@@ -12,8 +12,8 @@ public class PureToneBlockTests
     {
         var block = new PureToneBlock();
 
-        block.PulseLength.Should().Be(0);
-        block.PulseCount.Should().Be(0);
+        block.PulseLength.ShouldBe(0);
+        block.PulseCount.ShouldBe(0);
     }
 
     [Fact]
@@ -22,8 +22,8 @@ public class PureToneBlockTests
         using var stream = new MemoryStream([0x01, 0x02, 0x02, 0x04]);
         var block = new PureToneBlock(new ByteStreamReader(stream));
 
-        block.PulseLength.Should().Be(0x0201);
-        block.PulseCount.Should().Be(0x0402);
+        block.PulseLength.ShouldBe(0x0201);
+        block.PulseCount.ShouldBe(0x0402);
     }
 
     [Fact]
@@ -33,6 +33,6 @@ public class PureToneBlockTests
 
         var result = FileDataSerializer.Serialize(block);
 
-        result.Should().Equal(0x12, 0x83, 0x07, 0x0A, 0x00);
+        result.ShouldBeEquivalentTo(new byte[] { 0x12, 0x83, 0x07, 0x0A, 0x00 });
     }
 }

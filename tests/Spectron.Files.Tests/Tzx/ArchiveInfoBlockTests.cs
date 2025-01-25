@@ -12,7 +12,7 @@ public class ArchiveInfoBlockTests
     {
         var block = new ArchiveInfoBlock();
 
-        block.Infos.Count.Should().Be(0);
+        block.Infos.Count.ShouldBe(0);
     }
 
     [Fact]
@@ -26,16 +26,16 @@ public class ArchiveInfoBlockTests
         ]);
         var block = new ArchiveInfoBlock(new ByteStreamReader(stream));
 
-        block.Infos.Count.Should().Be(3);
-        block.Infos[0].Id.Should().Be(ArchiveInfo.Title);
-        block.Infos[0].Length.Should().Be(5);
-        block.Infos[0].Text.Should().Be("Title");
-        block.Infos[1].Id.Should().Be(ArchiveInfo.Year);
-        block.Infos[1].Length.Should().Be(4);
-        block.Infos[1].Text.Should().Be("1984");
-        block.Infos[2].Id.Should().Be(ArchiveInfo.Price);
-        block.Infos[2].Length.Should().Be(5);
-        block.Infos[2].Text.Should().Be("£7.95");
+        block.Infos.Count.ShouldBe(3);
+        block.Infos[0].Id.ShouldBe(ArchiveInfo.Title);
+        block.Infos[0].Length.ShouldBe(5);
+        block.Infos[0].Text.ShouldBe("Title");
+        block.Infos[1].Id.ShouldBe(ArchiveInfo.Year);
+        block.Infos[1].Length.ShouldBe(4);
+        block.Infos[1].Text.ShouldBe("1984");
+        block.Infos[2].Id.ShouldBe(ArchiveInfo.Price);
+        block.Infos[2].Length.ShouldBe(5);
+        block.Infos[2].Text.ShouldBe("£7.95");
     }
 
     [Fact]
@@ -48,9 +48,12 @@ public class ArchiveInfoBlockTests
 
         var result = FileDataSerializer.Serialize(block);
 
-        result.Should().Equal(0x32, 0x15, 0x00, 0x03,
+        result.ShouldBeEquivalentTo(new byte[]
+        {
+            0x32, 0x15, 0x00, 0x03,
             0x00, 0x05, 0x54, 0x69, 0x74, 0x6c, 0x65,
             0x03, 0x04, 0x31, 0x39, 0x38, 0x34,
-            0x06, 0x05, 0xA3, 0x37, 0x2E, 0x39, 0x35);
+            0x06, 0x05, 0xA3, 0x37, 0x2E, 0x39, 0x35
+        });
     }
 }

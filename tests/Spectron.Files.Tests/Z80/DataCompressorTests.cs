@@ -17,7 +17,7 @@ public class DataCompressorTests
     {
         var compressedData = DataCompressor.Compress(inputData, appendEndMarker);
 
-        compressedData.Should().Equal(expectedData);
+        compressedData.ShouldBeEquivalentTo(new List<byte>(expectedData));
     }
 
     [Theory]
@@ -33,7 +33,7 @@ public class DataCompressorTests
     {
         var decompressedData = DataCompressor.Decompress(compressedData, hasEndMarker);
 
-        decompressedData.Should().Equal(expectedData);
+        decompressedData.ShouldBeEquivalentTo(expectedData);
     }
 
     [Fact]
@@ -41,14 +41,14 @@ public class DataCompressorTests
     {
         var compressedData = DataCompressor.Compress(new byte[1024], true);
 
-        compressedData.Should().BeEquivalentTo(
-        [
+        compressedData.ShouldBeEquivalentTo(new List<byte>
+        {
             0xED, 0xED, 0xFF, 0x00,
             0xED, 0xED, 0xFF, 0x00,
             0xED, 0xED, 0xFF, 0x00,
-            0xED, 0xED, 0xFF ,0x00,
+            0xED, 0xED, 0xFF, 0x00,
             0x00, 0x00, 0x00, 0x00,
             0x00, 0xED, 0xED, 0x00
-        ]);
+        });
     }
 }

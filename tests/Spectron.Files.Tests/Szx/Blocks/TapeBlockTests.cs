@@ -27,26 +27,26 @@ private readonly byte[] _tapeData;
         tape.Write(writer);
 
         var data = writer.ToArray();
-        data.Length.Should().Be((int)(8 + expectedSize));
+        data.Length.ShouldBe((int)(8 + expectedSize));
 
         // Header
-        BitConverter.ToUInt32(data[..4].ToArray()).Should().Be(0x45504154);
-        BitConverter.ToUInt32(data[4..8].ToArray()).Should().Be(expectedSize);
+        BitConverter.ToUInt32(data[..4].ToArray()).ShouldBe(0x45504154);
+        BitConverter.ToUInt32(data[4..8].ToArray()).ShouldBe(expectedSize);
 
         // Data
-        BitConverter.ToUInt16(data[8..10].ToArray()).Should().Be(2);
-        BitConverter.ToUInt16(data[10..12].ToArray()).Should().Be((Word)(isCompressed ? TapeBlock.FlagsCompressed + TapeBlock.FlagsEmbedded : TapeBlock.FlagsEmbedded));
-        BitConverter.ToUInt32(data[12..16].ToArray()).Should().Be(4560);
-        BitConverter.ToUInt32(data[16..20].ToArray()).Should().Be((DWord)(isCompressed ? 2613 : 4560));
-        Encoding.ASCII.GetString(data[20..36]).Trim('\0').Should().Be(".tap");
+        BitConverter.ToUInt16(data[8..10].ToArray()).ShouldBe(2);
+        BitConverter.ToUInt16(data[10..12].ToArray()).ShouldBe((Word)(isCompressed ? TapeBlock.FlagsCompressed + TapeBlock.FlagsEmbedded : TapeBlock.FlagsEmbedded));
+        BitConverter.ToUInt32(data[12..16].ToArray()).ShouldBe(4560);
+        BitConverter.ToUInt32(data[16..20].ToArray()).ShouldBe((DWord)(isCompressed ? 2613 : 4560));
+        Encoding.ASCII.GetString(data[20..36]).Trim('\0').ShouldBe(".tap");
         if (!isCompressed)
         {
-            data[36..].ToArray().Should().BeEquivalentTo(_tapeData);
+            data[36..].ToArray().ShouldBeEquivalentTo(_tapeData);
         }
         else
         {
             var compressedData = ZLibHelper.Compress(_tapeData, CompressionLevel.SmallestSize);
-            data[36..].ToArray().Should().BeEquivalentTo(compressedData);
+            data[36..].ToArray().ShouldBeEquivalentTo(compressedData);
         }
     }
 
@@ -61,12 +61,12 @@ private readonly byte[] _tapeData;
 
         var tape = TapeBlock.Read(reader, tapeData.Length);
 
-        tape.CurrentBlockNo.Should().Be(2);
-        tape.Flags.Should().Be((Word)(compress ? TapeBlock.FlagsCompressed + TapeBlock.FlagsEmbedded : TapeBlock.FlagsEmbedded));
-        tape.UncompressedSize.Should().Be(4560);
-        tape.CompressedSize.Should().Be((Word)(compress ? 2613 : tape.Data.Length));
-        tape.FileExtension.Should().Be(".tap");
-        tape.Data.Should().BeEquivalentTo(_tapeData);
+        tape.CurrentBlockNo.ShouldBe(2);
+        tape.Flags.ShouldBe((Word)(compress ? TapeBlock.FlagsCompressed + TapeBlock.FlagsEmbedded : TapeBlock.FlagsEmbedded));
+        tape.UncompressedSize.ShouldBe(4560);
+        tape.CompressedSize.ShouldBe((Word)(compress ? 2613 : tape.Data.Length));
+        tape.FileExtension.ShouldBe(".tap");
+        tape.Data.ShouldBeEquivalentTo(_tapeData);
     }
 
     private byte[] GetTapeBlockData(bool compress)

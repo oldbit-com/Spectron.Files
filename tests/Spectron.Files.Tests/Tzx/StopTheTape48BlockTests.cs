@@ -23,6 +23,6 @@ public class StopTheTape48BlockTests
 
         var result = FileDataSerializer.Serialize(block);
 
-        result.Should().Equal(0x2A, 0x00, 0x00, 0x00, 0x00);
+        result.ShouldBeEquivalentTo(new byte[] { 0x2A, 0x00, 0x00, 0x00, 0x00 });
     }
 }

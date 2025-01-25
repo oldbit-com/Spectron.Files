@@ -11,8 +11,8 @@ public class MessageBlockTests
     {
         var block = new MessageBlock();
 
-        block.Time.Should().Be(0);
-        block.Message.Should().BeEmpty();
+        block.Time.ShouldBe(0);
+        block.Message.ShouldBeEmpty();
     }
 
     [Fact]
@@ -23,8 +23,8 @@ public class MessageBlockTests
         ]);
         var block = new MessageBlock(new ByteStreamReader(stream));
 
-        block.Time.Should().Be(10);
-        block.Message.Should().Be("Sinclair");
+        block.Time.ShouldBe(10);
+        block.Message.ShouldBe("Sinclair");
     }
 
     [Fact]
@@ -38,6 +38,6 @@ public class MessageBlockTests
 
         var result = FileDataSerializer.Serialize(block);
 
-        result.Should().Equal(0x31, 0x14, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65);
+        result.ShouldBeEquivalentTo(new byte[] { 0x31, 0x14, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65 });
     }
 }

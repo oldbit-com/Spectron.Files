@@ -14,18 +14,18 @@ public class SpecRegsBlockTests
         regs.Write(writer);
 
         var data = writer.ToArray();
-        data.Length.Should().Be(8 + 8);
+        data.Length.ShouldBe(8 + 8);
 
         // Header
-        BitConverter.ToUInt32(data[..4].ToArray()).Should().Be(0x52435053);
-        BitConverter.ToUInt32(data[4..8].ToArray()).Should().Be(8);
+        BitConverter.ToUInt32(data[..4].ToArray()).ShouldBe(0x52435053);
+        BitConverter.ToUInt32(data[4..8].ToArray()).ShouldBe(8);
 
         // Data
-        data[8].Should().Be(1);
-        data[9].Should().Be(2);
-        data[10].Should().Be(3);
-        data[11].Should().Be(4);
-        data[12..16].ToArray().Should().BeEquivalentTo(new byte[] { 0, 0, 0, 0 });
+        data[8].ShouldBe(1);
+        data[9].ShouldBe(2);
+        data[10].ShouldBe(3);
+        data[11].ShouldBe(4);
+        data[12..16].ToArray().ShouldBeEquivalentTo(new byte[] { 0, 0, 0, 0 });
     }
 
     [Fact]
@@ -37,11 +37,11 @@ public class SpecRegsBlockTests
 
         var regs = SpecRegsBlock.Read(reader, regsData.Length);
 
-        regs.Border.Should().Be(1);
-        regs.Port7FFD.Should().Be(2);
-        regs.Port1FFD.Should().Be(3);
-        regs.PortFE.Should().Be(4);
-        regs.Reserved.Should().BeEquivalentTo(new byte[] { 0, 0, 0, 0 });
+        regs.Border.ShouldBe(1);
+        regs.Port7FFD.ShouldBe(2);
+        regs.Port1FFD.ShouldBe(3);
+        regs.PortFE.ShouldBe(4);
+        regs.Reserved.ShouldBeEquivalentTo(new byte[] { 0, 0, 0, 0 });
     }
 
     private static byte[] GetSpecRegsBlockData()

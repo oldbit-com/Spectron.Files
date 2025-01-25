@@ -11,7 +11,7 @@ public class PauseBlockTests
     {
         var block = new PauseBlock();
 
-        block.Duration.Should().Be(0);
+        block.Duration.ShouldBe(0);
     }
 
     [Fact]
@@ -21,7 +21,7 @@ public class PauseBlockTests
         using var stream = new MemoryStream(bytes);
         var block = new PauseBlock(new ByteStreamReader(stream));
 
-        block.Duration.Should().Be(0x0201);
+        block.Duration.ShouldBe(0x0201);
     }
 
     [Fact]
@@ -31,6 +31,6 @@ public class PauseBlockTests
 
         var result = FileDataSerializer.Serialize(block);
 
-        result.Should().Equal(0x20, 0xD2, 0x04);
+        result.ShouldBeEquivalentTo(new byte[] { 0x20, 0xD2, 0x04 });
     }
 }

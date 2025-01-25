@@ -26,23 +26,23 @@ public class CustomRomBlockTests
         customRom.Write(writer);
 
         var data = writer.ToArray();
-        data.Length.Should().Be((int)(8 + expectedSize));
+        data.Length.ShouldBe((int)(8 + expectedSize));
 
         // Header
-        BitConverter.ToUInt32(data[..4].ToArray()).Should().Be(0x004D4F52);
-        BitConverter.ToUInt32(data[4..8].ToArray()).Should().Be(expectedSize);
+        BitConverter.ToUInt32(data[..4].ToArray()).ShouldBe((DWord)0x004D4F52);
+        BitConverter.ToUInt32(data[4..8].ToArray()).ShouldBe(expectedSize);
 
         // Data
-        BitConverter.ToUInt16(data[8..10].ToArray()).Should().Be((Word)(isCompressed ? CustomRomBlock.FlagsCompressed : 0));
-        BitConverter.ToUInt32(data[10..14].ToArray()).Should().Be(16384);
+        BitConverter.ToUInt16(data[8..10].ToArray()).ShouldBe((Word)(isCompressed ? CustomRomBlock.FlagsCompressed : 0));
+        BitConverter.ToUInt32(data[10..14].ToArray()).ShouldBe((DWord)16384);
         if (!isCompressed)
         {
-            data[14..].ToArray().Should().BeEquivalentTo(_romData);
+            data[14..].ToArray().ShouldBeEquivalentTo(_romData);
         }
         else
         {
             var compressedData = ZLibHelper.Compress(_romData, CompressionLevel.SmallestSize);
-            data[14..].ToArray().Should().BeEquivalentTo(compressedData);
+            data[14..].ToArray().ShouldBeEquivalentTo(compressedData);
         }
     }
 
@@ -57,9 +57,9 @@ public class CustomRomBlockTests
 
         var customRom = CustomRomBlock.Read(reader, customRomData.Length);
 
-        customRom.Flags.Should().Be((Word)(compress ? CustomRomBlock.FlagsCompressed : 0));
-        customRom.UncompressedSize.Should().Be(16384);
-        customRom.Data.Should().BeEquivalentTo(_romData);
+        customRom.Flags.ShouldBe((Word)(compress ? CustomRomBlock.FlagsCompressed : 0));
+        customRom.UncompressedSize.ShouldBe(16384);
+        customRom.Data.ShouldBeEquivalentTo(_romData);
     }
 
     private byte[] GetCustomRomBlockData(bool compress)

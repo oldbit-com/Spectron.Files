@@ -11,7 +11,7 @@ public class SelectBlockTests
     {
         var block = new SelectBlock();
 
-        block.Selections.Count().Should().Be(0);
+        block.Selections.Count().ShouldBe(0);
     }
 
     [Fact]
@@ -22,13 +22,13 @@ public class SelectBlockTests
         ]);
         var block = new SelectBlock(new ByteStreamReader(stream));
 
-        block.Selections.Count().Should().Be(2);
-        block.Selections[0].Offset.Should().Be(-2);
-        block.Selections[0].Length.Should().Be(2);
-        block.Selections[0].Description.Should().Be("ZX");
-        block.Selections[1].Offset.Should().Be(1);
-        block.Selections[1].Length.Should().Be(2);
-        block.Selections[1].Description.Should().Be("81");
+        block.Selections.Count().ShouldBe(2);
+        block.Selections[0].Offset.ShouldBe(-2);
+        block.Selections[0].Length.ShouldBe(2);
+        block.Selections[0].Description.ShouldBe("ZX");
+        block.Selections[1].Offset.ShouldBe(1);
+        block.Selections[1].Length.ShouldBe(2);
+        block.Selections[1].Description.ShouldBe("81");
     }
 
     [Fact]
@@ -45,8 +45,11 @@ public class SelectBlockTests
 
         var result = FileDataSerializer.Serialize(block);
 
-        result.Should().Equal(0x28, 0x1D, 0x00, 0x02, 0x0A, 0x00, 0x0B, 0x53, 0x65, 0x6c,
+        result.ShouldBeEquivalentTo(new byte[]
+        {
+            0x28, 0x1D, 0x00, 0x02, 0x0A, 0x00, 0x0B, 0x53, 0x65, 0x6c,
             0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x20, 0x31, 0x14, 0x00, 0x0B, 0x53, 0x65,
-            0x6c, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x20, 0x32);
+            0x6c, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x20, 0x32
+        });
     }
 }

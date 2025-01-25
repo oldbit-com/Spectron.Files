@@ -14,34 +14,34 @@ public class Z80RegsBlockTests
         regs.Write(writer);
 
         var data = writer.ToArray();
-        data.Length.Should().Be(8 + 37);
+        data.Length.ShouldBe(8 + 37);
 
         // Header
-        BitConverter.ToUInt32(data[..4].ToArray()).Should().Be(0x5230385A);
-        BitConverter.ToUInt32(data[4..8].ToArray()).Should().Be(37);
+        BitConverter.ToUInt32(data[..4].ToArray()).ShouldBe(0x5230385A);
+        BitConverter.ToUInt32(data[4..8].ToArray()).ShouldBe(37);
 
         // Data
-        BitConverter.ToUInt16(data[8..10].ToArray()).Should().Be(0x1234);
-        BitConverter.ToUInt16(data[10..12].ToArray()).Should().Be(0x5678);
-        BitConverter.ToUInt16(data[12..14].ToArray()).Should().Be(0x9ABC);
-        BitConverter.ToUInt16(data[14..16].ToArray()).Should().Be(0xDEF0);
-        BitConverter.ToUInt16(data[16..18].ToArray()).Should().Be(0x1234);
-        BitConverter.ToUInt16(data[18..20].ToArray()).Should().Be(0x5678);
-        BitConverter.ToUInt16(data[20..22].ToArray()).Should().Be(0x9ABC);
-        BitConverter.ToUInt16(data[22..24].ToArray()).Should().Be(0xDEF0);
-        BitConverter.ToUInt16(data[24..26].ToArray()).Should().Be(0x1234);
-        BitConverter.ToUInt16(data[26..28].ToArray()).Should().Be(0x5678);
-        BitConverter.ToUInt16(data[28..30].ToArray()).Should().Be(0xDEF0);
-        BitConverter.ToUInt16(data[30..32].ToArray()).Should().Be(0x9ABC);
-        data[32].Should().Be(0x12);
-        data[33].Should().Be(0x34);
-        data[34].Should().Be(0x01);
-        data[35].Should().Be(0x01);
-        data[36].Should().Be(0x02);
-        BitConverter.ToUInt32(data[37..41].ToArray()).Should().Be(1985);
-        data[41].Should().Be(0x01);
-        data[42].Should().Be(0x02);
-        BitConverter.ToUInt16(data[43..45].ToArray()).Should().Be(0x1234);
+        BitConverter.ToUInt16(data[8..10].ToArray()).ShouldBe(0x1234);
+        BitConverter.ToUInt16(data[10..12].ToArray()).ShouldBe(0x5678);
+        BitConverter.ToUInt16(data[12..14].ToArray()).ShouldBe(0x9ABC);
+        BitConverter.ToUInt16(data[14..16].ToArray()).ShouldBe(0xDEF0);
+        BitConverter.ToUInt16(data[16..18].ToArray()).ShouldBe(0x1234);
+        BitConverter.ToUInt16(data[18..20].ToArray()).ShouldBe(0x5678);
+        BitConverter.ToUInt16(data[20..22].ToArray()).ShouldBe(0x9ABC);
+        BitConverter.ToUInt16(data[22..24].ToArray()).ShouldBe(0xDEF0);
+        BitConverter.ToUInt16(data[24..26].ToArray()).ShouldBe(0x1234);
+        BitConverter.ToUInt16(data[26..28].ToArray()).ShouldBe(0x5678);
+        BitConverter.ToUInt16(data[28..30].ToArray()).ShouldBe(0xDEF0);
+        BitConverter.ToUInt16(data[30..32].ToArray()).ShouldBe(0x9ABC);
+        data[32].ShouldBe(0x12);
+        data[33].ShouldBe(0x34);
+        data[34].ShouldBe(0x01);
+        data[35].ShouldBe(0x01);
+        data[36].ShouldBe(0x02);
+        BitConverter.ToUInt32(data[37..41].ToArray()).ShouldBe(1985);
+        data[41].ShouldBe(0x01);
+        data[42].ShouldBe(0x02);
+        BitConverter.ToUInt16(data[43..45].ToArray()).ShouldBe(0x1234);
     }
 
     [Fact]
@@ -53,27 +53,27 @@ public class Z80RegsBlockTests
 
         var regs = Z80RegsBlock.Read(reader, regsData.Length);
 
-        regs.AF.Should().Be(0x1234);
-        regs.BC.Should().Be(0x5678);
-        regs.DE.Should().Be(0x9ABC);
-        regs.HL.Should().Be(0xDEF0);
-        regs.AF1.Should().Be(0x1234);
-        regs.BC1.Should().Be(0x5678);
-        regs.DE1.Should().Be(0x9ABC);
-        regs.HL1.Should().Be(0xDEF0);
-        regs.IX.Should().Be(0x1234);
-        regs.IY.Should().Be(0x5678);
-        regs.SP.Should().Be(0xDEF0);
-        regs.PC.Should().Be(0x9ABC);
-        regs.I.Should().Be(0x12);
-        regs.R.Should().Be(0x34);
-        regs.IFF1.Should().Be(0x01);
-        regs.IFF2.Should().Be(0x01);
-        regs.IM.Should().Be(0x02);
-        regs.CyclesStart.Should().Be(1985);
-        regs.HoldIntReqCycles.Should().Be(0x01);
-        regs.Flags.Should().Be(Z80RegsBlock.FlagsHalted);
-        regs.MemPtr.Should().Be(0x1234);
+        regs.AF.ShouldBe(0x1234);
+        regs.BC.ShouldBe(0x5678);
+        regs.DE.ShouldBe(0x9ABC);
+        regs.HL.ShouldBe(0xDEF0);
+        regs.AF1.ShouldBe(0x1234);
+        regs.BC1.ShouldBe(0x5678);
+        regs.DE1.ShouldBe(0x9ABC);
+        regs.HL1.ShouldBe(0xDEF0);
+        regs.IX.ShouldBe(0x1234);
+        regs.IY.ShouldBe(0x5678);
+        regs.SP.ShouldBe(0xDEF0);
+        regs.PC.ShouldBe(0x9ABC);
+        regs.I.ShouldBe(0x12);
+        regs.R.ShouldBe(0x34);
+        regs.IFF1.ShouldBe(0x01);
+        regs.IFF2.ShouldBe(0x01);
+        regs.IM.ShouldBe(0x02);
+        regs.CyclesStart.ShouldBe(1985);
+        regs.HoldIntReqCycles.ShouldBe(0x01);
+        regs.Flags.ShouldBe(Z80RegsBlock.FlagsHalted);
+        regs.MemPtr.ShouldBe(0x1234);
     }
 
     private static byte[] GetZ80RegsBlockData()

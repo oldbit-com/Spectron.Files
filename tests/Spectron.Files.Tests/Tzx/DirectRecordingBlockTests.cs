@@ -11,9 +11,9 @@ public class DirectRecordingBlockTests
     {
         var block = new DirectRecordingBlock();
 
-        block.UsedBitsInLastByte.Should().Be(0);
-        block.PauseDuration.Should().Be(0);
-        block.Data.Count.Should().Be(0);
+        block.UsedBitsInLastByte.ShouldBe(0);
+        block.PauseDuration.ShouldBe(0);
+        block.Data.Count.ShouldBe(0);
     }
 
     [Fact]
@@ -24,13 +24,13 @@ public class DirectRecordingBlockTests
         ]);
         var block = new DirectRecordingBlock(new ByteStreamReader(stream));
 
-        block.StatesPerSample.Should().Be(0x0201);
-        block.PauseDuration.Should().Be(0x0403);
-        block.UsedBitsInLastByte.Should().Be(0x05);
-        block.Data.Count.Should().Be(3);
-        block.Data[0].Should().Be(0xA0);
-        block.Data[1].Should().Be(0xA1);
-        block.Data[2].Should().Be(0xA2);
+        block.StatesPerSample.ShouldBe(0x0201);
+        block.PauseDuration.ShouldBe(0x0403);
+        block.UsedBitsInLastByte.ShouldBe(0x05);
+        block.Data.Count.ShouldBe(3);
+        block.Data[0].ShouldBe(0xA0);
+        block.Data[1].ShouldBe(0xA1);
+        block.Data[2].ShouldBe(0xA2);
     }
 
     [Fact]
@@ -46,7 +46,10 @@ public class DirectRecordingBlockTests
 
         var result = FileDataSerializer.Serialize(block);
 
-        result.Should().Equal(0x15, 0x98, 0x05, 0xE8, 0x03, 0x06, 0x04,
-            0x00, 0x00, 0x01, 0x02, 0x03, 0x04);
+        result.ShouldBeEquivalentTo(new byte[]
+        {
+            0x15, 0x98, 0x05, 0xE8, 0x03, 0x06, 0x04,
+            0x00, 0x00, 0x01, 0x02, 0x03, 0x04
+        });
     }
 }

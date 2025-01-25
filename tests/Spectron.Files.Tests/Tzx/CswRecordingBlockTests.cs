@@ -11,9 +11,9 @@ public class CswRecordingBlockTests
     {
         var block = new CswRecordingBlock();
 
-        block.PauseDuration.Should().Be(0);
-        block.CompressionType.Should().Be(CompressionType.Rle);
-        block.Data.Count.Should().Be(0);
+        block.PauseDuration.ShouldBe(0);
+        block.CompressionType.ShouldBe(CompressionType.Rle);
+        block.Data.Count.ShouldBe(0);
     }
 
     [Fact]
@@ -26,15 +26,15 @@ public class CswRecordingBlockTests
         ]);
         var block = new CswRecordingBlock(new ByteStreamReader(stream));
 
-        block.PauseDuration.Should().Be(0x0201);
-        block.SamplingRate.Should().Be(0xCCBBAA);
-        block.CompressionType.Should().Be(CompressionType.ZRle);
-        block.StoredPulsesCount.Should().Be(0xC4C3C2C1);
-        block.Data.Count.Should().Be(4);
-        block.Data[0].Should().Be(0x11);
-        block.Data[1].Should().Be(0x12);
-        block.Data[2].Should().Be(0x13);
-        block.Data[3].Should().Be(0x14);
+        block.PauseDuration.ShouldBe(0x0201);
+        block.SamplingRate.ShouldBe(0xCCBBAA);
+        block.CompressionType.ShouldBe(CompressionType.ZRle);
+        block.StoredPulsesCount.ShouldBe(0xC4C3C2C1);
+        block.Data.Count.ShouldBe(4);
+        block.Data[0].ShouldBe(0x11);
+        block.Data[1].ShouldBe(0x12);
+        block.Data[2].ShouldBe(0x13);
+        block.Data[3].ShouldBe(0x14);
     }
 
     [Fact]
@@ -51,7 +51,10 @@ public class CswRecordingBlockTests
 
         var result = FileDataSerializer.Serialize(block);
 
-        result.Should().Equal(0x18, 0x0E, 0x00, 0x00, 0x00, 0xE8, 0x03,
-            0xD0, 0x07, 0x00, 0x01, 0xB8, 0x0B, 0x00, 0x00, 0x01, 0x02, 0x03, 0x04);
+        result.ShouldBeEquivalentTo(new byte[]
+        {
+            0x18, 0x0E, 0x00, 0x00, 0x00, 0xE8, 0x03,
+            0xD0, 0x07, 0x00, 0x01, 0xB8, 0x0B, 0x00, 0x00, 0x01, 0x02, 0x03, 0x04
+        });
     }
 }

@@ -14,14 +14,14 @@ public class ZxPrinterBlockTests
         printer.Write(writer);
 
         var data = writer.ToArray();
-        data.Length.Should().Be(8 + 2);
+        data.Length.ShouldBe(8 + 2);
 
         // Header
-        BitConverter.ToUInt32(data[..4].ToArray()).Should().Be(0x5250585A);
-        BitConverter.ToUInt32(data[4..8].ToArray()).Should().Be(2);
+        BitConverter.ToUInt32(data[..4].ToArray()).ShouldBe((DWord)0x5250585A);
+        BitConverter.ToUInt32(data[4..8].ToArray()).ShouldBe((DWord)2);
 
         // Data
-        BitConverter.ToUInt16(data[8..10].ToArray()).Should().Be(1);
+        BitConverter.ToUInt16(data[8..10].ToArray()).ShouldBe(1);
     }
 
     [Fact]
@@ -33,7 +33,7 @@ public class ZxPrinterBlockTests
 
         var printer = ZxPrinterBlock.Read(reader, printerData.Length);
 
-        printer.Flags.Should().Be(ZxPrinterBlock.FlagsEnabled);
+        printer.Flags.ShouldBe(ZxPrinterBlock.FlagsEnabled);
     }
 
     private static byte[] GetZxPrinterBlockData()

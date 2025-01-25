@@ -11,7 +11,7 @@ public class JumpToBlockTests
     {
         var block = new JumpToBlock();
 
-        block.Jump.Should().Be(0);
+        block.Jump.ShouldBe(0);
     }
 
     [Fact]
@@ -20,7 +20,7 @@ public class JumpToBlockTests
         using var stream = new MemoryStream([0xE7, 0xFF]);
         var block = new JumpToBlock(new ByteStreamReader(stream));
 
-        block.Jump.Should().Be(-25);
+        block.Jump.ShouldBe(-25);
     }
 
     [Fact]
@@ -30,6 +30,6 @@ public class JumpToBlockTests
 
         var result = FileDataSerializer.Serialize(block);
 
-        result.Should().Equal(0x23, 0xFF, 0xFF);
+        result.ShouldBeEquivalentTo(new byte[] { 0x23, 0xFF, 0xFF });
     }
 }

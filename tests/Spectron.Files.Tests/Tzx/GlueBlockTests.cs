@@ -11,7 +11,7 @@ public class GlueBlockTests
     {
         var block = new GlueBlock();
 
-        block.Data.Count.Should().Be(9);
+        block.Data.Count.ShouldBe(9);
     }
 
     [Fact]
@@ -22,7 +22,7 @@ public class GlueBlockTests
         ]);
         var block = new GlueBlock(new ByteStreamReader(stream));
 
-        block.Data.Count.Should().Be(9);
+        block.Data.Count.ShouldBe(9);
     }
 
     [Fact]
@@ -32,6 +32,6 @@ public class GlueBlockTests
 
         var result = FileDataSerializer.Serialize(block);
 
-        result.Should().Equal(0x5A, 0x58, 0x54, 0x61, 0x70, 0x65, 0x21, 0x1A, 0x01, 0x14);
+        result.ShouldBeEquivalentTo(new byte[] { 0x5A, 0x58, 0x54, 0x61, 0x70, 0x65, 0x21, 0x1A, 0x01, 0x14 });
     }
 }

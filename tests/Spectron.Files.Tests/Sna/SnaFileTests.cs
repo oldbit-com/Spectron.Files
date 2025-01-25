@@ -13,25 +13,25 @@ public class SnaFileTests
         using var stream = new MemoryStream(data);
         var snaFile = SnaFile.Load(stream);
 
-        snaFile.Header.I.Should().Be(0x01);
-        snaFile.Header.HLPrime.Should().Be(0x0302);
-        snaFile.Header.DEPrime.Should().Be(0x0504);
-        snaFile.Header.BCPrime.Should().Be(0x0706);
-        snaFile.Header.AFPrime.Should().Be(0x0908);
-        snaFile.Header.HL.Should().Be(0x0B0A);
-        snaFile.Header.DE.Should().Be(0x0D0C);
-        snaFile.Header.BC.Should().Be(0x0F0E);
-        snaFile.Header.IY.Should().Be(0x1110);
-        snaFile.Header.IX.Should().Be(0x1312);
-        snaFile.Header.Interrupt.Should().Be(0x14);
-        snaFile.Header.R.Should().Be(0x15);
-        snaFile.Header.AF.Should().Be(0x1716);
-        snaFile.Header.SP.Should().Be(0x1918);
-        snaFile.Header.InterruptMode.Should().Be(0x1A);
-        snaFile.Header.BorderColor.Should().Be(0x1B);
-        snaFile.Ram48.Should().Equal(data[27..]);
-        snaFile.Header128.Should().BeNull();
-        snaFile.RamBanks.Should().BeNull();
+        snaFile.Header.I.ShouldBe(0x01);
+        snaFile.Header.HLPrime.ShouldBe(0x0302);
+        snaFile.Header.DEPrime.ShouldBe(0x0504);
+        snaFile.Header.BCPrime.ShouldBe(0x0706);
+        snaFile.Header.AFPrime.ShouldBe(0x0908);
+        snaFile.Header.HL.ShouldBe(0x0B0A);
+        snaFile.Header.DE.ShouldBe(0x0D0C);
+        snaFile.Header.BC.ShouldBe(0x0F0E);
+        snaFile.Header.IY.ShouldBe(0x1110);
+        snaFile.Header.IX.ShouldBe(0x1312);
+        snaFile.Header.Interrupt.ShouldBe(0x14);
+        snaFile.Header.R.ShouldBe(0x15);
+        snaFile.Header.AF.ShouldBe(0x1716);
+        snaFile.Header.SP.ShouldBe(0x1918);
+        snaFile.Header.InterruptMode.ShouldBe(0x1A);
+        snaFile.Header.BorderColor.ShouldBe(0x1B);
+        snaFile.Ram48.ShouldBeEquivalentTo(data[27..]);
+        snaFile.Header128.ShouldBeNull();
+        snaFile.RamBanks.ShouldBeNull();
     }
 
     [Fact]
@@ -41,33 +41,33 @@ public class SnaFileTests
         using var stream = new MemoryStream(data);
         var snaFile = SnaFile.Load(stream);
 
-        snaFile.Header.I.Should().Be(0x01);
-        snaFile.Header.HLPrime.Should().Be(0x0302);
-        snaFile.Header.DEPrime.Should().Be(0x0504);
-        snaFile.Header.BCPrime.Should().Be(0x0706);
-        snaFile.Header.AFPrime.Should().Be(0x0908);
-        snaFile.Header.HL.Should().Be(0x0B0A);
-        snaFile.Header.DE.Should().Be(0x0D0C);
-        snaFile.Header.BC.Should().Be(0x0F0E);
-        snaFile.Header.IY.Should().Be(0x1110);
-        snaFile.Header.IX.Should().Be(0x1312);
-        snaFile.Header.Interrupt.Should().Be(0x14);
-        snaFile.Header.R.Should().Be(0x15);
-        snaFile.Header.AF.Should().Be(0x1716);
-        snaFile.Header.SP.Should().Be(0x1918);
-        snaFile.Header.InterruptMode.Should().Be(0x1A);
-        snaFile.Header.BorderColor.Should().Be(0x1B);
-        snaFile.Ram48.Should().Equal(data[27..49179]);
-        snaFile.Header128!.PC.Should().Be(0x1D1C);
-        snaFile.Header128!.PageMode.Should().Be(0x05);
-        snaFile.Header128!.TrDosRom.Should().Be(0x00);
-        snaFile.RamBanks.Should().HaveCount(6);
-        snaFile.RamBanks![0].Should().Equal(data.Skip(49183).Take(16384));
-        snaFile.RamBanks![1].Should().Equal(data.Skip(65567).Take(16384));
-        snaFile.RamBanks![2].Should().Equal(data.Skip(81951).Take(16384));
-        snaFile.RamBanks![3].Should().Equal(data.Skip(98335).Take(16384));
-        snaFile.RamBanks![4].Should().Equal(data.Skip(114719).Take(16384));
-        snaFile.RamBanks![5].Should().Equal(data.Skip(131103).Take(16384));
+        snaFile.Header.I.ShouldBe(0x01);
+        snaFile.Header.HLPrime.ShouldBe(0x0302);
+        snaFile.Header.DEPrime.ShouldBe(0x0504);
+        snaFile.Header.BCPrime.ShouldBe(0x0706);
+        snaFile.Header.AFPrime.ShouldBe(0x0908);
+        snaFile.Header.HL.ShouldBe(0x0B0A);
+        snaFile.Header.DE.ShouldBe(0x0D0C);
+        snaFile.Header.BC.ShouldBe(0x0F0E);
+        snaFile.Header.IY.ShouldBe(0x1110);
+        snaFile.Header.IX.ShouldBe(0x1312);
+        snaFile.Header.Interrupt.ShouldBe(0x14);
+        snaFile.Header.R.ShouldBe(0x15);
+        snaFile.Header.AF.ShouldBe(0x1716);
+        snaFile.Header.SP.ShouldBe(0x1918);
+        snaFile.Header.InterruptMode.ShouldBe(0x1A);
+        snaFile.Header.BorderColor.ShouldBe(0x1B);
+        snaFile.Ram48.ShouldBeEquivalentTo(data[27..49179]);
+        snaFile.Header128!.PC.ShouldBe(0x1D1C);
+        snaFile.Header128!.PageMode.ShouldBe(0x05);
+        snaFile.Header128!.TrDosRom.ShouldBe(0x00);
+        snaFile.RamBanks!.Count.ShouldBe(6);
+        snaFile.RamBanks![0].ShouldBeEquivalentTo(data.Skip(49183).Take(16384).ToArray());
+        snaFile.RamBanks![1].ShouldBeEquivalentTo(data.Skip(65567).Take(16384).ToArray());
+        snaFile.RamBanks![2].ShouldBeEquivalentTo(data.Skip(81951).Take(16384).ToArray());
+        snaFile.RamBanks![3].ShouldBeEquivalentTo(data.Skip(98335).Take(16384).ToArray());
+        snaFile.RamBanks![4].ShouldBeEquivalentTo(data.Skip(114719).Take(16384).ToArray());
+        snaFile.RamBanks![5].ShouldBeEquivalentTo(data.Skip(131103).Take(16384).ToArray());
     }
 
     [Fact]
@@ -99,7 +99,7 @@ public class SnaFileTests
 
         var result = FileDataSerializer.Serialize(snaFile);
 
-        result.Should().Equal(GetSna48Data());
+        result.ShouldBeEquivalentTo(GetSna48Data());
     }
 
     [Fact]
@@ -146,7 +146,7 @@ public class SnaFileTests
 
         var result = FileDataSerializer.Serialize(snaFile);
 
-        result.Should().Equal(GetSna128());
+        result.ShouldBeEquivalentTo(GetSna128());
     }
 
     private static byte[] GetSna48Data()
