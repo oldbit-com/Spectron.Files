@@ -28,4 +28,25 @@ public static class TapFileExtensions
 
         return tzx;
     }
+
+    /// <summary>
+    /// Converts a TzxFile to a TapFile, only including standard speed data blocks.
+    /// Any other block types will be ignored since they cannot be represented in a TapFile.
+    /// </summary>
+    /// <param name="tzxFile">The TzxFile to convert.</param>
+    /// <returns>A TapFile containing the standard speed data blocks.</returns>
+    public static TapFile ToTap(this TzxFile tzxFile)
+    {
+        var tap = new TapFile();
+
+        foreach (var block in tzxFile.Blocks.Where(b => b is StandardSpeedDataBlock).Cast<StandardSpeedDataBlock>())
+        {
+            if (TapData.TryParse(block.Data, out var tapData))
+            {
+                tap.Blocks.Add(tapData);
+            }
+        }
+
+        return tap;
+    }
 }

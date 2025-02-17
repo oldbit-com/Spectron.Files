@@ -35,4 +35,10 @@ public class JumpToBlock : IBlock
     {
         Jump = (short)reader.ReadWord();
     }
+
+    /// <summary>
+    /// Converts the 'Jump To' block to its equivalent string representation.
+    /// </summary>
+    /// <returns>A string representation of the 'Jump To' object which corresponds to Name value.</returns>
+    public override string ToString() => $"Jump to {Jump}";
 }

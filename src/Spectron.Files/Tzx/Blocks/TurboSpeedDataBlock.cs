@@ -104,6 +104,6 @@ public class TurboSpeedDataBlock : IBlock
     /// <summary>
     /// Converts the 'Turbo Speed Data' block to its equivalent string representation.
     /// </summary>
-    /// <returns>The string representation of this object which corresponds to Length value.</returns>
+    /// <returns>A string representation of the 'Turbo Speed Data' object which corresponds to Length value.</returns>
     public override string ToString() => Length == 1 ? "1 byte" : $"{Length} bytes";
 }

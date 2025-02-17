@@ -39,6 +39,6 @@ public class PauseBlock : IBlock
     /// <summary>
     /// Converts the 'Pause' block to its equivalent string representation.
     /// </summary>
-    /// <returns>The string representation of this object which corresponds to Duration value.</returns>
+    /// <returns>A string representation of the 'Pause' object which corresponds to Duration value.</returns>
     public override string ToString() => $"Pause for {Duration} ms";
 }

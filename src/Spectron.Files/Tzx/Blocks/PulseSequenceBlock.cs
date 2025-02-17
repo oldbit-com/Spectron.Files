@@ -47,7 +47,7 @@ public class PulseSequenceBlock : IBlock
     /// <summary>
     /// Converts the 'Pulse Sequence' block to its equivalent string representation.
     /// </summary>
-    /// <returns>The string representation of this object which corresponds to PulseCount value.</returns>
+    /// <returns>A string representation of the 'Pulse Sequence' object which corresponds to PulseCount value.</returns>
     public override string ToString() =>
         PulseLengths.Count == 1 ? "1 pulse" : $"{PulseLengths.Count} pulses";
 }

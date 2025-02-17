@@ -57,6 +57,12 @@ public class SelectBlock : IBlock
     }
 
     /// <summary>
+    /// Converts the 'Select' block to its equivalent string representation.
+    /// </summary>
+    /// <returns>A string representation of the 'Select' object.</returns>
+    public override string ToString() => $"{Selections.Count} selection(s)";
+
+    /// <summary>
     /// Represents the SELECT structure.
     /// </summary>
     public class Selection

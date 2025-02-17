@@ -45,4 +45,10 @@ public class CallSequenceBlock : IBlock
             .ReadWords(length)
             .Select(offset => (short)offset).ToList();
     }
+
+    /// <summary>
+    /// Converts the 'Call Sequence' block class to its equivalent string representation.
+    /// </summary>
+    /// <returns>A string representation of 'Call Sequence' object.</returns>
+    public override string ToString() => $"{Offsets.Count} call(s)";
 }

@@ -42,4 +42,10 @@ public class SetSignalLevelBlock : IBlock
     {
         Level = (SignalLevel)reader.ReadByte();
     }
+
+    /// <summary>
+    /// Converts the 'Set Signal Level' block to its equivalent string representation.
+    /// </summary>
+    /// <returns>A string representation of the 'Set Signal Level' object.</returns>
+    public override string ToString() => $"Signal Level: {Level}";
 }

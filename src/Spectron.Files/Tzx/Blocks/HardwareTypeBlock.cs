@@ -97,7 +97,7 @@ public class HardwareTypeBlock : IBlock
         /// <summary>
         /// Converts the 'Hardware Info' to its equivalent string representation.
         /// </summary>
-        /// <returns>The string representation of this object.</returns>
+        /// <returns>A string representation of the 'Hardware Info' object.</returns>
         public override string ToString() => HardwareNames.GetName(HardwareTypeId, HardwareId);
     }
 }

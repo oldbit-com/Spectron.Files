@@ -35,4 +35,10 @@ public class LoopStartBlock : IBlock
     {
         Count = reader.ReadWord();
     }
+
+    /// <summary>
+    /// Converts the 'Loop Start' block to its equivalent string representation.
+    /// </summary>
+    /// <returns>A string representation of the 'Loop Start' object which corresponds to Name value.</returns>
+    public override string ToString() => $"Loop for {Count} time(s)";
 }

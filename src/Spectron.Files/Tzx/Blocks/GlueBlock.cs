@@ -36,4 +36,10 @@ public class GlueBlock : IBlock
     {
         Data = new List<byte>(reader.ReadBytes(9));
     }
+
+    /// <summary>
+    /// Converts the 'Glue' block to its equivalent string representation.
+    /// </summary>
+    /// <returns>A string representation of the 'Glue' object.</returns>
+    public override string ToString() => "Glue";
 }

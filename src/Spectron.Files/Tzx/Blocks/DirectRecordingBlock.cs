@@ -1,5 +1,6 @@
 ﻿using OldBit.Spectron.Files.IO;
 using OldBit.Spectron.Files.Serialization;
+using OldBit.Spectron.Files.Tap;
 
 namespace OldBit.Spectron.Files.Tzx.Blocks;
 
@@ -64,5 +65,20 @@ public class DirectRecordingBlock : IBlock
         UsedBitsInLastByte = reader.ReadByte();
         var length = reader.ReadByte() | reader.ReadByte() << 8 | reader.ReadByte() << 16;
         Data.AddRange(reader.ReadBytes(length));
+    }
+
+    /// <summary>
+    /// Converts the 'Direct Recording' block to its equivalent string representation.
+    /// </summary>
+    /// <returns>A string representation of the 'Direct Recording' object which corresponds to
+    /// Program name or Length value.</returns>
+    public override string ToString()
+    {
+        if (TapData.TryParse(Data, out var tap))
+        {
+            return tap.ToString();
+        }
+
+        return Length == 1 ? "1 byte" : $"{Length} bytes";
     }
 }

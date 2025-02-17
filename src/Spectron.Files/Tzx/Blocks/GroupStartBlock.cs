@@ -48,6 +48,6 @@ public class GroupStartBlock : IBlock
     /// <summary>
     /// Converts the 'Group Start' block to its equivalent string representation.
     /// </summary>
-    /// <returns>The string representation of this object which corresponds to Name value.</returns>
+    /// <returns>A string representation of the 'Group Start' object which corresponds to Name value.</returns>
     public override string ToString() => Name;
 }

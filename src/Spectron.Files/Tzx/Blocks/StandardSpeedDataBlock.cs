@@ -35,7 +35,7 @@ public class StandardSpeedDataBlock : IBlock
     public List<byte> Data { get; set; } = [];
 
     /// <summary>
-    /// Creates a new emptyi nstance of the 'Standard Speed Data' block.
+    /// Creates a new empty instance of the 'Standard Speed Data' block.
     /// </summary>
     public StandardSpeedDataBlock()
     {
@@ -65,7 +65,7 @@ public class StandardSpeedDataBlock : IBlock
     /// <summary>
     /// Converts the 'Standard Speed Data' block to its equivalent string representation.
     /// </summary>
-    /// <returns>The string representation of this object which corresponds to Program name or Length value.</returns>
+    /// <returns>A string representation of the 'Standard Speed Data' object which corresponds to Program name or Length value.</returns>
     public override string ToString()
     {
         if (TapData.TryParse(Data, out var tap))

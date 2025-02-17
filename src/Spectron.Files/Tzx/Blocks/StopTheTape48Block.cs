@@ -32,8 +32,11 @@ public class StopTheTape48Block : IBlock
     /// Creates a new instance of the 'Stop The Tape 48k' block using the byte reader.
     /// </summary>
     /// <param name="reader">The ByteStreamReader used to initialize the StopTheTape48Block properties.</param>
-    internal StopTheTape48Block(ByteStreamReader reader)
-    {
-        reader.ReadDWord();
-    }
+    internal StopTheTape48Block(ByteStreamReader reader) => reader.ReadDWord();
+
+    /// <summary>
+    /// Converts the 'Stop The Tape' block to its equivalent string representation.
+    /// </summary>
+    /// <returns>A string representation of the 'Stop The Tape' object.</returns>
+    public override string ToString() => "Stop the Tape 48k";
 }

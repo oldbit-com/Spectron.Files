@@ -48,6 +48,6 @@ public class TextDescriptionBlock : IBlock
     /// <summary>
     /// Converts the 'Text Description' block to its equivalent string representation.
     /// </summary>
-    /// <returns>The string representation of this object which corresponds to Description value.</returns>
+    /// <returns>A string representation of the 'Text Description' object which corresponds to Description value.</returns>
     public override string ToString() => Description;
 }

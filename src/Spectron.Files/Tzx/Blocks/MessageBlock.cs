@@ -55,6 +55,6 @@ public class MessageBlock : IBlock
     /// <summary>
     /// Converts the 'Message' block to its equivalent string representation.
     /// </summary>
-    /// <returns>The string representation of this object which corresponds to Message value.</returns>
+    /// <returns>A string representation of the 'Message' object which corresponds to Message value.</returns>
     public override string ToString() => Message;
 }

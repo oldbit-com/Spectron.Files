@@ -12,4 +12,10 @@ public class LoopEndBlock : IBlock
     /// </summary>
     [FileData(Order = 0)]
     public byte BlockId => BlockCode.LoopEnd;
+
+    /// <summary>
+    /// Converts the 'Loop End' block to its equivalent string representation.
+    /// </summary>
+    /// <returns>A string representation of 'Loop End' object.</returns>
+    public override string ToString() => "Loop End";
 }

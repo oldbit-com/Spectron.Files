@@ -125,7 +125,7 @@ public class ArchiveInfoBlock : IBlock
         /// <summary>
         /// Converts the TextInfo class to its equivalent string representation.
         /// </summary>
-        /// <returns>The string representation of this object.</returns>
+        /// <returns>A string representation of TextInfo object.</returns>
         public override string ToString() => Text;
     }
 }

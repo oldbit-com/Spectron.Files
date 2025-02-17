@@ -51,4 +51,10 @@ public class CustomInfoBlock : IBlock
         var length = reader.ReadDWord();
         Info.AddRange(reader.ReadBytes((int)length));
     }
+
+    /// <summary>
+    /// Converts the 'Custom Info' block class to its equivalent string representation.
+    /// </summary>
+    /// <returns>A string representation of 'Custom Info' object.</returns>
+    public override string ToString() => $"Custom Info: {Identification}";
 }

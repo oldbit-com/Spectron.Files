@@ -46,7 +46,7 @@ public class PureToneBlock : IBlock
     /// <summary>
     /// Converts the 'Pure Tone' block to its equivalent string representation.
     /// </summary>
-    /// <returns>The string representation of this object which corresponds to PulseLength and PulseCount value.</returns>
+    /// <returns>A string representation of the 'Pure Tone' object which corresponds to PulseLength and PulseCount value.</returns>
     public override string ToString()
     {
         var s = PulseCount == 1 ? "1 pulse" : $"{PulseCount} pulses";
