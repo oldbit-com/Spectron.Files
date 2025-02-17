@@ -28,6 +28,7 @@ public sealed class TapFile
             {
                 throw new InvalidDataException("Invalid TAP data.");
             }
+
             tapFile.Blocks.Add(tapData);
         }
 
@@ -42,6 +43,7 @@ public sealed class TapFile
     public static TapFile Load(string fileName)
     {
         using var stream = File.OpenRead(fileName);
+
         return Load(stream);
     }
 
@@ -52,8 +54,10 @@ public sealed class TapFile
     public void Save(Stream stream)
     {
         var writer = new DataWriter(stream);
+
         foreach (var block in Blocks)
         {
+            writer.WriteWord(block.Length);
             writer.Write(block);
         }
     }
@@ -65,6 +69,7 @@ public sealed class TapFile
     public void Save(string fileName)
     {
         using var stream = File.Create(fileName);
+
         Save(stream);
     }
 }

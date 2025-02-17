@@ -10,6 +10,11 @@ namespace OldBit.Spectron.Files.Tap;
 public sealed class TapData
 {
     /// <summary>
+    /// Gets the length of the block data.
+    /// </summary>
+    public Word Length => (Word)(Data.Count + 2);
+
+    /// <summary>
     /// Gets or sets type of the block data.
     /// Typically, there are two standard values: 0x00 for header and 0xFF for data.
     /// </summary>
