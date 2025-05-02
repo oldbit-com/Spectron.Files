@@ -9,12 +9,14 @@
         <Version>0.9.2</Version>
         <Title>ZX Spectrum emulator files parser</Title>
         <Authors>Wojciech Sobieszek</Authors>
-        <Description>This package allows reading and writing files used by ZX Spectrum emulators such as TAP, TZX, SNA, SZX and Z80.</Description>
+        <Description>This package allows reading and writing files used by ZX Spectrum emulators such as TAP, TZX, SNA, SZX, POK and Z80.</Description>
         <PackageProjectUrl>https://github.com/oldbit-com/Spectron.Files</PackageProjectUrl>
-        <PackageTags>TAP TZX SNA SZX Z80</PackageTags>
+        <PackageTags>TAP TZX SNA SZX Z80 POK</PackageTags>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>icon.png</PackageIcon>
         <PackageReadmeFile>README.md</PackageReadmeFile>
+        <GenerateDocumentationFile>True</GenerateDocumentationFile>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
     </PropertyGroup>
 
     <ItemGroup>

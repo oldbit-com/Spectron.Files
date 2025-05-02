@@ -18,30 +18,45 @@ public sealed class Flags2
 
     internal Flags2(byte[] data) => _data = data;
 
+    /// <summary>
+    /// Gets or sets the interrupt mode.
+    /// </summary>
     public byte InterruptMode
     {
         get => (byte)(Value & 0x03);
         set => Value = (byte)((Value & 0xFC) | (value & 0x03));
     }
 
+    /// <summary>
+    /// Gets or sets a value indicating whether to emulate Issue 2 behavior.
+    /// </summary>
     public bool Issue2Emulation
     {
         get => (Value & 0x04) != 0;
         set => Value = (byte)((Value & 0xFB) | (value ? 0x04 : 0));
     }
 
+    /// <summary>
+    /// Gets or sets a value indicating whether to double the interrupt frequency.
+    /// </summary>
     public bool DoubleInterruptFrequency
     {
         get => (Value & 0x08) != 0;
         set => Value = (byte)((Value & 0xF7) | (value ? 0x08 : 0));
     }
 
+    /// <summary>
+    /// Gets or sets the video synchronization mode.
+    /// </summary>
     public byte VideoSynchronization
     {
         get => (byte)((Value >> 4) & 0x03);
         set => Value = (byte)((Value & 0xCF) | ((value & 0x03) << 4));
     }
 
+    /// <summary>
+    /// Gets or sets the joystick type.
+    /// </summary>
     public JoystickType JoystickType
     {
        get => (JoystickType)((Value >> 6) & 0x03);

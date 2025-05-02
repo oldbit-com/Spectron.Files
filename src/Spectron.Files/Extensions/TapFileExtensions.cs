@@ -5,6 +5,9 @@ using OldBit.Spectron.Files.Tzx.Blocks;
 
 namespace OldBit.Spectron.Files.Extensions;
 
+/// <summary>
+/// Extensions for converting between TapFile and TzxFile.
+/// </summary>
 public static class TapFileExtensions
 {
     /// <summary>

@@ -2,6 +2,9 @@ using OldBit.Spectron.Files.Tzx.Blocks;
 
 namespace OldBit.Spectron.Files.Tzx.Extensions;
 
+/// <summary>
+/// Provides extension methods for working with TZX file blocks.
+/// </summary>
 public static class BlockExtensions
 {
     /// <summary>
@@ -43,6 +46,12 @@ public static class BlockExtensions
         };
     }
 
+    /// <summary>
+    /// Retrieves the text associated with the specified ID from the 'Archive Info' block.
+    /// </summary>
+    /// <param name="archiveInfoBlock">The archive information block containing the textual information.</param>
+    /// <param name="id">The identifier used to locate the specific text within the archive info block.</param>
+    /// <returns>The text associated with the specified ID if found; otherwise, null.</returns>
     public static string? GetInfoText(this ArchiveInfoBlock archiveInfoBlock, int id) =>
         archiveInfoBlock.Infos.FirstOrDefault(i => i.Id == id)?.Text;
 }

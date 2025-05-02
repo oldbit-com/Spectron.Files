@@ -36,6 +36,9 @@
       <None Update="TestFiles\Test128.z80">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="TestFiles\ManicMiner.pok">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

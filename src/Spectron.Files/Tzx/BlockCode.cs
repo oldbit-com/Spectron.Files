@@ -1,5 +1,12 @@
 ﻿namespace OldBit.Spectron.Files.Tzx;
 
+/// <summary>
+/// Contains constant values representing different types of TZX block codes used in the system.
+/// </summary>
+/// <remarks>
+/// These block codes correspond to various data types and operations defined in the TZX file format.
+/// They are used to identify the type of block in TZX-related operations and processes.
+/// </remarks>
 public static class BlockCode
 {
     /// <summary>

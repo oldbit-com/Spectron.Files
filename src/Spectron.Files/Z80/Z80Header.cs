@@ -333,6 +333,11 @@ public sealed class Z80Header
         }
     }
 
+    /// <summary>
+    /// Gets or sets the AY sound chip registers. These registers control the behavior
+    /// of the AY-3-8910 sound chip in the Z80 snapshot format. The data consists of
+    /// 16 bytes representing the state of the AY registers.
+    /// </summary>
     public byte[] AyRegisters
     {
         get => Version > 1 ? Data[39..55] : [];

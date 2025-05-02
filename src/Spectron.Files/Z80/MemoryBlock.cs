@@ -3,6 +3,9 @@ using OldBit.Spectron.Files.Serialization;
 
 namespace OldBit.Spectron.Files.Z80;
 
+/// <summary>
+/// Represents a memory block in the Z80 file format.
+/// </summary>
 public class MemoryBlock : IDataSerializer
 {
     /// <summary>
@@ -19,6 +22,12 @@ public class MemoryBlock : IDataSerializer
     {
     }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="MemoryBlock"/> class with the specified data and page number.
+    /// </summary>
+    /// <param name="data">The memory data, which must be 16k (0x4000) in length.</param>
+    /// <param name="pageNumber">The page number associated with the memory block.</param>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when the length of <paramref name="data"/> is not 16k.</exception>
     public MemoryBlock(byte[] data, byte pageNumber)
     {
         if (data.Length != 0x4000)
@@ -49,6 +58,14 @@ public class MemoryBlock : IDataSerializer
         return block;
     }
 
+    /// <summary>
+    /// Serializes the memory block into a byte array format suitable for Z80 files.
+    /// </summary>
+    /// <returns>
+    /// A byte array representing the serialized memory block,
+    /// including the page number, compressed data length,
+    /// and the compressed data itself.
+    /// </returns>
     public byte[] Serialize()
     {
         var compressedData = DataCompressor.Compress(Data, false);

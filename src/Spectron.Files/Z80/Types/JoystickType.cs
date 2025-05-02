@@ -1,5 +1,8 @@
 namespace OldBit.Spectron.Files.Z80.Types;
 
+/// <summary>
+/// Defines the types of joysticks supported.
+/// </summary>
 public enum JoystickType
 {
     /// <summary>

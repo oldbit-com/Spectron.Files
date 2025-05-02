@@ -1,6 +1,6 @@
 namespace OldBit.Spectron.Files.Serialization;
 
-public interface IDataSerializer
+internal interface IDataSerializer
 {
     byte[] Serialize();
 }
