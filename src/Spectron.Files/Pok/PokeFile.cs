@@ -6,9 +6,9 @@ namespace OldBit.Spectron.Files.Pok;
 /// <param name="MemoryBank">Bits 0-2 specify a memory bank for 128K games or bit 3
 /// is always set for 48K games</param>
 /// <param name="Address">The address (16384-65535).</param>
-/// <param name="Value">Poke value (0-255). If it is 256, a requester should pop up where the user can enter a value</param>
+/// <param name="Value">Poke value (0-255). If it is null, a requester should pop up where the user can enter a value.</param>
 /// <param name="OriginalValue">Original value at the address.</param>
-public record Poke(int MemoryBank, Word Address, int Value, byte OriginalValue);
+public record Poke(int MemoryBank, Word Address, byte? Value, byte OriginalValue);
 
 /// <summary>
 /// Represents a trainer that contains a list of pokes.
@@ -123,7 +123,7 @@ public sealed class PokeFile
             return null;
         }
 
-        return new Poke(memoryBank, address, value, originalValue);
+        return new Poke(memoryBank, address, value > 255 ? null : (byte)value, originalValue);
     }
 
     private static bool IsNextTrainer(string line) => line.StartsWith('N');

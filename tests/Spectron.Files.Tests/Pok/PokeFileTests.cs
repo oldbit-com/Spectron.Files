@@ -16,7 +16,7 @@ public class PokeFileTests
         pokeFile.Trainers[0].Pokes.Count.ShouldBe(1);
         pokeFile.Trainers[0].Pokes[0].MemoryBank.ShouldBe(8);
         pokeFile.Trainers[0].Pokes[0].Address.ShouldBe(35142);
-        pokeFile.Trainers[0].Pokes[0].Value.ShouldBe(0);
+        pokeFile.Trainers[0].Pokes[0].Value.ShouldBe((byte)0);
         pokeFile.Trainers[0].Pokes[0].OriginalValue.ShouldBe(0);
 
         pokeFile.Trainers[1].Name.ShouldBe("Air supply (Bug Byte)");
@@ -26,14 +26,14 @@ public class PokeFileTests
         pokeFile.Trainers[4].Pokes.Count.ShouldBe(1);
         pokeFile.Trainers[4].Pokes[0].MemoryBank.ShouldBe(8);
         pokeFile.Trainers[4].Pokes[0].Address.ShouldBe(35136);
-        pokeFile.Trainers[4].Pokes[0].Value.ShouldBe(0);
+        pokeFile.Trainers[4].Pokes[0].Value.ShouldBe((byte)0);
         pokeFile.Trainers[4].Pokes[0].OriginalValue.ShouldBe(53);
 
         pokeFile.Trainers[65].Name.ShouldBe("Restart game in last visited cavern(Software Projects)");
         pokeFile.Trainers[65].Pokes.Count.ShouldBe(1);
         pokeFile.Trainers[65].Pokes[0].MemoryBank.ShouldBe(8);
         pokeFile.Trainers[65].Pokes[0].Address.ShouldBe(34260);
-        pokeFile.Trainers[65].Pokes[0].Value.ShouldBe(88);
+        pokeFile.Trainers[65].Pokes[0].Value.ShouldBe((byte)88);
         pokeFile.Trainers[65].Pokes[0].OriginalValue.ShouldBe(0);
     }
 
