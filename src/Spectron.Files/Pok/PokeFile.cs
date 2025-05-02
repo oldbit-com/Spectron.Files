@@ -38,19 +38,31 @@ public sealed class PokeFile
     /// <returns>A <see cref="PokeFile"/> instance containing the trainers and pokes parsed from the file.</returns>
     public static PokeFile Load(string fileName)
     {
-        var lines = File.ReadAllLines(fileName);
+        using FileStream stream = new(fileName, FileMode.Open, FileAccess.Read);
+
+        return Load(stream);
+    }
+
+    /// <summary>
+    /// Loads a POKE file from the provided stream and parses its contents into a PokeFile object.
+    /// </summary>
+    /// <param name="stream">The stream containing the POKE file data to be loaded.</param>
+    /// <returns>A <see cref="PokeFile"/> instance containing the trainers and pokes parsed from the stream.</returns>
+    public static PokeFile Load(Stream stream)
+    {
+        using StreamReader reader = new(stream);
 
         var pokeFile = new PokeFile();
         Trainer? trainer = null;
 
-        foreach (var line in lines)
+        while (reader.ReadLine() is { } line)
         {
             if (IsNextTrainer(line))
             {
                 trainer = new Trainer(line[1..], []);
             }
 
-            if (line.StartsWith('M'))
+            if (IsPoke(line))
             {
                 var poke = ParsePoke(line);
 
@@ -60,7 +72,7 @@ public sealed class PokeFile
                 }
             }
 
-            if (line.StartsWith('Z'))
+            if (IsLastPoke(line))
             {
                 var poke = ParsePoke(line);
 
@@ -117,4 +129,8 @@ public sealed class PokeFile
     private static bool IsNextTrainer(string line) => line.StartsWith('N');
 
     private static bool IsLastLine(string line) => line.StartsWith('Y');
+
+    private static bool IsPoke(string line) => line.StartsWith('M');
+
+    private static bool IsLastPoke(string line) => line.StartsWith('Z');
 }
