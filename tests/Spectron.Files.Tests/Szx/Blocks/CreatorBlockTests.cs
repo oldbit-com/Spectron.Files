@@ -15,17 +15,16 @@ public class CreatorBlockTests
         creator.Write(writer);
 
         var data = writer.ToArray();
-        data.Length.ShouldBe(8 + 37);
+        data.Length.ShouldBe(8 + 36);
 
         // Header
         BitConverter.ToUInt32(data[..4].ToArray()).ShouldBe((DWord)0x52545243);
-        BitConverter.ToUInt32(data[4..8].ToArray()).ShouldBe((DWord)37);
+        BitConverter.ToUInt32(data[4..8].ToArray()).ShouldBe((DWord)36);
 
         // Data
         Encoding.ASCII.GetString(data[8..40]).Trim('\0').ShouldBe("Test creator");
         BitConverter.ToUInt16(data[40..42].ToArray()).ShouldBe(1);
         BitConverter.ToUInt16(data[42..44].ToArray()).ShouldBe(2);
-        data[44].ShouldBe(0);
     }
 
     [Fact]

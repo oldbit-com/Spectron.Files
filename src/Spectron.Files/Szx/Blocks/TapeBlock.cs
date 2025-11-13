@@ -27,7 +27,7 @@ public sealed class TapeBlock
     /// <summary>
     /// Gets the various flags indicating whether a tape file is embedded in this block or linked to on disk.
     /// </summary>
-    public Word Flags { get; init; }
+    public Word Flags { get; private init; }
 
     /// <summary>
     /// Gets the uncompressed size in bytes of the tape file. This value is undefined if the tape file is not embedded.

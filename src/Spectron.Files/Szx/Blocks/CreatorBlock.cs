@@ -30,13 +30,13 @@ public sealed class CreatorBlock
 
     internal void Write(Stream writer)
     {
-        var header = new BlockHeader(BlockIds.Creator, 32 + 2 + 2 + (CustomData?.Length ?? 1));
+        var header = new BlockHeader(BlockIds.Creator, 32 + 2 + 2 + (CustomData?.Length ?? 0));
         header.Write(writer);
 
         writer.WriteChars(Name, 32);
         writer.WriteWord(MajorVersion);
         writer.WriteWord(MinorVersion);
-        writer.WriteBytes(CustomData ?? [0]);
+        writer.WriteBytes(CustomData ?? []);
     }
 
     internal static CreatorBlock Read(ByteStreamReader reader, int size)
@@ -49,8 +49,11 @@ public sealed class CreatorBlock
         };
 
         var remaining = size - 36;
-        var customData = reader.ReadBytes(remaining);
-        creator.CustomData = customData is [0] ? null : customData;
+
+        if (remaining > 0)
+        {
+            creator.CustomData = reader.ReadBytes(remaining);
+        }
 
         return creator;
     }

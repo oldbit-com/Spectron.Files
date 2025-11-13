@@ -74,6 +74,11 @@ public sealed class SzxFile
     public TapeBlock? Tape { get; set; }
 
     /// <summary>
+    /// Gets or sets the Beta 128 disk drive state.
+    /// </summary>
+    public Beta128Block? Beta128 { get; set; }
+
+    /// <summary>
     /// Loads a SZX file from the given stream.
     /// </summary>
     /// <param name="stream">The stream containing the SZX data.</param>
@@ -140,6 +145,14 @@ public sealed class SzxFile
 
                 case BlockIds.Tape:
                     state.Tape = TapeBlock.Read(reader, blockHeader.Size);
+                    break;
+
+                case BlockIds.Beta128:
+                    state.Beta128 = Beta128Block.Read(reader, blockHeader.Size);
+                    break;
+
+                case BlockIds.BetaDisk:
+                    //
                     break;
 
                 default:
