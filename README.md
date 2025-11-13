@@ -31,3 +31,16 @@ tap.Save(filePath);
 ````
 
 ### Reading a TZX file
+
+Using file path:
+```csharp
+var tzx = TzxFile.Load(filePath);
+tzx.Save(filePath);
+````
+
+or from a stream:
+```csharp
+using var stream = File.OpenRead(fileName);
+var tzx = TzxFile.Load(stream);
+tzx.Save(filePath);
+````
