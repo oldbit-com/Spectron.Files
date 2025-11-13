@@ -17,7 +17,7 @@ private readonly byte[] _tapeData;
     }
 
     [Theory]
-    [InlineData(true, 2641)]
+    [InlineData(true, 2645)]
     [InlineData(false, 4588)]
     public void Tape_ShouldConvertToBytes(bool isCompressed, DWord expectedSize)
     {
@@ -37,7 +37,7 @@ private readonly byte[] _tapeData;
         BitConverter.ToUInt16(data[8..10].ToArray()).ShouldBe(2);
         BitConverter.ToUInt16(data[10..12].ToArray()).ShouldBe((Word)(isCompressed ? TapeBlock.FlagsCompressed + TapeBlock.FlagsEmbedded : TapeBlock.FlagsEmbedded));
         BitConverter.ToUInt32(data[12..16].ToArray()).ShouldBe(4560);
-        BitConverter.ToUInt32(data[16..20].ToArray()).ShouldBe((DWord)(isCompressed ? 2613 : 4560));
+        BitConverter.ToUInt32(data[16..20].ToArray()).ShouldBe((DWord)(isCompressed ? 2617 : 4560));
         Encoding.ASCII.GetString(data[20..36]).Trim('\0').ShouldBe(".tap");
         if (!isCompressed)
         {
@@ -64,7 +64,7 @@ private readonly byte[] _tapeData;
         tape.CurrentBlockNo.ShouldBe(2);
         tape.Flags.ShouldBe((Word)(compress ? TapeBlock.FlagsCompressed + TapeBlock.FlagsEmbedded : TapeBlock.FlagsEmbedded));
         tape.UncompressedSize.ShouldBe(4560);
-        tape.CompressedSize.ShouldBe((Word)(compress ? 2613 : tape.Data.Length));
+        tape.CompressedSize.ShouldBe((Word)(compress ? 2617 : tape.Data.Length));
         tape.FileExtension.ShouldBe(".tap");
         tape.Data.ShouldBeEquivalentTo(_tapeData);
     }
