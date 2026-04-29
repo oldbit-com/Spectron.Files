@@ -10,7 +10,7 @@ internal static class BytesExtensions
 
         foreach (var b in bytes)
         {
-            if (b is < 32 or > 126)
+            if (b < 32)
             {
                 continue;
             }

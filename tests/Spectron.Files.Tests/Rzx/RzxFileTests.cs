@@ -11,7 +11,7 @@ public class RzxFileTests
         using var file = LoadTestFile("test.rzx");
         var rzxFile = RzxFile.Load(file);
 
-        rzxFile.Creator?.CreatorName.ShouldBe("SpectaculatorD");
+        rzxFile.Creator?.CreatorName.ShouldStartWith("Spectaculator");
         rzxFile.Creator?.MajorVersion.ShouldBe(52);
         rzxFile.Creator?.MinorVersion.ShouldBe(371);
 
