@@ -8,15 +8,18 @@ public class RzxFileTests
     [Fact]
     public void RzxFile_ShouldLoad()
     {
-        using var file = LoadTestFile("manic.rzx");
+        using var file = LoadTestFile("test.rzx");
         var rzxFile = RzxFile.Load(file);
 
-        rzxFile.Creator?.CreatorName.ShouldBe("SPIN");
-        rzxFile.Creator?.MajorVersion.ShouldBe(0);
-        rzxFile.Creator?.MinorVersion.ShouldBe(3);
+        rzxFile.Creator?.CreatorName.ShouldBe("SpectaculatorD");
+        rzxFile.Creator?.MajorVersion.ShouldBe(52);
+        rzxFile.Creator?.MinorVersion.ShouldBe(371);
 
         rzxFile.Snapshots.ShouldHaveSingleItem();
-        rzxFile.Snapshots[0].Extension.ShouldBe("Z80");
+        rzxFile.Snapshots[0].Extension.ShouldBe("z80");
+
+        rzxFile.Snapshots[0].Recording.ShouldNotBeNull();
+        rzxFile.Snapshots[0].Recording!.Frames.Count.ShouldBe(21381);
     }
 
     private static FileStream LoadTestFile(string fileName)
