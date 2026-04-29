@@ -1,7 +1,7 @@
 using System.Text;
 using OldBit.Spectron.Files.IO;
 
-namespace OldBit.Spectron.Files.Szx.Extensions;
+namespace OldBit.Spectron.Files.Extensions;
 
 internal static class ByteStreamReaderExtensions
 {

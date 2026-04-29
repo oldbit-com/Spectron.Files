@@ -1,6 +1,6 @@
 using System.IO.Compression;
+using OldBit.Spectron.Files.Extensions;
 using OldBit.Spectron.Files.IO;
-using OldBit.Spectron.Files.Szx.Extensions;
 
 namespace OldBit.Spectron.Files.Szx.Blocks;
 

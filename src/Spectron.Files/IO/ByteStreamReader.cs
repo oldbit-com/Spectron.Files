@@ -11,54 +11,27 @@ internal sealed class ByteStreamReader
     /// Create a new instance of the byte reader.
     /// </summary>
     /// <param name="stream">The stream that provides data for the reader.</param>
-    public ByteStreamReader(Stream stream)
-    {
-        _stream = stream;
-    }
+    public ByteStreamReader(Stream stream) => _stream = stream;
 
     /// <summary>
     /// Reads a byte from the stream and advances the position within the stream by one byte.
     /// </summary>
     /// <returns>The byte retrieved from the stream.</returns>
     /// <exception cref="EndOfStreamException">Thrown when not enough data is in the stream.</exception>
-    public byte ReadByte()
-    {
-        if (!TryReadByte( out var data))
-        {
-            throw new EndOfStreamException();
-        }
-
-        return data;
-    }
+    public byte ReadByte() => !TryReadByte( out var data) ? throw new EndOfStreamException() : data;
 
     /// <summary>
     /// Reads a word from the stream and advances the position within the stream by two bytes.
     /// </summary>
     /// <returns>The word retrieved from the stream.</returns>
     /// <exception cref="EndOfStreamException">Thrown when not enough data is in the stream.</exception>
-    public Word ReadWord()
-    {
-        if (!TryReadWord(out var data))
-        {
-            throw new EndOfStreamException();
-        }
-
-        return data;
-    }
+    public Word ReadWord() => !TryReadWord(out var data) ? throw new EndOfStreamException() : data;
 
     /// <summary>
     /// Reads a dword from the stream and advances the position within the stream by four bytes.
     /// </summary>
     /// <returns>The dword retrieved from the stream.</returns>
-    public DWord ReadDWord()
-    {
-        if (!TryReadDWord(out var data))
-        {
-            throw new EndOfStreamException();
-        }
-
-        return data;
-    }
+    public DWord ReadDWord() => !TryReadDWord(out var data) ? throw new EndOfStreamException() : data;
 
     /// <summary>
     /// Reads a sequence of bytes from the stream and advances the position within the stream by 'count' bytes.
