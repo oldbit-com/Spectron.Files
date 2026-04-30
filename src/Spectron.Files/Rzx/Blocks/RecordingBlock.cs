@@ -26,8 +26,11 @@ public class RecordingBlock
     /// <summary>
     /// Flags (b0: Protected (frames are encrypted with x-key), b1: Compressed data.)
     /// </summary>
-    public DWord Flags { get; private set; }
+    public DWord Flags { get; private init; }
 
+    /// <summary>
+    /// Sequence of input frames.
+    /// </summary>
     public List<RecordingFrame> Frames { get; } = [];
 
     internal static RecordingBlock Read(ByteStreamReader reader, DWord blockLength)
@@ -70,8 +73,8 @@ public class RecordingBlock
 
             if (frame.InCounter == 65535)
             {
-                // Repeated frame, copy the values from the previous frame
-                frame.Values = block.Frames.LastOrDefault()?.Values ?? [];
+                // Repeated frame, copy "in" values from the previous frame
+                frame.InValues = block.Frames.LastOrDefault()?.InValues ?? [];
             }
 
             block.Frames.Add(frame);

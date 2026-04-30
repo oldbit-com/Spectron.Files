@@ -21,7 +21,7 @@ public class RecordingFrame
     /// <summary>
     /// Return values for the CPU I/O port reads.
     /// </summary>
-    public byte[] Values { get; internal set; } = [];
+    public byte[] InValues { get; internal set; } = [];
 
     internal static RecordingFrame Read(ByteStreamReader reader)
     {
@@ -33,7 +33,7 @@ public class RecordingFrame
 
         if (block.InCounter != 65535)
         {
-            block.Values = reader.ReadBytes(block.InCounter);
+            block.InValues = reader.ReadBytes(block.InCounter);
         }
 
         return block;

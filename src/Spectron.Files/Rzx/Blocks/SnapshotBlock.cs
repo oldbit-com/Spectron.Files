@@ -27,7 +27,7 @@ public class SnapshotBlock
     /// <summary>
     /// Input recording block.
     /// </summary>
-    public RecordingBlock? Recording { get; internal set; }
+    public RecordingBlock Recording { get; internal set; } = new();
 
     /// <summary>
     /// Snapshot data.
