@@ -50,7 +50,7 @@ public sealed class Flags3
     }
 
     /// <summary>
-    /// Gets or sets a modify hardware flag..
+    /// Gets or sets a modify hardware flag.
     /// </summary>
     public bool ModifyHardware
     {

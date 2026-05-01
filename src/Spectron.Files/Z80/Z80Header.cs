@@ -9,9 +9,6 @@ namespace OldBit.Spectron.Files.Z80;
 public sealed class Z80Header
 {
     private byte[] _data;
-    private Flags1? _flags1;
-    private Flags2? _flags2;
-    private Flags3? _flags3;
 
     /// <summary>
     /// Gets or sets the raw header data.
@@ -101,7 +98,7 @@ public sealed class Z80Header
     /// <summary>
     /// Gets or sets miscellaneous flags 1.
     /// </summary>
-    public Flags1 Flags1 => _flags1 ??= new Flags1(Data);
+    public Flags1 Flags1 => field ??= new Flags1(Data);
 
     /// <summary>
     /// Gets or sets the DE register.
@@ -196,17 +193,23 @@ public sealed class Z80Header
     /// <summary>
     /// Gets or sets miscellaneous flags 2.
     /// </summary>
-    public Flags2 Flags2 => _flags2 ??= new Flags2(Data);
+    public Flags2 Flags2 => field ??= new Flags2(Data);
 
     /// <summary>
     /// Gets the version of the Z80 header.
     /// </summary>
-    public int Version => _data.Length switch
+    public int Version
     {
-        30 => 1,
-        53 => 2,
-        _ => 3
-    };
+        get
+        {
+            if (Data[6] != 0 || Data[7] != 0)
+            {
+                return 1;
+            }
+
+            return _data[30] == 23 ? 2 : 3;
+        }
+    }
 
     /// <summary>
     /// Gets the length of the additional header data.
@@ -356,7 +359,7 @@ public sealed class Z80Header
                 return null;
             }
 
-            return _flags3 ??= new Flags3(Data);
+            return field ??= new Flags3(Data);
         }
     }
 
@@ -400,7 +403,7 @@ public sealed class Z80Header
         _data = new byte[headerSize + 2];
 
         Data.SetWord(30, headerSize - 30);
-        Flags1.IsDataCompressed = true;
+        Flags1?.IsDataCompressed = true;
     }
 
     /// <summary>
