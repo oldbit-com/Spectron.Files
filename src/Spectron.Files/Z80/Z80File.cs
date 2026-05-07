@@ -45,14 +45,14 @@ public sealed class Z80File
                 var empty = new byte[0x4000];
 
                 MemoryBlocks.Add(new MemoryBlock(empty, 4));
-                MemoryBlocks.Add(new MemoryBlock(memory, 5));
-                MemoryBlocks.Add(new MemoryBlock(empty, 8));
+                MemoryBlocks.Add(new MemoryBlock(empty, 5));
+                MemoryBlocks.Add(new MemoryBlock(memory, 8));
                 break;
             }
             case 0xC000:
                 MemoryBlocks.Add(new MemoryBlock(memory[0x4000..0x8000], 4));
-                MemoryBlocks.Add(new MemoryBlock(memory[0x0000..0x4000], 5));
-                MemoryBlocks.Add(new MemoryBlock(memory[0x8000..0xC000], 8));
+                MemoryBlocks.Add(new MemoryBlock(memory[0x8000..0xC000], 5));
+                MemoryBlocks.Add(new MemoryBlock(memory[0x0000..0x4000], 8));
                 break;
 
             default:
